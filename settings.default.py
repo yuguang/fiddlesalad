@@ -303,7 +303,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'fiddlesalad.urls'
 
 TEMPLATE_DIRS = (
-    '/templates',
+    os.path.join(os.path.dirname(PROJECT_DIR), "templates"),
     os.path.join(PROJECT_DIR, "templates"),
     )
 
