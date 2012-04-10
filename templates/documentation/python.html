@@ -1,0 +1,161 @@
+{% extends "base_documentation.html" %}
+
+{% block header %}
+    <h1 id="title">Python Fiddle</h1>
+    <nav>
+        <ul>
+            <li><a href="#python">Python</a></li>
+            <li><a href="#javascript">Compiled JavaScript</a></li>
+            <li><a href="#caveat">Notes</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block main %}
+    <aside>
+        <h3>Standard Library</h3>
+        <b>Functional</b>
+        <ul>
+            <li><a href="http://docs.python.org/library/functions.html#all">all</a></li><li><a href="http://docs.python.org/library/functions.html#any">any</a></li><li><a href="http://docs.python.org/library/functions.html#enumerate">enumerate</a></li><li><a href="http://docs.python.org/library/functions.html#map">map</a></li><li><a href="http://docs.python.org/library/functions.html#filter">filter</a></li><li><a href="http://docs.python.org/library/functions.html#reduce">reduce</a></li><li><a href="http://docs.python.org/library/functions.html#compose">compose</a></li><li><a href="http://docs.python.org/library/functions.html#max">max</a></li><li><a href="http://docs.python.org/library/functions.html#min">min</a></li><li><a href="http://docs.python.org/library/functions.html#zip">zip</a></li><li><a href="http://docs.python.org/library/functions.html#range">range</a></li><li><a href="http://docs.python.org/library/functions.html#list">list</a></li><li><a href="http://docs.python.org/library/functions.html#sum">sum</a></li><li class="last"><a href="http://docs.python.org/library/functions.html#product">product</a></li>
+        </ul>
+        <b>String</b>
+        <ul>
+            <li><a href="http://docs.python.org/library/stdtypes.html#str.capitalize">capitalize</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.center">center</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.count">count</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.endswith">endswith</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.expandtabs">expandtabs</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.find">find</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.format">format</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.index">index</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.isalnum">isalnum</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.isalpha">isalpha</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.isdigit">isdigit</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.islower">islower</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.isspace">isspace</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.istitle">istitle</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.isupper">isupper</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.join">join</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.ljust">ljust</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.lower">lower</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.lstrip">lstrip</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.partition">partition</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.replace">replace</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.rfind">rfind</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.rindex">rindex</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.rjust">rjust</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.rpartition">rpartition</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.rsplit">rsplit</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.rstrip">rstrip</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.split">split</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.splitlines">splitlines</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.startswith">startswith</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.strip">strip</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.swapcase">swapcase</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.title">title</a></li><li><a href="http://docs.python.org/library/stdtypes.html#str.upper">upper</a></li><li class="last"><a href="http://docs.python.org/library/stdtypes.html#str.zfill">zfill</a></li>
+        </ul>
+    </aside>
+    <article>
+        <header>
+            <h2>Python to JavaScript compiler</h2>
+            <p>Python Fiddle aims to solve issues with JavaScript. The Python compiler takes on the numerous <a href="http://wtfjs.com/">JavaScript quirks and inconsistencies</a>, <a href="http://zef.me/2856/javascript-a-language-in-search-of-a-standard-library-and-module-system">the lack of a standard library</a>, and removes <a href="http://www.johndcook.com/blog/2011/06/09/mental-context-switches-are-evil/">the pain resulting from switching between programming languages</a>. Variables no longer have global scope by default. Instead, they must be defined using the keyword global. Testing for equality between two objects does a deep comparison, while truth values are the same as in Python. Class based inheritance replaces prototypal inheritance. In addition, many of the functions in the standard Python library is built-in. The best part is it compiles to JavaScript, so JavaScript libraries such as jQuery can be used directly. </p>
+            <p>To use the compiled JavaScript, include <a href="http://s3.amazonaws.com/pythonfiddle/files/pylib.js">pylib.js 1.1</a> before the compiled JavaScript:
+            <pre class="brush: html; toolbar: false;">
+            &lt;script type=&quot;text/javascript&quot; src=&quot;pylib.js&quot;&gt;&lt;/script&gt;
+            &lt;script type=&quot;text/javascript&quot; src=&quot;script.js&quot;&gt;&lt;/script&gt;
+            </pre>
+            </p>
+            <h4>Features</h4>
+            <h5>Lists and Tuples</h5>
+            <ul class="bullet">
+                <li>indexing, slicing, length, minimum, maximum</li>
+                <li>the <span class="code">list</span> function</li>
+                <li>list methods: <span class="code">append, extend, index, insert, pop, reverse</span></li>
+                <li>tuples as immutable sequences</li>
+            </ul>
+            <h5>Strings</h5>
+            <ul class="bullet">
+                <li><a href="http://docs.python.org/release/3.0.1/whatsnew/2.6.html#pep-3101">Python 3 advanced string formatting</a></li>
+                <li>string methods except encode and decode</li>
+            </ul>
+            <h5>Dictionaries</h5>
+            <ul class="bullet">
+                <li>the <span class="code">dict</span> function
+              <pre class="brush: python; toolbar: false;">
+    >>> items = [('name', 'Gumby'), ('age', 42)]
+    >>> d = dict(items)
+    {'age': 42, 'name': 'Gumby'}
+    </pre>
+                </li>
+                <li>basic operations: <span class="code">d[k] = v, in, del</span></li>
+            </ul>
+            <h5>Conditionals, Loops and Other Statements</h5>
+            <ul class="bullet">
+                <li>conditional execution with the <span class="code">if</span> statement, <span class="code">else</span> and <span class="code">elseif</span> clauses</li>
+                <li>ternary statement
+              <pre class="brush: python; toolbar: false;">
+    >>> 'true' if True else 'false'
+    'true'
+    >>> 'true' if False else 'false'
+    'false'
+    </pre>
+                </li>
+                <li><span class="code">for...in</span> loops</li>
+                <li><span class="code">with...as</span> scope isolation</li>
+                <li><span class="code">try...except...finally</span> exception catching</li>
+            </ul>
+            <h5>Functions</h5>
+            <ul class="bullet">
+                <li>functions support default arguments</li>
+                <li>variables within functions are scoped locally</li>
+                <li>lambda expressions and functional programming support</li>
+            </ul>
+            <h5>Classes</h5>
+            <ul class="bullet">
+                <li>polymorphism and inheritance</li>
+                <li><span class="code">getattr, hasattr, isinstance</span></li>
+            </ul>
+        </header>
+        <h3 id="python">Standards Compliant Python</h3>
+        <h4>Truth Values</h4>
+        <p>Everything except <span class="code">None, False, 0, '', (), [], {}</span> are true.
+            Dictionaries compare equal if and only if their key-value pairs are equal.
+          <pre class="brush: python; toolbar: false;">
+    >>> moe   = {'name': 'moe'}
+    >>> clone = {'name': 'moe'}
+    >>> moe == clone
+    True
+    >>> moe is clone #http://docs.python.org/library/stdtypes.html#comparisons
+    False
+    >>> moe['name'] = 'joe'
+    >>> moe == clone
+    False
+    </pre>
+        </p>
+        <h4>List Comprehensions</h4>
+        <p>
+          <pre class="brush: python; toolbar: false;">
+    >>> l = [(x, y) for x in range(3) for y in range(3)]
+    [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]</pre>
+        </p>
+
+        <h3 id="javascript">JavaScript Specifc Enhancements</h3>
+        <h4>Unquoted Dictionary Keys</h4>
+        <p>Dictionaries can be created without quoting keys
+        <pre class="brush: python; toolbar: false;">
+    >>> phonebook_shorthand = {Alice: '2341', Beth: '9102', Cecil: '3258'}
+    ... phonebook = {'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'}
+    ... phonebook_shorthand == phonebook
+    True
+        </pre>
+        </p>
+        <h4>Scope Isolation</h4>
+        <p>Any time you need to define a separate scope for each value in a collection, <span class="code">with ... as</span> can be used to isolate each iteration through the collection. In a situation involving multiple AJAX calls with different parameters, a context often needs to be associated each callback.
+        <pre class="brush: python; toolbar: false;">
+    >>> keys = ["a", "b"]
+    ... for index in keys:
+    ...     with keys[index] as key:
+    ...         $.ajax({
+    ...             url: 'test.json',
+    ...             type: 'GET',
+    ...             dataType: 'json',
+    ...             success: def(data, textStatus, XMLHttpRequest):
+    ...                 print key
+    ...         })
+    a
+    b
+    </pre>
+        </p>
+        <h4>Checking for Undefined</h4>
+        <p>The standard Python approach for testing if a variable is defined and initialized is <a href="http://code.activestate.com/recipes/59892-testing-if-a-variable-is-defined/">unwieldy</a>. However, a simple <span class="code">if</span> statement is enough to test if a variable has been defined in the browser implementation of Python:<pre class="brush: python; toolbar: false;">
+    >>> if not a:
+    ...     a = 1
+    ... print a
+    1</pre></p>
+        <h4>Looping Through jQuery Elements</h4>
+        <p>Native jQuery returns a list of DOM elements, which is iterable with a<span class="code">for</span> loop. Suppose we had an image gallery and wanted to position the images: <pre class="brush: python; toolbar: false;">
+    >>> pic = $('#images a')
+    ... pic.hide()
+    ... for i, next in pic:
+    ...     next.css({'position': 'absolute','left':65*i})
+    ...     next.show()
+    </pre><span class="code">Next</span> refers to the jQuery object for the current element. The more concise Python syntax avoids the use of <span class="code">$(this)</span>.
+        </p>
+        <h3 id="caveat">Notes and Caveats</h3>
+        <ul class="bullet">
+            <li>Python keywords such as <span class="code">list</span> and <span class="code">dict</span> should not be used as variable or function names</li>
+            <li>The function <span class="code">JS</span> is for embedded JavaScript and takes a string</li>
+            <li>pylib.js needs to be loaded before other compiled scripts</li>
+            <li>The <span class="code">_</span> namespace is reserved for the <a href="http://documentcloud.github.com/underscore/">underscore JavaScript library</a></li>
+            <li>Methods and functions common between Python and JavaScript behave as they do in Python</li>
+        </ul>
+    </article>
+{% endblock %}

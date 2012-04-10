@@ -1,0 +1,169 @@
+body > div > label, form span {
+    display: block;
+}
+
+form input, form textarea {
+    font-family: Arial, Sans-Serif;
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+    border: solid 1px #85b1de;
+    width: 150px;
+    background-color: #EDF2F7;
+    padding: 4px;
+}
+
+#logo {
+    height: 108px;
+    position: relative;
+    z-index: -3;
+}
+
+#logo h1, #logo h3 {
+    font-family: 'Baumans', cursive;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+}
+
+#logo h1 {
+    top: 37px;
+    right: 132px;
+    font-weight: 400;
+    font-size: 36px;
+    letter-spacing: 0.069em;
+    word-spacing: 0em;
+    line-height: 1.4;
+}
+
+#logo h3 {
+    top: 83px;
+    right: 4px;
+}
+
+#logo img {
+    position: absolute;
+    top: 0;
+    right: 3px;
+}
+
+#importDialog input {
+    width: 200px;
+}
+
+.toolbar * {
+    display: inline;
+}
+
+div.toolbar, .title {
+    float: left;
+    width: 610px;
+    padding: 15px 20px 5px 0;
+}
+
+.toolbar div {
+    padding: 0 10px;
+}
+
+.title {
+    z-index: -3;
+}
+
+#shareMenu {
+    width: 150px;
+    height: 100px;
+    padding: .4em;
+    position: absolute;
+    left: 9px;
+    top: 25px;
+}
+
+#shareMenu input {
+    width: 98%;
+}
+
+#shareMenu div {
+    padding: 0;
+}
+
+#share_this {
+    margin-bottom: 5px;
+    display: block;
+}
+
+#copyButton {
+    padding: 2px;
+}
+
+#console {
+    width: 100%;
+    height: 6em;
+    display: block;
+    border: none;
+}
+
+#console span {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+
+#revisionsMenu input + label {
+    margin-left: 10px;
+}
+
+#revisionsMenu input[type="checkbox"] {
+    vertical-align: middle;
+}
+*/
+
+div#revisionsMenu > div {
+    display: none;
+}
+
+div.ui-layout-center {
+    padding: 0 !important;
+}
+
+.removePadding {
+    padding: 0 !important;
+}
+
+.fullWidth {
+    width: 100% !important;
+}
+
+/*fill the tab bar*/
+
+.east-north, .center-north , .east-south{
+    padding: 0;
+}
+
+.east-north .ui-tabs-nav, .center-north .ui-tabs-nav, .east-south .ui-tabs-nav{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    padding-bottom: 0 !important;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+}
+
+.center-north ul, .east-north ul {
+    position: fixed;
+    width: 100%;
+    z-index: 4;
+}
+
+.maximized, .maximized iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.ui-layout-resizer {
+    background: #EEE !important;
+}
+
+.ui-layout-toggler {
+    background: #999 !important;
+}

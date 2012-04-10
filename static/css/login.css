@@ -1,0 +1,27 @@
+body
+{
+    font-family:Gotham,Verdana,Sans-Serif;
+    font-weight:bold;
+}
+
+ul.thumbs li
+{
+    float:left;
+    list-style:none outside none;
+    width:75px;
+    margin:0 15px 15px 0;
+    padding:5px;
+}
+
+ul.thumbs img
+{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+ul.thumbs div
+{
+    text-align:center;
+    line-height:2em;
+}

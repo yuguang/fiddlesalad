@@ -1,0 +1,28 @@
+body {
+    font-family: 'Dosis', sans-serif;
+    width: 400px;
+    margin: 5em auto;
+}
+h1 {
+    font-size: 120%;
+    font-weight: bold;
+}
+p {
+    margin-bottom: 2em;
+}
+.blackboard {
+    background-color: #01695B;
+    color: white;
+    padding: 1em;
+    margin: 1em;
+    background-color: #01695b;
+    background-image: -webkit-linear-gradient(top, #01695b, #004c40);
+    background-image: -moz-linear-gradient(top, #01695b, #004c40);
+    background-image: -o-linear-gradient(top, #01695b, #004c40);
+    background-image: -ms-linear-gradient(top, #01695b, #004c40);
+    background-image: linear-gradient(top, #01695b, #004c40);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 8px solid #985119;
+}

@@ -1,0 +1,45 @@
+body {
+    overflow-x: hidden;
+}
+
+.list li
+{
+    display: inline;
+    list-style-type: none;
+}
+
+.right {
+    float: right;
+    margin-right: 10px;
+}
+
+#options {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.CodeMirror-placeholder {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #272822;
+    background-image: none;
+    background-origin: padding-box;
+    color: #F8F8F2;
+    display: block;
+    font-family: monospace;
+    font-size: 13px;
+    height: 300px;
+    line-height: 13px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    overflow-x: auto;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+}
+
+.placeholder {
+    color: white;
+}

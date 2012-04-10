@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Python Documentation | Fiddle Salad{% endblock %}
+
+{% block content %}
+    <div id="header-container">
+        <header class="wrapper clearfix">
+            {% block header %}{% endblock %}
+        </header>
+    </div>
+    <div id="main-container">
+        <div id="main" class="wrapper clearfix">
+            {% block main %}{% endblock %}
+        </div>
+    </div>
+    <div id="footer-container">
+        <footer class="wrapper">
+            <h3>&copy; Fiddle Salad</h3>
+        </footer>
+    </div>
+    {% css "css/documentation.css" %}
+    {% js "js/documentation.js" %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        SyntaxHighlighter.defaults['gutter'] = false;
+        SyntaxHighlighter.all();
+        $("a:not([href*='http://fiddlesalad.com'])").not("[href^=#]")
+            .addClass("external")
+            .attr({ target: "_blank" });
+    </script>
+    <script type="text/javascript" src="http://s3.amazonaws.com/pythonfiddle/files/documentation/script.js"></script>
+{% endblock %}

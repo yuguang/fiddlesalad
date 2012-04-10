@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{% if snippet.title %}{{ snippet.title }}{% else %}{{ default_meta.title }}{% endif %} | Fiddle Salad{% endblock %}
+{% block description %}{% if snippet.description %}{{ snippet.description }}{% else %}{{ default_meta.description }}{% endif %}{% endblock %}
+{% block keywords %}{% if snippet.get_tagstring %}{{ snippet.get_tagstring }}{% else %}{{ default_meta.keywords }}{% endif %}{% endblock %}
+
+{% block content %}
+    <textarea id="snippet">{{ snippet.code }}</textarea>
+    {% if not DEBUG %}
+        <progress id="progress" value="5" max="100"></progress>
+        <iframe id="viewer" src="http://fiddlesalad.com/home/files/viewer.html?v=2012032107"></iframe>
+    {% else %}
+        <iframe id="viewer" src="/static/files/viewer.local.html"></iframe>
+    {% endif %}
+    {% block layout %}{% endblock %}
+    {% block tmpl %}{% endblock %}
+{% endblock %}
+
+{% block styles %}
+    <link href="http://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" type="text/css">
+    {% css "css/styles.fiddle.css" %}
+{% endblock %}
+
+{% block resources %}
+    <script type="text/javascript">
+        var _startTime = (new Date()).getSeconds();
+        {% include "javascript_setup.html" %}
+        {% if ownerId %}var ownerId = {{ ownerId }}{% endif %};
+        {% block json %}{% endblock %}
+        {% if not DEBUG %}
+        (function(g,b,d){var c=b.head||b.getElementsByTagName("head"),D="readyState",E="onreadystatechange",F="DOMContentLoaded",G="addEventListener",H=setTimeout;
+        function f(){
+        	document.getElementById('progress').value = 20
+            $LAB
+            .script(base_url+"/js/fiddle.bootstrap.js.gz"+_v)
+            .script("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait(function(){
+            	document.getElementById('progress').value = 50
+            })
+            .script(base_url+"/js/jquery-ui.fiddle.js.gz"+_v)
+            .script(base_url+"/js/knockout.js.gz?v=2012032916")
+            .script(base_url+"/js/codemirror.fiddle.js.gz"+_v)
+            .script(base_url+"/js/fiddle.plugins.js.gz"+_v).wait(function(){
+            	document.getElementById('progress').value = 75
+            })
+            .script(base_url+"/js/fiddle.init.js.gz"+_v).wait()
+            .script("http://www.google-analytics.com/ga.js")
+            .script("http://dnn506yrbagrg.cloudfront.net/pages/scripts/0012/1566.js?"+Math.floor(new Date().getTime()/3600000))
+            .script("http://w.sharethis.com/button/buttons.js").wait(function(){
+                __st_loadLate=true;
+                stLight.options({publisher: "fc68151a-448d-4de4-aff8-689891a963fd"});
+                stWidget.addEntry(defaultShare);
+            });
+        }
+        H(function(){if("item"in c){if(!c[0]){H(arguments.callee,25);return}c=c[0]}var a=b.createElement("script"),e=false;a.onload=a[E]=function(){if((a[D]&&a[D]!=="complete"&&a[D]!=="loaded")||e){return false}a.onload=a[E]=null;e=true;f()};
+
+        a.src=base_url+"/js/LAB.min.js"+_v;
+
+        c.insertBefore(a,c.firstChild)},0);if(b[D]==null&&b[G]){b[D]="loading";b[G](F,d=function(){b.removeEventListener(F,d,false);b[D]="complete"},false)}})(this,document);
+        {% endif %}
+    </script>
+    {% if DEBUG %}
+        {% js "js/fiddle.bootstrap.js" %}
+        {% js "js/jquery-1.7.1.js" %}
+        {% js "js/jquery-ui.fiddle.js" %}
+        {% js "js/knockout.js" %}
+        {% js "js/codemirror.fiddle.js" %}
+        {% js "js/fiddle.plugins.js" %}
+        {% js "js/fiddle.init.js" %}
+    {% endif %}
+{% endblock %}

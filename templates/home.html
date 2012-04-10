@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Fiddle Salad Language Configuration{% endblock %}
+{% block description %}Choose among CSS, HTML, and JavaScript preprocessors. Develop web applications faster with real-time preview and enhanced debugging. {% endblock %}
+{% block keywords %}javascript, lesscss, zen coding{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+
+        {% include "logo.html" %}
+
+        <p class="span2"><a class="btn right" href="#" data-bind="click: loadWorkspace">Go &raquo;</a></p>
+    </div>
+    <div class="CodeMirror-placeholder"></div>
+    <textarea id="code">
+    </textarea>
+
+    <div id="options">
+        <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
+            <li class="span3">
+                <input type="radio" name="documentOption" value="html" checked="checked" data-bind="checked: documentLanguage" id="htmlMenuOption" />
+                <label for="htmlMenuOption" data-bind="inputActive: documentLanguage">HTML</label>
+            </li>
+            <li class="span3">
+                <input type="radio" name="documentOption" value="haml" data-bind="checked: documentLanguage" id="hamlMenuOption" />
+                <label for="hamlMenuOption" data-bind="inputActive: documentLanguage">HAML</label>
+            </li>
+            <li class="span3">
+                <input type="radio" name="documentOption" value="zencoding" data-bind="checked: documentLanguage" id="zencodingMenuOption" />
+                <label for="zencodingMenuOption" data-bind="inputActive: documentLanguage">Zen Coding</label>
+            </li>
+            <li class="span3">
+                <input type="radio" name="documentOption" value="jade" data-bind="checked: documentLanguage" id="jadeMenuOption" />
+                <label for="jadeMenuOption" data-bind="inputActive: documentLanguage">Jade</label>
+            </li>
+        </ul>
+        <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
+            <li class="span2">
+                <input type="radio" name="styleOption" value="css" data-bind="checked: styleLanguage" id="cssMenuOption" />
+                <label for="cssMenuOption" data-bind="inputActive: styleLanguage">CSS</label>
+            </li>
+            <li class="span3">
+                <input type="radio" name="styleOption" value="scss" data-bind="checked: styleLanguage" id="scssMenuOption" />
+                <label for="scssMenuOption" data-bind="inputActive: styleLanguage">SCSS</label>
+            </li>
+            <li class="span2">
+                <input type="radio" name="styleOption" value="sass" data-bind="checked: styleLanguage" id="sassMenuOption" />
+                <label for="sassMenuOption" data-bind="inputActive: styleLanguage">SASS</label>
+            </li>
+            <li class="span2">
+                <input type="radio" name="styleOption" value="less" checked="checked" data-bind="checked: styleLanguage" id="lessMenuOption" />
+                <label for="lessMenuOption" data-bind="inputActive: styleLanguage">LESS</label>
+            </li>
+            <li class="span3">
+                <input type="radio" name="styleOption" value="stylus" data-bind="checked: styleLanguage" id="stylusMenuOption" />
+                <label for="stylusMenuOption" data-bind="inputActive: styleLanguage">Stylus</label>
+            </li>
+        </ul>
+        <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
+            <li class="span4">
+                <input type="radio" name="programOption" value="javascript" checked="checked" data-bind="checked: programLanguage" id="javascriptMenuOption" />
+                <label for="javascriptMenuOption" data-bind="inputActive: programLanguage">JavaScript</label>
+            </li>
+            <li class="span4">
+                <input type="radio" name="programOption" value="coffeescript" data-bind="checked: programLanguage" id="coffeescriptMenuOption" />
+                <label for="coffeescriptMenuOption" data-bind="inputActive: programLanguage">CoffeeScript</label>
+            </li>
+            <li class="span4">
+                <input type="radio" name="programOption" value="python" data-bind="checked: programLanguage" id="pythonMenuOption" />
+                <label for="pythonMenuOption" data-bind="inputActive: programLanguage">Python</label>
+            </li>
+        </ul>
+    </div>
+    <div class="row-fluid">
+        <div class="span3 placeholder">.</div>
+        <div class="span3">
+            <a class="btn btn-default btn-large" data-bind="click: selectBasic">Basic</a>
+        </div>
+        <div class="span3">
+            <a class="btn btn-primary btn-large" data-bind="click: selectOptimal">Optimal</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block resources %}
+    <link href="http://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" type="text/css">
+    {% css "css/home.css" %}
+    {% css "css/wijmo-artisto.css" %}
+    {% if not DEBUG %}
+        <script src="http://s3.amazonaws.com/pythonfiddle/js/LAB.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            {% include "javascript_setup.html" %}
+            $LAB
+                    .script("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait()
+                    .script("http://s3.amazonaws.com/pythonfiddle/js/knockout.js.gz?v=2012032916")
+                    .script("http://s3.amazonaws.com/pythonfiddle/js/codemirror.fiddle.js.gz"+_v)
+                    .script("http://s3.amazonaws.com/pythonfiddle/js/jquery-ui.fiddle.js.gz"+_v).wait()
+                    .script("http://s3.amazonaws.com/pythonfiddle/js/menu.fiddle.js.gz"+_v)
+                    .script("http://www.google-analytics.com/ga.js")
+                    .script("http://dnn506yrbagrg.cloudfront.net/pages/scripts/0012/1566.js?"+Math.floor(new Date().getTime()/3600000));
+        </script>
+    {% else %}
+        {% js "js/jquery-1.7.1.js" %}
+        {% js "js/jquery-ui.fiddle.js" %}
+        {% js "js/knockout.js" %}
+        {% js "js/codemirror.fiddle.js" %}
+        {% js "js/menu.fiddle.js" %}
+    {% endif %}
+{% endblock %}

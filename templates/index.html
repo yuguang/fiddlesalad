@@ -1,0 +1,61 @@
+{% extends "templates.html" %}
+{% load chunks %}
+
+{% block json %}
+    var view_model = {{ view_model|safe }};
+{% endblock %}
+
+{% block layout %}
+    <div data-bind="foreach: containers">
+        <div data-bind="jqueryui: { widget: 'wijdialog', options: {
+            title: title,
+            width: dimension.width,
+            height: dimension.height,
+            position: [location.x, location.y],
+            stack: true,
+            closeOnEscape: false,
+            dialogClass: $root.configuration.enableTransparency() ? 'transparent' : '',
+            resize: $root.maskOverlapIframe,
+            resizeStop: $root.showMaskedIframes,
+            stateChanged: $root.showMaskedIframes,
+            captionButtons: {
+                minimize: { visible: buttons.minimize },
+                close: { visible: buttons.close },
+                pin: buttons.pin ? { visible: true, click: function() { engine.execute() }, iconClassOn: 'ui-icon-search', iconClassOff: 'ui-icon-refresh' } : { visible: false },
+                refresh: buttons.refresh ? { visible: true, click: function() { engine.reset() } } : { visible: false }
+            }
+        } }">
+            <div class="maximized" data-bind="attr: { id: id }, foreach: components">
+                <!-- ko if: $data.type == 'tabs' -->
+                    <div data-bind="template: { name: 'tabsTemplate', data: $data, afterRender: $root.initializeTabs }"></div>
+                <!-- /ko -->
+                <!-- ko if: $data.type == 'iframe' -->
+                    <iframe data-bind="attr: { src: $data.src, id: $data.id }"></iframe>
+                <!-- /ko -->
+                <!-- ko if: $data.type == 'template' -->
+                    <div data-bind="attr: { id: $data.id }, template: { name: $data.template }"></div>
+                <!-- /ko -->
+                <!-- ko if: $data.type == 'editor' -->
+                    <textarea data-bind="attr: ( $data.autofocus ? { id: $data.id, autofocus: 'autofocus' } : { id: $data.id } )"></textarea>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+
+    <div class="background" style="right: 0">
+        {% include "logo.html" %}
+        <div id="accordion" data-bind="template: { name: 'fiddleAccordion' }"></div>
+    </div>
+
+    <script type="text/html" id="tabsTemplate">
+        <div>
+            <ul data-bind="foreach: tabs">
+                <li><a data-bind="attr: { href: '#' + id }, text: title"></a></li>
+            </ul>
+            <!-- ko foreach: tabs -->
+                <div class="maximized" data-bind="attr: { id: id }, html: content">
+                </div>
+            <!-- /ko -->
+        </div>
+    </script>
+{% endblock %}

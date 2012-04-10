@@ -1,0 +1,1 @@
+java -jar S:\Minifiers\compiler.jar --js ../underscore.js --js ../classy.js --js pythonic.js --js stdlib.js --js stringformat.js --compilation_level SIMPLE_OPTIMIZATIONS --warning_level QUIET > ../pylib.js
