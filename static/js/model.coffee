@@ -381,7 +381,7 @@ FiddleViewModel = ViewModel.$extend(
     the languages are set in the view model, the server request returns a JSON result with the resources, inline 
     CSS/JS blocks, and the HTML body. This routine sets the associated editors with the imported code. 
     ###
-    return  if @importUrl.hasError()
+    return  if not @importUrl().length or @importUrl.hasError()
     absolutePath = (resource, relative=false) =>
       # if resource isn't a full url
       if relative or resource.slice(0, 4) isnt 'http'
