@@ -1,239 +1,236 @@
 {% extends "layout.html" %}
 
 {% block tmpl %}
-    {% load jqtmpl %}
     {% load chunks %}
 
     {% include "fiddle/templates.html"%}
-    {% jqtmpl %}
 
-        <script type="text/html" id="shareTemplate">
-            <span class='st_facebook_large' displayText='Facebook'></span>
-            <span class='st_twitter_large' displayText='Tweet'></span>
-            <span class='st_plusone_large' displayText='Google +1'></span>
-            <span class='st_fblike_large' displayText='Facebook Like'></span>
-            <span class='st_twitterfollow_large' displayText='Twitter Follow' st_username='fiddle_salad'></span>
-        </script>
+    <script type="text/html" id="shareTemplate">
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_plusone_large' displayText='Google +1'></span>
+        <span class='st_fblike_large' displayText='Facebook Like'></span>
+        <span class='st_twitterfollow_large' displayText='Twitter Follow' st_username='fiddle_salad'></span>
+    </script>
 
-        <script type="text/html" id="tipsTemplate">
-            <img data-bind="attr: { src: $root.tips.selected().image }" />
-            <p data-bind="html: $root.tips.selected().text"></p>
-            <div class="clearfix">
-                <button class="left" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
-                    Prev
-                </button>
-                <button class="right" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() < $root.tips.content.length - 1, click: $root.tips.next'>
-                    Next
-                </button>
-            </div>
-        </script>
-
-        <script type="text/html" id="macHotkeysTemplate">
-            <div class="hotkeys">
-                <span class="kbd">&#8984;</span>+<span class="kbd">A</span><span>selectAll</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">D</span><span>deleteLine</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Z</span><span>undo</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">Z</span><span>redo</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Y</span><span>redo</span><br />
-                <span class="kbd">&#8984;</span>+<span class="kbd">Up</span><span>goDocStart</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">End</span><span>goDocEnd</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Down</span><span>goDocEnd</span><br /><span class="kbd">Alt</span>+<span class="kbd">Left</span><span>goWordLeft</span><br />
-                <span class="kbd">Alt</span>+<span class="kbd">Right</span><span>goWordRight</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Left</span><span>goLineStart</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Right</span><span>goLineEnd</span><br /><span class="kbd">Alt</span>+<span class="kbd">Back</span><span>delWordLeft</span><br />
-                <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">Back</span><span>delWordRight</span><br /><span class="kbd">Alt</span>+<span class="kbd">Delete</span><span>delWordRight</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">F</span><span>find</span><br />
-                <span class="kbd">&#8984;</span>+<span class="kbd">G</span><span>findNext</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">G</span><span>findPrev</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Alt</span>+<span class="kbd">F</span><span>findPrev</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">Alt</span>+<span class="kbd">F</span><span>replaceAll</span>
-            </div>
-        </script>
-
-        <script type="text/html" id="windowsHotkeysTemplate">
-            <div class="hotkeys">
-                <span class="kbd">Ctrl</span>+<span class="kbd">A</span><span>selectAll</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">D</span><span>deleteLine</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Z</span><span>undo</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">Z</span><span>redo</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Y</span><span>redo</span><br />
-                <span class="kbd">Ctrl</span>+<span class="kbd">Home</span><span>goDocStart</span><br /><span class="kbd">Alt</span>+<span class="kbd">Up</span><span>goDocStart</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">End</span><span>goDocEnd</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Down</span><span>goDocEnd</span><br />
-                <span class="kbd">Ctrl</span>+<span class="kbd">Left</span><span>goWordLeft</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Right</span><span>goWordRight</span><br /><span class="kbd">Alt</span>+<span class="kbd">Left</span><span>goLineStart</span><br /><span class="kbd">Alt</span>+<span class="kbd">Right</span><span>goLineEnd</span><br />
-                <span class="kbd">Ctrl</span>+<span class="kbd">Back</span><span>delWordLeft</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Delete</span><span>delWordRight</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">F</span><span>find</span><br />
-                <span class="kbd">Ctrl</span>+<span class="kbd">G</span><span>findNext</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">G</span><span>findPrev</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">F</span><span>replace</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">R</span><span>replaceAll</span><br />
-            </div>
-        </script>
-
-        <div id="compareLanguageSelection" style="display: none">
-            <input id="diffSelectStyleLanguage" type="radio" name="compareOption" value="1" />
-            <label for="diffSelectStyleLanguage" data-bind="text: styleLanguage"></label>
-            <input id="diffSelectDocumentLanguage" type="radio" name="compareOption" checked="checked" value="2" />
-            <label for="diffSelectDocumentLanguage" data-bind="text: documentLanguage"></label>
-            <input id="diffSelectProgramLanguage" type="radio" name="compareOption" value="5" />
-            <label for="diffSelectProgramLanguage" data-bind="text: programLanguage"></label>
+    <script type="text/html" id="tipsTemplate">
+        <img data-bind="attr: { src: $root.tips.selected().image }" />
+        <p data-bind="html: $root.tips.selected().text"></p>
+        <div class="clearfix">
+            <button class="left" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
+                Prev
+            </button>
+            <button class="right" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() < $root.tips.content.length - 1, click: $root.tips.next'>
+                Next
+            </button>
         </div>
+    </script>
 
-        <div id="zenReferenceTab" class="hotkeys" style="display: none">
-            <div class="clearfix">
-                <div class="right">
-                    <span>|</span>
-                    <a class="link" href="http://code.google.com/p/zen-coding/wiki/ZenHTMLSelectorsEn">HTML Selectors</a>
-                    <span>|</span>
-                    <a class="link" href="http://code.google.com/p/zen-coding/wiki/Actions">Actions</a>
-                    <span>|</span>
-                </div>
-            </div>
-            <span class="kbd">Tab</span>or<span class="kbd">Ctrl</span>+<span class="kbd">E</span><span>Expand Abbreviation</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">D</span><span>Balance Tag Outward</span><br />
-            <span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">D</span><span>Balance Tag inward</span><br />
-            <span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">A</span><span>Wrap with Abbreviation</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Next Edit Point</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Previous Edit Point</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">L</span><span>Select Line</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">M</span><span>Merge Lines</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">/</span><span>Toggle Comment</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">J</span><span>Split/Join Tag</span>
-            <span class="kbd">Ctrl</span>+<span class="kbd">K</span><span>Remove Tag</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">Y</span><span>Evaluate Math Expression</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">?</span><span>Increment number by 1</span>
-            <span class="kbd">Ctrl</span>+<span class="kbd">?</span><span>Decrement number by 1</span><br />
-            <span class="kbd">Alt</span>+<span class="kbd">?</span><span>Increment number by 0.1</span>
-            <span class="kbd">Alt</span>+<span class="kbd">?</span><span>Decrement number by 0.1</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Increment number by 10</span>
-            <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Decrement number by 10</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">.</span><span>Select Next Item</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">,</span><span>Select Previous Item</span><br />
-            <span class="kbd">Ctrl</span>+<span class="kbd">B</span><span>Reflect CSS Value</span><br />
+    <script type="text/html" id="macHotkeysTemplate">
+        <div class="hotkeys">
+            <span class="kbd">&#8984;</span>+<span class="kbd">A</span><span>selectAll</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">D</span><span>deleteLine</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Z</span><span>undo</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">Z</span><span>redo</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Y</span><span>redo</span><br />
+            <span class="kbd">&#8984;</span>+<span class="kbd">Up</span><span>goDocStart</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">End</span><span>goDocEnd</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Down</span><span>goDocEnd</span><br /><span class="kbd">Alt</span>+<span class="kbd">Left</span><span>goWordLeft</span><br />
+            <span class="kbd">Alt</span>+<span class="kbd">Right</span><span>goWordRight</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Left</span><span>goLineStart</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Right</span><span>goLineEnd</span><br /><span class="kbd">Alt</span>+<span class="kbd">Back</span><span>delWordLeft</span><br />
+            <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">Back</span><span>delWordRight</span><br /><span class="kbd">Alt</span>+<span class="kbd">Delete</span><span>delWordRight</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">F</span><span>find</span><br />
+            <span class="kbd">&#8984;</span>+<span class="kbd">G</span><span>findNext</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">G</span><span>findPrev</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Alt</span>+<span class="kbd">F</span><span>findPrev</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">Alt</span>+<span class="kbd">F</span><span>replaceAll</span>
         </div>
+    </script>
 
-        <script id="packageTemplate" type="text/html">
-            <li class="clickable" data-bind="text:name, attr: { title: description }, click: function() { window.open($data.link) }"></li>
-        </script>
+    <script type="text/html" id="windowsHotkeysTemplate">
+        <div class="hotkeys">
+            <span class="kbd">Ctrl</span>+<span class="kbd">A</span><span>selectAll</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">D</span><span>deleteLine</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Z</span><span>undo</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">Z</span><span>redo</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Y</span><span>redo</span><br />
+            <span class="kbd">Ctrl</span>+<span class="kbd">Home</span><span>goDocStart</span><br /><span class="kbd">Alt</span>+<span class="kbd">Up</span><span>goDocStart</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">End</span><span>goDocEnd</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Down</span><span>goDocEnd</span><br />
+            <span class="kbd">Ctrl</span>+<span class="kbd">Left</span><span>goWordLeft</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Right</span><span>goWordRight</span><br /><span class="kbd">Alt</span>+<span class="kbd">Left</span><span>goLineStart</span><br /><span class="kbd">Alt</span>+<span class="kbd">Right</span><span>goLineEnd</span><br />
+            <span class="kbd">Ctrl</span>+<span class="kbd">Back</span><span>delWordLeft</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">Delete</span><span>delWordRight</span><br /><span class="kbd">Ctrl</span>+<span class="kbd">F</span><span>find</span><br />
+            <span class="kbd">Ctrl</span>+<span class="kbd">G</span><span>findNext</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">G</span><span>findPrev</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">F</span><span>replace</span><br /><span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">R</span><span>replaceAll</span><br />
+        </div>
+    </script>
 
-        <script id="optionTemplate" type="text/html">
-            <li>
-                <label data-bind="text: title"></label>
-                <select data-bind="options: templates, value: selected, optionsCaption: 'Choose...'"></select>
-            </li>
-        </script>
-        
-        <script id="fiddleAccordion" type="text/html">
-            <h3><a href="#">Project</a></h3>
-            <div id="projectConfiguration">
-                <p class="clearfix">
-                    <label>Add Resource: </label><input class="thin left" data-bind="value: newResourceText" placeholder="JS/CSS URL" />
-                    <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
-                </p>
-                <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
-                <div class="details wide west" data-bind='template: "formTemplate"'></div>
-                <!-- ko template: "revisionsTemplate" -->
-                <!-- /ko -->
-                <p class="vertical">
-                    <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
-                        <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
-                        <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
-                    </a>
-                </p>
-            </div>
-            <h3><a href="#">Import</a></h3>
-            <div id="templateConfiguration">
-                <!-- ko if: compatibleLanguages() -->
-                <p class="clearfix">
-                    <input class="thin left required url" placeholder="Open URL..." data-bind="value: importUrl, valueUpdate: 'afterkeydown'"/>
-                    <span class="clickable right ui-icon ui-icon-circle-triangle-e" data-bind="click: importExternal"></span>
-                </p>
-                <p data-bind='visible: importUrl.hasError, text: importUrl.validationMessage'> </p>
-                <!-- /ko -->
-                <ul data-bind="template: { name: 'optionTemplate', foreach: starterTemplates }"></ul>
-                <!-- ko if: showSelectedTemplates -->
-                <ul>
-                    <li data-bind="visible: _.isString(cssSelected().name)">CSS: <a target="_blank" data-bind="fadeInText: cssSelected().name, attr: { href: cssSelected().url }"></a></li>
-                    <li data-bind="visible: _.isString(htmlSelected().name)">HTML: <a target="_blank" data-bind="fadeInText: htmlSelected().name, attr: { href: htmlSelected().url }"></a></li>
-                </ul>
-                <!-- /ko -->
-                <ul data-bind="template: { name: 'optionTemplate', foreach: starterFrameworks }"></ul>
-                <ul>
-                    <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
-                </ul>
-            </div>
-            <h3><a href="#">Tools</a></h3>
-            <div id="webDevelopmentTools">
-                <p class="clickable" onclick="window.open('/')">
-                    <span class="left ui-icon ui-icon-home"></span>
-                    <span>Configure Languages</span>
-                </p>
-                <!-- ko if: COMPATIBLE_LANGUAGES.HTML.indexOf(documentLanguage()) != -1 -->
-                <p class="clickable" data-bind="click: validateHtml">
-                    <span class="left ui-icon ui-icon-check"></span>
-                    <span>Validate HTML</span>
-                </p>
-                <!-- /ko -->
-                <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
-                <p class="clickable" data-bind="click: validateCss">
-                    <span class="left ui-icon ui-icon-check"></span>
-                    <span>Validate CSS</span>
-                </p>
-                <!-- /ko -->
-                <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
-                <p class="clickable" data-bind="click: beautifyCss">
-                    <span class="left ui-icon ui-icon-star"></span>
-                    <span>Beautify CSS</span>
-                </p>
-                <!-- /ko -->
-                <!-- ko if: programLanguage() == LANGUAGE.JAVASCRIPT -->
-                <p class="clickable" data-bind="click: beautifyJavascript">
-                    <span class="left ui-icon ui-icon-star"></span>
-                    <span>Beautify Javascript</span>
-                </p>
-                <!-- /ko -->
-                <!-- ko if: documentLanguage() == LANGUAGE.HTML -->
-                <p class="clickable" id="beautifyHtml">
-                    <span class="left ui-icon ui-icon-star"></span>
-                    <span>Beautify HTML</span>
-                </p>
-                <!-- /ko -->
-                <p class="clickable" data-bind="click: function () { window.open('http://ricostacruz.com/lorem/') }">
-                    <span class="left ui-icon ui-icon-comment"></span>
-                    <span>Lorem Ipsum Generator</span>
-                </p>
-                <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
-                <p>
-                    <input type="checkbox" data-bind="checked: configuration.cssLintEnabled" /><label>Lint CSS</label>
-                </p>
-                <!-- /ko -->
-                <!-- ko if: programLanguage() == LANGUAGE.JAVASCRIPT -->
-                <p>
-                    <input type="checkbox" data-bind="checked: configuration.jsLintEnabled" /><label>Lint JS</label>
-                </p>
-                <!-- /ko -->
-                <p>
-                    <input type="checkbox" data-bind="checked: configuration.enableTransparency" /><label>Enable Transparency</label>
-                </p>
-                <!-- ko if: programLanguage() == LANGUAGE.COFFEESCRIPT -->
-                <textarea id="javascriptConverter" placeholder="Paste JavaScript to be converted to CoffeeScript"></textarea>
-                <!-- /ko -->
-                <p><strong>Batteries Included</strong></p>
-                <p>
-                    <a href="http://leaverou.github.com/prefixfree/" class="link">-prefix-free</a>
-                </p>
-                <p>
-                    <a href="http://jquery.com/" class="link">jQuery</a>
-                </p>
-                <!-- ko if: styleLanguage() == LANGUAGE.SASS || styleLanguage() == LANGUAGE.SCSS -->
-                <p>
-                    <a href="http://compass-style.org/" class="link">Compass</a>
-                </p>
-                <!-- /ko -->
-                <p class="vertical">
-                    <a href="#" data-bind='click: openHotkeysFrame'>
-                        <span class="left ui-icon ui-icon-document"></span>
-                        <span>Hotkeys</span>
-                    </a>
-                </p>
-            </div>
-            <h3><a href="#">Links</a></h3>
-            <div>
-                <p><a class="link" href="http://blog.fiddlesalad.com/">Blog</a></p>
-                <p><a class="link" href="https://getsatisfaction.com/fiddle_salad">Support Forum</a></p>
-                <p><a class="link" href="https://chrome.google.com/webstore/detail/gbbimmnlnnanjkmjbopohmghngacfbem">Chrome App</a></p>
-                <p class="vertical">
-                    <a href="#" data-bind='click: openTipsFrame'>
-                        <span class="left ui-icon ui-icon-lightbulb"></span>
-                        <span>Tips</span>
-                    </a>
-                </p>
-            </div>
-        </script>
+    <div id="compareLanguageSelection" style="display: none">
+        <input id="diffSelectStyleLanguage" type="radio" name="compareOption" value="1" />
+        <label for="diffSelectStyleLanguage" data-bind="text: styleLanguage"></label>
+        <input id="diffSelectDocumentLanguage" type="radio" name="compareOption" checked="checked" value="2" />
+        <label for="diffSelectDocumentLanguage" data-bind="text: documentLanguage"></label>
+        <input id="diffSelectProgramLanguage" type="radio" name="compareOption" value="5" />
+        <label for="diffSelectProgramLanguage" data-bind="text: programLanguage"></label>
+    </div>
 
-        <script type="text/html" id="resourceTemplate">
-            <li>
-                <a target="_blank" data-bind="text: title, attr: { href: source }"></a>
-                <span class="clickable right ui-icon ui-icon-trash" data-bind="click: remove"></span>
-            </li>
-        </script>
-    {% endjqtmpl %}
+    <div id="zenReferenceTab" class="hotkeys" style="display: none">
+        <div class="clearfix">
+            <div class="right">
+                <span>|</span>
+                <a class="link" href="http://code.google.com/p/zen-coding/wiki/ZenHTMLSelectorsEn">HTML Selectors</a>
+                <span>|</span>
+                <a class="link" href="http://code.google.com/p/zen-coding/wiki/Actions">Actions</a>
+                <span>|</span>
+            </div>
+        </div>
+        <span class="kbd">Tab</span>or<span class="kbd">Ctrl</span>+<span class="kbd">E</span><span>Expand Abbreviation</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">D</span><span>Balance Tag Outward</span><br />
+        <span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">D</span><span>Balance Tag inward</span><br />
+        <span class="kbd">Shift</span>+<span class="kbd">Ctrl</span>+<span class="kbd">A</span><span>Wrap with Abbreviation</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Next Edit Point</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Previous Edit Point</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">L</span><span>Select Line</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">M</span><span>Merge Lines</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">/</span><span>Toggle Comment</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">J</span><span>Split/Join Tag</span>
+        <span class="kbd">Ctrl</span>+<span class="kbd">K</span><span>Remove Tag</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">Y</span><span>Evaluate Math Expression</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">?</span><span>Increment number by 1</span>
+        <span class="kbd">Ctrl</span>+<span class="kbd">?</span><span>Decrement number by 1</span><br />
+        <span class="kbd">Alt</span>+<span class="kbd">?</span><span>Increment number by 0.1</span>
+        <span class="kbd">Alt</span>+<span class="kbd">?</span><span>Decrement number by 0.1</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Increment number by 10</span>
+        <span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">?</span><span>Decrement number by 10</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">.</span><span>Select Next Item</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">,</span><span>Select Previous Item</span><br />
+        <span class="kbd">Ctrl</span>+<span class="kbd">B</span><span>Reflect CSS Value</span><br />
+    </div>
+
+    <script id="packageTemplate" type="text/html">
+        <li class="clickable" data-bind="text:name, attr: { title: description }, click: function() { window.open($data.link) }"></li>
+    </script>
+
+    <script id="optionTemplate" type="text/html">
+        <li>
+            <label data-bind="text: title"></label>
+            <select data-bind="options: templates, value: selected, optionsCaption: 'Choose...'"></select>
+        </li>
+    </script>
+
+    <script id="fiddleAccordion" type="text/html">
+        <h3><a href="#">Project</a></h3>
+        <div id="projectConfiguration">
+            <p class="clearfix">
+                <label>Add Resource: </label><input class="thin left" data-bind="value: newResourceText" placeholder="JS/CSS URL" />
+                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
+            </p>
+            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
+            <div class="details wide west" data-bind='template: "formTemplate"'></div>
+            <!-- ko template: "revisionsTemplate" -->
+            <!-- /ko -->
+            <p class="vertical">
+                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
+                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
+                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
+                </a>
+            </p>
+        </div>
+        <h3><a href="#">Import</a></h3>
+        <div id="templateConfiguration">
+            <!-- ko if: compatibleLanguages() -->
+            <p class="clearfix">
+                <input class="thin left required url" placeholder="Open URL..." data-bind="value: importUrl, valueUpdate: 'afterkeydown'"/>
+                <span class="clickable right ui-icon ui-icon-circle-triangle-e" data-bind="click: importExternal"></span>
+            </p>
+            <p data-bind='visible: importUrl.hasError, text: importUrl.validationMessage'> </p>
+            <!-- /ko -->
+            <ul data-bind="template: { name: 'optionTemplate', foreach: starterTemplates }"></ul>
+            <!-- ko if: showSelectedTemplates -->
+            <ul>
+                <li data-bind="visible: _.isString(cssSelected().name)">CSS: <a target="_blank" data-bind="fadeInText: cssSelected().name, attr: { href: cssSelected().url }"></a></li>
+                <li data-bind="visible: _.isString(htmlSelected().name)">HTML: <a target="_blank" data-bind="fadeInText: htmlSelected().name, attr: { href: htmlSelected().url }"></a></li>
+            </ul>
+            <!-- /ko -->
+            <ul data-bind="template: { name: 'optionTemplate', foreach: starterFrameworks }"></ul>
+            <ul>
+                <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
+            </ul>
+        </div>
+        <h3><a href="#">Tools</a></h3>
+        <div id="webDevelopmentTools">
+            <p class="clickable" onclick="window.open('/')">
+                <span class="left ui-icon ui-icon-home"></span>
+                <span>Configure Languages</span>
+            </p>
+            <!-- ko if: COMPATIBLE_LANGUAGES.HTML.indexOf(documentLanguage()) != -1 -->
+            <p class="clickable" data-bind="click: validateHtml">
+                <span class="left ui-icon ui-icon-check"></span>
+                <span>Validate HTML</span>
+            </p>
+            <!-- /ko -->
+            <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
+            <p class="clickable" data-bind="click: validateCss">
+                <span class="left ui-icon ui-icon-check"></span>
+                <span>Validate CSS</span>
+            </p>
+            <!-- /ko -->
+            <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
+            <p class="clickable" data-bind="click: beautifyCss">
+                <span class="left ui-icon ui-icon-star"></span>
+                <span>Beautify CSS</span>
+            </p>
+            <!-- /ko -->
+            <!-- ko if: programLanguage() == LANGUAGE.JAVASCRIPT -->
+            <p class="clickable" data-bind="click: beautifyJavascript">
+                <span class="left ui-icon ui-icon-star"></span>
+                <span>Beautify Javascript</span>
+            </p>
+            <!-- /ko -->
+            <!-- ko if: documentLanguage() == LANGUAGE.HTML -->
+            <p class="clickable" id="beautifyHtml">
+                <span class="left ui-icon ui-icon-star"></span>
+                <span>Beautify HTML</span>
+            </p>
+            <!-- /ko -->
+            <p class="clickable" data-bind="click: function () { window.open('http://ricostacruz.com/lorem/') }">
+                <span class="left ui-icon ui-icon-comment"></span>
+                <span>Lorem Ipsum Generator</span>
+            </p>
+            <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
+            <p>
+                <input type="checkbox" data-bind="checked: configuration.cssLintEnabled" /><label>Lint CSS</label>
+            </p>
+            <!-- /ko -->
+            <!-- ko if: programLanguage() == LANGUAGE.JAVASCRIPT -->
+            <p>
+                <input type="checkbox" data-bind="checked: configuration.jsLintEnabled" /><label>Lint JS</label>
+            </p>
+            <!-- /ko -->
+            <p>
+                <input type="checkbox" data-bind="checked: configuration.enableTransparency" /><label>Enable Transparency</label>
+            </p>
+            <!-- ko if: programLanguage() == LANGUAGE.COFFEESCRIPT -->
+            <textarea id="javascriptConverter" placeholder="Paste JavaScript to be converted to CoffeeScript"></textarea>
+            <!-- /ko -->
+            <p><strong>Batteries Included</strong></p>
+            <p>
+                <a href="http://leaverou.github.com/prefixfree/" class="link">-prefix-free</a>
+            </p>
+            <p>
+                <a href="http://jquery.com/" class="link">jQuery</a>
+            </p>
+            <!-- ko if: styleLanguage() == LANGUAGE.SASS || styleLanguage() == LANGUAGE.SCSS -->
+            <p>
+                <a href="http://compass-style.org/" class="link">Compass</a>
+            </p>
+            <!-- /ko -->
+            <p class="vertical">
+                <a href="#" data-bind='click: openHotkeysFrame'>
+                    <span class="left ui-icon ui-icon-document"></span>
+                    <span>Hotkeys</span>
+                </a>
+            </p>
+        </div>
+        <h3><a href="#">Links</a></h3>
+        <div>
+            <p><a class="link" href="http://blog.fiddlesalad.com/">Blog</a></p>
+            <p><a class="link" href="https://getsatisfaction.com/fiddle_salad">Support Forum</a></p>
+            <p><a class="link" href="https://chrome.google.com/webstore/detail/gbbimmnlnnanjkmjbopohmghngacfbem">Chrome App</a></p>
+            <p class="vertical">
+                <a href="#" data-bind='click: openTipsFrame'>
+                    <span class="left ui-icon ui-icon-lightbulb"></span>
+                    <span>Tips</span>
+                </a>
+            </p>
+        </div>
+    </script>
+
+    <script type="text/html" id="resourceTemplate">
+        <li>
+            <a target="_blank" data-bind="text: title, attr: { href: source }"></a>
+            <span class="clickable right ui-icon ui-icon-trash" data-bind="click: remove"></span>
+        </li>
+    </script>
 {% endblock %}
