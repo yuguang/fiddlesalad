@@ -24,10 +24,10 @@ Getting the Code and Running it
 -------------------------------
 
     git clone git://github.com/yuguang/fiddlesalad.git
-    git clone git://github.com/yuguang/cloud_ide-templates.git
-    mv cloud_ide-templates templates
-    git clone git://github.com/yuguang/cloud_ide.git
-    cd cloud_ide
+    git clone git://github.com/yuguang/cloud-ide-templates.git
+    mv cloud-ide-templates templates
+    git clone git://github.com/yuguang/django-cloud-ide.git
+    cd django-cloud-ide
     python setup.py install
     cd ../fiddlesalad
     mv settings.default.py settings.py
