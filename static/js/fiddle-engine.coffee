@@ -263,6 +263,13 @@ HamlEditor = TemplateEditor.$extend(
       indentWithTabs: false
     )
 )
+CoffeecupEditor = TemplateEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = name: 'coffeescript'
+    @loadWorker('coffeecup')
+    @documentationUrl = 'https://github.com/mark-hahn/coffeekup-intro'
+)
 JadeEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -382,7 +389,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['/',  @mode.name, '/compile/'].join('')
+      ['http://fiddlesalad.com/',  @mode.name, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -1053,5 +1060,5 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor}
 root.engine = EngineFactory(FiddleFactory())

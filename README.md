@@ -46,3 +46,7 @@ Requirements
 * django-taggit >= 0.9.3
 * django-chunks >= 0.1
 
+Developer Documentation
+-----------------------
+
+The [wiki](https://github.com/yuguang/fiddlesalad/wiki) has information on the overall design.
