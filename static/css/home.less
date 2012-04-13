@@ -4,23 +4,23 @@ body {
     overflow-x: hidden;
 }
 
-ul.list:nth-child(odd) {
-    background-color: #F2F2FA;
-}
-
-.list li
-{
-    display: inline;
-    list-style-type: none;
+ul.list {
+    &:nth-child(odd) {
+        background-color: #F2F2FA;
+    }
+    li {
+        display: inline;
+        list-style-type: none;
+    }
 }
 
 .right {
     float: right;
-    margin-right: 10px;
 }
 
 .action {
     padding: 5px 12px 5px 12px;
+    margin-right: 10px;
     .borderRadius(15px);
 }
 
