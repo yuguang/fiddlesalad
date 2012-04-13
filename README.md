@@ -37,6 +37,15 @@ Getting the Code and Running it
 
 Open http://127.0.0.1:8000/ in the browser. 
 
+Installation Notes
+------------------
+###Compiling CoffeeScript
+from the js folder run
+    coffee -cw -o ./compiled-coffee .\
+
+###Installing Package Tools
+if you don't have pip, see http://guide.python-distribute.org/installation.html for how to install it
+
 Requirements
 ------------
 
@@ -44,7 +53,8 @@ Requirements
 * django-mediasync >= 2.2.0
 * django-social-auth >= 0.6.4
 * django-taggit >= 0.9.3
-* django-chunks >= 0.1
+* chunks >= 0.1
+* beautifulsoup4 >= 4.0.1
 
 Developer Documentation
 -----------------------
