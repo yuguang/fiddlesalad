@@ -31,11 +31,11 @@ Getting the Code and Running it
     python setup.py install
     cd ../fiddlesalad
     mv settings.default.py settings.py
-    pip install -r requirements.txt
+    pip install -r requirements.txt (see http://guide.python-distribute.org/installation.html if you don't have pip)
     python manage.py syncdb
     python manage.py runserver
 
-Open http://127.0.0.1:8000/ in the browser.
+Open http://127.0.0.1:8000/ in the browser. 
 
 Requirements
 ------------
