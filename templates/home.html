@@ -9,7 +9,7 @@
 
         {% include "logo.html" %}
 
-        <p class="span2"><a class="btn right" href="#" data-bind="click: loadWorkspace">Go &raquo;</a></p>
+        <p class="span2"><a class="btn btn-warning action right" href="#" data-bind="click: loadWorkspace">Go &raquo;</a></p>
     </div>
     <div class="CodeMirror-placeholder"></div>
     <textarea id="code">
@@ -80,6 +80,34 @@
             <a class="btn btn-primary btn-large" data-bind="click: selectOptimal">Optimal</a>
         </div>
     </div>
+    <div class="bs-links">
+		<ul class="quick-links">
+			<li>
+				<a target="_blank" href="http://blog.fiddlesalad.com/whats-new-in-fiddle-salad-1-0/">Read the tips</a>
+			</li>
+			<li>
+				<a target="_blank" href="http://www.facebook.com/pages/Fiddle-Salad/433836646631748">Become a fan</a>
+			</li>
+			<li>
+				<a target="_blank" href="https://github.com/yuguang/fiddlesalad/issues?state=open">Submit issues</a>
+			</li>
+		</ul>
+		<ul class="quick-links">
+			<li>
+				<iframe class="github-btn" src="http://markdotto.github.com/github-buttons/github-btn.html?user=yuguang&repo=fiddlesalad&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="112px" height="20px"></iframe>
+			</li>
+			<li>
+				<iframe class="github-btn" src="http://markdotto.github.com/github-buttons/github-btn.html?user=yuguang&repo=fiddlesalad&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+			</li>
+			<li class="follow-btn">
+				<a href="https://twitter.com/fiddle_salad" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @fiddle_salad</a>
+			</li>
+			<li class="tweet-btn">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://fiddlesalad.com" data-via="fiddle_salad">Tweet</a>
+			</li>
+		</ul>
+	</div>
+</div>
 {% endblock %}
 
 {% block resources %}
@@ -97,6 +125,7 @@
                     .script("http://s3.amazonaws.com/pythonfiddle/js/jquery-ui.fiddle.js.gz"+_v).wait()
                     .script("http://s3.amazonaws.com/pythonfiddle/js/menu.fiddle.js.gz"+_v)
                     .script("http://www.google-analytics.com/ga.js")
+                    .script("http://platform.twitter.com/widgets.js")
                     .script("http://dnn506yrbagrg.cloudfront.net/pages/scripts/0012/1566.js?"+Math.floor(new Date().getTime()/3600000));
         </script>
     {% else %}
@@ -105,5 +134,6 @@
         {% js "js/knockout.js" %}
         {% js "js/codemirror.fiddle.js" %}
         {% js "js/menu.fiddle.js" %}
+        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     {% endif %}
 {% endblock %}
