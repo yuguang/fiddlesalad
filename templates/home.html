@@ -17,21 +17,25 @@
 
     <div id="options">
         <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
-            <li class="span3">
+            <li class="span2">
                 <input type="radio" name="documentOption" value="html" checked="checked" data-bind="checked: documentLanguage" id="htmlMenuOption" />
                 <label for="htmlMenuOption" data-bind="inputActive: documentLanguage">HTML</label>
             </li>
-            <li class="span3">
+            <li class="span2">
                 <input type="radio" name="documentOption" value="haml" data-bind="checked: documentLanguage" id="hamlMenuOption" />
                 <label for="hamlMenuOption" data-bind="inputActive: documentLanguage">HAML</label>
             </li>
-            <li class="span3">
+            <li class="span2">
                 <input type="radio" name="documentOption" value="zencoding" data-bind="checked: documentLanguage" id="zencodingMenuOption" />
                 <label for="zencodingMenuOption" data-bind="inputActive: documentLanguage">Zen Coding</label>
             </li>
-            <li class="span3">
+            <li class="span2">
                 <input type="radio" name="documentOption" value="jade" data-bind="checked: documentLanguage" id="jadeMenuOption" />
                 <label for="jadeMenuOption" data-bind="inputActive: documentLanguage">Jade</label>
+            </li>
+            <li class="span2">
+                <input type="radio" name="documentOption" value="coffeecup" data-bind="checked: documentLanguage" id="coffeecupMenuOption" />
+                <label for="coffeecupMenuOption" data-bind="inputActive: documentLanguage">CoffeeCup</label>
             </li>
         </ul>
         <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
@@ -77,7 +81,7 @@
             <a class="btn btn-default btn-large" data-bind="click: selectBasic">Basic</a>
         </div>
         <div class="span3">
-            <a class="btn btn-primary btn-large" data-bind="click: selectOptimal">Optimal</a>
+            <a class="btn btn-default btn-large" data-bind="click: selectOptimal">Optimal</a>
         </div>
     </div>
     <div class="bs-links">

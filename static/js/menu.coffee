@@ -389,6 +389,29 @@ examples =
     //     province: 'BC'
     //   };
   """, atob('fCBBbiBleGFtcGxlIG9mIGFuDQphKGhyZWY9JyMnKSBpbmxpbmUNCnwgbGluay4NCg0KZm9ybQ0KICBsYWJlbCBVc2VybmFtZToNCiAgICBpbnB1dCh0eXBlPSd0ZXh0JywgbmFtZT0ndXNlcltuYW1lXScpDQogICAgcA0KICAgICAgfCBKdXN0IGFuIGV4YW1wbGUgb2Ygc29tZSB0ZXh0IHVzYWdlLg0KICAgICAgfCBZb3UgY2FuIGhhdmUgPGVtPmlubGluZTwvZW0+IGh0bWwsDQogICAgICB8IGFzIHdlbGwgYXMNCiAgICAgIHN0cm9uZyB0YWdzDQogICAgICB8IC4NCg0KICAgICAgfCBJbnRlcnBvbGF0aW9uIGlzIGFsc28gc3VwcG9ydGVkLiBUaGUgDQogICAgICB8IHVzZXJuYW1lIGlzIGN1cnJlbnRseSAiI3tuYW1lfSIuDQoNCiAgbGFiZWwgRW1haWw6DQogICAgaW5wdXQodHlwZT0ndGV4dCcsIG5hbWU9J3VzZXJbZW1haWxdJykNCiAgICBwDQogICAgICB8IEVtYWlsIGlzIGN1cnJlbnRseQ0KICAgICAgZW09IGVtYWlsDQogICAgICB8IC4NCg0KICAvLyBhbHRlcm5hdGl2ZWx5LCBpZiB3ZSBwbGFuIG9uIGhhdmluZyBvbmx5DQogIC8vIHRleHQgb3IgaW5saW5lLWh0bWwsIHdlIGNhbiB1c2UgYSB0cmFpbGluZw0KICAvLyAiLiIgdG8gbGV0IGphZGUga25vdyB3ZSB3YW50IHRvIG9taXQgcGlwZXMNCiAgDQogIGxhYmVsIFVzZXJuYW1lOg0KICAgIGlucHV0KHR5cGU9J3RleHQnKQ0KICAgIHAuDQogICAgICBKdXN0IGFuIGV4YW1wbGUsIGxpa2UgYmVmb3JlDQogICAgICBob3dldmVyIG5vdyB3ZSBjYW4gb21pdCB0aG9zZQ0KICAgICAgYW5ub3lpbmcgcGlwZXMhLg0KICAgICAgDQogICAgICBXYWhvby4NCg0KLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1qYXZhc2NyaXB0LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KLy8gbG9jYWxzLm5hbWUgPSAndGonOw0KLy8gbG9jYWxzLmVtYWlsID0gJ3RqQHZpc2lvbi1tZWRpYS5jYSc7')])
+  coffeecup: Queue(["""
+    div '.navbar.navbar-fixed-top', ->
+      div '.navbar-inner', ->
+        div '.container', ->
+          a '.brand', href: '/', 'Creamer'
+          div '.nav-collapse', ->
+            ul '.nav', ->
+              li @home || '', ->
+                a href: '/', 'Home'
+              li @about || '', ->
+                a href: '/about', 'About'
+
+    div '.container', ->
+      div '.row-fluid', ->
+        div '.span8', -> content()
+        div '.span4', ->
+          div '.hero-unit', ->
+            h2 'Creamer'
+            p 'A great way to add coffee to flatiron'
+  """
+    atob('QHRpdGxlID0gJ0xvZyBJbicNCg0KaDEgQHRpdGxlDQoNCnAgIkEgbG9jYWwgdmFyOiAje3Bpbmd9Ig0KcCAiQSBjb250ZXh0IHZhcjogI3tAZm9vfSINCg0KZm9ybSBhY3Rpb246ICcvJywgbWV0aG9kOiAncG9zdCcsIC0+DQogIGRpdiBjbGFzczogJ2ZpZWxkJywgLT4NCiAgICBsYWJlbCBmb3I6ICd1c2VybmFtZScsIC0+ICdVc2VybmFtZTogJw0KICAgIGlucHV0IGlkOiAndXNlcm5hbWUnLCBuYW1lOiAndXNlcm5hbWUnDQoNCiAgZGl2IGNsYXNzOiAnZmllbGQnLCAtPg0KICAgIGxhYmVsIGZvcjogJ3Bhc3N3b3JkJywgLT4gJ1Bhc3N3b3JkOiAnDQogICAgaW5wdXQgaWQ6ICdwYXNzd29yZCcsIG5hbWU6ICdwYXNzd29yZCc=')
+    atob('aGVhZGVyIC0+DQogIGEgaHJlZjogJy8nLCB0aXRsZTogJ0hvbWUnLCAtPiAnSG9tZScNCg0KICBuYXYgLT4NCgl1bCAtPg0KCSAgZm9yIGl0ZW0gaW4gWydBYm91dCcsICdQcmljaW5nJywgJ0NvbnRhY3QnXQ0KCQlsaSAtPiBhIGhyZWY6ICIvI3tpdGVtLnRvTG93ZXJDYXNlKCl9IiwgdGl0bGU6IGl0ZW0sIC0+IGl0ZW0NCgkJDQoJICBsaSAtPiBhIGhyZWY6ICcvYWJvdXQnLCB0aXRsZTogJ0Fib3V0JywgLT4gJ0Fib3V0Jw0KCSAgbGkgLT4gYSBocmVmOiAnL3ByaWNpbmcnLCB0aXRsZTogJ1ByaWNpbmcnLCAtPiAnUHJpY2luZycNCgkgIGxpIC0+IGEgaHJlZjogJy9jb250YWN0JywgdGl0bGU6ICdDb250YWN0IFVzJywgLT4gJ0NvbnRhY3QgVXMnDQoNCmRpdiBpZDogJ2NvbnRlbnQnLCAtPg0KICBAYm9keQ0KDQpmb290ZXIgLT4NCiAgcCAtPiBhIGhyZWY6ICcvcHJpdmFjeScsIC0+ICdQcml2YWN5IFBvbGljeSc=')
+  ])
   css: Queue(["""
     /* Compiled from LESS */
     ul {
@@ -581,6 +604,8 @@ codeMirrorMode = _.memoize((language) ->
       return 'htmlmixed'
     when 'zencoding'
       return 'htmlmixed'
+    when 'coffeecup'
+      return 'coffeescript'
     else
       return language
 )

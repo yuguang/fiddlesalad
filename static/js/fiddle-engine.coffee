@@ -268,7 +268,10 @@ CoffeecupEditor = TemplateEditor.$extend(
     @$super id
     @mode = name: 'coffeescript'
     @loadWorker('coffeecup')
-    @documentationUrl = 'https://github.com/mark-hahn/coffeekup-intro'
+    @documentationUrl = base_url + '/files/documentation/coffeekup.html'
+
+  get_documentation: ->
+    @$super('coffeecup')
 )
 JadeEditor = TemplateEditor.$extend(
   __init__: (id) ->

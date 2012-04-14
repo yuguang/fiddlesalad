@@ -40,11 +40,9 @@ Open http://127.0.0.1:8000/ in the browser.
 Installation Notes
 ------------------
 ###Compiling CoffeeScript
-from the js folder run
-    coffee -cw -o ./compiled-coffee .\
+from the _static/js/_ folder run
 
-###Installing Package Tools
-if you don't have pip, see http://guide.python-distribute.org/installation.html for how to install it
+    coffee -cw -o ./compiled-coffee .\
 
 Requirements
 ------------
