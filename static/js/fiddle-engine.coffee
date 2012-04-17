@@ -414,6 +414,7 @@ serverCompiler =
     This routine calls execute to compile code either when a major code block is completed or after a period of time.
     http://codemirror.net/doc/manual.html#option_onChange
     ###
+    return  if _.isEmpty(editor) or _.isEmpty(change)
     # if a code block is completed
     if change.next? and change.next.from.ch is 0
       @execute()
@@ -499,13 +500,23 @@ CssViewer = Viewer.$extend(
   __init__: (id) ->
     @$super id
     @mode = name: 'css'
-    unless view_model.newFiddle
-      @set_code = _.after 2, @set_code
 
-  set_code: (css) ->
+  setIframeCss: (css) ->
     cssElement = document.getElementById(@id).contentWindow.css
     cssElement.textContent = css
     document.getElementById(@id).contentWindow.Highlight.init(cssElement)
+
+  set_code: (css) ->
+    if viewModel.newFiddle()
+      @setIframeCss css
+    else
+      timer = setInterval(
+        =>
+          if document.getElementById(@id)?.contentWindow?.loaded
+            @setIframeCss css
+            clearInterval timer
+        250
+      )
 )
 JavascriptViewer = Viewer.$extend(
   __init__: (id) ->
@@ -603,6 +614,7 @@ FiddleEditor = Class.$extend(
     viewModel.containers @layoutFrames()
     $('#viewer').appendTo('#result').show()
     root.codeRunner = CodeRunner()
+    viewModel.add_resource(if debug then base_url + '/js/jquery-1.7.1.js' else 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
 
     @styleEditor.load()
     @documentEditor.load()
@@ -710,7 +722,7 @@ FiddleEditor = Class.$extend(
     previewFrame = Frame 'source', 'Source'
     tabs = TabInterface 'source-tab'
     preview = IframeComponent @id.css
-    preview.set_source if debug then base_url + '/files/csspreviewer.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2012033019'
+    preview.set_source if debug then base_url + '/files/csspreviewer.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2012041516'
     index = tabs.add 'css', preview.to_html_string()
     @styleEditor.set_focus_listener PreviewListener('source', index)
 
@@ -858,7 +870,7 @@ CodeRunner = Class.$extend(
   __init__: ->
     frame = document.getElementById('viewer')
     @window = (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
-    @scripts = (if debug then [ base_url + '/js/jquery-1.7.1.js', base_url + '/js/prettyprint.js' ] else [ 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', base_url + '/js/prettyprint.js' ])
+    @scripts = [base_url + '/js/prettyprint.js']
     @synchronizeNextExecution()
     @template =
       css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'

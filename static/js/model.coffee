@@ -455,7 +455,7 @@ FiddleViewModel = ViewModel.$extend(
     templateLibrary =
       css:
         title: 'CSS Framework'
-        templates: ['inuit', 'html5boilerplate']
+        templates: ['inuit', 'html5boilerplate', 'twitterbootstrap']
         type: 'css'
       html:
         title: 'HTML Boilerplate'
@@ -494,24 +494,28 @@ FiddleViewModel = ViewModel.$extend(
     fileName =
       css: 'styles'
       html: 'index'
+    languageType =
+      css: LANGUAGE_TYPE.STYLE
+      html: LANGUAGE_TYPE.DOCUMENT
 
-    i = 0
-
-    while i < @starterTemplates.length
-      unless @starterTemplates[i].type.indexOf(type) is -1
-        if _.isString(@starterTemplates[i].selected())
-          template = @starterTemplates[i].selected()
-          templateType = @starterTemplates[i].type
-      i++
+    for starterTemplate in @starterTemplates
+      unless starterTemplate.type.indexOf(type) is -1
+        if _.isString(starterTemplate.selected())
+          template = starterTemplate.selected()
+          templateType = starterTemplate.type
     if _.isString(template) and template.length > 0
       if templateType is 'css/html'
         templatePath = [ 'templates/', template, '/', fileName[type] ].join('')
       else
         templatePath = template
       templatePath = [ ajax_url, '/files/', templatePath, '.', type ].join('')
-      $.get templatePath, {}, ((code) ->
-        engine.set_code code, type
-      ), 'text'
+      if type is 'css' and templateType isnt 'css/html'
+        @add_resource templatePath
+      else
+        $.get templatePath, {}, ((code) =>
+          @disableLint()
+          engine.set_code code, languageType[type]
+        ), 'text'
     name: template
     url: templatePath
 
