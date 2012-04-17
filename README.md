@@ -1,6 +1,6 @@
 Fiddle Salad Live Web Development
 ======================
-The most advanced web development IDE
+A web developer's wonderland that makes everyday tasks enjoyable, a live editor for front-end languages
 #### [fiddlesalad.com](http://fiddlesalad.com)
  
 Current Features
@@ -16,7 +16,7 @@ Current Features
     * JavaScript context
 * Saving
     * Local history
-    * Diff
+    * Diff of different revisions
 * Import from existing site
 
 Supported Languages
@@ -52,7 +52,7 @@ Getting the Code and Running it
     python manage.py syncdb
     python manage.py runserver
 
-Open http://127.0.0.1:8000/ in the browser. 
+Open http://127.0.0.1:8000/ in the browser.
 
 Installation Notes
 ------------------
