@@ -72,11 +72,23 @@ Contribution Guidelines
 Features ready to be implemented:
 
 * Save lint options with fiddle, as a part of the JSON
-* SCSS mode smart indent
 * HTML class and id auto-complete
+* Auto-semicolon insertion for CSS style languages
+* Hide window title bar option
+* CDN search, suggest, and add as resource (http://www.cdnjs.com/#/search/)
+* Color picker
+* Scroll source to current cursor position in editor
+* Remember previously selected languages on home page
+* Better CoffeeCup documentation page with syntax highlighting
+    * Use CodeMirror's built-in run mode
+* More Languages
+    * Markdown
+    * Eco
+    * Move
+* Add HTML to Jade converter (http://roguesynaptics.com/post/6514756867/html-to-jade-converter-node-js-express)
     
 ###Syntax Highlighting
-Get started by reading the [CodeMirror manual](http://codemirror.net/doc/manual.html#modeapi). The modes are under _static/js/codemirror/mode/_. Each mode has an index.html page for testing the mode. 
+Get started by reading the [CodeMirror manual](http://codemirror.net/doc/manual.html#modeapi). The modes are under _static/js/codemirror/mode/_.
 
 Contributors
 ------------

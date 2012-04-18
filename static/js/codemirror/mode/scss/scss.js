@@ -212,7 +212,14 @@ CodeMirror.defineMode("scss", function(config) {
 			else if(context == "{" && type != "comment")
 				state.stack.push("rule");
 			return style;
-		}
+		},
+        indent : function(state, textAfter) {
+            var n = state.stack.length;
+            if(/^\}/.test(textAfter))
+                n -= state.stack[state.stack.length - 1] == "rule" ? 2 : 1;
+            return state.baseIndent + n * indentUnit;
+        },
+        electricChars : "}"
 	};
 });
 
