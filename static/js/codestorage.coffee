@@ -1,7 +1,13 @@
 root = global ? window
 Language = Class.$extend(
-  __init__: ->
+  __init__: (languages) ->
     @settings = new Object
+    #  for each language
+    for language in languages
+    #  if the language is in category
+      if LANGUAGE_CATEGORY?[language]
+      #  set language for the category
+        @set_language language, LANGUAGE_CATEGORY[language]
     @settings[LANGUAGE_TYPE.RESOURCE] = LANGUAGE.RESOURCE
     @settings[LANGUAGE_TYPE.COMPILED_PROGRAM] = LANGUAGE.JAVASCRIPT
     @settings[LANGUAGE_TYPE.FRAMEWORK] = LANGUAGE.FRAMEWORK

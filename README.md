@@ -78,7 +78,6 @@ Features ready to be implemented:
 * CDN search, suggest, and add as resource (http://www.cdnjs.com/#/search/)
 * Color picker
 * Scroll source to current cursor position in editor
-* Remember previously selected languages on home page
 * Better CoffeeCup documentation page with syntax highlighting
     * Use CodeMirror's built-in run mode
 * More Languages

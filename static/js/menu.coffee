@@ -633,9 +633,11 @@ editor = CodeMirror.fromTextArea(document.getElementById('code'),
 $('.CodeMirror-placeholder').remove()
 
 ViewModel = ->
-  @documentLanguage = ko.observable('html')
-  @styleLanguage = ko.observable('less')
-  @programLanguage = ko.observable('javascript')
+  settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])
+
+  @documentLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.DOCUMENT))
+  @styleLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.STYLE))
+  @programLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.PROGRAM))
 
   @selectBasic = =>
     @documentLanguage 'html'

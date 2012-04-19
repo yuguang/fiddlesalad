@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from cloud_ide.fiddle.jsonresponse import JsonResponse
-import urllib2
-import base64
+import urllib2, base64, urlparse
 from bs4 import BeautifulSoup as BS
 
 def scrape(request):    
     url = request.GET['url']
+    if not urlparse.urlparse(url).scheme[0:4] is 'http':
+        return
     response = urllib2.urlopen(url)
     html = response.read(200000) #200 kiloBytes
     

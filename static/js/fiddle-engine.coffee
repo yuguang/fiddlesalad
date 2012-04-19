@@ -1025,21 +1025,10 @@ FiddleFactory = Class.$extend(
     for language, languageIndex in secondaryLanguages
       if LANGUAGE_CATEGORY[language] is LANGUAGE_CATEGORY[primaryLanguage]
         secondaryLanguages[languageIndex] = primaryLanguage
-    @loadLanguageSettings secondaryLanguages
+    Language secondaryLanguages
 
   loadLanguages: (storageJSON) ->
-    @loadLanguageSettings _.keys(JSON.parse(storageJSON))
-
-  loadLanguageSettings: (languages) ->
-    #  initialize language object
-    settings = Language()
-    #  for each language
-    for language in languages
-    #  if the language is in category
-      if LANGUAGE_CATEGORY?[language]
-      #  set language for the category
-        settings.set_language language, LANGUAGE_CATEGORY[language]
-    settings
+    Language _.keys(JSON.parse(storageJSON))
 
   layout: ->
     $('#snippet, #progress').remove()
