@@ -86,7 +86,6 @@ Features ready to be implemented:
     * Markdown
     * Eco
     * Move
-* Add HTML to Jade converter (http://roguesynaptics.com/post/6514756867/html-to-jade-converter-node-js-express)
     
 ###Syntax Highlighting
 Get started by reading the [CodeMirror manual](http://codemirror.net/doc/manual.html#modeapi). The modes are under _static/js/codemirror/mode/_.
