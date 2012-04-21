@@ -279,6 +279,11 @@ JadeEditor = TemplateEditor.$extend(
     @mode = name: 'jade'
     @loadWorker('jade')
     @documentationUrl = base_url + '/files/documentation/jade.html'
+
+  load: ->
+    @$super()
+    converter = HtmlConverter('htmlConverter')
+    converter.set_editor @
 )
 HtmlEditor = DocumentEditor.$extend(
   __init__: (id) ->
@@ -537,9 +542,8 @@ BeautifiedJavascriptViewer = JavascriptViewer.$extend(
   set_code: (javascript) ->
     @$super js_beautify(javascript)
 )
-JavascriptConverter = Class.$extend(
-  __init__: (id) ->
-    @loadWorker('js2coffee')
+codeConverter =
+  loadConverter: (id) ->
     @textarea = $('#' + id)
     @previousValue = new String
     @textarea.bind(
@@ -548,9 +552,26 @@ JavascriptConverter = Class.$extend(
         @changeHandler()
     )
 
-  __include__: [BackgroundWorker]
+  set_editor: (@editor) ->
 
-  set_editor: (@programEditor) ->
+  previewCode: (convertedCode) ->
+  # when the user pastes JavaScript code, it is inserted at the cursor position in the CoffeeScript editor
+  # get the character position of the cursor
+    position = @editor.pad.getCursor()
+    # insert block after the cursor in the line
+    cursorPositionLine = @editor.pad.getLine(position.line)
+    # replace line in code
+    lines = @editor.get_code().split('\n')
+    # insert at the cursor position
+    lines[position.line] = cursorPositionLine.slice(0, position.ch) + convertedCode + cursorPositionLine.slice(position.ch)
+    @editor.set_code lines.join('\n')
+
+JavascriptConverter = Class.$extend(
+  __init__: (id) ->
+    @loadWorker('js2coffee')
+    @loadConverter(id)
+
+  __include__: [BackgroundWorker, codeConverter]
 
   changeHandler: _.throttle(
     ->
@@ -559,18 +580,25 @@ JavascriptConverter = Class.$extend(
         @previousValue = @textarea.val()
     500
   )
+)
+HtmlConverter = Class.$extend(
+  __init__: (id) ->
+    @loadConverter(id)
 
-  previewCode: (convertedJavascript) ->
-    # when the user pastes JavaScript code, it is inserted at the cursor position in the CoffeeScript editor
-    # get the character position of the cursor
-    position = @programEditor.pad.getCursor()
-    # insert block after the cursor in the line
-    cursorPositionLine = @programEditor.pad.getLine(position.line)
-    # replace line in code
-    lines = @programEditor.get_code().split('\n')
-    # insert at the cursor position
-    lines[position.line] = cursorPositionLine.slice(0, position.ch) + convertedJavascript + cursorPositionLine.slice(position.ch)
-    @programEditor.set_code lines.join('\n')
+  __include__: [codeConverter]
+
+  changeHandler: _.throttle(
+    ->
+      if @textarea.val() isnt @previousValue
+        $.post(
+          ['http://fiddlesalad.com/',  @editor.mode.name, '/convert/'].join('')
+          code: @textarea.val()
+          (response) =>
+            @previewCode(response.html)
+          'json'
+        )
+    500
+  )
 )
 FiddleEditor = Class.$extend(
   __init__: (@settings) ->

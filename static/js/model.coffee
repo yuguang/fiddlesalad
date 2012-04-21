@@ -47,6 +47,7 @@ ViewModel = Class.$extend(
   __init__: ->
     @formMessage = ko.observable('')
     @importUrl = ko.observable('').extend(url: '')
+    @packages = ko.observableArray([])
     @snippetUrl = ko.computed =>
       urlPattern = /(\w+):\/\/([\w.]+(?:\:8000)?)\//
       result = document.URL.match(urlPattern)
@@ -201,7 +202,6 @@ PythonViewModel = ViewModel.$extend(
     @consoleOutput = ko.computed =>
       @output().join ''
     .extend(throttle: 50)
-    @packages = ko.observableArray([])
     @accordionTemplate = 'pythonAccordion'
     @spellcheck = true
 

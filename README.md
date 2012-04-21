@@ -17,6 +17,9 @@ Current Features
 * Saving
     * Local history
     * Diff of different revisions
+* Converters
+    * JS -> CoffeeScript
+    * HTML -> Jade
 * Import from existing site
 
 Supported Languages
@@ -75,7 +78,6 @@ Features ready to be implemented:
 * HTML class and id auto-complete
 * Auto-semicolon insertion for CSS style languages
 * Hide window title bar option
-* CDN search, suggest, and add as resource (http://www.cdnjs.com/#/search/)
 * Color picker
 * Scroll source to current cursor position in editor
 * Better CoffeeCup documentation page with syntax highlighting
