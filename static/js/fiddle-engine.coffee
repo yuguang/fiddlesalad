@@ -273,6 +273,15 @@ CoffeecupEditor = TemplateEditor.$extend(
   get_documentation: ->
     @$super('coffeecup')
 )
+MarkdownEditor = TemplateEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = name: 'markdown'
+    @loadWorker('markdown')
+    @documentationUrl = 'http://daringfireball.net/projects/markdown/syntax'
+
+  keyHandler: ->
+)
 JadeEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -282,7 +291,7 @@ JadeEditor = TemplateEditor.$extend(
 
   load: ->
     @$super()
-    converter = HtmlConverter('htmlConverter')
+    converter = HtmlJadeConverter('htmlConverter')
     converter.set_editor @
 )
 HtmlEditor = DocumentEditor.$extend(
@@ -590,15 +599,25 @@ HtmlConverter = Class.$extend(
   changeHandler: _.throttle(
     ->
       if @textarea.val() isnt @previousValue
+        @previousValue = @textarea.val()
         $.post(
           ['http://fiddlesalad.com/',  @editor.mode.name, '/convert/'].join('')
           code: @textarea.val()
           (response) =>
-            @previewCode(response.html)
+            @previewCode(response[@editor.mode.name])
           'json'
         )
     500
   )
+)
+HtmlJadeConverter = HtmlConverter.$extend(
+  previewCode: (jade) ->
+    jade = jade
+      .replace('html\n', '')
+      .replace(/.*body\n/, '')
+      .replace(/^\s\s/, '')
+      .replace(/\n\s\s/, '\n')
+    @$super($.trim(jade))
 )
 FiddleEditor = Class.$extend(
   __init__: (@settings) ->
@@ -1092,5 +1111,5 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor}
 root.engine = EngineFactory(FiddleFactory())

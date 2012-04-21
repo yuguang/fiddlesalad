@@ -28,6 +28,7 @@ LANGUAGE = {
     HAML: 'haml',
     STYLUS: 'stylus',
     JADE: 'jade',
+    MARKDOWN: 'markdown',
     ZENCODING: 'zencoding',
     FRAMEWORK: 'framework'
 };
@@ -50,6 +51,7 @@ LANGUAGE_CATEGORY = {
     haml: LANGUAGE_TYPE.DOCUMENT,
     jade: LANGUAGE_TYPE.DOCUMENT,
     coffeecup: LANGUAGE_TYPE.DOCUMENT,
+    markdown: LANGUAGE_TYPE.DOCUMENT,
     zencoding: LANGUAGE_TYPE.DOCUMENT,
     css: LANGUAGE_TYPE.STYLE,
     less: LANGUAGE_TYPE.STYLE,

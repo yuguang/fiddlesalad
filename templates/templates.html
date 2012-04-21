@@ -100,44 +100,6 @@
     </script>
 
     <script id="fiddleAccordion" type="text/html">
-        <h3><a href="#">Project</a></h3>
-        <div id="projectConfiguration">
-            <p class="clearfix">
-                <label>Add Resource: </label><input class="thin left" data-bind="autoComplete: packages, value: newResourceText, optionsText: 'name', optionsValue: 'url', autoCompleteOptions: {autoFocus: false}, placeholder: 'Search/Paste URL'" />
-                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
-            </p>
-            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
-            <div class="details wide west" data-bind='template: "formTemplate"'></div>
-            <!-- ko template: "revisionsTemplate" -->
-            <!-- /ko -->
-            <p class="vertical">
-                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
-                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
-                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
-                </a>
-            </p>
-        </div>
-        <h3><a href="#">Import</a></h3>
-        <div id="templateConfiguration">
-            <!-- ko if: compatibleLanguages() -->
-            <p class="clearfix">
-                <input class="thin left required url" placeholder="Open URL..." data-bind="value: importUrl, valueUpdate: 'afterkeydown'"/>
-                <span class="clickable right ui-icon ui-icon-circle-triangle-e" data-bind="click: importExternal"></span>
-            </p>
-            <p data-bind='visible: importUrl.hasError, text: importUrl.validationMessage'> </p>
-            <!-- /ko -->
-            <ul data-bind="template: { name: 'optionTemplate', foreach: starterTemplates }"></ul>
-            <!-- ko if: showSelectedTemplates -->
-            <ul>
-                <li data-bind="visible: _.isString(cssSelected().name)">CSS: <a target="_blank" data-bind="fadeInText: cssSelected().name, attr: { href: cssSelected().url }"></a></li>
-                <li data-bind="visible: _.isString(htmlSelected().name)">HTML: <a target="_blank" data-bind="fadeInText: htmlSelected().name, attr: { href: htmlSelected().url }"></a></li>
-            </ul>
-            <!-- /ko -->
-            <ul data-bind="template: { name: 'optionTemplate', foreach: starterFrameworks }"></ul>
-            <ul>
-                <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
-            </ul>
-        </div>
         <h3><a href="#">Tools</a></h3>
         <div id="webDevelopmentTools">
             <p class="clickable" onclick="window.open('/')">
@@ -215,6 +177,44 @@
                     <span>Hotkeys</span>
                 </a>
             </p>
+        </div>
+        <h3><a href="#">Project</a></h3>
+        <div id="projectConfiguration">
+            <p class="clearfix">
+                <label>Add Resource: </label><input class="thin left" data-bind="autoComplete: packages, value: newResourceText, optionsText: 'name', optionsValue: 'url', autoCompleteOptions: {autoFocus: false}, placeholder: 'Search/Paste URL'" />
+                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
+            </p>
+            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
+            <div class="details wide west" data-bind='template: "formTemplate"'></div>
+            <!-- ko template: "revisionsTemplate" -->
+            <!-- /ko -->
+            <p class="vertical">
+                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
+                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
+                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
+                </a>
+            </p>
+        </div>
+        <h3><a href="#">Import</a></h3>
+        <div id="templateConfiguration">
+            <!-- ko if: compatibleLanguages() -->
+            <p class="clearfix">
+                <input class="thin left required url" placeholder="Open URL..." data-bind="value: importUrl, valueUpdate: 'afterkeydown'"/>
+                <span class="clickable right ui-icon ui-icon-circle-triangle-e" data-bind="click: importExternal"></span>
+            </p>
+            <p data-bind='visible: importUrl.hasError, text: importUrl.validationMessage'> </p>
+            <!-- /ko -->
+            <ul data-bind="template: { name: 'optionTemplate', foreach: starterTemplates }"></ul>
+            <!-- ko if: showSelectedTemplates -->
+            <ul>
+                <li data-bind="visible: _.isString(cssSelected().name)">CSS: <a target="_blank" data-bind="fadeInText: cssSelected().name, attr: { href: cssSelected().url }"></a></li>
+                <li data-bind="visible: _.isString(htmlSelected().name)">HTML: <a target="_blank" data-bind="fadeInText: htmlSelected().name, attr: { href: htmlSelected().url }"></a></li>
+            </ul>
+            <!-- /ko -->
+            <ul data-bind="template: { name: 'optionTemplate', foreach: starterFrameworks }"></ul>
+            <ul>
+                <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
+            </ul>
         </div>
         <h3><a href="#">Links</a></h3>
         <div>

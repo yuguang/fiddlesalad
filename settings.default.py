@@ -111,7 +111,7 @@ MEDIASYNC = {
         'css/documentation.css': [
             'css/documentation.css',
             'css/syntax_highlighter_theme_default.css',
-        ],
+            ],
         'css/wijmo-artisto.css': [
             'css/jquery-ui.artisto.css',
             'css/jquery.wijmo-open.css',
@@ -156,7 +156,7 @@ MEDIASYNC = {
             'js/build/lib/shAutoloader.js',
             'js/build/lib/shBrushPython.js',
             'js/build/lib/shBrushXml.js',
-        ],
+            ],
         'js/jquery-ui.fiddle.js': [
             'js/jquery-ui-1.8.18.custom.js',
             'js/jquery.wijmo-open.all.2.0.0.min.js',
@@ -208,6 +208,7 @@ MEDIASYNC = {
             'js/codemirror/mode/jade/jade.js',
             'js/codemirror/mode/sass/sass.js',
             'js/codemirror/mode/scss/scss.js',
+            'js/codemirror/mode/markdown/markdown.js',
             'js/codemirror/mode/stylus/stylus.js',
             'js/codemirror/runmode.js',
             ],
@@ -223,6 +224,7 @@ MEDIASYNC = {
             'js/compiled-coffee/model.js',
             'js/fiddle.js',
             'js/layout.js',
+            'js/packages.fiddle.js',
             'js/htmlparser.js',
             'js/jade.runtime.min.js',
             'js/jquery.noty.js',
@@ -234,6 +236,8 @@ MEDIASYNC = {
             'js/underscore.js',
             'js/queue.js',
             'js/store.js',
+            'js/classy.js',
+            'js/compiled-coffee/codestorage.js',
             'js/compiled-coffee/menu.js',
             ]
     },
