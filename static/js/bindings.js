@@ -132,7 +132,7 @@ ko.bindingHandlers.autoComplete = {
         var modelValue = binding.value;
         if (modelValue) {
             var handleValueChange = function (event, ui) {
-                var labelToWrite = ui.item ? ui.item.label : null
+                var labelToWrite = ui.item ? ui.item.label : null;
                 var valueToWrite = ui.item ? ui.item.value : null;
                 //The Label and Value should not be null, if it is
                 // then they did not make a selection so do not update the
@@ -205,7 +205,7 @@ ko.bindingHandlers.autoComplete = {
 
         displayElement.autocomplete(options);
     },
-    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+    update: function (element, valueAccessor, allBindingsAccessor) {
         //update value based on a model change
         var unwrap = ko.utils.unwrapObservable;
         var dataSource = valueAccessor();

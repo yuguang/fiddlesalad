@@ -208,6 +208,7 @@ MEDIASYNC = {
             'js/codemirror/mode/jade/jade.js',
             'js/codemirror/mode/sass/sass.js',
             'js/codemirror/mode/scss/scss.js',
+            'js/codemirror/mode/roy/roy.js',
             'js/codemirror/mode/markdown/markdown.js',
             'js/codemirror/mode/stylus/stylus.js',
             'js/codemirror/runmode.js',
@@ -224,7 +225,7 @@ MEDIASYNC = {
             'js/compiled-coffee/model.js',
             'js/fiddle.js',
             'js/layout.js',
-            'js/packages.fiddle.js',
+            FILES['PACKAGES'],
             'js/htmlparser.js',
             'js/jade.runtime.min.js',
             'js/jquery.noty.js',
@@ -241,13 +242,13 @@ MEDIASYNC = {
             'js/compiled-coffee/menu.js',
             ]
     },
-}
+    }
 
 if build_config:
     MEDIASYNC['PROCESSORS'] = ('mediasync.processors.closurecompiler.compile','mediasync.processors.slim.css_minifier',)
     #MEDIASYNC['PROCESSORS'] = ('mediasync.processors.combine.default',)
     MEDIASYNC['JOINED']['js/jquery-ui.fiddle.js'] = [
-        'js/build/lib/jquery-ui-1.8.18.custom.min.js',
+        'js/build/lib/jquery-ui-1.8.19.custom.min.js',
         'js/build/lib/jquery.wijmo.wijutil.min.js',
         'js/build/lib/jquery.wijmo.wijdialog.min.js',
         'js/build/lib/jquery.wijmo.wijsplitter.min.js',

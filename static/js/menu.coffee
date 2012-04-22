@@ -597,6 +597,103 @@ examples =
           no_oflines = 0
           scroll()"""
   ])
+  roy: Queue(["""
+    let deferred = {
+      return: $.when
+      bind: \x f ->
+        let defer = $.Deferred ()
+        x.done (\v -> (f v).done defer.resolve)
+        defer.promise ()
+    }
+
+    let v = do deferred
+      hello <- $.ajax 'examples/helloworld.roy'
+      alias <- $.ajax 'examples/alias.roy'
+      return (hello ++ alias)
+
+    v.done console.log
+  """, """
+    // Alias for a primitive type
+    type Int = Number
+
+    // Alias for a structural type
+    type Person = {name: String, age: Int}
+
+    // Function with aliased type annotation
+    let personName (p: Person) = p.name
+    console.log (personName {name: "Brian", age: 21})
+
+    // Value with aliased type annotation
+    let ben: Person = {name: "Ben", age: 18}
+    let anyName a = a.name
+    console.log (anyName ben)
+  """, """
+    type Request = {url: String, payload: String}
+
+    let ajaxRequest = {
+      return: \x -> x
+      bind: \(x : Request) f ->
+        $.get x.url x.payload f
+    }
+
+    let v = (do ajaxRequest
+      value <- {url: '/examples/helloworld.roy', payload: 'stuff'}
+      console.log value
+      return value
+    )
+
+    console.log v
+  """
+  ])
+  markdown: Queue(["""
+    ### Emphasis ###
+    Some of these words *are emphasized*.
+    Some of these words _are emphasized also_.
+
+    Use two asterisks for **strong emphasis**.
+    Or, if you prefer, __use two underscores instead__.
+
+    ### Code ###
+      line 1 of code
+      line 2 of code
+      line 3 of code
+
+    ### Lists ###
+      * An item in a bulleted (unordered) list
+          * A subitem, indented with 4 spaces
+      * Another item in a bulleted list
+
+  """, """
+    A First Level Header
+    ====================
+
+    A Second Level Header
+    ---------------------
+
+    Now is the time for all good men to come to
+    the aid of their country. This is just a
+    regular paragraph.
+
+    The quick brown fox jumped over the lazy
+    dog's back.
+
+    ### Header 3
+
+    > This is a blockquote.
+    >
+    > This is the second paragraph in the blockquote.
+    >
+    > ## This is an H2 in a blockquote
+  """
+  ])
+  blank: Queue(["""
+
+      """, """
+
+      """, """
+
+      """
+  ])
 
 codeMirrorMode = _.memoize((language) ->
   switch language

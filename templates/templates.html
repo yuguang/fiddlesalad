@@ -100,6 +100,23 @@
     </script>
 
     <script id="fiddleAccordion" type="text/html">
+        <h3><a href="#">Project</a></h3>
+        <div id="projectConfiguration">
+            <p class="clearfix">
+                <label>Add Resource: </label><input class="thin left" data-bind="autoComplete: packages, value: newResourceText, optionsText: 'name', optionsValue: 'url', autoCompleteOptions: {autoFocus: false}, placeholder: 'Search/Paste URL'" />
+                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
+            </p>
+            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
+            <div class="details wide west" data-bind='template: "formTemplate"'></div>
+            <!-- ko template: "revisionsTemplate" -->
+            <!-- /ko -->
+            <p class="vertical">
+                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
+                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
+                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
+                </a>
+            </p>
+        </div>
         <h3><a href="#">Tools</a></h3>
         <div id="webDevelopmentTools">
             <p class="clickable" onclick="window.open('/')">
@@ -175,23 +192,6 @@
                 <a href="#" data-bind='click: openHotkeysFrame'>
                     <span class="left ui-icon ui-icon-document"></span>
                     <span>Hotkeys</span>
-                </a>
-            </p>
-        </div>
-        <h3><a href="#">Project</a></h3>
-        <div id="projectConfiguration">
-            <p class="clearfix">
-                <label>Add Resource: </label><input class="thin left" data-bind="autoComplete: packages, value: newResourceText, optionsText: 'name', optionsValue: 'url', autoCompleteOptions: {autoFocus: false}, placeholder: 'Search/Paste URL'" />
-                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
-            </p>
-            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
-            <div class="details wide west" data-bind='template: "formTemplate"'></div>
-            <!-- ko template: "revisionsTemplate" -->
-            <!-- /ko -->
-            <p class="vertical">
-                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
-                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
-                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
                 </a>
             </p>
         </div>

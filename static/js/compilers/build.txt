@@ -5,3 +5,5 @@ java -jar S:\Minifiers\compiler.jar --js less.js --compilation_level SIMPLE_OPTI
 java -jar S:\Minifiers\compiler.jar --js coffeescript.js --compilation_level SIMPLE_OPTIMIZATIONS --warning_level QUIET --js_output_file build/coffeescript.js
 java -jar S:\Minifiers\compiler.jar --js haml.js --compilation_level SIMPLE_OPTIMIZATIONS --warning_level QUIET --js_output_file build/haml.js
 java -jar S:\Minifiers\compiler.jar --js htmlparser.js --compilation_level SIMPLE_OPTIMIZATIONS --warning_level QUIET --js_output_file build/htmlparser.js
+java -jar S:\Minifiers\compiler.jar --js roy.js --compilation_level SIMPLE_OPTIMIZATIONS --warning_level QUIET --js_output_file build/roy.js
+java -jar S:\Minifiers\compiler.jar --js markdown.js --compilation_level SIMPLE_OPTIMIZATIONS --warning_level QUIET --js_output_file build/markdown.js

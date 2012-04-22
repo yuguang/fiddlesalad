@@ -222,6 +222,18 @@ CoffeescriptEditor = ProgramEditor.$extend(
     converter = JavascriptConverter('javascriptConverter')
     converter.set_editor @
 )
+RoyEditor = ProgramEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = name: 'roy'
+    @loadWorker('roy')
+    @documentationUrl = 'http://guide.roylang.org/en/latest/index.html'
+    @tabCharaterLength = 2
+
+  load: ->
+    @$super()
+    @hint = CodeMirror.javascriptHint
+)
 DocumentEditor = DynamicEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -278,7 +290,7 @@ MarkdownEditor = TemplateEditor.$extend(
     @$super id
     @mode = name: 'markdown'
     @loadWorker('markdown')
-    @documentationUrl = 'http://daringfireball.net/projects/markdown/syntax'
+    @documentationUrl = base_url + '/files/documentation/markdown.html'
 
   keyHandler: ->
 )
@@ -1111,5 +1123,5 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor, RoyEditor}
 root.engine = EngineFactory(FiddleFactory())
