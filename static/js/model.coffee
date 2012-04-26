@@ -55,7 +55,7 @@ ViewModel = Class.$extend(
       url
     @revisionsMenu = new RevisionsMenu()
     @localHistory = LocalHistory(@revisionsMenu.revisions)
-    @spellcheck = false
+    @spellcheck = true
     @afterLogin = ->
     ko.computed =>
       # if the user just logged in
@@ -225,7 +225,7 @@ Template = (configuration) ->
 WorkspaceConfiguration = ->
   @enableTransparency = ko.observable(false)
   @cssLintEnabled = ko.observable(true)
-  @jsLintEnabled = ko.observable(true)
+  @jsLintEnabled = ko.observable(false)
   @completeHtmlTags = ko.observable(true)
   @
 FiddleViewModel = ViewModel.$extend(
@@ -237,6 +237,8 @@ FiddleViewModel = ViewModel.$extend(
     @resources = ko.observableArray([])
     @newResourceText = ko.observable()
     @configuration = new WorkspaceConfiguration()
+    if not @newFiddle()
+      @disableLint()
     @loadTips()
 
   add_resource: (file) ->
@@ -510,6 +512,7 @@ FiddleViewModel = ViewModel.$extend(
         templatePath = template
       templatePath = [ ajax_url, '/files/', templatePath, '.', type ].join('')
       if type is 'css' and templateType isnt 'css/html'
+        $('#accordion').accordion('activate', 0)
         @add_resource templatePath
       else
         $.get templatePath, {}, ((code) =>

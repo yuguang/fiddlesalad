@@ -153,12 +153,17 @@ lintEditor =
 
   changeHandler: _.throttle(
     ->
-      if viewModel.lint_enabled(@mode.name)
-        @compiler.postMessage @get_code()
-      else
-        @previewCode @get_code()
-    250
+      code = @get_code()
+      if @tokensMatch(code)
+        if viewModel.lint_enabled(@mode.name)
+          @compiler.postMessage code
+        else
+          @previewCode code
+    750
   )
+
+  tokensMatch: (code) ->
+    code.count('[(]') is code.count('[)]') and code.count('{') is code.count('}') and (code.count('"') % 2) is 0 and (code.count("'") % 2) is 0
 
   keyHandler: (editor, event) ->
     if event.keyCode is @blockEndKeyCode and event.type is 'keydown'

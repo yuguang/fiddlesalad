@@ -4015,7 +4015,7 @@ var options = {
     // allowed
     onecase     : true, // if one case switch statements should be allowed
     passfail    : true, // if the scan should stop on first error
-    plusplus    : true, // if increment/decrement should not be allowed
+    plusplus    : false, // if increment/decrement should not be allowed
     proto       : true, // if the `__proto__` property should be disallowed
     prototypejs : true, // if Prototype and Scriptaculous globals should be
     // predefined

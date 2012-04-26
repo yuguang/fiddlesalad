@@ -153,7 +153,7 @@ form textarea {
 }
 
 .CodeMirror {
-    font-family: Consolas, "Lucida Console", Monaco, monospace;
+    font-family: Consolas, "Bitstream Vera Sans Mono", Monaco, monospace;
     font-size: 9pt;
     line-height: 1.1em;
     margin: 0;
@@ -169,7 +169,7 @@ form textarea {
 .kbd {
     border: solid 1px #ABABAB;
     font-size: 10px;
-    font-family: 'Lucida Grande';
+    font-family: 'Lucida Grande', monospace;
     padding: 2px 3px;
     border-radius: 3px;
     -moz-border-radius: 3px;
