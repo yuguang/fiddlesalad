@@ -30,6 +30,7 @@ Supported Languages
     * Zen Coding (input method)
     * Jade
     * CoffeeCup
+    * Markdown
 
 * CSS
     * SASS and SCSS with Compass
@@ -39,6 +40,7 @@ Supported Languages
 * JavaScript
     * CoffeeeScript
     * Python
+    * Roy
 
 Getting the Code and Running it
 -------------------------------
@@ -74,7 +76,6 @@ Contribution Guidelines
 
 Features ready to be implemented:
 
-* Save lint options with fiddle, as a part of the JSON
 * HTML class and id auto-complete
 * Auto-semicolon insertion for CSS style languages
 * Hide window title bar option
@@ -83,8 +84,7 @@ Features ready to be implemented:
 * Better CoffeeCup documentation page with syntax highlighting
     * Use CodeMirror's built-in run mode
 * More Languages
-    * Markdown
-    * Eco
+    * Eco ([Browserify](https://github.com/substack/node-browserify) nodejs module)
     * Move
     
 ###Syntax Highlighting
