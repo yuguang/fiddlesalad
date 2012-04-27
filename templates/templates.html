@@ -103,7 +103,7 @@
         <h3><a href="#">Project</a></h3>
         <div id="projectConfiguration">
             <p class="clearfix">
-                <label>Add Resource: </label><input id="resourceInput" class="thin left" data-bind="autoComplete: packages, value: newResourceText, optionsText: 'name', optionsValue: 'url', autoCompleteOptions: {autoFocus: false}, placeholder: 'Search/Paste URL'" />
+                <label>Add Resource: </label><input id="resourceInput" class="thin left" data-bind="autoComplete: {autoFocus: false}, optionsSource: packages, autocompleteValue: newResourceText, optionsText: 'name', optionsValue: 'url', value: newResourceText" placeholder="Search/Paste URL" />
                 <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
             </p>
             <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
@@ -194,8 +194,11 @@
             <!-- ko if: programLanguage() == LANGUAGE.COFFEESCRIPT -->
             <textarea id="javascriptConverter" placeholder="Paste JavaScript to be converted to CoffeeScript"></textarea>
             <!-- /ko -->
-            <!-- ko if: documentLanguage() == LANGUAGE.JADE -->
+            <!-- ko if: (documentLanguage() == LANGUAGE.JADE) || (documentLanguage() == LANGUAGE.HAML) -->
             <textarea id="htmlConverter" placeholder="Paste HTML to be converted"></textarea>
+            <!-- /ko -->
+            <!-- ko if: (styleLanguage() == LANGUAGE.SASS) || (styleLanguage() == LANGUAGE.SCSS) -->
+            <textarea id="cssConverter" placeholder="Paste CSS to be converted"></textarea>
             <!-- /ko -->
             <p><strong>Batteries Included</strong></p>
             <p>

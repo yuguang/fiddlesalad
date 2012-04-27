@@ -9042,7 +9042,7 @@ self.addEventListener('message', function(e) {
     var errors = CSSLint.verify(e.data, ruleset).messages;
     if (errors.length) {
         for (var i = 0; i < errors.length; i++) {
-            if (errors[i].message.indexOf("Unexpected token 'null'") == -1)
+            if (errors[i].message.indexOf('Expected') == -1 && errors[i].message.indexOf("Unexpected token 'null'") == -1)
                 sendError(errors[i].message);
         }
     } else {

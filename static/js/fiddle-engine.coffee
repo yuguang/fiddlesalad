@@ -274,6 +274,11 @@ HamlEditor = TemplateEditor.$extend(
     @documentationUrl = base_url + '/files/documentation/haml.html'
     @tabCharaterLength = 2
 
+  load: ->
+    @$super()
+    converter = HtmlConverter('htmlConverter')
+    converter.set_editor @
+
   get_options: ->
     _.defaults(
       @$super()
@@ -468,6 +473,11 @@ RubyCompiler = StyleEditor.$extend(
 
   previewCode: (code) ->
     @$super viewModel.reindentCss(code)
+
+  load: ->
+    @$super()
+    converter = CssConverter('cssConverter')
+    converter.set_editor @
 )
 SassEditor = RubyCompiler.$extend(
   __init__: (id) ->
@@ -578,6 +588,20 @@ codeConverter =
         @changeHandler()
     )
 
+  changeHandler: _.throttle(
+    ->
+      if @textarea.val() isnt @previousValue
+        @previousValue = @textarea.val()
+        $.post(
+          ['http://fiddlesalad.com/',  @editor.mode.name, '/convert/'].join('')
+          code: @textarea.val()
+          (response) =>
+            @previewCode(response[@editor.mode.name])
+          'json'
+        )
+    500
+  )
+
   set_editor: (@editor) ->
 
   previewCode: (convertedCode) ->
@@ -612,20 +636,6 @@ HtmlConverter = Class.$extend(
     @loadConverter(id)
 
   __include__: [codeConverter]
-
-  changeHandler: _.throttle(
-    ->
-      if @textarea.val() isnt @previousValue
-        @previousValue = @textarea.val()
-        $.post(
-          ['http://fiddlesalad.com/',  @editor.mode.name, '/convert/'].join('')
-          code: @textarea.val()
-          (response) =>
-            @previewCode(response[@editor.mode.name])
-          'json'
-        )
-    500
-  )
 )
 HtmlJadeConverter = HtmlConverter.$extend(
   previewCode: (jade) ->
@@ -635,6 +645,12 @@ HtmlJadeConverter = HtmlConverter.$extend(
       .replace(/^\s\s/, '')
       .replace(/\n\s\s/, '\n')
     @$super($.trim(jade))
+)
+CssConverter = Class.$extend(
+  __init__: (id) ->
+    @loadConverter(id)
+
+  __include__: [codeConverter]
 )
 FiddleEditor = Class.$extend(
   __init__: (@settings) ->
