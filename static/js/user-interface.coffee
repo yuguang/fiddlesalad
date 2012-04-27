@@ -85,7 +85,7 @@ Frame = VisualComponent.$extend(
       y: 0
     @components = new Array
     @buttons =
-      minimize: true
+      minimize: false
       close: true
       pin: false
       refresh: false

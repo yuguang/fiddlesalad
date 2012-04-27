@@ -20,6 +20,9 @@ Current Features
 * Converters
     * JS -> CoffeeScript
     * HTML -> Jade
+	* HTML -> HAML
+	* CSS -> SASS
+	* CSS -> SCSS
 * Import from existing site
 
 Supported Languages
@@ -65,11 +68,17 @@ Installation Notes
 from the _static/js/_ folder run
 
     coffee -cw -o ./compiled-coffee .\
+	
+###Compiling Less
+run [less compiler](http://lesscss.org/#-server-side-usage) from the command line or install [SimpLESS](http://wearekiss.com/simpless)
+
 
 Developer Documentation
 -----------------------
 
-The [wiki](https://github.com/yuguang/fiddlesalad/wiki) has information on the overall design.
+The [wiki](https://github.com/yuguang/fiddlesalad/wiki) has information on the overall design
+as well as UML.
+
 
 Contribution Guidelines
 -----------------------
@@ -84,11 +93,50 @@ Features ready to be implemented:
 * Better CoffeeCup documentation page with syntax highlighting
     * Use CodeMirror's built-in run mode
 * More Languages
-    * Eco ([Browserify](https://github.com/substack/node-browserify) nodejs module)
-    * Move
+    * [Eco](https://github.com/sstephenson/eco) ([Browserify](https://github.com/substack/node-browserify) nodejs module)
+    * [Traceur](http://code.google.com/p/traceur-compiler/)
+	* [Move](https://github.com/rsms/move)
     
 ###Syntax Highlighting
 Get started by reading the [CodeMirror manual](http://codemirror.net/doc/manual.html#modeapi). The modes are under _static/js/codemirror/mode/_.
+
+###Language Editor
+To add a language:
+
+1. Modify the LANGUAGE and LANGUAGE_CATEGORY settings in *fiddle-configuration.js*. 
+2. Write a class in *fiddle-engine.coffee* that inherits *(Style/Program/Document)Editor*
+3. Create the compiler (aka worker) in _static/js/compilers/_ with the following lines:
+
+	function sendResult(resultText) {
+		if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
+		postMessage({
+			'type': 'result',
+			'resultText': resultText
+		});
+	}
+	function sendError(errorText) {
+		postMessage({
+			'type': 'error',
+			'errorText': errorText
+		});
+	}
+	self.addEventListener('message', function(e) {
+		try {
+			// compile e.data for style and program editors and e.data.code for document editors
+		} catch (err) {
+			sendError(err.message);
+		}
+	}, false);
+	
+###User Interface
+####Home
+The Homepage uses [Twitter Bootstrap's fluid grid system](http://twitter.github.com/bootstrap/scaffolding.html#fluidGridSystem) 
+to align buttons. The main files to modify are *templates/home.html* and *static/css/home.less*. 
+
+####Fiddle
+All UI elements are generated using [Knockout](http://knockoutjs.com/documentation/introduction.html)
+and [jQuery UI](http://jqueryui.com/demos/). Knockout templates are in *templates/templates.html*, with the View Model
+in *static/js/model.coffee*. Main stylesheet is *static/css/fiddle.less*. 
 
 Contributors
 ------------
