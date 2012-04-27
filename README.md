@@ -88,7 +88,8 @@ Features ready to be implemented:
 * HTML class and id auto-complete
 * Auto-semicolon insertion for CSS style languages
 * Hide window title bar option
-* Color picker
+* Color picker when hovering over CSS color values in editor
+* Homepage with vertical orientation and categorized languages
 * Scroll source to current cursor position in editor
 * Better CoffeeCup documentation page with syntax highlighting
     * Use CodeMirror's built-in run mode
