@@ -77,7 +77,7 @@ Developer Documentation
 -----------------------
 
 The [wiki](https://github.com/yuguang/fiddlesalad/wiki) has information on the overall design
-as well as UML.
+as well as UML diagrams.
 
 
 Contribution Guidelines
