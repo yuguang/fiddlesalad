@@ -107,26 +107,26 @@ To add a language:
 2. Write a class in *fiddle-engine.coffee* that inherits *(Style/Program/Document)Editor*
 3. Create the compiler (aka worker) in _static/js/compilers/_ with the following lines:
 
-	function sendResult(resultText) {
-		if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
-		postMessage({
-			'type': 'result',
-			'resultText': resultText
-		});
-	}
-	function sendError(errorText) {
-		postMessage({
-			'type': 'error',
-			'errorText': errorText
-		});
-	}
-	self.addEventListener('message', function(e) {
-		try {
-			// compile e.data for style and program editors and e.data.code for document editors
-		} catch (err) {
-			sendError(err.message);
-		}
-	}, false);
+    function sendResult(resultText) {
+        if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
+        postMessage({
+            'type': 'result',
+            'resultText': resultText
+        });
+    }
+    function sendError(errorText) {
+        postMessage({
+            'type': 'error',
+            'errorText': errorText
+        });
+    }
+    self.addEventListener('message', function(e) {
+        try {
+            // compile e.data for style and program editors and e.data.code for document editors
+        } catch (err) {
+            sendError(err.message);
+        }
+    }, false);
 	
 ###User Interface
 ####Home
