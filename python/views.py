@@ -18,7 +18,7 @@ def compile(request):
     try:
         g = Grammar.parse(code)
     except ParseError, error:
-        response_dict.update({'error': str(error).replace('Parse error ', '')})
+        response_dict.update({'error': error.message})
     else:
         success = True
         response_dict.update({'code': Translator.parse(g)})

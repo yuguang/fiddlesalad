@@ -107,6 +107,10 @@ div.toolbar, .title {
     padding: 0;
 }
 
+.CodeMirror {
+    padding: .4em;
+}
+
 /*
 
 #revisionsMenu input + label {

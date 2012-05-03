@@ -428,7 +428,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['http://fiddlesalad.com/',  @mode.name, '/compile/'].join('')
+      ['/',  @mode.name, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -518,6 +518,8 @@ PythonEditor = ProgramEditor.$extend(
   preview: (javascript) ->
     codeRunner.execute javascript
 
+  displayError: (message) ->
+    @$super(message.replace('Parse error ', ''))
 )
 Viewer = Class.$extend(
   __init__: (id) ->
@@ -802,7 +804,7 @@ FiddleEditor = Class.$extend(
     previewFrame = Frame 'source', 'Source'
     tabs = TabInterface 'source-tab'
     preview = IframeComponent @id.css
-    preview.set_source if debug then base_url + '/files/csspreviewer.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2012041516'
+    preview.set_source if debug then base_url + '/files/csspreviewer.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2012050220'
     index = tabs.add 'css', preview.to_html_string()
     @styleEditor.set_focus_listener PreviewListener('source', index)
 
@@ -1130,6 +1132,10 @@ FiddleFactory = Class.$extend(
     $('.menu').show()
     unless bowser.webkit
       $('.ui-dialog-title').css(position: 'static', height: '1em')
+
+    for type in ['program', 'document', 'style']
+      $("##{ type }container").find('.CodeMirror-scroll').css(overflow: 'auto', height: "#{ $("##{ type }container").parent().height() }px")
+      $("##{ type }container").parent().css('overflow', 'hidden')
 
   get_view_model: ->
     document.getElementById('progress')?.value = 90
