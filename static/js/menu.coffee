@@ -600,9 +600,9 @@ examples =
   roy: Queue(["""
     let deferred = {
       return: $.when
-      bind: \x f ->
+      bind: \\x f ->
         let defer = $.Deferred ()
-        x.done (\v -> (f v).done defer.resolve)
+        x.done (\\v -> (f v).done defer.resolve)
         defer.promise ()
     }
 
@@ -631,8 +631,8 @@ examples =
     type Request = {url: String, payload: String}
 
     let ajaxRequest = {
-      return: \x -> x
-      bind: \(x : Request) f ->
+      return: \\x -> x
+      bind: \\(x : Request) f ->
         $.get x.url x.payload f
     }
 
@@ -720,6 +720,7 @@ $('ul.list label').hover _.throttle(->
       5000
     )
     editor.setOption 'mode', codeMirrorMode(language)
+    enableEditorClick()
   , 1500)
 
 editor = CodeMirror.fromTextArea(document.getElementById('code'),
@@ -728,6 +729,14 @@ editor = CodeMirror.fromTextArea(document.getElementById('code'),
 )
 
 $('.CodeMirror-placeholder').remove()
+
+enableEditorClick = _.once(->
+  $('.CodeMirror')
+    .css('cursor', 'pointer')
+    .click(->
+      viewModel.loadWorkspace()
+    )
+)
 
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])

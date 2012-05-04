@@ -4,6 +4,10 @@ body {
     overflow-x: hidden;
 }
 
+#logo {
+    margin-top: 20px;
+}
+
 ul.list {
     margin: 2em auto 2em auto;
     &:nth-child(odd) {
@@ -13,6 +17,11 @@ ul.list {
         display: inline;
         list-style-type: none;
     }
+    .ui-corner-left, .ui-corner-right {
+         -moz-border-radius: 0;
+         -webkit-border-radius: 0;
+         border-radius: 0;
+     }
 }
 
 .right {
@@ -20,14 +29,18 @@ ul.list {
 }
 
 .action {
-    padding: 5px 12px 5px 12px;
+    padding: 10px 24px 10px 24px;
     margin-right: 10px;
     .borderRadius(15px);
+    font-size: 120%;
 }
 
 #options {
     margin-top: 20px;
     margin-bottom: 65px;
+    .ui-button-text {
+        font-size: 90%;
+    }
 }
 
 .CodeMirror-placeholder {

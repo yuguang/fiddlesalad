@@ -47,6 +47,10 @@
                 <input type="radio" name="styleOption" value="css" data-bind="checked: styleLanguage" id="cssMenuOption" />
                 <label for="cssMenuOption" data-bind="inputActive: styleLanguage">CSS</label>
             </li>
+            <li class="span2">
+                <input type="radio" name="styleOption" value="less" checked="checked" data-bind="checked: styleLanguage" id="lessMenuOption" />
+                <label for="lessMenuOption" data-bind="inputActive: styleLanguage">LESS</label>
+            </li>
             <li class="span3">
                 <input type="radio" name="styleOption" value="scss" data-bind="checked: styleLanguage" id="scssMenuOption" />
                 <label for="scssMenuOption" data-bind="inputActive: styleLanguage">SCSS</label>
@@ -54,10 +58,6 @@
             <li class="span2">
                 <input type="radio" name="styleOption" value="sass" data-bind="checked: styleLanguage" id="sassMenuOption" />
                 <label for="sassMenuOption" data-bind="inputActive: styleLanguage">SASS</label>
-            </li>
-            <li class="span2">
-                <input type="radio" name="styleOption" value="less" checked="checked" data-bind="checked: styleLanguage" id="lessMenuOption" />
-                <label for="lessMenuOption" data-bind="inputActive: styleLanguage">LESS</label>
             </li>
             <li class="span3">
                 <input type="radio" name="styleOption" value="stylus" data-bind="checked: styleLanguage" id="stylusMenuOption" />
@@ -86,10 +86,10 @@
     <div class="row-fluid">
         <div class="span3 placeholder">.</div>
         <div class="span3">
-            <a class="btn btn-default btn-large" data-bind="click: selectBasic">Basic</a>
+            <a class="btn btn-default" data-bind="click: selectBasic">Basic</a>
         </div>
         <div class="span3">
-            <a class="btn btn-default btn-large" data-bind="click: selectOptimal">Optimal</a>
+            <a class="btn btn-default" data-bind="click: selectOptimal">Optimal</a>
         </div>
     </div>
     <div class="bs-links">
