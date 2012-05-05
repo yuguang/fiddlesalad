@@ -52,6 +52,18 @@ function getDocumentWidth() {
     );
 }
 
+var keywordDict = _.memoize(function(keywords) {
+    var dict = new Object;
+    _.each(keywords, function(keyword) {
+        if (keyword.indexOf('.') >= 0) {
+            return dict[keyword.split('.')[1]] = keyword;
+        } else {
+            return dict[keyword] = keyword;
+        }
+    });
+    return dict;
+});
+
 String.prototype.count=function(s1) {
     return this.length - this.replace(new RegExp(s1,"g"), '').length;
 }

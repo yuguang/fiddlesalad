@@ -568,12 +568,15 @@ JavascriptViewer = Viewer.$extend(
 
   update: (editor) ->
     @$super editor
-    $('#' + @id + ' .cm-property').each(
-      ->
-        if $(this).text() in KEYWORDS.JQUERY_OBJECT and $(this).prev().text() is '$'
-          $(this).html "<a href='http://api.jquery.com/jQuery.#{ $(this).text() }/' target='_blank'>#{ $(this).text() }</a>"
-        else if $(this).text() in KEYWORDS.JQUERY_PROTOTYPE and $(this).prev().prev().text() is '$'
-          $(this).html "<a href='http://api.jquery.com/#{ $(this).text() }/' target='_blank'>#{ $(this).text() }</a>"
+    $('#' + @id + ' .cm-property').each(->
+      $element = $(this)
+      if $element.text() in KEYWORDS.JQUERY_OBJECT and $element.prev().text() is '$'
+        $element.html "<a href='http://api.jquery.com/jQuery.#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
+      else if $element.text() in KEYWORDS.JQUERY_PROTOTYPE and $element.prev().prev().text() is '$'
+        $element.html "<a href='http://api.jquery.com/#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
+      else if $element.text() of keywordDict(KEYWORDS.DOM)
+        $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }/' target='_blank'>#{ $element.text() }</a>"
+
     )
 )
 BeautifiedJavascriptViewer = JavascriptViewer.$extend(
