@@ -575,7 +575,7 @@ JavascriptViewer = Viewer.$extend(
       else if $element.text() in KEYWORDS.JQUERY_PROTOTYPE and $element.prev().prev().text() is '$'
         $element.html "<a href='http://api.jquery.com/#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
       else if $element.text() of keywordDict(KEYWORDS.DOM)
-        $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }/' target='_blank'>#{ $element.text() }</a>"
+        $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }' target='_blank'>#{ $element.text() }</a>"
     )
 )
 BeautifiedJavascriptViewer = JavascriptViewer.$extend(
@@ -779,7 +779,11 @@ FiddleEditor = Class.$extend(
 
       frame = Frame 'documentation', 'Documentation'
       tabs = TabInterface 'documentation-tabs'
-      for documentation in [@styleEditor.get_documentation(), @documentEditor.get_documentation(), @programEditor.get_documentation()]
+      if @settings.get_language(LANGUAGE_TYPE.STYLE) is LANGUAGE.LESS
+        editorDocumentation = [@styleEditor.get_documentation(), @documentEditor.get_documentation(), @programEditor.get_documentation()]
+      else
+        editorDocumentation = [@programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
+      for documentation in editorDocumentation
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
       page.set_source base_url + '/files/documentation/jquery/index.html'

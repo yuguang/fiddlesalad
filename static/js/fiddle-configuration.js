@@ -12,7 +12,7 @@ var defaultShare = {
     'text':'ShareThis'
 };
 
-var accordionOptions = { fillSpace: false };
+var accordionOptions = { fillSpace: false, collapsible: true };
 
 LANGUAGE = {
     PYTHON: 'python',

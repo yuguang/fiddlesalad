@@ -81,7 +81,7 @@ body{ font:12px/22px Helvetica, Helvetica Neue, Arial; }
 }
 
 aside li {
-    display: inline;
+    display: inline-block;
 }
 aside li:after {
     content: ", ";

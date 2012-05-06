@@ -167,7 +167,7 @@ ViewModel = Class.$extend(
           (json) ->
             msg = 'unavailable'
             msg = 'available'  if json.available
-            $('span#title_msg').text msg
+            $('#title_msg').text msg
       , 750)
 
   updateShareUrl: ->
@@ -179,7 +179,7 @@ ViewModel = Class.$extend(
 
   hideTitleField: ->
     $("form p").first().addClass "invisible"
-    $("span#title_msg").addClass "invisible"
+    $("#title_msg").addClass "invisible"
 
   showValidationErrors: (errors) ->
     for field of errors
@@ -469,7 +469,7 @@ FiddleViewModel = ViewModel.$extend(
         type: 'css/html'
 
     starterTemplates = []
-    @showSelectedTemplates = false;
+    @showSelectedTemplates = false
     # if the styling language is compatible with css
     if @styleLanguage() in COMPATIBLE_LANGUAGES.CSS
       # load css templates
