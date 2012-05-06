@@ -576,7 +576,6 @@ JavascriptViewer = Viewer.$extend(
         $element.html "<a href='http://api.jquery.com/#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
       else if $element.text() of keywordDict(KEYWORDS.DOM)
         $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }/' target='_blank'>#{ $element.text() }</a>"
-
     )
 )
 BeautifiedJavascriptViewer = JavascriptViewer.$extend(

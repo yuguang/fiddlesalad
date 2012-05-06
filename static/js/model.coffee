@@ -457,7 +457,7 @@ FiddleViewModel = ViewModel.$extend(
     templateLibrary =
       css:
         title: 'CSS Framework'
-        templates: ['inuit', 'html5boilerplate', 'twitterbootstrap']
+        templates: ['twitterbootstrap', 'jqueryui', 'html5boilerplate', '1140grid', '960gs', 'inuit', 'normalize']
         type: 'css'
       html:
         title: 'HTML Boilerplate'
