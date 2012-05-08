@@ -55,7 +55,7 @@ ViewModel = Class.$extend(
       url
     @revisionsMenu = new RevisionsMenu()
     @localHistory = LocalHistory(@revisionsMenu.revisions)
-    @spellcheck = true
+    @spellcheck = false
     @afterLogin = ->
     ko.computed =>
       # if the user just logged in
@@ -141,7 +141,6 @@ ViewModel = Class.$extend(
           $('p.error').remove()
           @formMessage 'success'
           @updateShareUrl()
-          @hideTitleField()
           slug = slugify(@title())
           if @newFiddle()
           # create the first revision

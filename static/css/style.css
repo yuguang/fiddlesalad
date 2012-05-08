@@ -196,12 +196,12 @@ form textarea {
     color: orange;
 }
 
-#title_msg {
-    margin-left: 5px;
+.line-height {
+    height: 3em;
 }
 
-.line-height {
-    height: 2em;
+label.error {
+    color: red;
 }
 
 .maximized, .maximized iframe {
