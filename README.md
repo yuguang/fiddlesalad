@@ -97,6 +97,15 @@ Features ready to be implemented:
     * [Eco](https://github.com/sstephenson/eco) ([Browserify](https://github.com/substack/node-browserify) nodejs module)
     * [Traceur](http://code.google.com/p/traceur-compiler/)
 	* [Move](https://github.com/rsms/move)
+
+###Foreign language Translations
+Django's i18n middleware will be used, but only the translations are needed for buttons and labels.
+
+* Spanish
+* Russian
+* German
+* Japanese
+* French
     
 ###Syntax Highlighting
 Get started by reading the [CodeMirror manual](http://codemirror.net/doc/manual.html#modeapi). The modes are under _static/js/codemirror/mode/_.
