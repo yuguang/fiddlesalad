@@ -34,8 +34,7 @@ PythonFactory = Class.$extend(
     return  if bowser.chrome and bowser.version >= 10
     return  if bowser.firefox and bowser.version >= 4
     return  if bowser.safari and bowser.version >= 5
-    return  if bowser.msie and bowser.version >= 9
-    alert 'You are using an unsupported browser.\nTry Chrome 10+, Firefox 4+, Safari 5+, or IE 9+.'
+    alert 'You are using an unsupported browser.\nTry Chrome 10+, Firefox 4+, Safari 5+.'
 
   substitute_worker: ->
     if bowser.firefox
