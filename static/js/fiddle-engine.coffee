@@ -959,7 +959,6 @@ CodeRunner = Class.$extend(
     frame = document.getElementById('viewer')
     @window = (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
     @scripts = [base_url + '/js/prettyprint.js']
-    @synchronizeNextExecution()
     @template =
       css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
       js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
@@ -983,12 +982,13 @@ CodeRunner = Class.$extend(
             </html>
             """
 
-  execute: (code) ->
+  execute: _.after(2, (code) ->
     return  unless code.length
     script = @window.document.createElement('script')
     script.type = 'text/javascript'
     script.text = [ 'head.js("', @scripts.join('", "'), '", function() {', code, '});' ].join('')
     @window.document.body.appendChild script
+  )
 
   filetype: (path) ->
     filePattern = /(css|js)$/
@@ -1029,14 +1029,6 @@ CodeRunner = Class.$extend(
         engine.set_code code
       , 750
 
-  synchronizeNextExecution: ->
-    @originalExecute = @execute
-    @execute = _.after(2,
-      (code) =>
-        @originalExecute(code)
-        @execute = @originalExecute
-    )
-
   debug: ->
     ###
     Debug opens a new window with the code loaded in the page. External CSS and JS files are loaded through head tags.
@@ -1055,7 +1047,7 @@ CodeRunner = Class.$extend(
     css = engine.get_code LANGUAGE_TYPE.COMPILED_STYLE
     # call the template for the window with the head tags and code
     html = @template.html {javascript, css, body, headtags}
-    # open window with generated HTML 
+    # open window with generated HTML
     window.open 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
     # display message about new window and links to browser console documentation
     if bowser.firefox
@@ -1159,7 +1151,11 @@ FiddleFactory = Class.$extend(
     FiddleViewModel()
 
   load_threads: ->
-    @editor.set_code @code
+    setCode = => @editor.set_code @code
+    if bowser.firefox
+      _.delay setCode, 750
+    else
+      setCode()
 
   execute: ->
     @editor.execute()

@@ -720,7 +720,6 @@ $('ul.list label').hover _.throttle(->
       5000
     )
     editor.setOption 'mode', codeMirrorMode(language)
-    enableEditorClick()
   , 1500)
 
 editor = CodeMirror.fromTextArea(document.getElementById('code'),
@@ -729,14 +728,6 @@ editor = CodeMirror.fromTextArea(document.getElementById('code'),
 )
 
 $('.CodeMirror-placeholder').remove()
-
-enableEditorClick = _.once(->
-  $('.CodeMirror')
-    .css('cursor', 'pointer')
-    .click(->
-      viewModel.loadWorkspace()
-    )
-)
 
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])

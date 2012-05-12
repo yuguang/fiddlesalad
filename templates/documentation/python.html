@@ -1,10 +1,10 @@
 {% extends "base_documentation.html" %}
 
 {% block header %}
-    <h1 id="title">Python in Browser</h1>
+    <h1 id="title">Client-side Python</h1>
     <nav>
         <ul>
-            <li><a href="#python">Standard Python</a></li>
+            <li><a href="#examples">Examples</a></li>
             <li><a href="#javascript">Compiled JavaScript</a></li>
             <li><a href="#caveat">Notes</a></li>
         </ul>
@@ -26,7 +26,7 @@
     <article>
         <header>
             <h2>Python to JavaScript compiler</h2>
-            <p>Python Fiddle aims to solve issues with JavaScript. The Python compiler takes on the numerous <a href="http://wtfjs.com/">JavaScript quirks and inconsistencies</a>, <a href="http://zef.me/2856/javascript-a-language-in-search-of-a-standard-library-and-module-system">the lack of a standard library</a>, and removes <a href="http://www.johndcook.com/blog/2011/06/09/mental-context-switches-are-evil/">the pain resulting from switching between programming languages</a>. Variables no longer have global scope by default. Instead, they must be defined using the keyword global. Testing for equality between two objects does a deep comparison, while truth values are the same as in Python. Class based inheritance replaces prototypal inheritance. In addition, many of the functions in the standard Python library is built-in. The best part is it compiles to JavaScript, so JavaScript libraries such as jQuery can be used directly. </p>
+            <p>Python is a general-purpose, high-level programming language with a readability emphasis. The Python compiler takes on the numerous <a href="http://wtfjs.com/">JavaScript quirks and inconsistencies</a>, <a href="http://zef.me/2856/javascript-a-language-in-search-of-a-standard-library-and-module-system">the lack of a standard library</a>, and removes <a href="http://www.johndcook.com/blog/2011/06/09/mental-context-switches-are-evil/">the pain resulting from switching between programming languages</a>. Variables no longer have global scope by default. Instead, they must be defined using the keyword global. Testing for equality between two objects does a deep comparison, while truth values are the same as in Python. Class based inheritance replaces prototypal inheritance. In addition, many of the functions in the standard Python library is built-in. The best part is it compiles to JavaScript, so JavaScript libraries such as jQuery can be used directly. </p>
             <p>To use the compiled JavaScript, include <a href="http://s3.amazonaws.com/pythonfiddle/files/pylib.js">pylib.js 1.1</a> before the compiled JavaScript:
             <pre class="brush: html; toolbar: false;">
             &lt;script type=&quot;text/javascript&quot; src=&quot;pylib.js&quot;&gt;&lt;/script&gt;
@@ -106,7 +106,42 @@
     >>> l = [(x, y) for x in range(3) for y in range(3)]
     [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]</pre>
         </p>
-
+        <h3 id="examples">Examples</h3>
+		<ul>
+		  
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/python/python-shell-for-python-fiddle-features/">Python Shell Demonstrating Features</a>
+          </li>
+        
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/python/cat-mouse-coordination/">Cat Mouse Coordination</a>
+          </li>
+        
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/python/classes-and-inheritance/">Classes and Inheritance</a>
+          </li>
+        
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/python/library-catalog-menu/">Library Catalog Menu</a>
+          </li>
+        
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/python/random-coin-shuffling/">Random Coin Shuffling</a>
+          </li>
+        
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/python/displaying-images-horizontally/">Displaying Images Horizontally</a>
+          </li>
+        
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/css/animated-news-scrolling/">Animated News Scrolling</a>
+          </li>
+		  
+          <li>
+            <a target="_blank" href="http://fiddlesalad.com/css/waypoints-sticky-menu/">Waypoints Sticky Menu</a>
+          </li>
+        
+        </ul>
         <h3 id="javascript">JavaScript Specifc Enhancements</h3>
         <h4>Unquoted Dictionary Keys</h4>
         <p>Dictionaries can be created without quoting keys
