@@ -124,7 +124,7 @@ StyleEditor = DynamicEditor.$extend(
       @popupAutocomplete(@keyCharacter(event))
 
   preview: (css) ->
-    $('#viewer').contents().find('#user_css').html StyleFix.fix(css)
+    codeRunner.format css
 )
 LessEditor = StyleEditor.$extend(
   __init__: (id) ->
@@ -144,7 +144,7 @@ StylusEditor = StyleEditor.$extend(
 )
 ProgramEditor = DynamicEditor.$extend(
   preview: (javascript) ->
-    codeRunner.execute(javascript)
+    codeRunner.execute javascript
 )
 lintEditor =
   debounceWaitSeconds: 2250 # When the editor is idle after changes, call changeHandler
@@ -246,8 +246,7 @@ DocumentEditor = DynamicEditor.$extend(
     @addAutocomplete attributes
 
   preview: (html) ->
-    $('#viewer').contents().find('body').html html
-    codeRunner.execute engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM)
+    codeRunner.execute engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html
 
   keyHandler: (editor, event) -> # disable auto-complete
     if event.type isnt 'keypress'
@@ -521,6 +520,17 @@ PythonEditor = ProgramEditor.$extend(
   displayError: (message) ->
     @$super(message.replace('Parse error ', ''))
 )
+HtmlChecker = Class.$extend(
+  __init__: ->
+
+  observe: (editor) ->
+    editor.attach @
+
+  update: (editor) ->
+    html = editor.get_compiled_code()
+    if /<!DOCTYPE|<html|<body/g.test html
+      noty text: 'Please do not enter doctype, body etc. into the HTML panel. These tags are placed automatically.', type: 'warning'
+)
 Viewer = Class.$extend(
   __init__: (id) ->
     @id = id
@@ -681,6 +691,8 @@ FiddleEditor = Class.$extend(
     else
       @javascriptViewer = JavascriptViewer @id.javascript
     @javascriptViewer.observe @programEditor
+    @htmlChecker = HtmlChecker()
+    @htmlChecker.observe @documentEditor
     if @showHtmlSource()
       @htmlViewer = HtmlViewer @id.html
       @htmlViewer.observe @documentEditor
@@ -958,6 +970,7 @@ CodeRunner = Class.$extend(
   __init__: ->
     frame = document.getElementById('viewer')
     @window = (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
+    @initialized = false
     @scripts = [base_url + '/js/prettyprint.js']
     @template =
       css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
@@ -982,13 +995,26 @@ CodeRunner = Class.$extend(
             </html>
             """
 
-  execute: _.after(2, (code) ->
-    return  unless code.length
-    script = @window.document.createElement('script')
-    script.type = 'text/javascript'
-    script.text = [ 'head.js("', @scripts.join('", "'), '", function() {', code, '});' ].join('')
-    @window.document.body.appendChild script
-  )
+  execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
+    return  unless @initialized
+    @body.innerHTML = html
+    if javascript.length
+      script = @window.document.createElement('script')
+      script.type = 'text/javascript'
+      script.text = [ 'head.js("', @scripts.join('", "'), '", function() {', javascript, '});' ].join('')
+      @body.appendChild script
+
+  format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
+    return  unless @initialized
+    @style.innerHTML = StyleFix.fix(css)
+
+  initialize: ->
+    if not @initialized
+      @initialized = true
+      @body = @window.document.body
+      @style = @window.document.querySelector('#user_css')
+      @execute()
+      @format()
 
   filetype: (path) ->
     filePattern = /(css|js)$/
@@ -1023,11 +1049,9 @@ CodeRunner = Class.$extend(
 
   reset: ->
     code = engine.get_code()
+    @__init__()
+    engine.set_code code
     @window.location.reload()
-    setTimeout =>
-        @__init__()
-        engine.set_code code
-      , 750
 
   debug: ->
     ###
@@ -1151,11 +1175,7 @@ FiddleFactory = Class.$extend(
     FiddleViewModel()
 
   load_threads: ->
-    setCode = => @editor.set_code @code
-    if bowser.firefox
-      _.delay setCode, 750
-    else
-      setCode()
+    @editor.set_code @code
 
   execute: ->
     @editor.execute()
