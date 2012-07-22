@@ -9,6 +9,15 @@
 <body>
 <script type="text/javascript">
     locals = {};
+
+    (function(){
+        var init = setInterval(function(){
+            if (window.parent.codeRunner != null) {
+                clearInterval(init);
+                window.parent.codeRunner.initialize();
+            }
+        }, 250);
+    })();
 </script>
 </body>
 </html>
