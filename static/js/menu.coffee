@@ -749,7 +749,7 @@ ViewModel = ->
   @loadWorkspace = =>
     languages = [ @documentLanguage(), @styleLanguage(), @programLanguage() ].join(',')
     store.set 'languages', languages
-    window.location.assign window.location.href + @programLanguage() + '/'
+    window.location.assign window.location.href.replace('#', '') + @programLanguage() + '/'
   @
 
 viewModel = new ViewModel()
