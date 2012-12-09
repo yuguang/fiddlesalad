@@ -72,11 +72,10 @@ from the _static/js/_ folder run
 ###Compiling Less
 run [less compiler](http://lesscss.org/#-server-side-usage) from the command line or install [SimpLESS](http://wearekiss.com/simpless)
 
-###Ubuntu Setup
-sudo apt-get install coffeescript
-cd static/js/
-coffee -cw -o ./compiled-coffee ./
-sudo npm install -g less
+###CoffeeScript Setup on Ubuntu
+	sudo apt-get install coffeescript
+	cd static/js/
+	coffee -cw -o ./compiled-coffee ./
 
 Developer Documentation
 -----------------------
