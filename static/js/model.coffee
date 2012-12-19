@@ -102,7 +102,7 @@ ViewModel = Class.$extend(
     if @emptyFiddle(code)
       @formMessage 'please fill in code'
       return
-    if @spellcheck
+    if @spellcheck and not 'jquery' in $('.check-spelling').text().toLowerCase()
       $('.check-spelling').spellchecker(
         url: ajax_url + '/ajax/checkspelling.php'
         lang: 'en'
