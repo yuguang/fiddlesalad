@@ -79,6 +79,7 @@ AWS_SECRET_ACCESS_KEY = 's3_secret'
 
 AWS_STORAGE_BUCKET_NAME = 'bucket_name'
 
+
 build_config = False
 
 if not build_config:
@@ -88,6 +89,7 @@ if not build_config:
         'VALIDATE': 'js/jquery.validate.js',
         'KNOCKOUT': 'js/knockout-latest.debug.js',
         'KNOCKOUT_MAPPING': 'js/knockout.mapping.js',
+        'PACKAGES': 'js/packages.fiddle.js',
         }
 else:
     FILES = {
@@ -96,6 +98,7 @@ else:
         'VALIDATE': 'js/build/lib/jquery.validate.min.js',
         'KNOCKOUT': 'js/build/lib/knockout.min.js',
         'KNOCKOUT_MAPPING': 'js/build/lib/knockout.mapping.min.js',
+        'PACKAGES': 'js/build/packages.fiddle.js',
         }
 
 # Media files
