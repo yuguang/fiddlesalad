@@ -55,7 +55,7 @@ ViewModel = Class.$extend(
       url
     @revisionsMenu = new RevisionsMenu()
     @localHistory = LocalHistory(@revisionsMenu.revisions)
-    @spellcheck = false
+    @spellcheck = true
     @afterLogin = ->
     ko.computed =>
       # if the user just logged in
@@ -99,7 +99,7 @@ ViewModel = Class.$extend(
       @afterLogin = @save
       return
     code = engine.get_code()
-    unless code.length
+    if @emptyFiddle(code)
       @formMessage 'please fill in code'
       return
     if @spellcheck
@@ -204,9 +204,12 @@ PythonViewModel = ViewModel.$extend(
     @accordionTemplate = 'pythonAccordion'
     @spellcheck = true
 
+  emptyFiddle: (code) ->
+    code.length is 0
+
   selectExample: (example) ->
     engine.set_code atob(example.code)
-    
+
   importExternal: ->
     callback = stackoverflow: scrapeStackoverflowQuestion
     if @importOption() of callback
@@ -281,7 +284,7 @@ FiddleViewModel = ViewModel.$extend(
   add_framework: (templateName) ->
     engine.set_code atob(frameworkLibrary[@styleLanguage()][templateName].source), LANGUAGE_TYPE.FRAMEWORK
     @starterFrameworks()[0].selected(templateName)
-    
+
   lint_enabled: (name) ->
     if name is 'css'
       @configuration.cssLintEnabled()
@@ -289,7 +292,11 @@ FiddleViewModel = ViewModel.$extend(
       @configuration.jsLintEnabled()
 
   #  private
-  
+
+  emptyFiddle: (code) ->
+    code = $.parseJSON(code)
+    Math.max(code[@documentLanguage()].length, code[@styleLanguage()].length, code[@programLanguage()].length) is 0
+
   disableLint: ->
     @configuration.cssLintEnabled(false)
     @configuration.jsLintEnabled(false)
