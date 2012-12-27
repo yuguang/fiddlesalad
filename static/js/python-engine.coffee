@@ -27,7 +27,6 @@ PythonFactory = Class.$extend(
   __init__: ->
     @editor = PythonOnlyEditor('editor')
     @display_browser_warning()
-    @substitute_worker()
     view_model.programLanguage = 'python'
 
   display_browser_warning: ->
@@ -35,32 +34,6 @@ PythonFactory = Class.$extend(
     return  if bowser.firefox and bowser.version >= 4
     return  if bowser.safari and bowser.version >= 5
     alert 'You are using an unsupported browser.\nTry Chrome 10+, Firefox 4+, Safari 5+.'
-
-  substitute_worker: ->
-    if bowser.firefox
-      window.Worker = (a) ->
-        b = undefined
-        c = {}
-        if typeof window isnt 'undefined'
-          b = window
-        else b = global  if global
-        if b.document and not b.require
-          b.require = (a) ->
-            $LAB.script a
-        c.onmessage = ->
-
-        c.postMessage = (a) ->
-          setTimeout (->
-            b.onmessage data: a
-          ), 10
-
-        b.postMessage = (a) ->
-          c.onmessage
-            data: a
-            type: 'message'
-
-        require a
-        c
 
   load_threads: ->
     @worker = new Worker(@get_executable())
