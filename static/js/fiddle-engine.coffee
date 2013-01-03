@@ -218,7 +218,7 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = name: 'coffeescript'
     @loadWorker('coffeescript')
-    @documentationUrl = 'http://coffeescript.org/'
+    @documentationUrl = base_url + '/files/documentation/coffeescript.html'
     @tabCharaterLength = 2
 
   load: ->
