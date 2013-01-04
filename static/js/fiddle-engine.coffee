@@ -176,7 +176,7 @@ JavascriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = name: 'javascript'
     @loadWorker('jshint')
-    @documentationUrl = 'https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/'
+    @documentationUrl = 'https://developer.mozilla.org/en-US/docs/JavaScript/Guide'
 
   __include__: [lintEditor]
 
