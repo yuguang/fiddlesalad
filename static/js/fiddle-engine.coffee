@@ -176,11 +176,12 @@ JavascriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = name: 'javascript'
     @loadWorker('jshint')
-    @documentationUrl = 'https://developer.mozilla.org/en-US/docs/JavaScript/Guide'
 
   __include__: [lintEditor]
 
   updateVars: ->
+
+  get_documentation: ->
 
   load: ->
     @$super()
@@ -208,10 +209,11 @@ CssEditor = StyleEditor.$extend(
     @mode = name: 'css'
     @theme = 'default'
     @loadWorker('csslint')
-    @documentationUrl = 'http://people.opera.com/rijk/panels/css3-online/prop-index.html'
     @blockEndKeyCode = 125
 
   __include__: [lintEditor]
+
+  get_documentation: ->
 )
 CoffeescriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
@@ -320,7 +322,6 @@ HtmlEditor = DocumentEditor.$extend(
     @$super id
     @mode = 'htmlmixed'
     @loadWorker('htmlparser')
-    @documentationUrl = 'http://people.opera.com/rijk/panels/html4.01-online/elem.html'
     @extraKeys["'>'"] = (cm) -> cm.closeTag cm, ">"
     @extraKeys["'/'"] = (cm) -> cm.closeTag cm, "/"
 
@@ -342,7 +343,6 @@ HtmlEditor = DocumentEditor.$extend(
     @pad.autoFormatRange range.from, range.to
 
   get_documentation: ->
-    @$super('html')
 )
 ZencodingEditor = DocumentEditor.$extend(
   __init__: (id) ->
@@ -791,11 +791,14 @@ FiddleEditor = Class.$extend(
 
       frame = Frame 'documentation', 'Documentation'
       tabs = TabInterface 'documentation-tabs'
+      dochubPage = IframeComponent name + 'ReferenceTab'
+      dochubPage.set_source 'http://dochub.io/'
+      dochubTab = {title: 'dochub', content: dochubPage.to_html_string()}
       if @settings.get_language(LANGUAGE_TYPE.STYLE) is LANGUAGE.LESS
-        editorDocumentation = [@styleEditor.get_documentation(), @documentEditor.get_documentation(), @programEditor.get_documentation()]
+        editorDocumentation = [@styleEditor.get_documentation(), dochubTab , @documentEditor.get_documentation(), @programEditor.get_documentation()]
       else
-        editorDocumentation = [@programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
-      for documentation in editorDocumentation
+        editorDocumentation = [dochubTab, @programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
+      for documentation in _.filter(editorDocumentation, (tabSetting) -> _.isObject(tabSetting))
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
       page.set_source base_url + '/files/documentation/jquery/index.html'
