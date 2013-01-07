@@ -102,7 +102,7 @@ ViewModel = Class.$extend(
     if @emptyFiddle(code)
       @formMessage 'please fill in code'
       return
-    title = $('.check-spelling').text()
+    title = viewModel.title()
     if _.all(title.split(' '), (word) -> word.length < 3)
       @formMessage 'title contains invalid words'
       return
