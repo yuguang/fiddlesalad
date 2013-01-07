@@ -14,23 +14,36 @@ function popup(url) {
 }
 
 function prefetchImport(script) {
-    var code = script || engine.get_code();
+    var code = script || ((typeof engine !== 'undefined') && engine.get_code());
     // if the keword import is not used, return
-    if (_.indexOf(code.split(' '), 'import') == -1) return;
+    if (!code || _.indexOf(code.split(' '), 'import') == -1) return;
     // for each line that imports a module, execute it
     _(code.split('\n')).chain()
+        .select(function (line) {
+            return line.match(/import\s*|from\s|\simport\s\*/);
+        })
         .map(function (line) {
-                // replaces "import ", "from ", and " import *"
-                return line.replace(/import\s*|from\s|\simport\s\*/, '');
+            // replaces "import ", "from ", and " import *"
+            return line.replace(/import\s*|from\s|\simport\s\*/, '');
         })
         .select(function (module) {
-                return module in files;
+            return module in files;
         })
         .each(function (module) {
-                $.get(files[module], function(data) {
-                        prefetchImport(data);
-                });
-                delete files[module];
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', files[module], true);
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState == 4){
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+                        var data = xhr.responseText;
+                        if (data && data.length) {
+                            prefetchImport(data);
+                        }
+                    }
+                }
+            };
+            xhr.send(null);
+            delete files[module];
         });
 }
 
