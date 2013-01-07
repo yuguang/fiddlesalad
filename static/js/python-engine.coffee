@@ -26,7 +26,7 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
 PythonFactory = Class.$extend(
   __init__: ->
     code = document.getElementById('editor').value
-    prefetchImport(code)
+    prefetchImport(code) if code
     @editor = PythonOnlyEditor('editor')
     @display_browser_warning()
     view_model.programLanguage = 'python'
@@ -35,6 +35,7 @@ PythonFactory = Class.$extend(
     return  if bowser.chrome and bowser.version >= 10
     return  if bowser.firefox and bowser.version >= 4
     return  if bowser.safari and bowser.version >= 5
+    return  if bowser.msie and bowser.version >= 10
     alert 'You are using an unsupported browser.\nTry Chrome 10+, Firefox 4+, Safari 5+.'
 
   load_threads: ->
