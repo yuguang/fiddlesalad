@@ -25,6 +25,8 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
 )
 PythonFactory = Class.$extend(
   __init__: ->
+    code = document.getElementById('editor').value
+    prefetchImport(code)
     @editor = PythonOnlyEditor('editor')
     @display_browser_warning()
     view_model.programLanguage = 'python'
