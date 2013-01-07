@@ -10,6 +10,15 @@
 <script type="text/javascript">
     locals = {};
 
+    window.console.log = function(){
+        var div = document.createElement('div');
+        div.style.color = 'gray';
+        div.style.fontFamily = 'Helvetica, Univers, Futura, "Franklin Gothic", Gotham, sans-serif';
+        div.innerHTML = '<strong>console</strong>: ' + Array.prototype.slice.call(arguments).join(', ');
+
+        document.body.appendChild(div);
+    };
+
     (function(){
         var init = setInterval(function(){
             if (window.parent.codeRunner != null) {
