@@ -13,7 +13,7 @@ var pythonExamples = [
     },
     {
         title:'Enumerate',
-        code:'YjJSa2N5QTlJQ2h1SUdadmNpQnVJR2x1SUhKaGJtZGxLREVzTVRBcElHbG1JRzRnSlNBeUtRMEtabTl5SUc0Z2FXNGdiMlJrY3pvTkNpQWdJQ0J3Y21sdWRDQnU='
+        code:'YSA9IFsnYScsICdiJywgJ2MnLCAnZCcsICdlJ10NCmZvciBpbmRleCwgaXRlbSBpbiBlbnVtZXJhdGUoYSk6IHByaW50IGluZGV4LCBpdGVt'
     },
     {
         title:'Function closure',
