@@ -320,7 +320,7 @@ JadeEditor = TemplateEditor.$extend(
 HtmlEditor = DocumentEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = 'htmlmixed'
+    @mode = 'text/html'
     @loadWorker('htmlparser')
     @extraKeys["'>'"] = (cm) -> cm.closeTag cm, ">"
     @extraKeys["'/'"] = (cm) -> cm.closeTag cm, "/"

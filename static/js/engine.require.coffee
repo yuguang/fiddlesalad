@@ -46,7 +46,7 @@ CodeCompleteEditor = Editor.$extend(
           @popupAutocomplete('', true, true)
         else
           # indent
-          @pad.indentSelection 'add'
+          throw CodeMirror.Pass
       "Esc": =>
         autoCompleteElements = document.getElementsByClassName("CodeMirror-completions")
         if autoCompleteElements.length
