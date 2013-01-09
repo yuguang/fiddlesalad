@@ -29,6 +29,8 @@ PythonFactory = Class.$extend(
     prefetchImport(code) if code
     @editor = PythonOnlyEditor('editor')
     @display_browser_warning()
+    @lastExecute = new Date()
+    @executeInterval = 50
     view_model.programLanguage = 'python'
 
   display_browser_warning: ->
@@ -69,7 +71,7 @@ PythonFactory = Class.$extend(
   get_executable: ->
     pythonExecutable = undefined
     unless debug
-      python_version = '?v=' + 10
+      python_version = '?v=' + 12
       pythonExecutable = worker_url + 'python.compressed.js' + python_version
     else
       pythonExecutable = worker_url + 'build/python.mod.debug.js'
@@ -91,10 +93,13 @@ PythonFactory = Class.$extend(
     'python'
 
   execute: ->
-    viewModel.busy true
-    @worker.postMessage
-      type: 'execute'
-      value: engine.get_code()
+    currentTime = new Date()
+    if currentTime - @lastExecute <= @executeInterval
+      viewModel.busy true
+      @worker.postMessage
+        type: 'execute'
+        value: engine.get_code()
+    @lastExecute = currentTime
 
   reset: ->
     viewModel.busy true
