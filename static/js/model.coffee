@@ -106,7 +106,7 @@ ViewModel = Class.$extend(
     if _.all(title.split(' '), (word) -> word.length < 3)
       @formMessage 'title contains invalid words'
       return
-    if @spellcheck and not 'jquery' in title.toLowerCase()
+    if @spellcheck and not ('jquery' in title.toLowerCase())
       $('.check-spelling').spellchecker(
         url: ajax_url + '/ajax/checkspelling.php'
         lang: 'en'

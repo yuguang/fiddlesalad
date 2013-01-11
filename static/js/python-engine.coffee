@@ -94,7 +94,7 @@ PythonFactory = Class.$extend(
 
   execute: ->
     currentTime = new Date()
-    if currentTime - @lastExecute <= @executeInterval
+    if currentTime - @lastExecute > @executeInterval
       viewModel.busy true
       @worker.postMessage
         type: 'execute'
