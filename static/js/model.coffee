@@ -102,20 +102,24 @@ ViewModel = Class.$extend(
     if @emptyFiddle(code)
       @formMessage 'please fill in code'
       return
-    title = viewModel.title()
-    if _.all(title.split(' '), (word) -> word.length < 3)
+    if _.all(@title().split(' '), (word) -> word.length < 3)
       @formMessage 'title contains invalid words'
       return
-    if @spellcheck and not ('jquery' in title.toLowerCase())
+    if @spellcheck
       $('.check-spelling').spellchecker(
         url: ajax_url + '/ajax/checkspelling.php'
         lang: 'en'
         engine: 'google'
         suggestBoxPosition: 'above'
       ).spellchecker 'check', (result) =>
-        unless result
+        validMispellings = @validMispellings($('.spellcheck-word-highlight').map( ->
+          $(this).text().toLowerCase()
+        ))
+        unless result or validMispellings
           @formMessage 'please check for misspellings'
           return
+        if validMispellings
+          $('.spellcheck-badwords').hide()
         @submitForm code
     else
       @submitForm code
@@ -211,6 +215,12 @@ PythonViewModel = ViewModel.$extend(
   emptyFiddle: (code) ->
     code.length is 0
 
+  validMispellings: (mispelledWords) ->
+    usedWords = _.map(engine.get_code().split(' '), (word) -> $.trim(word))
+    _.all(mispelledWords, (word) ->
+      word in usedWords
+    )
+
   selectExample: (example) ->
     engine.set_code atob(example.code)
 
@@ -300,6 +310,15 @@ FiddleViewModel = ViewModel.$extend(
   emptyFiddle: (code) ->
     code = $.parseJSON(code)
     Math.max(code[@documentLanguage()].length, code[@styleLanguage()].length, code[@programLanguage()].length) is 0
+
+  validMispellings: (mispelledWords) ->
+    allowedWords = ['css', 'js', 'sass', 'scss', 'stylus']
+    allowedWords = allowedWords.concat(_.flatten(_.map(viewModel.resources(), (resource) ->
+      resource.title().replace(/\d/g, '').split(/\W/)
+    )))
+    _.all(mispelledWords, (word) ->
+      word in allowedWords
+    )
 
   disableLint: ->
     @configuration.cssLintEnabled(false)

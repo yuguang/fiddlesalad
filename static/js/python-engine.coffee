@@ -99,7 +99,7 @@ PythonFactory = Class.$extend(
       @worker.postMessage
         type: 'execute'
         value: engine.get_code()
-    @lastExecute = currentTime
+      @lastExecute = currentTime
 
   reset: ->
     viewModel.busy true
