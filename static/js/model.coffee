@@ -312,7 +312,7 @@ FiddleViewModel = ViewModel.$extend(
     Math.max(code[@documentLanguage()].length, code[@styleLanguage()].length, code[@programLanguage()].length) is 0
 
   validMispellings: (mispelledWords) ->
-    allowedWords = ['css', 'js', 'sass', 'scss', 'stylus']
+    allowedWords = ['html', 'haml', 'zen coding', 'markdown', 'coffeecup', 'jade', 'css', 'less', 'scss', 'sass', 'stylus', 'javascript', 'coffeescript', 'python', 'roy']
     allowedWords = allowedWords.concat(_.flatten(_.map(viewModel.resources(), (resource) ->
       resource.title().replace(/\d/g, '').split(/\W/)
     )))
