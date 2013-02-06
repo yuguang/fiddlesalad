@@ -742,7 +742,7 @@ ViewModel = ->
     @programLanguage 'javascript'
 
   @selectOptimal = =>
-    @documentLanguage 'haml'
+    @documentLanguage 'jade'
     @styleLanguage 'less'
     @programLanguage 'coffeescript'
 

@@ -263,25 +263,6 @@ TemplateEditor = DocumentEditor.$extend(
   changeHandler: ->
     @compiler.postMessage code: @get_code(), locals: @getViewerLocals()
 )
-HamlEditor = TemplateEditor.$extend(
-  __init__: (id) ->
-    @$super id
-    @mode = name: 'haml'
-    @loadWorker('haml')
-    @documentationUrl = base_url + '/files/documentation/haml.html'
-    @tabCharaterLength = 2
-
-  load: ->
-    @$super()
-    converter = HtmlConverter('htmlConverter')
-    converter.set_editor @
-
-  get_options: ->
-    _.defaults(
-      @$super()
-      indentWithTabs: false
-    )
-)
 CoffeecupEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -472,6 +453,17 @@ RubyCompiler = StyleEditor.$extend(
   load: ->
     @$super()
     converter = CssConverter('cssConverter')
+    converter.set_editor @
+)
+HamlEditor = RubyCompiler.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = name: 'haml'
+    @documentationUrl = base_url + '/files/documentation/haml.html'
+
+  load: ->
+    @$super()
+    converter = HtmlConverter('htmlConverter')
     converter.set_editor @
 )
 SassEditor = RubyCompiler.$extend(
