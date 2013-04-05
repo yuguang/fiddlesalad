@@ -755,7 +755,7 @@ ViewModel = ->
     languages = [ @documentLanguage(), @styleLanguage(), @programLanguage() ].join(',')
     store.set 'languages', languages
     # keep the URL the same when the user clicks "Go" without clicking on a language
-    store.set 'lastSelectedLanguage', (if selectedLanguage then selectedLanguage else @programLanguage())
+    store.set 'lastSelectedLanguage', (if selectedLanguage then selectedLanguage else @styleLanguage())
     window.location.assign window.location.href.replace('#', '') + store.get('lastSelectedLanguage') + '/'
   @
 
