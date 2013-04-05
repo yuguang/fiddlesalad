@@ -729,6 +729,11 @@ editor = CodeMirror.fromTextArea(document.getElementById('code'),
 
 $('.CodeMirror-placeholder').remove()
 
+selectedLanguage = store.get('lastSelectedLanguage')
+$('#options input[type="radio"]').click( ->
+  selectedLanguage = $(this).val()
+)
+
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])
 
@@ -749,7 +754,9 @@ ViewModel = ->
   @loadWorkspace = =>
     languages = [ @documentLanguage(), @styleLanguage(), @programLanguage() ].join(',')
     store.set 'languages', languages
-    window.location.assign window.location.href.replace('#', '') + @programLanguage() + '/'
+    # keep the URL the same when the user clicks "Go" without clicking on a language
+    store.set 'lastSelectedLanguage', (if selectedLanguage then selectedLanguage else @programLanguage())
+    window.location.assign window.location.href.replace('#', '') + store.get('lastSelectedLanguage') + '/'
   @
 
 viewModel = new ViewModel()
