@@ -796,7 +796,11 @@ FiddleEditor = Class.$extend(
       layout.add_column frame
 
     editor_frames = new Array
-    for frame_setting, editorIndex in [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)]]
+    if LANGUAGE_CATEGORY?[engine.get_url_path_language()] is LANGUAGE_TYPE.PROGRAM
+      panelOrdering = [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)]]
+    else
+      panelOrdering = [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)]]
+    for frame_setting, editorIndex in panelOrdering
       frame = Frame frame_setting[0] + 'container', frame_setting[1]
       editor = EditorComponent frame_setting[0]
       if editorIndex is 0
