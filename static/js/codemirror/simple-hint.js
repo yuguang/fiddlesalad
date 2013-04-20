@@ -77,8 +77,8 @@ var autocompleteSelect;
 
         CodeMirror.connect(autocompleteSelect, "keydown", function (event) {
             var code = event.keyCode;
-            // Enter
-            if (code == 13) {
+            // Enter or Tab
+            if (code == 13 || code == 9) {
                 CodeMirror.e_stop(event);
                 pick();
             }
@@ -88,6 +88,7 @@ var autocompleteSelect;
                 close();
                 editor.focus();
             }
+            // Up and Down
             else if (code != 38 && code != 40) {
                 close();
                 editor.focus();

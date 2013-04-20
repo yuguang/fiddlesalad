@@ -40,15 +40,20 @@ CodeCompleteEditor = Editor.$extend(
       "Ctrl-Space": =>
         @popupAutocomplete('', true)
       "Tab": =>
-        position = @pad.getCursor()
-        token = @pad.getTokenAt(position)
-        if WORD_TOKEN.test(token.string) # cursor is at the end of a word
-          @popupAutocomplete('', true, true)
-        else
-          # indent
-          throw CodeMirror.Pass
+        @selectAutocomplete()
+      "Enter": =>
+        @selectAutocomplete()
       "Esc": =>
         @removeAutocomplete()
+
+  selectAutocomplete: ->
+    position = @pad.getCursor()
+    token = @pad.getTokenAt(position)
+    if WORD_TOKEN.test(token.string) # cursor is at the end of a word
+      @popupAutocomplete('', true, true)
+    else
+      # insert control character
+      throw CodeMirror.Pass
 
   removeAutocomplete: ->
     autoCompleteElements = document.getElementsByClassName("CodeMirror-completions")
