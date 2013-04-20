@@ -8,7 +8,7 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
       version: 2
       singleLineStringErrors: false
 
-    keywords = [ 'and', 'as', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'exec', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'not', 'or', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield' ]
+    keywords = ['and', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'exec', 'finally', 'for', 'from', 'global', 'import', 'lambda', 'not', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield', 'input()', 'abs()', 'divmod()', 'input()', 'open()', 'staticmethod()', 'all()', 'enumerate()', 'int()', 'ord()', 'str()', 'any()', 'eval()', 'isinstance()', 'pow()', 'sum()', 'basestring()', 'issubclass()', 'super()', 'bin()', 'file()', 'iter()', 'property()', 'tuple()', 'bool()', 'filter()', 'len()', 'range()', 'type()', 'bytearray()', 'float()', 'list()', 'raw_input()', 'unichr()', 'callable()', 'format()', 'locals()', 'reduce()', 'unicode()', 'chr()', 'frozenset()', 'long()', 'reload()', 'vars()', 'classmethod()', 'getattr()', 'map()', 'repr()', 'xrange()', 'cmp()', 'globals()', 'max()', 'reversed()', 'zip()', 'compile()', 'hasattr()', 'round()', 'complex()', 'hash()', 'min()', 'set()', 'apply()', 'delattr()', 'help()', 'next()', 'setattr()', 'buffer()', 'dict()', 'hex()', 'object()', 'slice()', 'coerce()', 'dir()', 'oct()', 'sorted()', 'intern()']
     @addAutocomplete keywords
     @codeMirrorContainer = '.ui-layout-center'
     @extraKeys['Ctrl-Enter'] = -> engine.execute()
@@ -31,6 +31,7 @@ PythonFactory = Class.$extend(
     @display_browser_warning()
     @lastExecute = new Date()
     @executeInterval = 50
+    @substituteLoaded = false
     view_model.programLanguage = 'python'
 
   display_browser_warning: ->
@@ -40,7 +41,32 @@ PythonFactory = Class.$extend(
     return  if bowser.msie and bowser.version >= 10
     alert 'You are using an unsupported browser.\nTry Chrome 10+, Firefox 4+, Safari 5+.'
 
-  load_threads: ->
+  substitute_worker: ->
+    window.Worker = (a) ->
+      b = undefined
+      c = {}
+      if typeof window isnt 'undefined'
+        b = window
+      else b = global  if global
+      if b.document and not b.require
+        b.require = (a) ->
+          $LAB.script a
+      c.onmessage = ->
+
+      c.postMessage = (a) ->
+        setTimeout (->
+          b.onmessage data: a
+        ), 10
+
+      b.postMessage = (a) ->
+        c.onmessage
+          data: a
+          type: 'message'
+
+      require a
+      c
+
+  load_threads: (finishedLoadingCallback) ->
     @worker = new Worker(@get_executable())
     @worker.onmessage = (event) ->
       messageType = event.data.type
@@ -52,6 +78,8 @@ PythonFactory = Class.$extend(
             when ('busy')
               viewModel.busy true
             when ('done')
+              if finishedLoadingCallback
+                do finishedLoadingCallback
               viewModel.busy false
             else
         when ('result')
@@ -96,9 +124,17 @@ PythonFactory = Class.$extend(
     currentTime = new Date()
     if currentTime - @lastExecute > @executeInterval
       viewModel.busy true
-      @worker.postMessage
-        type: 'execute'
-        value: engine.get_code()
+      code = engine.get_code()
+      executeCode = =>
+        @worker.postMessage
+          type: 'execute'
+          value: engine.get_code()
+      if /input/.test(code) and not @substituteLoaded
+        @substitute_worker()
+        @substituteLoaded = true
+        @load_threads(_.once executeCode)
+      else
+        do executeCode
       @lastExecute = currentTime
 
   reset: ->
