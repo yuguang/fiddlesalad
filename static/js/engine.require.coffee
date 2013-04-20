@@ -48,10 +48,13 @@ CodeCompleteEditor = Editor.$extend(
           # indent
           throw CodeMirror.Pass
       "Esc": =>
-        autoCompleteElements = document.getElementsByClassName("CodeMirror-completions")
-        if autoCompleteElements.length
-          autoComplete = autoCompleteElements[0]
-          autoComplete.parentNode.removeChild(autoComplete)
+        @removeAutocomplete()
+
+  removeAutocomplete: ->
+    autoCompleteElements = document.getElementsByClassName("CodeMirror-completions")
+    if autoCompleteElements.length
+      autoComplete = autoCompleteElements[0]
+      autoComplete.parentNode.removeChild(autoComplete)
 
   get_code_complexity: ->
     @editCount
@@ -83,6 +86,10 @@ CodeCompleteEditor = Editor.$extend(
   changeHandler: ->
     
   selectionHandler: ->
+
+  focus: ->
+    @$super()
+    @removeAutocomplete()
 
   keyHandler: (editor, event) ->
     if event.keyCode is 13 and event.type is 'keydown' # Enter is not captured on keypress
