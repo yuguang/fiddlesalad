@@ -138,7 +138,7 @@
 .ui-widget-header
 {
     border: 1px solid #a8a8a8;
-    background: #c0c0c0 url(images/ui-bg_highlight-soft_100_c0c0c0_1x100.png) top repeat-x;
+    background: #c0c0c0 url(images/artisto/ui-bg_highlight-soft_100_c0c0c0_1x100.png) top repeat-x;
     color: #333;
     font-weight: bold;
     text-shadow: 0px 1px 0px rgba(255,255,255,0.7);
@@ -153,7 +153,7 @@
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
 {
     border: 1px solid #a8a8a8;
-    background: #c4c4c4 url(images/ui-bg_highlight-hard_80_c4c4c4_1x100.png) 50% 50% repeat-x;
+    background: #c4c4c4 url(images/artisto/ui-bg_highlight-hard_80_c4c4c4_1x100.png) 50% 50% repeat-x;
     background: #c4c4c4 linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
     background: #c4c4c4 -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
     background: #c4c4c4 -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF)"; */
@@ -175,7 +175,7 @@
 }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
 {
-    background: #83b0ca url(images/ui-bg_highlight-soft_100_83b0ca_1x100.png) repeat-x top;
+    background: #83b0ca url(images/artisto/ui-bg_highlight-soft_100_83b0ca_1x100.png) repeat-x top;
     border: solid 1px #8ab0c6;
   /* background: #85b2cb linear-gradient(top, rgba(255,255,255,0.6), rgba(255,255,255,0));
     background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.6)), to(rgba(255,255,255,0)));
@@ -200,7 +200,7 @@
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active
 {
     border: 1px solid #7096ab;
-    background: #85b2cb url(images/ui-bg_inset-hard_65_85b2cb_1x100.png) 50% 50% repeat-x;
+    background: #85b2cb url(images/artisto/ui-bg_inset-hard_65_85b2cb_1x100.png) 50% 50% repeat-x;
     background: #85b2cb linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,0.4));
     background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0)), to(rgba(255,255,255,0.4)));
     background: #85b2cb -moz-linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,0.4)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endColorstr=#CCFFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF, endColorstr=#CCFFFFFF)"; */
@@ -243,7 +243,7 @@
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error
 {
     border: 1px solid #cd0a0a;
-    background: #fef1ec url(images/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x;
+    background: #fef1ec url(images/artisto/ui-bg_inset-soft_95_fef1ec_1x100.png) 50% bottom repeat-x;
     background: #fef1ec linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
     background: #fef1ec -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
     background: #fef1ec -moz-linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0)); /*    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF);     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#DDFFFFFF, endColorstr=#00FFFFFF)";*/
@@ -282,35 +282,35 @@
 {
     width: 16px;
     height: 16px;
-    background-image: url(images/ui-icons_616161_256x240.png);
+    background-image: url(images/artisto/ui-icons_616161_256x240.png);
 }
 .ui-widget-content .ui-icon
 {
-    background-image: url(images/ui-icons_616161_256x240.png);
+    background-image: url(images/artisto/ui-icons_616161_256x240.png);
 }
 .ui-widget-header .ui-icon
 {
-    background-image: url(images/ui-icons_898989_256x240.png);
+    background-image: url(images/artisto/ui-icons_898989_256x240.png);
 }
 .ui-state-default .ui-icon
 {
-    background-image: url(images/ui-icons_38667f_256x240.png);
+    background-image: url(images/artisto/ui-icons_38667f_256x240.png);
 }
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon
 {
-    background-image: url(images/ui-icons_38667f_256x240.png);
+    background-image: url(images/artisto/ui-icons_38667f_256x240.png);
 }
 .ui-state-active .ui-icon
 {
-    background-image: url(images/ui-icons_38667f_256x240.png);
+    background-image: url(images/artisto/ui-icons_38667f_256x240.png);
 }
 .ui-state-highlight .ui-icon
 {
-    background-image: url(images/ui-icons_2e83ff_256x240.png);
+    background-image: url(images/artisto/ui-icons_2e83ff_256x240.png);
 }
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon
 {
-    background-image: url(images/ui-icons_cd0a0a_256x240.png);
+    background-image: url(images/artisto/ui-icons_cd0a0a_256x240.png);
 }
 
 /* positioning */
@@ -1093,7 +1093,7 @@
 /* Overlays */
 .ui-widget-overlay
 {
-    background: #2d5972 url(images/ui-bg_flat_0_2d5972_40x100.png) 50% 50% repeat-x;
+    background: #2d5972 url(images/artisto/ui-bg_flat_0_2d5972_40x100.png) 50% 50% repeat-x;
     opacity: .30;
     filter: Alpha(Opacity=30);
 }
@@ -1101,7 +1101,7 @@
 {
     margin: -8px 0 0 -8px;
     padding: 8px;
-    background: #4f4f4f url(images/ui-bg_flat_0_4f4f4f_40x100.png) 50% 50% repeat-x;
+    background: #4f4f4f url(images/artisto/ui-bg_flat_0_4f4f4f_40x100.png) 50% 50% repeat-x;
     opacity: .30;
     filter: Alpha(Opacity=30);
     -moz-border-radius: 8px;
@@ -1671,7 +1671,7 @@ button.ui-button::-moz-focus-inner
 .ui-slider .ui-slider-handle
 {
     
-    background: #83b0ca url(images/ui-bg_highlight-soft_100_83b0ca_1x100.png) repeat-x top;
+    background: #83b0ca url(images/artisto/ui-bg_highlight-soft_100_83b0ca_1x100.png) repeat-x top;
     border-color: #8ab0c6;
     /*
     background: #85b2cb linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
@@ -1959,7 +1959,7 @@ button.ui-button::-moz-focus-inner
 
 .ui-datepicker-calendar thead
 {
-    /*background: #c0c0c0 url(images/ui-bg_highlight-soft_100_c0c0c0_1x100.png) repeat-x top;*/
+    /*background: #c0c0c0 url(images/artisto/ui-bg_highlight-soft_100_c0c0c0_1x100.png) repeat-x top;*/
     color: #545454;
     text-shadow: 1px 1px 0 rgba(255,255,255,0.50);
     border-bottom: solid 1px #aaaeb6;
@@ -2146,7 +2146,7 @@ button.ui-button::-moz-focus-inner
 }
 .ui-progressbar .ui-widget-header
 {
-    background: #83b0ca url(images/ui-bg_highlight-soft_100_83b0ca_1x100.png) repeat-x top;
+    background: #83b0ca url(images/artisto/ui-bg_highlight-soft_100_83b0ca_1x100.png) repeat-x top;
     border-color: #8ab0c6;
     /*background: #85b2cb linear-gradient(top, rgba(255,255,255,0.8), rgba(255,255,255,0));
     background: #85b2cb -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.8)), to(rgba(255,255,255,0)));
@@ -2243,7 +2243,7 @@ border:solid 1px #3f70b9;
 -moz-box-shadow:none;
 -webkit-box-shadow:none;
 box-shadow:none;
-background:transparent url(images/vertical-menu-item.png) repeat-x top;
+background:transparent url(images/artisto/vertical-menu-item.png) repeat-x top;
 color:#fff;
 text-shadow:1px 1px 1px #333;
 -moz-borer-radius:0;
@@ -2350,7 +2350,7 @@ border-color:#5f83b9;
 .wijmo-wijmenu-child .wijmo-wijmenu-link.ui-state-hover .ui-icon,.wijmo-wijmenu-child .wijmo-wijmenu-link.ui-state-active .ui-icon {
 width:16px;
 height:16px;
-background-image:url(images/ui-icons_ffffff_256x240.png);
+background-image:url(images/artisto/ui-icons_ffffff_256x240.png);
 }
 
 .wijmo-wijcombobox-input {
@@ -2373,7 +2373,7 @@ box-shadow:0 1px 1px rgba(0,0,0,0.25);
 }
 
 .wijmo-wijsuperpanel-vbarcontainer .wijmo-wijsuperpanel-handle {
-background:url(images/scrollbar-vertical.png) repeat-y left;
+background:url(images/artisto/scrollbar-vertical.png) repeat-y left;
 -moz-border-radius:12px;
 -webkit-border-radius:12px;
 border-radius:12px;
@@ -2384,7 +2384,7 @@ margin:-5px 0;
 }
 
 .wijmo-wijsuperpanel-hbarcontainer .wijmo-wijsuperpanel-handle {
-background:url(images/scrollbar-horizontal.png) repeat-x top;
+background:url(images/artisto/scrollbar-horizontal.png) repeat-x top;
 -moz-border-radius:12px;
 -webkit-border-radius:12px;
 border-radius:12px;
@@ -2413,7 +2413,7 @@ display:none;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-vbarcontainer .wijmo-wijsuperpanel-vbar-buttontop {
-background:url(images/scroller-up-arrow.png) no-repeat top;
+background:url(images/artisto/scroller-up-arrow.png) no-repeat top;
 border:none;
 height:25px;
 -moz-box-shadow:none;
@@ -2423,11 +2423,11 @@ width:18px;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-vbarcontainer .wijmo-wijsuperpanel-vbar-buttontop.ui-state-hover {
-background:url(images/scroller-up-arrow_hover.png) no-repeat top;
+background:url(images/artisto/scroller-up-arrow_hover.png) no-repeat top;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-vbarcontainer .wijmo-wijsuperpanel-vbar-buttonbottom {
-background:url(images/scroller-down-arrow.png) no-repeat bottom;
+background:url(images/artisto/scroller-down-arrow.png) no-repeat bottom;
 height:25px;
 border:none;
 -moz-box-shadow:none;
@@ -2437,11 +2437,11 @@ width:18px;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-vbarcontainer .wijmo-wijsuperpanel-vbar-buttonbottom.ui-state-hover {
-background:url(images/scroller-down-arrow_hover.png) no-repeat top;
+background:url(images/artisto/scroller-down-arrow_hover.png) no-repeat top;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-hbarcontainer .wijmo-wijsuperpanel-hbar-buttonleft {
-background:url(images/scroller-left-arrow.png) no-repeat left;
+background:url(images/artisto/scroller-left-arrow.png) no-repeat left;
 width:25px;
 border:none;
 -moz-box-shadow:none;
@@ -2451,11 +2451,11 @@ height:18px;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-hbarcontainer .wijmo-wijsuperpanel-hbar-buttonleft.ui-state-hover {
-background:url(images/scroller-left-arrow_hover.png) no-repeat top;
+background:url(images/artisto/scroller-left-arrow_hover.png) no-repeat top;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-hbarcontainer .wijmo-wijsuperpanel-hbar-buttonright {
-background:url(images/scroller-right-arrow.png) no-repeat right;
+background:url(images/artisto/scroller-right-arrow.png) no-repeat right;
 width:25px;
 border:none;
 -moz-box-shadow:none;
@@ -2465,7 +2465,7 @@ height:18px;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-hbarcontainer .wijmo-wijsuperpanel-hbar-buttonright.ui-state-hover {
-background:url(images/scroller-right-arrow_hover.png) no-repeat top;
+background:url(images/artisto/scroller-right-arrow_hover.png) no-repeat top;
 }
 
 .wijmo-wijsuperpanel .wijmo-wijsuperpanel-vbarcontainer .wijmo-wijsuperpanel-vbar-buttonbottom .ui-icon {
@@ -2635,7 +2635,7 @@ box-shadow:none;
 }
 
 .wijmo-wijmenu-ipod .wijmo-wijmenu-item .wijmo-wijmenu-link.ui-state-hover .ui-icon,.wijmo-wijtooltip-close .ui-icon {
-background-image:url(images/ui-icons_ffffff_256x240.png);
+background-image:url(images/artisto/ui-icons_ffffff_256x240.png);
 }
 
 .wijmo-wijmenu .wijmo-wijmenu-child,.wijmo-dropdown,.wijmo-wijgrid-filterlist {
@@ -2688,7 +2688,7 @@ div.wijmo-wijcalendar table.wijmo-wijcalendar-mygrid
 }
 div.wijmo-wijribbon .ui-icon, .wijmo-wijribbon-abbrevicon, div.wijmo-wijribbon-simple span.ui-icon, .wijmo-wijribbon .wijmo-wijribbon-group .ui-button:hover .ui-icon, div.wijmo-wijribbon-modes span.ui-icon, .wijmo-wijribbon-group .wijmo-wijribbon-abbrevgroup:hover .ui-icon, .wijmo-wijribbon-group .wijmo-wijribbon-abbrevgroup:hover .wijmo-wijribbon-abbrevicon
 {
-    background-image: url("images/wijmo-ui-icons_000000_240x112.png");
+    background-image: url("images/artisto/wijmo-ui-icons_000000_240x112.png");
 }
 
 .wijmo-wijinput .wijmo-wijinput-input
