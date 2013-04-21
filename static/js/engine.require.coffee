@@ -158,7 +158,7 @@ EngineFactory = Class.$extend(
     ko.applyBindings viewModel
     viewModel.prepare_form()
     @engine_factory.editor.load()
-    $('#accordion').accordion accordionOptions
+    $('#accordion').wijaccordion accordionOptions
     viewModel.load_history()
 
   load_threads: ->

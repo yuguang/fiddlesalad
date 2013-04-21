@@ -100,7 +100,7 @@
     </script>
 
     <script id="fiddleAccordion" type="text/html">
-        <h3><a href="#">Project</a></h3>
+        <h3>Project</h3>
         <div id="projectConfiguration">
             <p class="clearfix">
                 <label>Add Resource: </label><input id="resourceInput" class="thin left" data-bind="autoComplete: {autoFocus: false}, optionsSource: packages, autocompleteValue: newResourceText, optionsText: 'name', optionsValue: 'url', value: newResourceText" placeholder="Search/Paste URL" />
@@ -117,7 +117,7 @@
                 </a>
             </p>
         </div>
-        <h3><a href="#">Import</a></h3>
+        <h3>Import</h3>
         <div id="templateConfiguration">
             <!-- ko if: compatibleLanguages() -->
             <p class="clearfix">
@@ -138,7 +138,7 @@
                 <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
             </ul>
         </div>
-        <h3><a href="#">Tools</a></h3>
+        <h3>Tools</h3>
         <div id="webDevelopmentTools">
             <p class="clickable" onclick="window.open('/')">
                 <span class="left ui-icon ui-icon-home"></span>
@@ -220,11 +220,11 @@
             </p>
         </div>
         </div>
-        <h3><a href="#">Popular</a></h3>
+        <h3>Popular</h3>
         <div>
             {% chunk "featured_fiddles" %}
         </div>
-        <h3><a href="#">Links</a></h3>
+        <h3>Links</h3>
         <div>
             <p><a class="link" href="http://blog.fiddlesalad.com/">Blog</a></p>
             <p><a class="link" href="http://www.facebook.com/pages/Fiddle-Salad/433836646631748">Facebook Fan Page</a></p>
