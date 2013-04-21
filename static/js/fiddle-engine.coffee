@@ -951,8 +951,8 @@ ColumnLayout = Class.$extend(
       frames = new Array(frames)
     for frame in frames
       frame.set_size(
-        width: @column_width,
-        height: @document_height/frames.length
+        width: @column_width - frame.get_padding(),
+        height: @document_height/frames.length - frame.get_padding()
       )
       if @frames.length > 0
         frame.set_location_relative_to _.last(@frames)

@@ -80,6 +80,7 @@ Frame = VisualComponent.$extend(
     @dimension =
       width: 0
       height: 0
+    @padding = 4
     @location =
       x: 0
       y: 0
@@ -92,6 +93,9 @@ Frame = VisualComponent.$extend(
     if title is 'Result'
       @buttons.pin = true
       @buttons.refresh = true
+
+  get_padding: ->
+    @padding
 
   get_size: ->
     @dimension
@@ -106,10 +110,10 @@ Frame = VisualComponent.$extend(
     @location = point
 
   getAlignmentX: ->
-    @dimension.width + @location.x
+    @dimension.width + @location.x + @get_padding()
 
   getAlignmentY: ->
-    @dimension.height + @location.y
+    @dimension.height + @location.y + @get_padding()
 
   set_location_relative_to: (frame) ->
     viewport_bottom = getDocumentHeight()
