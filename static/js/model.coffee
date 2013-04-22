@@ -6,9 +6,9 @@ unless view_model.newFiddle
     tags: $('[name=keywords]').attr('content')
 else
   $.extend view_model,
-    title: ''
-    description: ''
-    tags: ''
+    title: 'abc abc abc'
+    description: 'As an extension to CSS, LESS is not only backwards compatible with CSS, but the extra features it adds use existing CSS syntax. This makes learning LESS a breeze, and if in doubt, lets you fall back to CSS.'
+    tags: 'abc'
 root.snippetModel = ko.mapping.fromJS(view_model)
 
 LocalHistory = Class.$extend(
@@ -104,6 +104,17 @@ ViewModel = Class.$extend(
       return
     if _.all(@title().split(' '), (word) -> word.length < 3)
       @formMessage 'title contains invalid words'
+      return
+    profanity = false
+    $.ajax(
+      url: [ajax_url, '/ajax/checkprofanity.php?q=', @title(), ' ', @description()].join('')
+      success: (result) ->
+        if JSON.parse(result).response is 'true'
+          profanity = true
+      async: false
+    )
+    if profanity
+      @formMessage 'no profanity allowed'
       return
     if @spellcheck
       $('.check-spelling').spellchecker(
