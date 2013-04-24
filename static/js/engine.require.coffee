@@ -41,8 +41,6 @@ CodeCompleteEditor = Editor.$extend(
         @popupAutocomplete('', true)
       "Tab": =>
         @selectAutocomplete()
-      "Enter": =>
-        @selectAutocomplete()
       "Esc": =>
         @removeAutocomplete()
 
