@@ -144,14 +144,14 @@ PythonFactory = Class.$extend(
       value: ''
 )
 EmbeddedPythonFactory = PythonFactory.$extend(
-  adjust_layout: ->
+  layout: ->
+    $('body').layout(
+      applyDefaultStyles: true
+      north__initClosed: true
+      east__initClosed: true
+      west__initClosed: true
+    )
     $('#run_button').clone().insertBefore('#console').addClass 'right'
-
-  get_layout: ->
-    applyDefaultStyles: true
-    north__initClosed: true
-    east__initClosed: true
-    west__initClosed: true
 )
 root.engine = EngineFactory((->
   if embedded

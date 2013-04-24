@@ -6,9 +6,9 @@ unless view_model.newFiddle
     tags: $('[name=keywords]').attr('content')
 else
   $.extend view_model,
-    title: 'abc abc abc'
-    description: 'As an extension to CSS, LESS is not only backwards compatible with CSS, but the extra features it adds use existing CSS syntax. This makes learning LESS a breeze, and if in doubt, lets you fall back to CSS.'
-    tags: 'abc'
+    title: ''
+    description: ''
+    tags: ''
 root.snippetModel = ko.mapping.fromJS(view_model)
 
 LocalHistory = Class.$extend(
