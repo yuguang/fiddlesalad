@@ -6,7 +6,6 @@ Editor = Class.$extend(
 
   load: ->
     @pad = CodeMirror.fromTextArea(document.getElementById(@id), _.defaults(@get_options(), defaultEditor))
-    $(@codeMirrorContainer).click => @focus()
 
   keyHandler: (i, e) ->
     if e.keyCode is 13 and e.ctrlKey

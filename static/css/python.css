@@ -111,6 +111,10 @@ div.toolbar, .title {
     padding: .4em;
 }
 
+.CodeMirror, .CodeMirror-scroll {
+    height: 100%;
+}
+
 /*
 
 #revisionsMenu input + label {
