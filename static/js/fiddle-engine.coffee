@@ -375,6 +375,9 @@ serverCompiler =
       # call execute in shorter intervals
         @executeThrottledShort()
 
+  displayError: (message, settings) ->
+    @$super message, {text: message, timeout: 25000}
+
   markError: (error) ->
     linePattern = /line\s(\d+)/
     columnPattern = /column\s(\d+)/
@@ -434,7 +437,7 @@ serverCompiler =
     else
       @executeThrottled()
 
-RubyCompiler = StyleEditor.$extend(
+SassCompiler = StyleEditor.$extend(
   __init__: (id) ->
     @$super id
     @loadThrottledExecution()
@@ -444,9 +447,6 @@ RubyCompiler = StyleEditor.$extend(
 
   markError: ->
 
-  displayError: (message, settings) ->
-    @$super message, {text: message, timeout: 25000}
-
   previewCode: (code) ->
     @$super viewModel.reindentCss(code)
 
@@ -455,24 +455,29 @@ RubyCompiler = StyleEditor.$extend(
     converter = CssConverter('cssConverter')
     converter.set_editor @
 )
-HamlEditor = RubyCompiler.$extend(
+HamlEditor = DocumentEditor.$extend(
   __init__: (id) ->
     @$super id
+    @loadThrottledExecution()
     @mode = name: 'haml'
     @documentationUrl = base_url + '/files/documentation/haml.html'
+
+  __include__: [serverCompiler]
+
+  markError: ->
 
   load: ->
     @$super()
     converter = HtmlConverter('htmlConverter')
     converter.set_editor @
 )
-SassEditor = RubyCompiler.$extend(
+SassEditor = SassCompiler.$extend(
   __init__: (id) ->
     @$super id
     @mode = name: 'sass'
     @documentationUrl = base_url + '/files/documentation/sass.html'
 )
-ScssEditor = RubyCompiler.$extend(
+ScssEditor = SassCompiler.$extend(
   __init__: (id) ->
     @$super id
     @mode = name: 'scss'
