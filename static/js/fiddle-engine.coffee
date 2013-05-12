@@ -703,7 +703,7 @@ FiddleEditor = Class.$extend(
     viewModel.containers @layoutFrames()
     $('#viewer').appendTo('#result').show()
     root.codeRunner = CodeRunner()
-    viewModel.add_resource(if debug then base_url + '/js/jquery-1.7.1.js' else 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+    viewModel.add_resource(if debug then base_url + '/js/jquery-2.0.0.js' else 'http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
 
     @styleEditor.load()
     @documentEditor.load()
@@ -753,6 +753,7 @@ FiddleEditor = Class.$extend(
       else
         @codeStorage.set_file code
         viewModel.resources []
+        codeRunner.scripts = []
         resources = @codeStorage.get_code(LANGUAGE_TYPE.RESOURCE)
         unless resources is '[]'
           _.each ko.utils.parseJson(resources), (resource) ->
