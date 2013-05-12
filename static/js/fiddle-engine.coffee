@@ -823,7 +823,7 @@ FiddleEditor = Class.$extend(
     previewFrame = Frame 'source', 'Source'
     tabs = TabInterface 'source-tab'
     preview = IframeComponent @id.css
-    preview.set_source if debug then base_url + '/files/csspreviewer.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2012050220'
+    preview.set_source if debug then base_url + '/files/csspreviewer.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013051208'
     index = tabs.add 'css', preview.to_html_string()
     @styleEditor.set_focus_listener PreviewListener('source', index)
 
