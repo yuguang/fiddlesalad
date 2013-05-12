@@ -972,6 +972,7 @@ CodeRunner = Class.$extend(
     @window = (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
     @initialized = false
     @scripts = [base_url + '/js/prettyprint.js']
+    @delayed_styles = []
     @template =
       css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
       js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
@@ -1006,6 +1007,8 @@ CodeRunner = Class.$extend(
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
     return  unless @initialized
+    while style = @delayed_styles.pop()
+      @add_css style
     @style.innerHTML = StyleFix.fix(css)
 
   initialize: ->
@@ -1024,11 +1027,14 @@ CodeRunner = Class.$extend(
     @scripts.push source
 
   add_css: (source) ->
-    style = @window.document.createElement('link')
-    style.rel = 'stylesheet'
-    style.type = 'text/css'
-    style.href = source
-    @window.document.getElementsByTagName('head')[0].appendChild style
+    if not @initialized
+      @delayed_styles.push source
+    else
+      style = @window.document.createElement('link')
+      style.rel = 'stylesheet'
+      style.type = 'text/css'
+      style.href = source
+      @window.document.getElementsByTagName('head')[0].appendChild style
 
   add_file: (source) ->
     switch @filetype(source)
