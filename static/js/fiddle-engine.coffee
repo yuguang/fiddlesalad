@@ -700,6 +700,7 @@ FiddleEditor = Class.$extend(
     @registerKeyboardShortcut @id.style, @styleEditor, @getKeyboardShortcut(@settings.get_language(LANGUAGE_TYPE.STYLE))
     @registerKeyboardShortcut @id.program, @programEditor, @getKeyboardShortcut(@settings.get_language(LANGUAGE_TYPE.PROGRAM))
 
+    $('#projectConfiguration').css('max-height', $(window).height() - 175 - 28)
     viewModel.containers @layoutFrames()
     $('#viewer').appendTo('#result').show()
     root.codeRunner = CodeRunner()
