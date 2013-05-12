@@ -1010,7 +1010,6 @@ CodeRunner = Class.$extend(
         @executedScripts = @executedScripts.concat(newScripts)
       else
         script.text = [ '(function() {', javascript, '})();' ].join('')
-      console.log script.text
       @body.appendChild script
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->

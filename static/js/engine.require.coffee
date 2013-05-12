@@ -60,6 +60,10 @@ CodeCompleteEditor = Editor.$extend(
 
   get_code_complexity: ->
     @editCount
+
+  load: ->
+    @$super()
+    $(@codeMirrorContainer).click => @removeAutocomplete()
     
   get_options: ->
     mode: @mode
@@ -88,10 +92,6 @@ CodeCompleteEditor = Editor.$extend(
   changeHandler: ->
     
   selectionHandler: ->
-
-  focus: ->
-    @$super()
-    @removeAutocomplete()
 
   keyHandler: (editor, event) ->
     if event.keyCode is 13 and event.type is 'keydown' # Enter is not captured on keypress
