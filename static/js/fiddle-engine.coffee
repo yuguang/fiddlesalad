@@ -375,9 +375,6 @@ serverCompiler =
       # call execute in shorter intervals
         @executeThrottledShort()
 
-  displayError: (message, settings) ->
-    @$super message, {text: message, timeout: 25000}
-
   markError: (error) ->
     linePattern = /line\s(\d+)/
     columnPattern = /column\s(\d+)/
@@ -407,7 +404,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['/',  @mode.name, '/compile/'].join('')
+      ['http://fiddlesalad.com/',  @mode.name, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -446,6 +443,9 @@ SassCompiler = StyleEditor.$extend(
   __include__: [serverCompiler]
 
   markError: ->
+
+  displayError: (message, settings) ->
+    @$super message, {text: message, timeout: 25000}
 
   previewCode: (code) ->
     @$super viewModel.reindentCss(code)
