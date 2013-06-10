@@ -70,6 +70,7 @@ PythonFactory = Class.$extend(
       c
 
   load_threads: (finishedLoadingCallback) ->
+    return  if not Worker?
     @worker = new Worker(@get_executable())
     @worker.onmessage = (event) ->
       messageType = event.data.type
