@@ -64,6 +64,8 @@ CodeCompleteEditor = Editor.$extend(
   load: ->
     @$super()
     $(@codeMirrorContainer).click => @removeAutocomplete()
+    if bowser.firefox
+      @removeAutocomplete()
     
   get_options: ->
     mode: @mode
