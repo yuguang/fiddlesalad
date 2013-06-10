@@ -13,6 +13,18 @@ function popup(url) {
     return false;
 }
 
+window.onerror = function(errorMessage, url, line) {
+  var loggerUrl = "http://yuguangzhang.com/home/ajax/logger.php";
+  var parameters = "?description=" + encodeURIComponent(errorMessage)
+      + "&url=" + encodeURIComponent(url)
+      + "&line=" + encodeURIComponent(line)
+      + "&parent_url=" + encodeURIComponent(document.location.href)
+      + "&user_agent=" + encodeURIComponent(navigator.userAgent);
+ 
+  /** Send error to server */
+  new Image().src = loggerUrl + parameters;
+};
+
 function prefetchImport(script) {
     var code = script || ((typeof engine !== 'undefined') && engine.get_code());
     // if the keword import is not used, return
