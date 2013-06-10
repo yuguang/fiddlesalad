@@ -37,8 +37,8 @@ def scrape(request):
                 scriptType = script.get('type', None)
                 if not scriptType or scriptType is 'text/javascript':
                     inlineJavascriptBlocks.append(script.string)
-    except urllib2.HTTPError, error:
-        response_dict.update({'error': error.message})
+    except urllib2.HTTPError:
+        response_dict.update({'error': 'HTTP Error 404: Not Found'})
     except HTMLParseError:
         response_dict.update({'error': 'malformed HTML'})
     except urllib2.URLError:
