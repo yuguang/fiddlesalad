@@ -439,50 +439,54 @@ FiddleViewModel = ViewModel.$extend(
     $.getJSON '/utility/import/',
       url: @importUrl(),
       (scrapedContents) =>
-        # add all resources
-        for resource in scrapedContents.resources
-          @add_resource absolutePath(resource)
-        @disableLint()
-        urlAdjustedCssBlocks = _.map(scrapedContents.inlineCssBlocks,
-          (cssBlock) ->
-            urlFunctionPattern = /url\([\w\-_\/.]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?\)/g
-            cssBlock.replace(urlFunctionPattern,
-              (url) ->
-                # adjust relative url paths
-                urlPath = absolutePath url.slice(4, url.length - 1).replace(/"|'/g, '')
-                "url(#{ urlPath })"
-            )
-        )
-        # set style code with all inline styles joined together
-        engine.set_code urlAdjustedCssBlocks.join('\n'), LANGUAGE_TYPE.STYLE
-        # remove all style and link tags in body
-        body = atob(scrapedContents.body)
-        body = @replaceInlineBlocks(body, scrapedContents.inlineCssBlocks)
-        body = body.replace(/<style[^>]*>[\s\S]*?<\/style>|<link[^>]*>/gi, '')
-        # if program language is compatible with JS
-        if @programLanguage() in COMPATIBLE_LANGUAGES.JAVASCRIPT
-          # remove all script tags in body
-          body = @replaceInlineBlocks(body, scrapedContents.inlineJavascriptBlocks)
-          body = body.replace(/(?:<script>|<script[\s]+src[^>]*>|<script[\s\w="']+text\/javascript[^>]*>)[\s\S]*?<\/script>/gi, '') # don't remove templates
-          # remove body tags
-          body = body.replace(/<body[^>]*>|<\/body>/gi, '')
-          # adjust relative urls
-          relativeUrlPattern = /(src|href|action)\s*=\s*('|"|(?!"|'))(?!(http:|ftp:|mailto:|https:|#))[\w\-\.,@?^=%&amp;:/~\+#]+('|")/gi
-          body = body.replace(relativeUrlPattern,
-            (link) ->
-              urlPath = absolutePath link.slice(link.indexOf('=') + 2, link.length - 1) # get the value of the path between quotes (eg script.js for src="script.js")
-              "#{ link.slice(0, link.indexOf('=') + 1) }\"#{ urlPath }\""
+        if scrapedContents.success
+          # add all resources
+          for resource in scrapedContents.resources
+            @add_resource absolutePath(resource)
+          @disableLint()
+          urlAdjustedCssBlocks = _.map(scrapedContents.inlineCssBlocks,
+            (cssBlock) ->
+              urlFunctionPattern = /url\([\w\-_\/.]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?\)/g
+              cssBlock.replace(urlFunctionPattern,
+                (url) ->
+                  # adjust relative url paths
+                  urlPath = absolutePath url.slice(4, url.length - 1).replace(/"|'/g, '')
+                  "url(#{ urlPath })"
+              )
           )
-          # set document code
-          engine.set_code body, LANGUAGE_TYPE.DOCUMENT
-          # set program code with all inline scripts joined together
-          inlineScripts = _.reject scrapedContents.inlineJavascriptBlocks, (block) ->
-            /google-analytics|UA-/g.test block
-          engine.set_code inlineScripts.join('\n'), LANGUAGE_TYPE.PROGRAM
-        # otherwise
+          # set style code with all inline styles joined together
+          engine.set_code urlAdjustedCssBlocks.join('\n'), LANGUAGE_TYPE.STYLE
+          # remove all style and link tags in body
+          body = atob(scrapedContents.body)
+          body = @replaceInlineBlocks(body, scrapedContents.inlineCssBlocks)
+          body = body.replace(/<style[^>]*>[\s\S]*?<\/style>|<link[^>]*>/gi, '')
+          # if program language is compatible with JS
+          if @programLanguage() in COMPATIBLE_LANGUAGES.JAVASCRIPT
+            # remove all script tags in body
+            body = @replaceInlineBlocks(body, scrapedContents.inlineJavascriptBlocks)
+            body = body.replace(/(?:<script>|<script[\s]+src[^>]*>|<script[\s\w="']+text\/javascript[^>]*>)[\s\S]*?<\/script>/gi, '') # don't remove templates
+            # remove body tags
+            body = body.replace(/<body[^>]*>|<\/body>/gi, '')
+            # adjust relative urls
+            relativeUrlPattern = /(src|href|action)\s*=\s*('|"|(?!"|'))(?!(http:|ftp:|mailto:|https:|#))[\w\-\.,@?^=%&amp;:/~\+#]+('|")/gi
+            body = body.replace(relativeUrlPattern,
+              (link) ->
+                urlPath = absolutePath link.slice(link.indexOf('=') + 2, link.length - 1) # get the value of the path between quotes (eg script.js for src="script.js")
+                "#{ link.slice(0, link.indexOf('=') + 1) }\"#{ urlPath }\""
+            )
+            # set document code
+            engine.set_code body, LANGUAGE_TYPE.DOCUMENT
+            # set program code with all inline scripts joined together
+            inlineScripts = _.reject scrapedContents.inlineJavascriptBlocks, (block) ->
+              /google-analytics|UA-/g.test block
+            engine.set_code inlineScripts.join('\n'), LANGUAGE_TYPE.PROGRAM
+          # otherwise
+          else
+            # set document code
+            engine.set_code body, LANGUAGE_TYPE.DOCUMENT
         else
-          # set document code
-          engine.set_code body, LANGUAGE_TYPE.DOCUMENT
+          @importUrl.hasError(true)
+          @importUrl.validationMessage(scrapedContents.error)
 
   replaceInlineBlocks: (body, blocks) ->
     for block in blocks

@@ -1029,7 +1029,11 @@ CodeRunner = Class.$extend(
 
   filetype: (path) ->
     filePattern = /(css|js)$/
-    path.match(filePattern)[0]
+    if path.match(filePattern)
+      path.match(filePattern)[0]
+    else
+      filePattern = /(css|js)/
+      path.match(filePattern)[0]
 
   add_javascript: (source) ->
     @scripts.push source
