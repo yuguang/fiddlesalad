@@ -28,7 +28,6 @@ PythonFactory = Class.$extend(
     code = document.getElementById('editor').value
     prefetchImport(code) if code
     @editor = PythonOnlyEditor('editor')
-    @display_browser_warning()
     @lastExecute = new Date()
     @executeInterval = 50
     @substituteLoaded = false
@@ -39,7 +38,11 @@ PythonFactory = Class.$extend(
     return  if bowser.firefox and bowser.version >= 4
     return  if bowser.safari and bowser.version >= 5
     return  if bowser.msie and bowser.version >= 10
-    alert 'You are using an unsupported browser.\nTry Chrome 10+, Firefox 4+, Safari 5+.'
+    $('#browserDialog').dialog(modal: true, width:'auto', create: ->
+      $('#fallback-ignore').click( ->
+        $('#browserDialog').dialog('close')
+      )
+    )
 
   substitute_worker: ->
     window.Worker = (a) ->
@@ -113,6 +116,7 @@ PythonFactory = Class.$extend(
       applyDefaultStyles: true
       north__size: 122
     ).allowOverflow 'north'
+    @display_browser_warning()
 
   get_view_model: ->
     PythonViewModel()
