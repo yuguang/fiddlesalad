@@ -1,193 +1,330 @@
-CodeMirror.defineMode("sass", function (config) {
-    var indentUnit = config.indentUnit,
-        type;
+CodeMirror.defineMode("sass", function(config) {
+  var tokenRegexp = function(words){
+    return new RegExp("^" + words.join("|"));
+  };
 
-    function ret(style, tp) {
-        type = tp;
-        return style;
+  var keywords = ["true", "false", "null", "auto"];
+  var keywordsRegexp = new RegExp("^" + keywords.join("|"));
+
+  var operators = ["\\(", "\\)", "=", ">", "<", "==", ">=", "<=", "\\+", "-", "\\!=", "/", "\\*", "%", "and", "or", "not"];
+  var opRegexp = tokenRegexp(operators);
+
+  var pseudoElementsRegexp = /^::?[\w\-]+/;
+
+  var urlTokens = function(stream, state){
+    var ch = stream.peek();
+
+    if (ch === ")"){
+      stream.next();
+      state.tokenizer = tokenBase;
+      return "operator";
+    }else if (ch === "("){
+      stream.next();
+      stream.eatSpace();
+
+      return "operator";
+    }else if (ch === "'" || ch === '"'){
+      state.tokenizer = buildStringTokenizer(stream.next());
+      return "string";
+    }else{
+      state.tokenizer = buildStringTokenizer(")", false);
+      return "string";
     }
-        
-	function wordRegexp(words) {
-        return new RegExp("^((" + words.join(")|(") + "))\\b");
-    }
-
-    //html5 tags
-    var defines = wordRegexp(["@mixin", "@include", "@import", "@media", "@extend", "@debug", "@warn"]);
-    var keywords = wordRegexp(["@if", "@for", "@each", "@while"]);
-    
-    var tags = KEYWORDS.HTML_TAGS;
-
-	function inTagsArray(val) {
-		for(var i = 0; i < tags.length; i++) {
-			if(val === tags[i]) {
-				return true;
-			}
-		}
-	}
-	
-    var partialCssProperties = []; 
-    
-    _.each(
-    	KEYWORDS.CSS_PROPERTIES,
-    	function (keyword) {
-    		var dashIndex = keyword.lastIndexOf('-');
-    		if (dashIndex > -1) {
-    			partialCssProperties.push(keyword.slice(dashIndex+1, keyword.length));
-    		} 
-    	}
-    );
-    
-    var cssProperties = wordRegexp(KEYWORDS.CSS_PROPERTIES.concat(partialCssProperties));
-
-    function tokenBase(stream, state) {
-    	if (stream.match(defines)) {
-	    	return "def";
-    	} else if (stream.match(keywords)) {
-    		return "keyword";
-    	} else if (stream.match(cssProperties)) {
-			return 'variable';
-		}
-    	
-    	
-        var ch = stream.next();
-
-        if (ch == "$") {
-            stream.eatWhile(/[\w\-]/);
-            return ret("meta", stream.current());
-        } else if (ch == "/" && stream.eat("*")) {
-            state.tokenize = tokenCComment;
-            return tokenCComment(stream, state);
-        } else if (ch == "<" && stream.eat("!")) {
-            state.tokenize = tokenSGMLComment;
-            return tokenSGMLComment(stream, state);
-        } else if (ch == "=") ret(null, "compare");
-        else if ((ch == "~" || ch == "|") && stream.eat("=")) return ret(null, "compare");
-        else if (ch == "\"" || ch == "'") {
-            state.tokenize = tokenString(ch);
-            return state.tokenize(stream, state);
-        } else if (ch == "/") { // lesscss e.g.: .png will not be parsed as a class
-            if (stream.eat("/")) {
-                state.tokenize = tokenSComment
-                return tokenSComment(stream, state);
-            } else {
-                stream.eatWhile(/[\a-zA-Z0-9\-_.]/);
-                if (stream.peek() == ")" || stream.peek() == "/") return ret("string", "string"); //let url(/images/logo.png) without quotes return as string
-                return ret("number", "unit");
-            }
-        } else if (ch == "!") {
-            stream.match(/^\s*\w*/);
-            return ret("keyword", "important");
-        } else if (/\d/.test(ch)) {
-            stream.eatWhile(/[\w.%]/);
-            return ret("number", "unit");
-        } else if (/[,+>*\/]/.test(ch)) { //removed . dot character original was [,.+>*\/]
-            return ret(null, "select-op");
-        } else if (/[;{}:\[\]()]/.test(ch)) { //added () char for lesscss original was [;{}:\[\]]
-            if (ch == ":") {
-                stream.eatWhile(/[active|hover|link|visited]/);
-                if (stream.current().match(/active|hover|link|visited/)) {
-                    return ret("tag", "tag");
-                } else {
-                    return ret(null, ch);
-                }
-            } else {
-                return ret(null, ch);
-            }
-        } else if (ch == ".") { // lesscss
-            stream.eatWhile(/[\a-zA-Z0-9\-_]/);
-            return ret("tag", "tag");
-        } else if (ch == "#") { // lesscss
-            stream.match(/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/);
-            if (stream.current().length > 1) {
-                if (stream.current().match(/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/) != null) {
-                    return ret("number", "unit");
-                } else {
-                    stream.eatWhile(/[\w\-]/);
-                    return ret("atom", "tag");
-                }
-            } else {
-                stream.eatWhile(/[\w\-]/);
-                return ret("atom", "tag");
-            }
-        } else if (ch == "&") {
-            stream.eatWhile(/[\w\-]/);
-            return ret(null, ch);
-        } else {
-            stream.eatWhile(/[\w\\\-_.%]/);
-            if (stream.eat("(")) { // lesscss
-                return ret(null, ch);
-            } else if (stream.current().match(/\-\d|\-.\d/)) { // lesscss match e.g.: -5px -0.4 etc...
-                return ret("number", "unit");
-            } else if(inTagsArray(stream.current())) { // lesscss match html tags
-                return ret("tag", "tag");
-            } else if ((stream.peek() == ")" || stream.peek() == "/") && stream.current().indexOf('.') !== -1) {
-                return ret("string", "string"); //let url(logo.png) without quotes and froward slash return as string
-            } else {
-                return ret("variable", "variable");
-            }
-        }
-
+  };
+  var multilineComment = function(stream, state) {
+    if (stream.skipTo("*/")){
+      stream.next();
+      stream.next();
+      state.tokenizer = tokenBase;
+    }else {
+      stream.next();
     }
 
-    function tokenSComment(stream, state) { // SComment = Slash comment
-        stream.skipToEnd();
-        state.tokenize = tokenBase;
-        return ret("comment", "comment");
+    return "comment";
+  };
+
+  var buildStringTokenizer = function(quote, greedy){
+    if(greedy == null){ greedy = true; }
+
+    function stringTokenizer(stream, state){
+      var nextChar = stream.next();
+      var peekChar = stream.peek();
+      var previousChar = stream.string.charAt(stream.pos-2);
+
+      var endingString = ((nextChar !== "\\" && peekChar === quote) || (nextChar === quote && previousChar !== "\\"));
+
+      /*
+      console.log("previousChar: " + previousChar);
+      console.log("nextChar: " + nextChar);
+      console.log("peekChar: " + peekChar);
+      console.log("ending: " + endingString);
+      */
+
+      if (endingString){
+        if (nextChar !== quote && greedy) { stream.next(); }
+        state.tokenizer = tokenBase;
+        return "string";
+      }else if (nextChar === "#" && peekChar === "{"){
+        state.tokenizer = buildInterpolationTokenizer(stringTokenizer);
+        stream.next();
+        return "operator";
+      }else {
+        return "string";
+      }
     }
 
-    function tokenCComment(stream, state) {
-        var maybeEnd = false,
-            ch;
-        while ((ch = stream.next()) != null) {
-            if (maybeEnd && ch == "/") {
-                state.tokenize = tokenBase;
-                break;
-            }
-            maybeEnd = (ch == "*");
-        }
-        return ret("comment", "comment");
-    }
+    return stringTokenizer;
+  };
 
-    function tokenSGMLComment(stream, state) {
-        var dashes = 0,
-            ch;
-        while ((ch = stream.next()) != null) {
-            if (dashes >= 2 && ch == ">") {
-                state.tokenize = tokenBase;
-                break;
-            }
-            dashes = (ch == "-") ? dashes + 1 : 0;
-        }
-        return ret("comment", "comment");
-    }
-
-    function tokenString(quote) {
-        return function (stream, state) {
-            var escaped = false,
-                ch;
-            while ((ch = stream.next()) != null) {
-                if (ch == quote && !escaped) break;
-                escaped = !escaped && ch == "\\";
-            }
-            if (!escaped) state.tokenize = tokenBase;
-            return ret("string", "string");
-        };
-    }
-
-    return {
-        startState: function (base) {
-            return {
-                tokenize: tokenBase
-            };
-        },
-
-        token: function (stream, state) {
-			if (stream.eatSpace()) {
-            	return null;
-            }
-            return state.tokenize(stream, state);
-        }
+  var buildInterpolationTokenizer = function(currentTokenizer){
+    return function(stream, state){
+      if (stream.peek() === "}"){
+        stream.next();
+        state.tokenizer = currentTokenizer;
+        return "operator";
+      }else{
+        return tokenBase(stream, state);
+      }
     };
+  };
+
+  var indent = function(state){
+    if (state.indentCount == 0){
+      state.indentCount++;
+      var lastScopeOffset = state.scopes[0].offset;
+      var currentOffset = lastScopeOffset + config.indentUnit;
+      state.scopes.unshift({ offset:currentOffset });
+    }
+  };
+
+  var dedent = function(state){
+    if (state.scopes.length == 1) { return; }
+
+    state.scopes.shift();
+  };
+
+  var tokenBase = function(stream, state) {
+    var ch = stream.peek();
+
+    // Single line Comment
+    if (stream.match('//')) {
+      stream.skipToEnd();
+      return "comment";
+    }
+
+    // Multiline Comment
+    if (stream.match('/*')){
+      state.tokenizer = multilineComment;
+      return state.tokenizer(stream, state);
+    }
+
+    // Interpolation
+    if (stream.match('#{')){
+    state.tokenizer = buildInterpolationTokenizer(tokenBase);
+      return "operator";
+    }
+
+    if (ch === "."){
+      stream.next();
+
+      // Match class selectors
+      if (stream.match(/^[\w-]+/)){
+        indent(state);
+        return "atom";
+      }else if (stream.peek() === "#"){
+        indent(state);
+        return "atom";
+      }else{
+        return "operator";
+      }
+    }
+
+    if (ch === "#"){
+      stream.next();
+
+      // Hex numbers
+      if (stream.match(/[0-9a-fA-F]{6}|[0-9a-fA-F]{3}/)){
+        return "number";
+      }
+
+      // ID selectors
+      if (stream.match(/^[\w-]+/)){
+        indent(state);
+        return "atom";
+      }
+
+      if (stream.peek() === "#"){
+        indent(state);
+        return "atom";
+      }
+    }
+
+    // Numbers
+    if (stream.match(/^-?[0-9\.]+/)){
+      return "number";
+    }
+
+    // Units
+    if (stream.match(/^(px|em|in)\b/)){
+      return "unit";
+    }
+
+    if (stream.match(keywordsRegexp)){
+      return "keyword";
+    }
+
+    if (stream.match(/^url/) && stream.peek() === "("){
+      state.tokenizer = urlTokens;
+      return "atom";
+    }
+
+    // Variables
+    if (ch === "$"){
+      stream.next();
+      stream.eatWhile(/[\w-]/);
+
+      if (stream.peek() === ":"){
+        stream.next();
+        return "variable-2";
+      }else{
+        return "variable-3";
+      }
+    }
+
+    if (ch === "!"){
+      stream.next();
+
+      if (stream.match(/^[\w]+/)){
+        return "keyword";
+      }
+
+      return "operator";
+    }
+
+    if (ch === "="){
+      stream.next();
+
+      // Match shortcut mixin definition
+      if (stream.match(/^[\w-]+/)){
+        indent(state);
+        return "meta";
+      }else {
+        return "operator";
+      }
+    }
+
+    if (ch === "+"){
+      stream.next();
+
+      // Match shortcut mixin definition
+      if (stream.match(/^[\w-]+/)){
+        return "variable-3";
+      }else {
+        return "operator";
+      }
+    }
+
+    // Indent Directives
+    if (stream.match(/^@(else if|if|media|else|for|each|while|mixin|function)/)){
+      indent(state);
+      return "meta";
+    }
+
+    // Other Directives
+    if (ch === "@"){
+      stream.next();
+      stream.eatWhile(/[\w-]/);
+      return "meta";
+    }
+
+    // Strings
+    if (ch === '"' || ch === "'"){
+      stream.next();
+      state.tokenizer = buildStringTokenizer(ch);
+      return "string";
+    }
+
+    // Pseudo element selectors
+    if (ch == ':' && stream.match(pseudoElementsRegexp)){
+      return "keyword";
+    }
+
+    // atoms
+    if (stream.eatWhile(/[\w-&]/)){
+      // matches a property definition
+      if (stream.peek() === ":" && !stream.match(pseudoElementsRegexp, false))
+        return "property";
+      else
+        return "atom";
+    }
+
+    if (stream.match(opRegexp)){
+      return "operator";
+    }
+
+    // If we haven't returned by now, we move 1 character
+    // and return an error
+    stream.next();
+    return null;
+  };
+
+  var tokenLexer = function(stream, state) {
+    if (stream.sol()){
+      state.indentCount = 0;
+    }
+    var style = state.tokenizer(stream, state);
+    var current = stream.current();
+
+    if (current === "@return"){
+      dedent(state);
+    }
+
+    if (style === "atom"){
+      indent(state);
+    }
+
+    if (style !== null){
+      var startOfToken = stream.pos - current.length;
+      var withCurrentIndent = startOfToken + (config.indentUnit * state.indentCount);
+
+      var newScopes = [];
+
+      for (var i = 0; i < state.scopes.length; i++){
+        var scope = state.scopes[i];
+
+        if (scope.offset <= withCurrentIndent){
+          newScopes.push(scope);
+        }
+      }
+
+      state.scopes = newScopes;
+    }
+
+
+    return style;
+  };
+
+  return {
+    startState: function() {
+      return {
+        tokenizer: tokenBase,
+        scopes: [{offset: 0, type: 'sass'}],
+        definedVars: [],
+        definedMixins: []
+      };
+    },
+    token: function(stream, state) {
+      var style = tokenLexer(stream, state);
+
+      state.lastToken = { style: style, content: stream.current() };
+
+      return style;
+    },
+
+    indent: function(state) {
+      return state.scopes[0].offset;
+    }
+  };
 });
 
-CodeMirror.defineMIME("text/sass", "sass");
+CodeMirror.defineMIME("text/x-sass", "sass");
