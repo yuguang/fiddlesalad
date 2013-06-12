@@ -806,7 +806,7 @@ FiddleEditor = Class.$extend(
       for documentation in _.filter(editorDocumentation, (tabSetting) -> _.isObject(tabSetting))
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
-      page.set_source base_url + '/files/documentation/jquery/index.html'
+      page.set_source base_url + '/files/documentation/jquery/index.html?v=2013061218'
       tabs.add 'jquery', page.to_html_string()
       frame.add tabs
 
