@@ -237,6 +237,16 @@ RoyEditor = ProgramEditor.$extend(
     @$super()
     @hint = CodeMirror.javascriptHint
 )
+TypescriptEditor = ProgramEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = 'text/typescript'
+    @loadWorker('typescript')
+    @documentationUrl = 'http://www.johnpapa.net/typescriptpost3/'
+
+  get_documentation: ->
+    @$super('typescript')
+)
 DocumentEditor = DynamicEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -1201,5 +1211,5 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor, RoyEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
 root.engine = EngineFactory(FiddleFactory())

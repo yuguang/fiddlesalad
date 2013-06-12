@@ -18,6 +18,7 @@ LANGUAGE = {
     PYTHON: 'python',
     JAVASCRIPT: 'javascript',
     COFFEESCRIPT: 'coffeescript',
+    TYPESCRIPT: 'typescript',
     ROY: 'roy',
     COFFEECUP: 'coffeecup',
     LESS: 'less',
@@ -48,6 +49,7 @@ LANGUAGE_CATEGORY = {
     python: LANGUAGE_TYPE.PROGRAM,
     javascript: LANGUAGE_TYPE.PROGRAM,
     coffeescript: LANGUAGE_TYPE.PROGRAM,
+    typescript: LANGUAGE_TYPE.PROGRAM,
     roy: LANGUAGE_TYPE.PROGRAM,
     html: LANGUAGE_TYPE.DOCUMENT,
     haml: LANGUAGE_TYPE.DOCUMENT,
@@ -65,7 +67,7 @@ LANGUAGE_CATEGORY = {
 COMPATIBLE_LANGUAGES = {
 	CSS: [LANGUAGE.CSS, LANGUAGE.SCSS, LANGUAGE.LESS],
 	HTML: [LANGUAGE.ZENCODING, LANGUAGE.HTML],
-	JAVASCRIPT: [LANGUAGE.JAVASCRIPT]
+	JAVASCRIPT: [LANGUAGE.JAVASCRIPT, LANGUAGE.TYPESCRIPT]
 };
 
 var notyDefaults = {"layout":"topRight","type":"alert","textAlign":"center","easing":"swing","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":"500","timeout":"5000","closable":true,"closeOnSelfClick":true};
