@@ -16,7 +16,7 @@ var autocompleteSelect;
                     removeOldComplete();
                 }
             });
-            return;
+            throw CodeMirror.Pass;
         }
         var completions = result.list;
 

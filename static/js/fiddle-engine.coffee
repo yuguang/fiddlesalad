@@ -129,10 +129,16 @@ StyleEditor = DynamicEditor.$extend(
 LessEditor = StyleEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'less'
+    @mode = 'less'
     @loadWorker('less')
     @documentationUrl = base_url + '/files/documentation/lesscss.html'
     @varStart = '@'
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      profile: 'css'
+    )
 )
 StylusEditor = StyleEditor.$extend(
   __init__: (id) ->
@@ -202,12 +208,18 @@ JavascriptEditor = ProgramEditor.$extend(
 CssEditor = StyleEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'css'
+    @mode = 'css'
     @theme = 'default'
     @loadWorker('csslint')
     @blockEndKeyCode = 125
 
   __include__: [lintEditor]
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      profile: 'css'
+    )
 
   get_documentation: ->
 )
@@ -453,8 +465,14 @@ SassEditor = SassCompiler.$extend(
 ScssEditor = SassCompiler.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'scss'
+    @mode = 'scss'
     @documentationUrl = base_url + '/files/documentation/sass.html'
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      profile: 'css'
+    )
 )
 PythonEditor = ProgramEditor.$extend(
   __init__: (id) ->
