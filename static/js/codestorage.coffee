@@ -4,9 +4,11 @@ Language = Class.$extend(
     @settings = new Object
     #  for each language
     for language in languages
-    #  if the language is in category
-      if LANGUAGE_CATEGORY?[language]
-      #  set language for the category
+      if language is LANGUAGE.ZENCODING
+        @set_language LANGUAGE.HTML, LANGUAGE_TYPE.DOCUMENT
+      #  if the language is in category
+      else if LANGUAGE_CATEGORY?[language]
+        #  set language for the category
         @set_language language, LANGUAGE_CATEGORY[language]
     @settings[LANGUAGE_TYPE.RESOURCE] = LANGUAGE.RESOURCE
     @settings[LANGUAGE_TYPE.COMPILED_PROGRAM] = LANGUAGE.JAVASCRIPT

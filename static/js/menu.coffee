@@ -794,6 +794,8 @@ editor = CodeMirror.fromTextArea(document.getElementById('code'),
 $('.CodeMirror-placeholder').remove()
 
 selectedLanguage = store.get('lastSelectedLanguage')
+if selectedLanguage is LANGUAGE.ZENCODING
+  selectedLanguage = LANGUAGE.HTML
 $('#options input[type="radio"]').click( ->
   selectedLanguage = $(this).val()
 )
