@@ -46,11 +46,11 @@ CodeCompleteEditor = Editor.$extend(
   selectAutocomplete: ->
     position = @pad.getCursor()
     token = @pad.getTokenAt(position)
-    if WORD_TOKEN.test(token.string) # cursor is at the end of a word
-      @popupAutocomplete('', true, true)
-    else
-      # insert control character
-      throw CodeMirror.Pass
+    # autocomplete if cursor is at the end of a word
+    if WORD_TOKEN.test(token.string) and @popupAutocomplete('', true, true)
+      return
+    # if there is nothing to autocomplete, insert control character
+    throw CodeMirror.Pass
 
   removeAutocomplete: ->
     autoCompleteElements = document.getElementsByClassName("CodeMirror-completions")
