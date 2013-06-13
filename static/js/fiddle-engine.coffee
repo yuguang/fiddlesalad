@@ -331,44 +331,7 @@ HtmlEditor = DocumentEditor.$extend(
 
   get_documentation: ->
 )
-ZencodingEditor = DocumentEditor.$extend(
-  __init__: (id) ->
-    @$super id
-    @initialCode = ''
-    @delayLoad = true
-    @loadWorker('htmlparser')
-
-  load: ->
-    codemirror_path = if debug then base_url + '/js/build/lib/' else base_url + '/js/'
-    $.getScript(codemirror_path + 'zencoding.js', =>
-        @pad = ZenCodingCodeMirror.fromTextArea(@id,
-          basefiles: [codemirror_path + 'codemirror1.min.js'],
-          stylesheet: base_url + '/css/xmlcolors.css'
-          continuousScanning: 500
-          lineNumbers: false
-          onChange: @get_options().onChange
-          syntax: 'html'
-          onLoad: (editor) =>
-            if @delayLoad
-              editor.setCode @initialCode
-              @delayLoad = false
-            zen_editor.bind editor
-        )
-    )
-
-  get_code: (type) ->
-    @pad.getCode()
-
-  set_code: (code) ->
-    if @delayLoad
-      @initialCode = code
-      return
-    @pad.setCode code
-
-  get_documentation: ->
-    page = HtmlComponent 'zenReferenceTab'
-    {title: 'zen coding', content: page.to_html_string()}
-)
+ZencodingEditor = HtmlEditor
 serverCompiler =
   compileSuccess: true
 
