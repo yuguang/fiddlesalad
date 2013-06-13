@@ -72,7 +72,7 @@ DynamicEditor = CodeCompleteEditor.$extend(
   set_compiled_code: (code) ->
     @compiledCode = code
 
-  get_documentation: (name=@mode.name) ->
+  get_documentation: (name=@mode) ->
     page = IframeComponent name + 'ReferenceTab'
     page.set_source @documentationUrl
     {title: name, content: page.to_html_string()}
@@ -143,7 +143,7 @@ LessEditor = StyleEditor.$extend(
 StylusEditor = StyleEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'stylus'
+    @mode = 'stylus'
     @loadWorker('stylus')
     @documentationUrl = 'http://learnboost.github.com/stylus/'
     @propertyEndKeyCode = 32
@@ -160,7 +160,7 @@ lintEditor =
   changeHandler: _.throttle(
     ->
       code = @get_code()
-      if viewModel.lint_enabled(@mode.name)
+      if viewModel.lint_enabled(@mode)
         @compiler.postMessage code
       else
         @previewCode code
@@ -176,7 +176,7 @@ lintEditor =
 JavascriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'javascript'
+    @mode = 'javascript'
     @loadWorker('jshint')
 
   __include__: [lintEditor]
@@ -226,7 +226,7 @@ CssEditor = StyleEditor.$extend(
 CoffeescriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'coffeescript'
+    @mode = 'coffeescript'
     @loadWorker('coffeescript')
     @documentationUrl = base_url + '/files/documentation/coffeescript.html'
     @tabCharaterLength = 2
@@ -240,7 +240,7 @@ CoffeescriptEditor = ProgramEditor.$extend(
 RoyEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'roy'
+    @mode = 'roy'
     @loadWorker('roy')
     @documentationUrl = 'http://guide.roylang.org/en/latest/index.html'
     @tabCharaterLength = 2
@@ -288,7 +288,7 @@ TemplateEditor = DocumentEditor.$extend(
 CoffeecupEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'coffeescript'
+    @mode = 'coffeescript'
     @loadWorker('coffeecup')
     @documentationUrl = base_url + '/files/documentation/coffeekup.html'
 
@@ -298,7 +298,7 @@ CoffeecupEditor = TemplateEditor.$extend(
 MarkdownEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'markdown'
+    @mode = 'markdown'
     @loadWorker('markdown')
     @documentationUrl = base_url + '/files/documentation/markdown.html'
 
@@ -307,7 +307,7 @@ MarkdownEditor = TemplateEditor.$extend(
 JadeEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'jade'
+    @mode = 'jade'
     @loadWorker('jade')
     @documentationUrl = base_url + '/files/documentation/jade.html'
 
@@ -388,7 +388,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['http://fiddlesalad.com/',  @mode.name, '/compile/'].join('')
+      ['http://fiddlesalad.com/',  @mode, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -443,7 +443,7 @@ HamlEditor = DocumentEditor.$extend(
   __init__: (id) ->
     @$super id
     @loadThrottledExecution()
-    @mode = name: 'haml'
+    @mode = 'haml'
     @documentationUrl = base_url + '/files/documentation/haml.html'
 
   __include__: [serverCompiler]
@@ -458,7 +458,7 @@ HamlEditor = DocumentEditor.$extend(
 SassEditor = SassCompiler.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'sass'
+    @mode = 'sass'
     @documentationUrl = base_url + '/files/documentation/sass.html'
 )
 ScssEditor = SassCompiler.$extend(
@@ -530,12 +530,12 @@ Viewer = Class.$extend(
 HtmlViewer = Viewer.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'htmlmixed'
+    @mode = 'htmlmixed'
 )
 CssViewer = Viewer.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'css'
+    @mode = 'css'
 
   setIframeCss: (css) ->
     cssElement = document.getElementById(@id).contentWindow.css
@@ -557,7 +557,7 @@ CssViewer = Viewer.$extend(
 JavascriptViewer = Viewer.$extend(
   __init__: (id) ->
     @$super id
-    @mode = name: 'javascript'
+    @mode = 'javascript'
 
   update: (editor) ->
     @$super editor
@@ -590,10 +590,10 @@ codeConverter =
       if @textarea.val() isnt @previousValue
         @previousValue = @textarea.val()
         $.post(
-          ['http://fiddlesalad.com/',  @editor.mode.name, '/convert/'].join('')
+          ['http://fiddlesalad.com/',  @editor.mode, '/convert/'].join('')
           code: @textarea.val()
           (response) =>
-            @previewCode(response[@editor.mode.name])
+            @previewCode(response[@editor.mode])
           'json'
         )
     500
