@@ -57,6 +57,70 @@ examples =
         memo
     """, atob('Y2xhc3MgQW5pbWFsDQogIGNvbnN0cnVjdG9yOiAoQG5hbWUpIC0+DQoNCiAgbW92ZTogKG1ldGVycykgLT4NCiAgICBhbGVydCBAbmFtZSArICIgbW92ZWQgI3ttZXRlcnN9bS4iDQoNCmNsYXNzIFNuYWtlIGV4dGVuZHMgQW5pbWFsDQogIG1vdmU6IC0+DQogICAgYWxlcnQgIlNsaXRoZXJpbmcuLi4iDQogICAgc3VwZXIgNQ0KDQpjbGFzcyBIb3JzZSBleHRlbmRzIEFuaW1hbA0KICBtb3ZlOiAtPg0KICAgIGFsZXJ0ICJHYWxsb3BpbmcuLi4iDQogICAgc3VwZXIgNDUNCg0Kc2FtID0gbmV3IFNuYWtlICJTYW1teSB0aGUgUHl0aG9uIg0KdG9tID0gbmV3IEhvcnNlICJUb21teSB0aGUgUGFsb21pbm8iDQoNCnNhbS5tb3ZlKCkNCnRvbS5tb3ZlKCk=')
   ])
+  typescript: Queue(["""
+      function area(shape: string, width: number, height: number) {
+         var area = width * height;
+         return "I'm a " + shape + " with an area of " + area + " cm squared.";
+      }
+
+      document.body.innerHTML = area("rectangle", 30, 15);
+    """, """
+      interface Shape {
+         name: string;
+         width: number;
+         height: number;
+         color?: string;
+      }
+
+      function area(shape : Shape) {
+         var area = shape.width * shape.height;
+         return "I'm " + shape.name + " with area " + area + " cm squared";
+      }
+
+      console.log( area( {name: "rectangle", width: 30, height: 15} ) );
+      console.log( area( {name: "square", width: 30, height: 30, color: "blue"} ) );
+    """, """
+      var shape = {
+         name: "rectangle",
+         popup: function() {
+
+            console.log('This inside popup(): ' + this.name);
+
+            setTimeout(function() {
+               console.log('This inside setTimeout(): ' + this.name);
+               console.log("I'm a " + this.name + "!");
+            }, 3000);
+
+         }
+      };
+
+      shape.popup();
+    """, """
+      class Shape {
+
+         area: number;
+         color: string;
+
+         constructor ( name: string, width: number, height: number ) {
+            this.area = width * height;
+            this.color = "pink";
+         };
+
+         shoutout() {
+            return "I'm " + this.color + " " + this.name +  " with an area of " + this.area + " cm squared.";
+         }
+      }
+
+      var square = new Shape("square", 30, 30);
+
+      console.log( square.shoutout() );
+      console.log( 'Area of Shape: ' + square.area );
+      console.log( 'Name of Shape: ' + square.name );
+      console.log( 'Color of Shape: ' + square.color );
+      console.log( 'Width of Shape: ' + square.width );
+      console.log( 'Height of Shape: ' + square.height );
+    """
+  ])
   sass: Queue(["""
       @import "compass/layout/stretching";
       @import "compass/utilities";
@@ -699,10 +763,10 @@ codeMirrorMode = _.memoize((language) ->
   switch language
     when 'html'
       return 'htmlmixed'
-    when 'zencoding'
-      return 'htmlmixed'
     when 'coffeecup'
       return 'coffeescript'
+    when 'typescript'
+      return 'text/typescript'
     else
       return language
 )
