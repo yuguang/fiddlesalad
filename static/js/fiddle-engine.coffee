@@ -343,7 +343,6 @@ HtmlEditor = DocumentEditor.$extend(
 
   get_documentation: ->
 )
-ZencodingEditor = HtmlEditor
 serverCompiler =
   compileSuccess: true
 
@@ -1192,5 +1191,5 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, ZencodingEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
 root.engine = EngineFactory(FiddleFactory())

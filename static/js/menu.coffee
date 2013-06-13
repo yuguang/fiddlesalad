@@ -298,7 +298,7 @@ examples =
             %td.numeric 110.0
     """
   ])
-  zencoding: Queue(["""
+  html: Queue(["""
       <!--tab expansion of div#page>div.logo+ul#navigation>li*5>a-->
       <div id="page">
               <div class="logo"></div>
@@ -309,11 +309,11 @@ examples =
                       <li><a href=""></a></li>
                       <li><a href=""></a></li>
               </ul>
-      </div>""", """
+      </div>
+  """, """
       <!--tab expansion of p>{Click }+a{here}+{ to continue}-->
-      <p>Click <a href="">here</a> to continue</p>"""
-  ])
-  html: Queue(["""
+      <p>Click <a href="">here</a> to continue</p>
+  ""","""
     <article>
     <h1>Title of Post</h1>
     <p>Content of post...</p>
