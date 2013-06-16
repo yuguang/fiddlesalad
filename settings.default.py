@@ -114,7 +114,7 @@ MEDIASYNC = {
         'css/documentation.css': [
             'css/documentation.css',
             'css/syntax_highlighter_theme_default.css',
-            ],
+        ],
         'css/wijmo-artisto.css': [
             'css/jquery-ui.artisto.css',
             'css/jquery.wijmo-open.css',
@@ -159,7 +159,7 @@ MEDIASYNC = {
             'js/build/lib/shAutoloader.js',
             'js/build/lib/shBrushPython.js',
             'js/build/lib/shBrushXml.js',
-            ],
+        ],
         'js/jquery-ui.fiddle.js': [
             'js/jquery-ui-1.8.18.custom.js',
             'js/jquery.wijmo-open.all.2.0.0.min.js',
@@ -192,6 +192,8 @@ MEDIASYNC = {
             ],
         'js/codemirror.fiddle.js': [
             'js/codemirror.js',
+            'js/codemirror/mode/css/css.js',
+            'js/build/lib/emmet.min.js',
             'js/codemirror/simple-hint.js',
             'js/codemirror/javascript-hint.js',
             'js/codemirror/dialog.js',
@@ -203,12 +205,12 @@ MEDIASYNC = {
             'js/codemirror/mode/python/python.js',
             'js/codemirror/mode/javascript/javascript.js',
             'js/codemirror/mode/coffeescript/coffeescript.js',
-            'js/codemirror/mode/less/less.js',
-            'js/codemirror/mode/css/css.js',
             'js/codemirror/mode/xml/xml.js',
             'js/codemirror/mode/htmlmixed/htmlmixed.js',
+            'js/codemirror/mode/ruby/ruby.js',
             'js/codemirror/mode/haml/haml.js',
             'js/codemirror/mode/jade/jade.js',
+            'js/codemirror/mode/less/less.js',
             'js/codemirror/mode/sass/sass.js',
             'js/codemirror/mode/scss/scss.js',
             'js/codemirror/mode/roy/roy.js',
@@ -235,6 +237,7 @@ MEDIASYNC = {
             'js/beautify.js',
             ],
         'js/menu.fiddle.js': [
+            'js/bootstrap.js',
             'js/fiddle-configuration.js',
             'js/keywords.js',
             'js/underscore.js',
@@ -245,7 +248,7 @@ MEDIASYNC = {
             'js/compiled-coffee/menu.js',
             ]
     },
-    }
+}
 
 if build_config:
     MEDIASYNC['PROCESSORS'] = ('mediasync.processors.closurecompiler.compile','mediasync.processors.slim.css_minifier',)
