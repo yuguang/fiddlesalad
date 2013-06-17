@@ -7,6 +7,7 @@ var autocompleteSelect;
 
         function removeOldComplete() {
             var oldComplete = document.getElementsByClassName("CodeMirror-completions")[0];
+            if (typeof oldComplete === "undefined") { return; }
             oldComplete.parentNode.removeChild(oldComplete);
         }
 
