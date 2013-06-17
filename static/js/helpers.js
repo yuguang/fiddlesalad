@@ -13,7 +13,7 @@ function popup(url) {
     return false;
 }
 
-if (debug == false) {
+if (debug == false && typeof debug_base_url !== "undefined") {
     window.onerror = function(errorMessage, url, line) {
       var loggerUrl = "http://yuguangzhang.com/home/ajax/logger.php";
       var parameters = "?description=" + encodeURIComponent(errorMessage)
