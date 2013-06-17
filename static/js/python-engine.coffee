@@ -15,6 +15,10 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
     @extraKeys['Ctrl-R'] = -> engine.reset()
     @extraKeys['Ctrl-O'] = -> $('#importDialog').dialog 'open'
 
+  load: ->
+    @$super()
+    $(@codeMirrorContainer).click => @focus()
+
   keyHandler: (editor, event) ->
     if event.keyCode is 13
       _.defer prefetchImport
