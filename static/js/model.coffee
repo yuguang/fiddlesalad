@@ -55,7 +55,7 @@ ViewModel = Class.$extend(
       url
     @revisionsMenu = new RevisionsMenu()
     @localHistory = LocalHistory(@revisionsMenu.revisions)
-    @spellcheck = true
+    @spellcheck = false
     @afterLogin = ->
     ko.computed =>
       # if the user just logged in
@@ -221,7 +221,6 @@ PythonViewModel = ViewModel.$extend(
       @output().join ''
     .extend(throttle: 50)
     @accordionTemplate = 'pythonAccordion'
-    @spellcheck = true
 
   emptyFiddle: (code) ->
     code.length is 0
