@@ -240,7 +240,6 @@ MEDIASYNC = {
             'js/bootstrap.js',
             'js/fiddle-configuration.js',
             'js/keywords.js',
-            'js/underscore.js',
             'js/queue.js',
             'js/store.js',
             'js/classy.js',
