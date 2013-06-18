@@ -278,11 +278,11 @@ FiddleViewModel = ViewModel.$extend(
       @source = ko.observable(source)
       @title = ko.observable(title)
       @remove = ->
-        source = @source()
-        if source.endsWith 'css'
+        filetype = codeRunner.filetype(@source())
+        if filetype is 'css'
           _.defer ->
             codeRunner.remove_css source
-        else if source.endsWith 'js'
+        else if filetype is 'js'
           _.defer ->
             engine.reset()
         ownerViewModel.resources.remove this
