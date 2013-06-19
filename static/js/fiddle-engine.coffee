@@ -1164,21 +1164,6 @@ FiddleFactory = Class.$extend(
     unless bowser.webkit
       $('.ui-dialog-title').css(position: 'static', height: '1em')
 
-    for type in ['program', 'document', 'style']
-      $("##{ type }container")
-        .find('.CodeMirror-scroll')
-        .css(overflow: 'auto', height: "#{ $("##{ type }container").parent().height() }px")
-      # change editor height after resizing a window
-      $("##{ type }container")
-        .parent()
-        .bind('wijdialogresize', _.debounce(
-            ->
-              $(this).find('.CodeMirror-scroll').css(height: "#{ $(this).height() }px")
-            300
-          )
-        )
-      $("##{ type }container").parent().css('overflow', 'hidden')
-
   get_view_model: ->
     document.getElementById('progress')?.value = 90
     FiddleViewModel()

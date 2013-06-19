@@ -96,7 +96,7 @@ form textarea {
     width: 68%;
 }
 
-.wide input, .wide textarea{
+.wide input, .wide textarea {
     width: 92%;
 }
 
@@ -157,12 +157,12 @@ form textarea {
     font-size: 9pt;
     line-height: 1.1em;
     margin: 0;
+    height: 100%;
 }
 
 .CodeMirror-scroll {
-    height: auto;
-    overflow: visible;
-    width: 100%
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .kbd {
