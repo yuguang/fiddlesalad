@@ -271,7 +271,9 @@ FiddleViewModel = ViewModel.$extend(
     resource = (source, ownerViewModel) ->
       pathSegments = source.split('/')
       title = undefined
-      if pathSegments[pathSegments.length - 1].length
+      if pathSegments.length - 1 < 1
+        title = source
+      else if pathSegments[pathSegments.length - 1].length
         title = pathSegments[pathSegments.length - 1]
       else
         title = pathSegments[pathSegments.length - 2]
