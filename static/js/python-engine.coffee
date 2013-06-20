@@ -11,15 +11,21 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
     keywords = ['and', 'assert', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'exec', 'finally', 'for', 'from', 'global', 'import', 'lambda', 'not', 'pass', 'print', 'raise', 'return', 'try', 'while', 'with', 'yield', 'input()', 'abs()', 'divmod()', 'input()', 'open()', 'staticmethod()', 'all()', 'enumerate()', 'int()', 'ord()', 'str()', 'any()', 'eval()', 'isinstance()', 'pow()', 'sum()', 'basestring()', 'issubclass()', 'super()', 'bin()', 'file()', 'iter()', 'property()', 'tuple()', 'bool()', 'filter()', 'len()', 'range()', 'type()', 'bytearray()', 'float()', 'list()', 'raw_input()', 'unichr()', 'callable()', 'format()', 'locals()', 'reduce()', 'unicode()', 'chr()', 'frozenset()', 'long()', 'reload()', 'vars()', 'classmethod()', 'getattr()', 'map()', 'repr()', 'xrange()', 'cmp()', 'globals()', 'max()', 'reversed()', 'zip()', 'compile()', 'hasattr()', 'round()', 'complex()', 'hash()', 'min()', 'set()', 'apply()', 'delattr()', 'help()', 'next()', 'setattr()', 'buffer()', 'dict()', 'hex()', 'object()', 'slice()', 'coerce()', 'dir()', 'oct()', 'sorted()', 'intern()']
     @addAutocomplete keywords
     @codeMirrorContainer = '.ui-layout-center'
-    @extraKeys['Ctrl-Enter'] = -> engine.execute()
-    @extraKeys['Ctrl-R'] = -> engine.reset()
-    @extraKeys['Ctrl-O'] = -> $('#importDialog').dialog 'open'
 
   keyHandler: (editor, event) ->
     if event.keyCode is 13
       _.defer prefetchImport
-    @$super editor, event
-          
+    false
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      extraKeys:
+        'Ctrl-Enter': -> engine.execute()
+        'Ctrl-R': -> engine.reset()
+        'Ctrl-O': -> $('#importDialog').dialog 'open'
+    )
+
   get_primary_language: ->
     'python'
 )
