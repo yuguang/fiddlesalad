@@ -30,20 +30,20 @@
         {% if not DEBUG %}
         (function(g,b,d){var c=b.head||b.getElementsByTagName("head"),D="readyState",E="onreadystatechange",F="DOMContentLoaded",G="addEventListener",H=setTimeout;
         function f(){
-            debug_base_url="http://fiddlesalad.com/home";
+            //debug_base_url="http://fiddlesalad.com/home";
         	document.getElementById('progress').value = 20;
             $LAB
-            .script(debug_base_url+"/js/fiddle.bootstrap.js.gz"+_v)
+            .script(base_url+"/js/fiddle.bootstrap.js.gz"+_v)
             .script("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait(function(){
             	document.getElementById('progress').value = 50
             })
-            .script(debug_base_url+"/js/jquery-ui.fiddle.js.gz"+_v)
-            .script(debug_base_url+"/js/knockout.js.gz?v=2012052521")
-            .script(debug_base_url+"/js/codemirror.fiddle.js.gz"+_v)
-            .script(debug_base_url+"/js/fiddle.plugins.js.gz"+_v).wait(function(){
+            .script(base_url+"/js/jquery-ui.fiddle.js.gz"+_v)
+            .script(base_url+"/js/knockout.js.gz?v=2012052521")
+            .script(base_url+"/js/codemirror.fiddle.js.gz"+_v)
+            .script(base_url+"/js/fiddle.plugins.js.gz"+_v).wait(function(){
             	document.getElementById('progress').value = 75
             })
-            .script(debug_base_url+"/js/fiddle.init.js.gz"+_v).wait()
+            .script(base_url+"/js/fiddle.init.js.gz"+_v).wait()
             .script("http://www.google-analytics.com/ga.js")
             .script("http://w.sharethis.com/button/buttons.js").wait(function(){
                 __st_loadLate=true;
