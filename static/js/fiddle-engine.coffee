@@ -268,11 +268,9 @@ DocumentEditor = DynamicEditor.$extend(
   preview: (html) ->
     codeRunner.execute engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html
 
-  keyHandler: (editor, event) -> # disable auto-complete
-    if event.type isnt 'keypress'
-      return
-    @popupAutocomplete(@keyCharacter(event))
-
+  load: ->
+    @$super()
+    @hint = CodeMirror.htmlHint
 )
 TemplateEditor = DocumentEditor.$extend(
   getViewerLocals: ->

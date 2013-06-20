@@ -8,11 +8,6 @@ Editor = Class.$extend(
     console.log @get_options()  if debug
     @pad = CodeMirror.fromTextArea(document.getElementById(@id), _.defaults(@get_options(), defaultEditor))
 
-  keyHandler: (i, e) ->
-    if e.keyCode is 13 and e.ctrlKey
-      e.stop()
-      engine.execute()
-
   focus: ->
     @pad.focus()
     
@@ -57,9 +52,9 @@ CodeCompleteEditor = Editor.$extend(
     lineNumbers: @showLineNumbers
     onKeyEvent: _.bind(@keyHandler, this)
 
-  popupAutocomplete: (lastChar='', immediate=false, tabSelect=false) ->
+  popupAutocomplete: (lastChar='') ->
     # bind pre-fills arguments to the hint function
-    CodeMirror.showHint @pad, _.bind(@hint, this)
+    CodeMirror.showHint @pad, _.bind(@hint, this, @pad, lastChar), completeSingle: false
 
   keyCharacter: (event) ->
     String.fromCharCode(if event.keyCode then event.keyCode else event.which)
@@ -71,16 +66,11 @@ CodeCompleteEditor = Editor.$extend(
   selectionHandler: ->
 
   keyHandler: (editor, event) ->
-    if event.keyCode is 13 and event.type is 'keydown' # Enter is not captured on keypress
-      if event.ctrlKey
-        event.stop()
-        engine.execute()
-      else
-        _.defer => @updateVars()
+    char = @keyCharacter(event)
     if event.type isnt 'keypress'
       return
-    else if not (event.keyCode < 41 and event.keyCode > 31) # not a navigation key
-      @popupAutocomplete(@keyCharacter(event))
+    else if WORD_TOKEN.test(char)
+      @popupAutocomplete(char)
 
   hint: (editor, lastChar) ->
     currentPosition = editor.getCursor()

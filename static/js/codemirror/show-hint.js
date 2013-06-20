@@ -31,6 +31,8 @@ CodeMirror.showHint = function (cm, getHints, options) {
             pickCompletion(cm, data, completions[0]);
             CodeMirror.signal(data, "close");
             return true;
+        } else if (continued && completions.length == 1) {
+            return false;
         }
 
         // Build the select widget
