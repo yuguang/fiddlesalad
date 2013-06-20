@@ -42,9 +42,6 @@ CodeCompleteEditor = Editor.$extend(
 
   load: ->
     @$super()
-    $(@codeMirrorContainer).click => @removeAutocomplete()
-    if bowser.firefox
-      @removeAutocomplete()
     @pad.on 'change', _.debounce(
       (editor, change) =>
         @changeHandler(editor, change)
