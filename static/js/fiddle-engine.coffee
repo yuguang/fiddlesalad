@@ -321,8 +321,6 @@ HtmlEditor = DocumentEditor.$extend(
     @$super id
     @mode = 'text/html'
     @loadWorker('htmlparser')
-    @extraKeys["'>'"] = (cm) -> cm.closeTag cm, ">"
-    @extraKeys["'/'"] = (cm) -> cm.closeTag cm, "/"
 
   load: ->
     @$super()
@@ -331,6 +329,12 @@ HtmlEditor = DocumentEditor.$extend(
       (event) =>
         CodeMirror.commands["selectAll"] @pad
         @autoFormatSelection()
+    )
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      autoCloseTags: true
     )
 
   getSelectedRange: ->

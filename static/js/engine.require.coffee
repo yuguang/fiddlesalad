@@ -5,6 +5,7 @@ Editor = Class.$extend(
     @mode = new Object
 
   load: ->
+    console.log @get_options()  if debug
     @pad = CodeMirror.fromTextArea(document.getElementById(@id), _.defaults(@get_options(), defaultEditor))
 
   keyHandler: (i, e) ->
@@ -35,28 +36,6 @@ CodeCompleteEditor = Editor.$extend(
     @debounceWaitSeconds = 250
     @editCount = 0
     @varClassName = 'cm-variable'
-    @extraKeys =
-      "Ctrl-Space": =>
-        @popupAutocomplete('', true)
-      "Tab": =>
-        @selectAutocomplete()
-      "Esc": =>
-        @removeAutocomplete()
-
-  selectAutocomplete: ->
-    position = @pad.getCursor()
-    token = @pad.getTokenAt(position)
-    # autocomplete if cursor is at the end of a word
-    if WORD_TOKEN.test(token.string) and @popupAutocomplete('', true, true)
-      return
-    # if there is nothing to autocomplete, insert control character
-    throw CodeMirror.Pass
-
-  removeAutocomplete: ->
-    autoCompleteElements = document.getElementsByClassName("CodeMirror-completions")
-    if autoCompleteElements.length
-      autoComplete = autoCompleteElements[0]
-      autoComplete.parentNode.removeChild(autoComplete)
 
   get_code_complexity: ->
     @editCount
@@ -66,25 +45,24 @@ CodeCompleteEditor = Editor.$extend(
     $(@codeMirrorContainer).click => @removeAutocomplete()
     if bowser.firefox
       @removeAutocomplete()
+    @pad.on 'change', _.debounce(
+      (editor, change) =>
+        @changeHandler(editor, change)
+        @editCount++
+      @debounceWaitSeconds
+    )
+    @pad.on 'focus', => @focusHandler()
+    @pad.on 'cursorActivity', _.bind(@selectionHandler, this)
     
   get_options: ->
     mode: @mode
     theme: if @theme? then @theme else 'default'
     lineNumbers: @showLineNumbers
     onKeyEvent: _.bind(@keyHandler, this)
-    onChange: _.debounce(
-      (editor, change) =>
-        @changeHandler(editor, change)
-        @editCount++
-      @debounceWaitSeconds
-    )
-    onFocus: => @focusHandler()
-    onCursorActivity: _.bind(@selectionHandler, this)
-    extraKeys: @extraKeys
 
   popupAutocomplete: (lastChar='', immediate=false, tabSelect=false) ->
     # bind pre-fills arguments to the hint function
-    CodeMirror.simpleHint @pad, _.bind(@hint, this, @pad, lastChar), immediate, tabSelect
+    CodeMirror.showHint @pad, _.bind(@hint, this)
 
   keyCharacter: (event) ->
     String.fromCharCode(if event.keyCode then event.keyCode else event.which)

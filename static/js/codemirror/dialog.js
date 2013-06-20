@@ -24,7 +24,8 @@
     }
     var inp = dialog.getElementsByTagName("input")[0], button;
     if (inp) {
-      CodeMirror.connect(inp, "keydown", function(e) {
+      CodeMirror.on(inp, "keydown", function(e) {
+        if (options && options.onKeyDown && options.onKeyDown(e, inp.value, close)) { return; }
         if (e.keyCode == 13 || e.keyCode == 27) {
           CodeMirror.e_stop(e);
           close();
@@ -32,16 +33,19 @@
           if (e.keyCode == 13) callback(inp.value);
         }
       });
+      if (options && options.onKeyUp) {
+        CodeMirror.on(inp, "keyup", function(e) {options.onKeyUp(e, inp.value, close);});
+      }
       if (options && options.value) inp.value = options.value;
       inp.focus();
-      CodeMirror.connect(inp, "blur", close);
+      CodeMirror.on(inp, "blur", close);
     } else if (button = dialog.getElementsByTagName("button")[0]) {
-      CodeMirror.connect(button, "click", function() {
+      CodeMirror.on(button, "click", function() {
         close();
         me.focus();
       });
       button.focus();
-      CodeMirror.connect(button, "blur", close);
+      CodeMirror.on(button, "blur", close);
     }
     return close;
   });
@@ -60,17 +64,17 @@
     for (var i = 0; i < buttons.length; ++i) {
       var b = buttons[i];
       (function(callback) {
-        CodeMirror.connect(b, "click", function(e) {
+        CodeMirror.on(b, "click", function(e) {
           CodeMirror.e_preventDefault(e);
           close();
           if (callback) callback(me);
         });
       })(callbacks[i]);
-      CodeMirror.connect(b, "blur", function() {
+      CodeMirror.on(b, "blur", function() {
         --blurring;
         setTimeout(function() { if (blurring <= 0) close(); }, 200);
       });
-      CodeMirror.connect(b, "focus", function() { ++blurring; });
+      CodeMirror.on(b, "focus", function() { ++blurring; });
     }
   });
 })();
