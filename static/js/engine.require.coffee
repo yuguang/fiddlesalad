@@ -44,13 +44,13 @@ CodeCompleteEditor = Editor.$extend(
       @debounceWaitSeconds
     )
     @pad.on 'focus', => @focusHandler()
-    @pad.on 'keypress', _.bind(@keyHandler, this)
     @pad.on 'cursorActivity', _.bind(@selectionHandler, this)
     
   get_options: ->
     mode: @mode
     theme: if @theme? then @theme else 'default'
     lineNumbers: @showLineNumbers
+    onKeyEvent: _.bind(@keyHandler, this)
 
   popupAutocomplete: (lastChar='') ->
     # bind pre-fills arguments to the hint function
@@ -62,12 +62,14 @@ CodeCompleteEditor = Editor.$extend(
   focusHandler: ->
 
   changeHandler: ->
-    
+
   selectionHandler: ->
 
   keyHandler: (editor, event) ->
     char = @keyCharacter(event)
-    if WORD_TOKEN.test(char)
+    if event.type isnt 'keypress'
+      return
+    else if WORD_TOKEN.test(char)
       @popupAutocomplete(char)
 
   hint: (editor, lastChar) ->

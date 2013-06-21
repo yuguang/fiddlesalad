@@ -12,10 +12,15 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
     @addAutocomplete keywords
     @codeMirrorContainer = '.ui-layout-center'
 
+  load: ->
+    @$super()
+    @hint = CodeMirror.pythonHint
+
   keyHandler: (editor, event) ->
-    if event.keyCode is 13
+    if event.keyCode is 13 and event.type is 'keydown'
       _.defer prefetchImport
-    false
+      return false
+    @$super editor, event
 
   get_options: ->
     _.defaults(
