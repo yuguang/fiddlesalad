@@ -25,7 +25,6 @@ CodeCompleteEditor = Editor.$extend(
     @showLineNumbers = false
     @numVars = 0
     @wordAutoComplete = new CompositeCodeComplete()
-    @methodAutoComplete = new CompositeMethodComplete()
     @varDict = new Hint()
     @wordAutoComplete.add @varDict
     @debounceWaitSeconds = 250
@@ -73,28 +72,6 @@ CodeCompleteEditor = Editor.$extend(
       @popupAutocomplete(char)
 
   hint: (editor, lastChar) ->
-    currentPosition = editor.getCursor()
-    token = editor.getTokenAt(currentPosition)
-    start = token.start
-    end = token.end
-    suggestions = undefined
-    return  unless WORD_TOKEN.test(token.string) or WORD_TOKEN.test(lastChar)
-    if token.string[0] is '.'
-      suggestions = @methodAutoComplete.getCompletions(editor)
-      start++
-      end++
-    else
-      suggestions = @wordAutoComplete.getCompletions(editor, lastChar)
-      if lastChar.length
-        end++
-    list: suggestions
-    from:
-      line: currentPosition.line
-      ch: start
-
-    to:
-      line: currentPosition.line
-      ch: end
 
   updateVars: ->
     varElements = $(@codeMirrorContainer + ' span.' + @varClassName)
@@ -104,11 +81,8 @@ CodeCompleteEditor = Editor.$extend(
         @varDict.trie.insert word  if word[0] isnt '.' and word.length > 2
       @numVars = varElements.length
 
-  addAutocomplete: (keywords, namespace) ->
-    if _.isUndefined(namespace)
-      @wordAutoComplete.add new Hint(keywords)
-    else
-      @methodAutoComplete.add new Hint(keywords), namespace
+  addAutocomplete: (keywords) ->
+    @wordAutoComplete.add new Hint(keywords)
 )
 EngineFactory = Class.$extend(
   __init__: (factory) ->

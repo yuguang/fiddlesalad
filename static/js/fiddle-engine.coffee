@@ -482,13 +482,7 @@ PythonEditor = ProgramEditor.$extend(
       name: 'python'
       version: 2
       singleLineStringErrors: false
-
-    keywords = [ 'and', 'break', 'class', 'continue', 'def', 'def():', 'del', 'elif', 'else', 'finally', 'for', 'for  in ', 'global', 'lambda', 'not', 'pass', 'print', 'return', 'try', 'while', 'with' ]
-    jQuery_object_methods = KEYWORDS.JQUERY_OBJECT
-    jQuery_prototype_methods = KEYWORDS.JQUERY_PROTOTYPE
-    @addAutocomplete keywords
-    @addAutocomplete jQuery_object_methods, '$'
-    @addAutocomplete jQuery_prototype_methods, '$()'
+    @addAutocomplete CodeMirror.pythonHint.keywords
     @loadWorker('javascript')
     @loadThrottledExecution()
     @documentationUrl = '/python/documentation/'

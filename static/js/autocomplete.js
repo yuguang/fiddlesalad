@@ -20,10 +20,10 @@ var CompositeCodeComplete = Class.$extend({
         return this.hintComponents[i];
     },
 
-    getCompletions: function (editor, lastChar) {
-        var hints = [], token = editor.getTokenAt(editor.getCursor());
+    getCompletions: function (start) {
+        var hints = [];
         for (var i = 0, len = this.hintComponents.length; i < len; i++) {
-            hints.push(this.hintComponents[i].getCompletions(token.string + lastChar));
+            hints.push(this.hintComponents[i].getCompletions(start));
         }
         return _.flatten(hints);
     }
@@ -42,43 +42,5 @@ var Hint = Class.$extend({
 
     getCompletions: function (prefix) {
         return this.trie.autoComplete(prefix);
-    }
-});
-
-var CompositeMethodComplete = Class.$extend({
-    __init__: function () {
-        this.hintComponents = {};
-    },
-
-    add: function (child, key) {
-        this.hintComponents[key] = child;
-    },
-
-    remove: function (key) {
-        delete this.hintComponents[key];
-    },
-
-    getChild: function (key) {
-        return this.hintComponents[key];
-    },
-
-    getCompletions: function (editor) {
-        var cur = editor.getCursor(), token = editor.getTokenAt(cur), currToken = token;
-        while (currToken.string.length && currToken.string != ' ') {
-            if (!context) var context = [];
-            context.unshift(currToken.string);
-            currToken = editor.getTokenAt({line:cur.line, ch:currToken.start});
-        }
-//        console.log(context)
-        // normalize keys
-        // namespace() for functions and namespace for objects
-        // namespace(argument).method -> namespace().method
-        var key = context.join('').replace(/\(.*\)/, '()');
-        // namespace.method -> namespace
-        key = key.replace(/\.[\w]*/, '');
-//        console.log(key)
-        if (!this.hintComponents.hasOwnProperty(key)) return [];
-        // remove everything before the . operator from the context
-        return this.hintComponents[key].getCompletions(context.join('').replace(/.*\./, ''));
     }
 });
