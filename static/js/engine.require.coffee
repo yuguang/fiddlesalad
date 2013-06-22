@@ -72,6 +72,23 @@ CodeCompleteEditor = Editor.$extend(
       @popupAutocomplete(char)
 
   hint: (editor, lastChar) ->
+    currentPosition = editor.getCursor()
+    token = editor.getTokenAt(currentPosition)
+    start = token.start
+    end = token.end
+    if not WORD_TOKEN.test(token.string)
+      token = start: currentPosition.ch, end: currentPosition.ch, string: "", state: token.state
+    if not token.string.length
+      suggestions = @wordAutoComplete.getCompletions(lastChar)
+    else
+      suggestions = @wordAutoComplete.getCompletions(token.string)
+    list: suggestions
+    from:
+      line: currentPosition.line
+      ch: start
+    to:
+      line: currentPosition.line
+      ch: end
 
   updateVars: ->
     varElements = $(@codeMirrorContainer + ' span.' + @varClassName)
