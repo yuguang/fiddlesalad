@@ -65,11 +65,11 @@ CodeCompleteEditor = Editor.$extend(
   selectionHandler: ->
 
   keyHandler: (editor, event) ->
-    char = @keyCharacter(event)
+    lastChar = @keyCharacter(event)
     if event.type isnt 'keypress'
       return
-    else if WORD_TOKEN.test(char)
-      @popupAutocomplete(char)
+    else if WORD_TOKEN.test(lastChar)
+      @popupAutocomplete(lastChar)
 
   hint: (editor, lastChar) ->
     currentPosition = editor.getCursor()
