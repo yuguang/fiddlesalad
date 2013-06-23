@@ -304,13 +304,10 @@ examples =
   ])
   haml: Queue(["""
       #home
-        = title
+        title
         %ul.menu
           %li Go Home
           %li Go Back
-
-      -# --------------------------javascript----------------------------
-      -# locals.title='abc'
     """, """
       #layout
         #header
