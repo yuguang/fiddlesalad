@@ -786,6 +786,10 @@ FiddleEditor = Class.$extend(
       page = IframeComponent 'jqueryReferenceTab'
       page.set_source base_url + '/files/documentation/jquery/index.html?v=2013061218'
       tabs.add 'jquery', page.to_html_string()
+      if @settings.get_language(LANGUAGE_TYPE.STYLE) in COMPATIBLE_LANGUAGES.CSS or @settings.get_language(LANGUAGE_TYPE.DOCUMENT) in COMPATIBLE_LANGUAGES.HTML
+        page = IframeComponent 'emmetReferenceTab'
+        page.set_source 'http://docs.emmet.io/cheat-sheet/'
+        tabs.add 'emmet', page.to_html_string()
       frame.add tabs
 
       layout.add_column frame
