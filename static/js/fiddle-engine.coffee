@@ -380,7 +380,7 @@ serverCompiler =
         line: lineNumber
         ch: scannerPosition
       ,
-      'syntax-error'
+        className: 'syntax-error'
     )
 
   execute: ->
