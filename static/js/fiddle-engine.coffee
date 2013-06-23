@@ -258,6 +258,10 @@ TypescriptEditor = ProgramEditor.$extend(
 
   get_documentation: ->
     @$super('typescript')
+
+  load: ->
+    @$super()
+    @hint = CodeMirror.javascriptHint
 )
 DocumentEditor = DynamicEditor.$extend(
   __init__: (id) ->
@@ -478,11 +482,7 @@ ScssEditor = SassCompiler.$extend(
 PythonEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode =
-      name: 'python'
-      version: 2
-      singleLineStringErrors: false
-    @addAutocomplete CodeMirror.pythonHint.keywords
+    @mode = 'python'
     @loadWorker('javascript')
     @loadThrottledExecution()
     @documentationUrl = '/python/documentation/'
@@ -492,6 +492,8 @@ PythonEditor = ProgramEditor.$extend(
   load: ->
     @$super()
     viewModel.add_resource base_url + '/js/pylib.js'
+    @hint = CodeMirror.coffeescriptHint
+    @addAutocomplete CodeMirror.pythonHint.keywords
 
   preview: (javascript) ->
     codeRunner.execute javascript

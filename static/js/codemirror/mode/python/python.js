@@ -263,6 +263,8 @@ CodeMirror.defineMode("python", function(conf, parserConf) {
         // Handle decorators
         if (current === '@') {
             return stream.match(identifiers, false) ? 'meta' : ERRORCLASS;
+        } else if (current === '$' || current === '_') { //Added for FiddleSalad
+            return 'builtin'
         }
 
         if ((style === 'variable' || style === 'builtin')
