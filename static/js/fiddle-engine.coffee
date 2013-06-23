@@ -492,8 +492,8 @@ PythonEditor = ProgramEditor.$extend(
   load: ->
     @$super()
     viewModel.add_resource base_url + '/js/pylib.js'
-    @hint = CodeMirror.coffeescriptHint
-    @addAutocomplete CodeMirror.pythonHint.keywords
+    @hint = CodeMirror.pythonHint
+    @addAutocomplete CodeMirror.pythonHint.pylibKeywords
 
   preview: (javascript) ->
     codeRunner.execute javascript

@@ -66,7 +66,8 @@
         + "dict hex object slice coerce dir id oct sorted intern ";
     var pythonBuiltinsL = pythonBuiltins.split(" ").join("() ").split(" ");
     var pythonBuiltinsU = pythonBuiltins.toUpperCase().split(" ").join("() ").split(" ");
+    var pythonFunctional = "all any enumerate map filter reduce compose max min zip range list sum product ".split(" ").join("() ").split(" ");
 
     CodeMirror.pythonHint.keywords = _.flatten([pythonBuiltinsL, pythonKeywordsL])
-
+    CodeMirror.pythonHint.pylibKeywords = _.flatten([pythonFunctional, pythonKeywordsL])
 })();
