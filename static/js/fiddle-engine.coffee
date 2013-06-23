@@ -921,7 +921,7 @@ DiffViewer = Class.$extend(
     if not $('#' + @id).length
       dimensions = @openCompareWindow()
       $('#' + @id).mergely
-        width: dimensions.width - 4
+        width: dimensions.width
         height: dimensions.height - 36
         cmsettings:
           readOnly: false
