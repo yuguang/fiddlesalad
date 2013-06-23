@@ -77,7 +77,7 @@ CodeCompleteEditor = Editor.$extend(
     start = token.start
     end = token.end
     if not WORD_TOKEN.test(token.string)
-      token = start: currentPosition.ch, end: currentPosition.ch, string: "", state: token.state
+      token = start: currentPosition.ch, end: currentPosition.ch, string: '', state: token.state
     if not token.string.length
       suggestions = @wordAutoComplete.getCompletions(lastChar)
     else
