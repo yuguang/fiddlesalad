@@ -20,6 +20,7 @@
             stateChanged: $root.showMaskedIframes,
             captionButtons: {
                 minimize: { visible: buttons.minimize },
+                maximize: { visible: buttons.maximize },
                 close: { visible: buttons.close },
                 pin: buttons.pin ? { visible: true, click: function() { engine.execute() }, iconClassOn: 'ui-icon-search', iconClassOff: 'ui-icon-refresh' } : { visible: false },
                 refresh: buttons.refresh ? { visible: true, click: function() { engine.reset() } } : { visible: false }

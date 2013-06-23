@@ -90,6 +90,7 @@ Frame = VisualComponent.$extend(
       close: true
       pin: false
       refresh: false
+      maximize: true
     if title is 'Result'
       @buttons.pin = true
       @buttons.refresh = true

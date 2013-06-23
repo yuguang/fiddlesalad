@@ -909,15 +909,20 @@ DiffViewer = Class.$extend(
   openCompareWindow: ->
     layout = ColumnLayout 1
     title = HtmlComponent 'compareLanguageSelection'
-    layout.add_column Frame(@id, 'Compare Revisions' + title.to_html_string())
+    revisionFrame = Frame(@id, 'Compare Revisions' + title.to_html_string())
+    revisionFrame.buttons.maximize = false
+    layout.add_column revisionFrame
     viewModel.containers.push _.first(layout.get_frames())
     $('#compareLanguageSelection input').change =>
       @compare_language_type $('#compareLanguageSelection input:checked').val()
+    revisionFrame.get_size()
 
   compare_language_type: (type) ->
     if not $('#' + @id).length
-      @openCompareWindow()
+      dimensions = @openCompareWindow()
       $('#' + @id).mergely
+        width: dimensions.width - 4
+        height: dimensions.height - 36
         cmsettings:
           readOnly: false
           lineNumbers: true
