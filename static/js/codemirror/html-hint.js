@@ -124,7 +124,7 @@
     var i = 0;
 
     for(i = 0; i < keywords.length; i++) {
-      if(keywords[i].substring(0, text.length) == text) {
+      if(keywords[i].substring(0, text.length) == text && text !== keywords[i]) { //Modified for FiddleSalad so that auto-complete closes when words match
         results.push(keywords[i]);
       }
     }

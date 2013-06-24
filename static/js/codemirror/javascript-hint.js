@@ -97,7 +97,7 @@
   function getCompletions(token, context, keywords, options) {
     var found = [], start = token.string;
     function maybeAdd(str) {
-      if (str.indexOf(start) == 0 && !arrayContains(found, str)) found.push(str);
+      if (str.indexOf(start) == 0 && str !== start) found.push(str); //Modified for FiddleSalad so that auto-complete closes when words match
     }
     function gatherCompletions(obj) {
       if (typeof obj == "string") forEach(stringProps, maybeAdd);
@@ -138,6 +138,6 @@
       gatherCompletions(iframeWindow);
       forEach(keywords, maybeAdd);
     }
-    return found;
+    return _.unique(found); //Modified for FiddleSalad for performance
   }
 })();

@@ -1,20 +1,4 @@
 (function () {
-    function forEach(arr, f) {
-        for (var i = 0, e = arr.length; i < e; ++i) f(arr[i]);
-    }
-
-    function arrayContains(arr, item) {
-        if (!Array.prototype.indexOf) {
-            var i = arr.length;
-            while (i--) {
-                if (arr[i] === item) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return arr.indexOf(item) != -1;
-    }
 
     function scriptHint(editor, _keywords, getToken, lastChar) {
         // Find the token at the cursor
@@ -33,6 +17,9 @@
             completionList = this.wordAutoComplete.getCompletions(lastChar);
         } else {
             completionList = this.wordAutoComplete.getCompletions(token.string);
+            if (completionList.length === 1 && token.string === completionList[0]) {
+                completionList = [];
+            }
         }
 
         //prevent autocomplete for last word, instead show dropdown with one word

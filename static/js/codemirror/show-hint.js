@@ -31,8 +31,6 @@ CodeMirror.showHint = function (cm, getHints, options) {
             pickCompletion(cm, data, completions[0]);
             CodeMirror.signal(data, "close");
             return true;
-        } else if (completions.length == 1) { //Added for FiddleSalad
-            return false;
         }
 
         // Build the select widget
