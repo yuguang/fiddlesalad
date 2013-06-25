@@ -784,7 +784,7 @@ FiddleEditor = Class.$extend(
       for documentation in _.filter(editorDocumentation, (tabSetting) -> _.isObject(tabSetting))
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
-      page.set_source base_url + '/files/documentation/jquery/index.html?v=2013061218'
+      page.set_source base_url + '/files/documentation/jquery/index.html?v=2013062511'
       tabs.add 'jquery', page.to_html_string()
       if @settings.get_language(LANGUAGE_TYPE.STYLE) in COMPATIBLE_LANGUAGES.CSS or @settings.get_language(LANGUAGE_TYPE.DOCUMENT) in COMPATIBLE_LANGUAGES.HTML
         page = IframeComponent 'emmetReferenceTab'
@@ -970,7 +970,7 @@ CodeRunner = Class.$extend(
     frame = document.getElementById('viewer')
     @window = (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
     @initialized = false
-    @scripts = [base_url + '/js/prettyprint.js']
+    @scripts = []
     @executedScripts = []
     @delayedStyles = []
     @template =
