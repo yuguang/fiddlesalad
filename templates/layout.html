@@ -25,7 +25,7 @@
     <script type="text/javascript">
         var _startTime = (new Date()).getSeconds();
         {% include "javascript_setup.html" %}
-        {% if ownerId %}var ownerId = {{ ownerId }}{% endif %};
+        {% if ownerId %}var ownerId = '{{ ownerId }}'{% endif %};
         {% block json %}{% endblock %}
         {% if not DEBUG %}
         (function(g,b,d){var c=b.head||b.getElementsByTagName("head"),D="readyState",E="onreadystatechange",F="DOMContentLoaded",G="addEventListener",H=setTimeout;
