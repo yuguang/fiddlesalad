@@ -167,12 +167,6 @@ lintEditor =
     750
   )
 
-  keyHandler: (editor, event) ->
-    if event.keyCode is @blockEndKeyCode and event.type is 'keydown'
-      @changeHandler()
-    else if event.type is 'keypress' and not (event.keyCode < 41 and event.keyCode > 31) # not a navigation key
-      @popupAutocomplete(@keyCharacter(event))
-
 JavascriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -303,6 +297,7 @@ MarkdownEditor = TemplateEditor.$extend(
     @mode = 'markdown'
     @loadWorker('markdown')
     @documentationUrl = base_url + '/files/documentation/markdown.html'
+    @closeBrackets = false
 
   keyHandler: ->
 )

@@ -30,6 +30,7 @@ CodeCompleteEditor = Editor.$extend(
     @debounceWaitSeconds = 250
     @editCount = 0
     @varClassName = 'cm-variable'
+    @closeBrackets = true
 
   get_code_complexity: ->
     @editCount
@@ -51,6 +52,7 @@ CodeCompleteEditor = Editor.$extend(
     lineWrapping: true
     lineNumbers: @showLineNumbers
     onKeyEvent: _.bind(@keyHandler, this)
+    autoCloseBrackets: @closeBrackets
 
   popupAutocomplete: (lastChar='') ->
     # bind pre-fills arguments to the hint function
