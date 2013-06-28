@@ -12,6 +12,8 @@ BackgroundWorker =
           when ('result')
             code = event.data.resultText
             @previewCode code
+          when ('hint')
+            @displayHint(event.data.hint)
           when ('error')
             @displayError event.data.errorText
       false
@@ -19,9 +21,12 @@ BackgroundWorker =
 
   previewCode: (code) ->
 
-  displayError: (message, settings=text: message) ->
+  displayHint: (hint) ->
+    CodeMirror.makeMarker(@pad, hint.line, hint.severity, hint.message)
+
+  displayError: (message) ->
     if message isnt @previousError
-      noty _.defaults(settings, notyDefaults)
+      noty _.defaults(text: message, notyDefaults)
       @previousError = message
 
 DynamicEditor = CodeCompleteEditor.$extend(
@@ -152,28 +157,15 @@ ProgramEditor = DynamicEditor.$extend(
   preview: (javascript) ->
     codeRunner.execute javascript
 )
-lintEditor =
-  debounceWaitSeconds: 2250 # When the editor is idle after changes, call changeHandler
-
-  blockEndKeyCode: 13 # Enter
-
-  changeHandler: _.throttle(
-    ->
-      code = @get_code()
-      if viewModel.lint_enabled(@mode)
-        @compiler.postMessage code
-      else
-        @previewCode code
-    750
-  )
-
 JavascriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
     @mode = 'javascript'
     @loadWorker('jshint')
 
-  __include__: [lintEditor]
+  get_options: ->
+    gutters: ["CodeMirror-lint-markers"],
+    lintWith: @compiler.postMessage
 
   updateVars: ->
 
@@ -182,6 +174,7 @@ JavascriptEditor = ProgramEditor.$extend(
   load: ->
     @$super()
     @hint = CodeMirror.javascriptHint
+    root.editor = @pad
 
   selectionHandler: _.throttle(
     ->
@@ -206,8 +199,6 @@ CssEditor = StyleEditor.$extend(
     @theme = 'default'
     @loadWorker('csslint')
     @blockEndKeyCode = 125
-
-  __include__: [lintEditor]
 
   get_options: ->
     _.defaults(
