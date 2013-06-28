@@ -13,7 +13,7 @@ BackgroundWorker =
             code = event.data.resultText
             @previewCode code
           when ('hint')
-            @displayHint(event.data.hint)
+            @displayHint(event.data.hints)
           when ('error')
             @displayError event.data.errorText
       false
@@ -21,8 +21,8 @@ BackgroundWorker =
 
   previewCode: (code) ->
 
-  displayHint: (hint) ->
-    CodeMirror.makeMarker(@pad, hint.line, hint.severity, hint.message)
+  displayHint: (hints) ->
+    CodeMirror.updateLinting(@pad, hints)
 
   displayError: (message) ->
     if message isnt @previousError
@@ -165,7 +165,7 @@ JavascriptEditor = ProgramEditor.$extend(
 
   get_options: ->
     gutters: ["CodeMirror-lint-markers"],
-    lintWith: @compiler.postMessage
+    lintWith: (code) => @compiler.postMessage code
 
   updateVars: ->
 

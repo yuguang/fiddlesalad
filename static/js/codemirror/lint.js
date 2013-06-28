@@ -66,11 +66,6 @@ CodeMirror.validate = (function() {
     state.marked.length = 0;
   }
 
-  CodeMirror.makeMarker = function (editor, line, severity, message) {
-    var label = document.createDocumentFragment();
-    editor.setGutterMarker(line, GUTTER_ID, makeMarker(label.appendChild(annotationTooltip({severity: severity, message: message})), severity, false, undefined))
-  }
-
   function makeMarker(labels, severity, multiple, tooltips) {
     var marker = document.createElement("div"), inner = marker;
     marker.className = "CodeMirror-lint-marker-" + severity;
@@ -94,7 +89,7 @@ CodeMirror.validate = (function() {
   function groupByLine(annotations) {
     var lines = [];
     for (var i = 0; i < annotations.length; ++i) {
-      var ann = annotations[i], line = ann.from.line;
+      var ann = annotations[i], line = ann.line;
       (lines[line] || (lines[line] = [])).push(ann);
     }
     return lines;
@@ -115,7 +110,7 @@ CodeMirror.validate = (function() {
     options.getAnnotations(cm.getValue());
   }
 
-  function updateLinting(cm, annotationsNotSorted) {
+  CodeMirror.updateLinting = function(cm, annotationsNotSorted) {
     clearMarks(cm);
     var state = cm.state.lint, options = state.options;
 
@@ -136,11 +131,6 @@ CodeMirror.validate = (function() {
 
         if (options.formatAnnotation) ann = options.formatAnnotation(ann);
         if (state.hasGutter) tipLabel.appendChild(annotationTooltip(ann));
-
-        if (ann.to) state.marked.push(cm.markText(ann.from, ann.to, {
-          className: "CodeMirror-lint-mark-" + severity,
-          __annotation: ann
-        }));
       }
 
       if (state.hasGutter)

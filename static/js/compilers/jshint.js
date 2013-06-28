@@ -4521,148 +4521,157 @@ loop:   for (;;) {
 var bogus = [ "Dangerous comment" ];
 
 var warnings = [
-    [ "Expected '{'",
-        "Statement body should be inside '{ }' braces." ]
+  [ "Expected '{'",
+    "Statement body should be inside '{ }' braces." ]
 ];
 
 var errors = [ "Missing semicolon", "Extra comma", "Missing property name",
-    "Unmatched ", " and instead saw", " is not defined",
-    "Unclosed string", "Stopping, unable to continue" ];
+  "Unmatched ", " and instead saw", " is not defined",
+  "Unclosed string", "Stopping, unable to continue" ];
 
 function validator(options, text) {
-    JSHINT(text, options);
-    var errors = JSHINT.data().errors, result = [];
-    if (errors) parseErrors(errors, result);
-    return result;
+  JSHINT(text, options);
+  var errors = JSHINT.data().errors, result = [];
+  if (errors) parseErrors(errors, result);
+  return result;
 }
 
 function cleanup(error) {
-    // All problems are warnings by default
-    fixWith(error, warnings, "warning", true);
-    fixWith(error, errors, "error");
+  // All problems are warnings by default
+  fixWith(error, warnings, "warning", true);
+  fixWith(error, errors, "error");
 
-    return isBogus(error) ? null : error;
+  return isBogus(error) ? null : error;
 }
 
 function fixWith(error, fixes, severity, force) {
-    var description, fix, find, replace, found;
+  var description, fix, find, replace, found;
 
-    description = error.description;
+  description = error.description;
 
-    for (var i = 0; i < fixes.length; i++) {
-        fix = fixes[i];
-        find = (typeof fix === "string" ? fix : fix[0]);
-        replace = (typeof fix === "string" ? null : fix[1]);
-        found = description.indexOf(find) !== -1;
+  for (var i = 0; i < fixes.length; i++) {
+    fix = fixes[i];
+    find = (typeof fix === "string" ? fix : fix[0]);
+    replace = (typeof fix === "string" ? null : fix[1]);
+    found = description.indexOf(find) !== -1;
 
-        if (force || found) {
-            error.severity = severity;
-        }
-        if (found && replace) {
-            error.description = replace;
-        }
+    if (force || found) {
+      error.severity = severity;
     }
+    if (found && replace) {
+      error.description = replace;
+    }
+  }
 }
 
 function isBogus(error) {
-    var description = error.description;
-    for (var i = 0; i < bogus.length; i++) {
-        if (description.indexOf(bogus[i]) !== -1) {
-            return true;
-        }
+  var description = error.description;
+  for (var i = 0; i < bogus.length; i++) {
+    if (description.indexOf(bogus[i]) !== -1) {
+      return true;
     }
-    return false;
+  }
+  return false;
 }
 
 function parseErrors(errors, output) {
-    for (var i = 0; i < errors.length; i++) {
-        var error = errors[i];
-        if (error) {
-            var linetabpositions, index;
+  for (var i = 0; i < errors.length; i++) {
+    var error = errors[i];
+    if (error) {
+      var linetabpositions, index;
 
-            linetabpositions = [];
+      linetabpositions = [];
 
-            // This next block is to fix a problem in jshint. Jshint
-            // replaces
-            // all tabs with spaces then performs some checks. The error
-            // positions (character/space) are then reported incorrectly,
-            // not taking the replacement step into account. Here we look
-            // at the evidence line and try to adjust the character position
-            // to the correct value.
-            if (error.evidence) {
-                // Tab positions are computed once per line and cached
-                var tabpositions = linetabpositions[error.line];
-                if (!tabpositions) {
-                    var evidence = error.evidence;
-                    tabpositions = [];
-                    // ugggh phantomjs does not like this
-                    // forEachChar(evidence, function(item, index) {
-                    Array.prototype.forEach.call(evidence, function (item, index) {
-                        if (item === '\t') {
-                            // First col is 1 (not 0) to match error
-                            // positions
-                            tabpositions.push(index + 1);
-                        }
-                    });
-                    linetabpositions[error.line] = tabpositions;
-                }
-                if (tabpositions.length > 0) {
-                    var pos = error.character;
-                    tabpositions.forEach(function (tabposition) {
-                        if (pos > tabposition) pos -= 1;
-                    });
-                    error.character = pos;
-                }
+      // This next block is to fix a problem in jshint. Jshint
+      // replaces
+      // all tabs with spaces then performs some checks. The error
+      // positions (character/space) are then reported incorrectly,
+      // not taking the replacement step into account. Here we look
+      // at the evidence line and try to adjust the character position
+      // to the correct value.
+      if (error.evidence) {
+        // Tab positions are computed once per line and cached
+        var tabpositions = linetabpositions[error.line];
+        if (!tabpositions) {
+          var evidence = error.evidence;
+          tabpositions = [];
+          // ugggh phantomjs does not like this
+          // forEachChar(evidence, function(item, index) {
+          Array.prototype.forEach.call(evidence, function (item, index) {
+            if (item === '\t') {
+              // First col is 1 (not 0) to match error
+              // positions
+              tabpositions.push(index + 1);
             }
-
-            var start = error.character - 1, end = start + 1;
-            if (error.evidence) {
-                index = error.evidence.substring(start).search(/.\b/);
-                if (index > -1) {
-                    end += index;
-                }
-            }
-
-            // Convert to format expected by validation service
-            error.description = error.reason;// + "(jshint)";
-            error.start = error.character;
-            error.end = end;
-            error = cleanup(error);
-
-            if (error)
-                output.push({message: error.description,
-                    severity: error.severity,
-                    line: error.line});
+          });
+          linetabpositions[error.line] = tabpositions;
         }
+        if (tabpositions.length > 0) {
+          var pos = error.character;
+          tabpositions.forEach(function (tabposition) {
+            if (pos > tabposition) pos -= 1;
+          });
+          error.character = pos;
+        }
+      }
+
+      var start = error.character - 1, end = start + 1;
+      if (error.evidence) {
+        index = error.evidence.substring(start).search(/.\b/);
+        if (index > -1) {
+          end += index;
+        }
+      }
+
+      // Convert to format expected by validation service
+      error.description = error.reason;// + "(jshint)";
+      error.start = error.character;
+      error.end = end;
+      error = cleanup(error);
+
+      if (error)
+        output.push({message: error.description,
+          severity: error.severity,
+          line: error.line - 1}); //subtract to start at 0
     }
+  }
 }
+
+var hintOptions = {
+  browser: true, // if the standard browser globals should be predefined
+  couch: false, // if CouchDB globals should be predefined
+  node: false, // if the Node.js environment globals should be predefined
+  rhino: false, // if the Rhino environment globals should be predefined
+  wsh: false  // if the Windows Scripting Host environment globals should be predefined
+};
 
 function sendResult(resultText) {
-    if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
-    postMessage({
-        'type': 'result',
-        'resultText': resultText
-    });
+  if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
+  postMessage({
+    'type': 'result',
+    'resultText': resultText
+  });
 }
-function sendHint(hint) {
-    postMessage({
-        'type': 'hint',
-        'hint': hint
-    });
+function sendHints(annotations) {
+  postMessage({
+    'type': 'hint',
+    'hints': annotations
+  });
 }
 if (typeof window === "undefined" && typeof global === "undefined") {
-    this.onmessage = function (event) {
-        var hints = validator(null, event.data);
-        var success = true;
+  this.onmessage = function (event) {
+    var hints = validator(hintOptions, event.data);
+    sendHints(hints);
 
-        for (var i = 0; i < hints.length && typeof hints[i].message != 'undefined' && hints[i].message !== null; i++) {
-            sendHint(hints[i]);
-            if (hints[i].severity === 'error') {
-                success = false;
-            }
-        }
-        if (success) {
-            sendResult(event.data);
-        }
+    var success = true;
+
+    for (var i = 0; i < hints.length && typeof hints[i].message != 'undefined' && hints[i].message !== null; i++) {
+      if (hints[i].severity === 'error') {
+        success = false;
+      }
     }
+    if (success) {
+      sendResult(event.data);
+    }
+  }
 }
