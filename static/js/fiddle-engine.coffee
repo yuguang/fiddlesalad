@@ -157,15 +157,25 @@ ProgramEditor = DynamicEditor.$extend(
   preview: (javascript) ->
     codeRunner.execute javascript
 )
+
+lintEditor =
+  changeHandler: ->
+
+  get_options: ->
+    gutters: ["CodeMirror-lint-markers"],
+    lintWith: (code) =>
+      if viewModel.lint_enabled(@mode)
+        @compiler.postMessage code
+      else
+        @previewCode code
+
 JavascriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
     @mode = 'javascript'
     @loadWorker('jshint')
 
-  get_options: ->
-    gutters: ["CodeMirror-lint-markers"],
-    lintWith: (code) => @compiler.postMessage code
+  __include__: [lintEditor]
 
   updateVars: ->
 
@@ -174,7 +184,6 @@ JavascriptEditor = ProgramEditor.$extend(
   load: ->
     @$super()
     @hint = CodeMirror.javascriptHint
-    root.editor = @pad
 
   selectionHandler: _.throttle(
     ->
@@ -213,7 +222,7 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeescript')
-    @documentationUrl = base_url + '/files/documentation/coffeescript.html'
+    @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013062818'
     @tabCharaterLength = 2
 
   load: ->
