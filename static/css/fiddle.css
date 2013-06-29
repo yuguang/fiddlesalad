@@ -18,9 +18,6 @@ em {
 #source > div > div {
   height: 100%;
 }
-.spellcheck-suggestbox-foot {
-  display: none;
-}
 #accordion {
   width: 190px;
 }

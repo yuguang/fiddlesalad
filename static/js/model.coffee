@@ -55,7 +55,6 @@ ViewModel = Class.$extend(
       url
     @revisionsMenu = new RevisionsMenu()
     @localHistory = LocalHistory(@revisionsMenu.revisions)
-    @spellcheck = false
     @afterLogin = ->
     ko.computed =>
       # if the user just logged in
@@ -89,6 +88,21 @@ ViewModel = Class.$extend(
         return  if not (_.isString(@revisionsMenu.selectedRevision()) and _.isString(@revisionsMenu.selectedDiffRevision()) and (@timestampChanged(@revisionsMenu.selectedRevision) or @timestampChanged(@revisionsMenu.selectedDiffRevision)))
         engine.compare_revisions @revisionsMenu.selectedRevision(), @revisionsMenu.selectedDiffRevision()
 
+  checkSpelling: (words) ->
+    misspelledWords = []
+    _.each(words, (word) ->
+      $.ajax
+        url: ajax_url + '/ajax/get.php?url=' + encodeURIComponent('http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' + word)
+        dataType: 'json'
+        async: false
+        success: (response) ->
+          suggestions = response[1]
+          word = word.toLowerCase()
+          if not _.contains _.map(suggestions, (suggestion) -> suggestion.toLowerCase()), word
+            misspelledWords.push(word)
+    )
+    misspelledWords
+
   saveCurrentRevision: ->
     _.throttle @localHistory.create_revision(), 2*MINUTE 
 
@@ -102,7 +116,8 @@ ViewModel = Class.$extend(
     if @emptyFiddle(code)
       @formMessage 'please fill in code'
       return
-    if _.all(@title().split(' '), (word) -> word.length < 3)
+    titleWords = @title().split(' ')
+    if _.all(titleWords, (word) -> word.length < 3)
       @formMessage 'title contains invalid words'
       return
     profanity = false
@@ -116,25 +131,12 @@ ViewModel = Class.$extend(
     if profanity
       @formMessage 'no profanity allowed'
       return
-    if @spellcheck
-      $('.check-spelling').spellchecker(
-        url: ajax_url + '/ajax/checkspelling.php'
-        lang: 'en'
-        engine: 'google'
-        suggestBoxPosition: 'above'
-      ).spellchecker 'check', (result) =>
-        validMispellings = @validMispellings($('.spellcheck-word-highlight').map( ->
-          $(this).text().toLowerCase()
-        ))
-        unless result or validMispellings
-          @formMessage 'please check for misspellings'
-          return
-        if validMispellings
-          $('.spellcheck-badwords').hide()
-        @submitForm code
-    else
-      @submitForm code
-
+    misspellings = @checkSpelling titleWords
+    if misspellings.length
+      @formMessage 'please check for misspellings'
+      $('#title_msg').text misspellings.join(', ')
+      return
+    @submitForm code
 
   prepare_form: ->
     $('form').validate submitHandler: =>
@@ -225,12 +227,6 @@ PythonViewModel = ViewModel.$extend(
   emptyFiddle: (code) ->
     code.length is 0
 
-  validMispellings: (mispelledWords) ->
-    usedWords = _.map(engine.get_code().split(' '), (word) -> $.trim(word))
-    _.all(mispelledWords, (word) ->
-      word in usedWords
-    )
-
   selectExample: (example) ->
     engine.set_code atob(example.code)
 
@@ -320,15 +316,6 @@ FiddleViewModel = ViewModel.$extend(
   emptyFiddle: (code) ->
     code = $.parseJSON(code)
     Math.max(code[@documentLanguage()].length, code[@styleLanguage()].length, code[@programLanguage()].length) is 0
-
-  validMispellings: (mispelledWords) ->
-    allowedWords = ['html', 'haml', 'zen coding', 'markdown', 'coffeecup', 'jade', 'css', 'less', 'scss', 'sass', 'stylus', 'javascript', 'coffeescript', 'python', 'roy']
-    allowedWords = allowedWords.concat(_.flatten(_.map(viewModel.resources(), (resource) ->
-      resource.title().replace(/\d/g, '').split(/\W/)
-    )))
-    _.all(mispelledWords, (word) ->
-      word in allowedWords
-    )
 
   disableLint: ->
     @configuration.cssLintEnabled(false)

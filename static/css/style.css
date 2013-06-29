@@ -175,10 +175,6 @@ form textarea {
     color: #999;
 }
 
-.spellcheck-badwords span {
-    display: inline;
-}
-
 #packages li {
     list-style: circle;
 }

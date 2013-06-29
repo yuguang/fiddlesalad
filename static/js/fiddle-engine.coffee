@@ -25,7 +25,9 @@ BackgroundWorker =
     CodeMirror.updateLinting(@pad, hints)
 
   displayError: (message) ->
-    console.log message
+    if message isnt @previousError
+      noty _.defaults(text: message, notyDefaults)
+      @previousError = message
 
 DynamicEditor = CodeCompleteEditor.$extend(
   __init__: (id) ->
