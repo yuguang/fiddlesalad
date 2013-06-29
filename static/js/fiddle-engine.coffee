@@ -25,9 +25,7 @@ BackgroundWorker =
     CodeMirror.updateLinting(@pad, hints)
 
   displayError: (message) ->
-    if message isnt @previousError
-      noty _.defaults(text: message, notyDefaults)
-      @previousError = message
+    console.log message
 
 DynamicEditor = CodeCompleteEditor.$extend(
   __init__: (id) ->
@@ -161,7 +159,7 @@ ProgramEditor = DynamicEditor.$extend(
 lintEditor =
   changeHandler: ->
 
-  get_options: ->
+  lintOptions: ->
     gutters: ["CodeMirror-lint-markers"],
     lintWith: (code) =>
       if viewModel.lint_enabled(@mode)
@@ -180,6 +178,12 @@ JavascriptEditor = ProgramEditor.$extend(
   updateVars: ->
 
   get_documentation: ->
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      @lintOptions()
+    )
 
   load: ->
     @$super()
@@ -209,10 +213,13 @@ CssEditor = StyleEditor.$extend(
     @loadWorker('csslint')
     @blockEndKeyCode = 125
 
+  __include__: [lintEditor]
+
   get_options: ->
     _.defaults(
       @$super()
       profile: 'css'
+      @lintOptions()
     )
 
   get_documentation: ->
