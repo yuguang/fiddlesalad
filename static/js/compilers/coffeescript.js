@@ -15,7 +15,7 @@ function sendError(errorText) {
 }
 self.addEventListener('message', function(e) {
     try {
-        sendResult(CoffeeScript.compile(e.data));
+        sendResult(CoffeeScript.compile(e.data, {bare: true}));
     } catch (err) {
 		if (err.name == 'SyntaxError')
 			sendError(err.message);
