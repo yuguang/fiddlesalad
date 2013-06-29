@@ -79,28 +79,9 @@ AWS_SECRET_ACCESS_KEY = 's3_secret'
 
 AWS_STORAGE_BUCKET_NAME = 'bucket_name'
 
-
 build_config = False
 
-if not build_config:
-    FILES = {
-        'BOWSER': 'js/bowser.js',
-        'UNDERSCORE': 'js/underscore.js',
-        'VALIDATE': 'js/jquery.validate.js',
-        'KNOCKOUT': 'js/knockout-latest.debug.js',
-        'KNOCKOUT_MAPPING': 'js/knockout.mapping.js',
-        'PACKAGES': 'js/packages.fiddle.js',
-        }
-else:
-    FILES = {
-        'BOWSER': 'js/build/lib/bowser.min.js',
-        'UNDERSCORE': 'js/build/lib/underscore.min.js',
-        'VALIDATE': 'js/build/lib/jquery.validate.min.js',
-        'KNOCKOUT': 'js/build/lib/knockout.min.js',
-        'KNOCKOUT_MAPPING': 'js/build/lib/knockout.mapping.min.js',
-        'PACKAGES': 'js/build/packages.fiddle.js',
-        }
-
+from files import *
 # Media files
 MEDIASYNC = {
     'BACKEND': 'mediasync.backends.s3',
@@ -109,19 +90,6 @@ MEDIASYNC = {
     'AWS_BUCKET': AWS_STORAGE_BUCKET_NAME,
     'JOINED': MEDIASYNC_JOINED,
 }
-
-if build_config:
-    MEDIASYNC['PROCESSORS'] = ('mediasync.processors.closurecompiler.compile','mediasync.processors.slim.css_minifier',)
-    #MEDIASYNC['PROCESSORS'] = ('mediasync.processors.combine.default',)
-    MEDIASYNC['JOINED']['js/jquery-ui.fiddle.js'] = [
-        'js/build/lib/jquery-ui-1.8.19.custom.min.js',
-        'js/build/lib/jquery.wijmo.wijutil.min.js',
-        'js/build/lib/jquery.wijmo.wijdialog.min.js',
-        'js/build/lib/jquery.wijmo.wijsplitter.min.js',
-        'js/build/lib/jquery.wijmo.wijmenu.min.js',
-        ]
-
-MEDIASYNC['SERVE_REMOTE'] = False
 
 # Additional locations of static files
 STATICFILES_DIRS = (
