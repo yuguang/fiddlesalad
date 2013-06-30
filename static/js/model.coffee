@@ -188,11 +188,11 @@ ViewModel = Class.$extend(
 
   checkTitleOnKeyup: ->
     input = $('input#id_title')
-    input.keyup _.debounce(->
+    input.keyup _.debounce(=>
         return  if input.val().split(' ').length < 3
         $.getJSON '/check_title/',
           title: input.val(),
-          (json) ->
+          (json) =>
             if json.available
               @titleMessage.set_message 'available', 'check'
             else
