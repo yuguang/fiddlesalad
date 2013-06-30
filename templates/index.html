@@ -54,7 +54,7 @@
                 <li><a data-bind="attr: { href: '#' + id }, text: title"></a></li>
             </ul>
             <!-- ko foreach: tabs -->
-                <div class="maximized" data-bind="attr: { id: id }, html: content">
+                <div class="maximized" data-bind="attr: { id: id }, style: { height: height }, html: content">
                 </div>
             <!-- /ko -->
         </div>

@@ -596,6 +596,7 @@ FiddleViewModel = ViewModel.$extend(
 
   initializeTabs: (elements, data) ->
     $(elements).tabs()
+    data.height(($('#' + data.parentId).height() - $('#' + data.id).find('.ui-tabs').outerHeight() - $('.ui-dialog-titlebar:first').outerHeight() + 2) + 'px')
 
   iframeContainers: _.memoize( ->
     containers = [ $('#source').parent(), $('#result').parent() ]

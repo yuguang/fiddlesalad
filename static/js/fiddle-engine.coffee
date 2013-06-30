@@ -787,7 +787,7 @@ FiddleEditor = Class.$extend(
       layout = ColumnLayout 3
 
       frame = Frame 'documentation', 'Documentation'
-      tabs = TabInterface 'documentation-tabs'
+      tabs = TabInterface 'documentation-tabs', 'documentation'
       dochubPage = IframeComponent name + 'ReferenceTab'
       dochubPage.set_source 'http://dochub.io/'
       dochubTab = {title: 'dochub', content: dochubPage.to_html_string()}
@@ -798,7 +798,7 @@ FiddleEditor = Class.$extend(
           editorDocumentation = [@documentEditor.get_documentation(), @styleEditor.get_documentation(), @programEditor.get_documentation()]
         else
           editorDocumentation = [@styleEditor.get_documentation(), @programEditor.get_documentation(), @documentEditor.get_documentation()]
-      editorDocumentation.push dochubTab
+      editorDocumentation.push(dochubTab)  if not debug
       for documentation in _.filter(editorDocumentation, (tabSetting) -> _.isObject(tabSetting))
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
@@ -832,7 +832,7 @@ FiddleEditor = Class.$extend(
 
     # source preview tabs
     previewFrame = Frame 'source', 'Source'
-    tabs = TabInterface 'source-tab'
+    tabs = TabInterface 'source-tab', 'source'
     preview = IframeComponent @id.css
     preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013051208'
     index = tabs.add 'css', preview.to_html_string()

@@ -4,14 +4,16 @@ VisualComponent = Class.$extend(
     @id = id
 )
 TabInterface = VisualComponent.$extend(
-  __init__: (id) ->
+  __init__: (id, parentId) ->
     @id = id
+    @parentId = parentId
     @type = 'tabs'
     @tabs = new Array
     @tab_count = 0
+    @height = ko.observable('')
 
   add: (title='', content='') ->
-    @tabs.push { title, content, id: @getId() }
+    @tabs.push { title, content, id: @getId(), height: @height }
     @tab_count++
 
   getId: ->
@@ -32,7 +34,7 @@ PreviewComponent = SourceComponent.$extend(
     @id = id
     @type = 'preview'
     @tag = 'pre'
-    @class = 'cm-s-default'
+    @style = 'cm-s-default'
 )
 IframeComponent = SourceComponent.$extend(
   __init__: (id) ->
