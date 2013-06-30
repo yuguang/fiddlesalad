@@ -53,6 +53,7 @@ CodeCompleteEditor = Editor.$extend(
     lineNumbers: @showLineNumbers
     onKeyEvent: _.bind(@keyHandler, this)
     autoCloseBrackets: @closeBrackets
+    highlightSelectionMatches: true
 
   popupAutocomplete: (lastChar='') ->
     # bind pre-fills arguments to the hint function

@@ -120,6 +120,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror/searchcursor.js',
             'js/codemirror/search.js',
             'js/codemirror/formatting.js',
+            'js/codemirror/match-highlighter.js',
             'js/keywords.js',
             'js/codemirror/lint.js',
             'js/codemirror/closetag.js',
