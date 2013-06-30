@@ -781,10 +781,14 @@ FiddleEditor = Class.$extend(
       dochubPage = IframeComponent name + 'ReferenceTab'
       dochubPage.set_source 'http://dochub.io/'
       dochubTab = {title: 'dochub', content: dochubPage.to_html_string()}
-      if @settings.get_language(LANGUAGE_TYPE.STYLE) is LANGUAGE.LESS
-        editorDocumentation = [@styleEditor.get_documentation(), dochubTab , @documentEditor.get_documentation(), @programEditor.get_documentation()]
-      else
-        editorDocumentation = [dochubTab, @programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
+      switch LANGUAGE_CATEGORY[engine.get_url_path_language()]
+        when LANGUAGE_TYPE.PROGRAM
+          editorDocumentation = [@programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
+        when LANGUAGE_TYPE.DOCUMENT
+          editorDocumentation = [@documentEditor.get_documentation(), @styleEditor.get_documentation(), @programEditor.get_documentation()]
+        else
+          editorDocumentation = [@styleEditor.get_documentation(), @programEditor.get_documentation(), @documentEditor.get_documentation()]
+      editorDocumentation.push dochubTab
       for documentation in _.filter(editorDocumentation, (tabSetting) -> _.isObject(tabSetting))
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
