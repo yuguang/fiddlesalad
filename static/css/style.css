@@ -231,3 +231,7 @@ div#revisionsMenu {
 #revisionsMenu input {
     margin-left: 5px;
 }
+
+#titleMessage span {
+    vertical-align: top;
+}

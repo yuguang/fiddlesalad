@@ -35,6 +35,13 @@ LocalHistory = Class.$extend(
   saveRevisions: ->
     store.set @title, @revisions()
 )
+TitleMessage = ->
+  @icon = ko.observable('')
+  @text = ko.observable('')
+  @set_message = (message, image='blank') ->
+    @text message
+    @icon [base_url, '/images/', image, '.png'].join('')
+  @
 RevisionsMenu = ->
   @revisions = ko.observableArray([])
   @selectedRevision = ko.observable()
@@ -55,6 +62,7 @@ ViewModel = Class.$extend(
       url
     @revisionsMenu = new RevisionsMenu()
     @localHistory = LocalHistory(@revisionsMenu.revisions)
+    @titleMessage = new TitleMessage()
     @afterLogin = ->
     ko.computed =>
       # if the user just logged in
@@ -134,7 +142,7 @@ ViewModel = Class.$extend(
     misspellings = @checkSpelling titleWords
     if misspellings.length
       @formMessage 'please check for misspellings'
-      $('#title_msg').text misspellings.join(', ')
+      @titleMessage.set_message misspellings.join(', '), 'error'
       return
     @submitForm code
 
@@ -185,9 +193,10 @@ ViewModel = Class.$extend(
         $.getJSON '/check_title/',
           title: input.val(),
           (json) ->
-            msg = 'unavailable'
-            msg = 'available'  if json.available
-            $('#title_msg').text msg
+            if json.available
+              @titleMessage.set_message 'available', 'check'
+            else
+              @titleMessage.set_message 'unavailable', 'error'
       , 750)
 
   updateShareUrl: ->
@@ -196,10 +205,6 @@ ViewModel = Class.$extend(
       url: @snippetUrl()
       , defaultShare)
     $('#share_this span').first().remove()  if $('#share_this span').length > 1
-
-  hideTitleField: ->
-    $("form p").first().addClass "invisible"
-    $("#title_msg").addClass "invisible"
 
   showValidationErrors: (errors) ->
     for field of errors
