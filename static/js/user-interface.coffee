@@ -34,7 +34,7 @@ PreviewComponent = SourceComponent.$extend(
     @id = id
     @type = 'preview'
     @tag = 'pre'
-    @style = 'cm-s-default'
+    @class = 'cm-s-default'
 )
 IframeComponent = SourceComponent.$extend(
   __init__: (id) ->
