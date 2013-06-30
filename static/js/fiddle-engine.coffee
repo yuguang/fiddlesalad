@@ -303,7 +303,7 @@ CoffeecupEditor = TemplateEditor.$extend(
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeecup')
-    @documentationUrl = base_url + '/files/documentation/coffeekup.html'
+    @documentationUrl = '/coffeecup/documentation/'
 
   get_documentation: ->
     @$super('coffeecup')

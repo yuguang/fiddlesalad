@@ -18,6 +18,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('',
     (r'^$', views.index),
+    (r'^coffeecup/documentation/$', 'django.views.generic.simple.direct_to_template', {'template': 'documentation/coffeekup.html'}),
 )
 
 urlpatterns += patterns('cloud_ide.fiddle.views',

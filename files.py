@@ -78,6 +78,7 @@ MEDIASYNC_JOINED = {
             'js/build/lib/shAutoloader.js',
             'js/build/lib/shBrushPython.js',
             'js/build/lib/shBrushXml.js',
+            'js/build/lib/shBrushCoffeeScript.js',
         ],
         'js/jquery-ui.fiddle.js': [
             'js/jquery-ui-1.8.18.custom.js',
