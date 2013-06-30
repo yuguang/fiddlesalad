@@ -354,6 +354,8 @@ HtmlEditor = DocumentEditor.$extend(
   get_documentation: ->
 )
 serverCompiler =
+  marker: null
+
   compileSuccess: true
 
   loadThrottledExecution: ->
@@ -381,7 +383,7 @@ serverCompiler =
       scannerPosition++
     while scannerPosition < lineString.length and lineString.charAt(scannerPosition) isnt ' '
       scannerPosition++
-    @pad.markText(
+    @marker = @pad.markText(
         line: lineNumber
         ch: columnNumber
       ,
@@ -398,7 +400,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['http://fiddlesalad.com/',  @mode, '/compile/'].join('')
+      ['/',  @mode, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -413,7 +415,7 @@ serverCompiler =
           @displayError response.error
       'json'
     )
-    $('span.syntax-error').removeClass 'syntax-error'
+    @marker?.clear()
 
   changeHandler: (editor, change) ->
     ###
