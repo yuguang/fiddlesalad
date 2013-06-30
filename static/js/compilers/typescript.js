@@ -43,6 +43,24 @@ function sendError(errorText) {
 var noop = function () {
 };
 
+function sendHints(annotations) {
+  postMessage({
+    'type': 'hint',
+    'hints': annotations
+  });
+}
+
+function oc(a){
+	var o = {};
+	for(var i=0;i<a.length;i++)
+	{
+	o[a[i]]='';
+	}
+	return o;
+}
+
+var ignore = oc(["The name 'IArguments' does not exist in the current scope", "The name 'document' does not exist in the current scope"]);
+
 self.addEventListener('message', function (e) {
 	var outfile = {
 		source: "",
@@ -77,9 +95,36 @@ self.addEventListener('message', function (e) {
 	
 	if (outfile.source.length) {
 		sendResult(outfile.source);
-	} else {
-		for (var i = 0, len = parseErrors.length; i < len; i++) {
-			sendError(parseErrors[i].message);
+	}
+	
+	var lines = e.data.split('\n');
+	var lineLengths = [lines[0].length];
+	for (var i = 1; i < lines.length; i++) {			
+		lineLengths[i] = lineLengths[i - 1] + lines[i].length;
+	}
+	
+	var hints = [];
+	var hintLines = {};
+	for (var i = 0, len = parseErrors.length; i < len; i++) {			
+		if (!(parseErrors[i].message in ignore)) {
+			var lineNumber;
+			for (lineNumber = 0; lineNumber < lineLengths.length; lineNumber++) {
+				if (parseErrors[i].start < lineLengths[lineNumber]) {
+					break;
+				}
+			}
+			if (!(lineNumber in hintLines)) {
+				hintLines[lineNumber] = [];
+			} 
+			if (hintLines[lineNumber].indexOf(parseErrors[i].message) < 0) {
+				hintLines[lineNumber].push(parseErrors[i].message);
+				hints.push({
+					message: parseErrors[i].message,
+					line: lineNumber,
+					severity: 'warning'
+				});
+			}
 		}
 	}
+	sendHints(hints);
 }, false);

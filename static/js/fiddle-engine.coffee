@@ -259,6 +259,14 @@ TypescriptEditor = ProgramEditor.$extend(
     @loadWorker('typescript')
     @documentationUrl = 'http://www.johnpapa.net/typescriptpost3/'
 
+  __include__: [lintEditor]
+
+  get_options: ->
+    _.defaults(
+      @$super()
+      @lintOptions()
+    )
+
   get_documentation: ->
     @$super('typescript')
 
