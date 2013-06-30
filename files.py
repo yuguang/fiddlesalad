@@ -134,6 +134,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror/mode/htmlmixed/htmlmixed.js',
             'js/codemirror/mode/ruby/ruby.js',
             'js/codemirror/mode/haml/haml.js',
+            'js/codemirror/multiplex.js',
             'js/codemirror/mode/jade/jade.js',
             'js/codemirror/mode/less/less.js',
             'js/codemirror/mode/sass/sass.js',

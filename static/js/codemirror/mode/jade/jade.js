@@ -1,8 +1,4 @@
-/**
- * Link to the project's GitHub page:
- * https://github.com/pickhardt/jade-codemirror-mode
- */
-CodeMirror.defineMode('jade', function(conf) {
+CodeMirror.defineMode('jade-internal', function(conf) {
     var ERRORCLASS = 'error';
 
     function wordRegexp(words) {
@@ -343,6 +339,16 @@ CodeMirror.defineMode('jade', function(conf) {
 
     };
     return external;
+});
+
+// handles HTML tags within Jade mode
+CodeMirror.defineMode("jade", function (config) {
+    return CodeMirror.multiplexingMode(
+        CodeMirror.getMode(config, "jade-internal"),
+        {open: "<", close: ">",
+            mode: CodeMirror.getMode(config, "text/plain"),
+            delimStyle: "delimit"}
+    );
 });
 
 CodeMirror.defineMIME('text/jade', 'jade');
