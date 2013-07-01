@@ -68,6 +68,7 @@ DynamicEditor = CodeCompleteEditor.$extend(
       @$super()
       indentUnit: @tabCharaterLength
       indentWithTabs: true
+      tabSize: @tabCharaterLength
     )
 
   previewCode: (code) ->
