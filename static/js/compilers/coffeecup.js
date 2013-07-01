@@ -398,10 +398,17 @@ function sendResult(resultText) {
         'resultText': resultText
     });
 }
-function sendError(errorText) {
+function sendError(error) {
+	var line;
+	if ('location' in error) { 
+		line = error.location.first_line;
+	} else if ('lineNumber' in error) {
+		line = error.lineNumber;
+	}
     postMessage({
         'type': 'error',
-        'errorText': errorText
+		'line': line,
+        'errorText': error.message
     });
 }
 self.addEventListener('message', function(e) {
@@ -409,6 +416,6 @@ self.addEventListener('message', function(e) {
         html = window.coffeecup.compile(e.data.code)(e.data.locals);
         sendResult(html);
     } catch (err) {
-        sendError(err.message);
+        sendError(err);
     }
 }, false);

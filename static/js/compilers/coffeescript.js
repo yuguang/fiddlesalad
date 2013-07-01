@@ -7,11 +7,17 @@ function sendResult(resultText) {
         'resultText': resultText
     });
 }
-function sendError(errorText, line) {
+function sendError(error) {
+	var line;
+	if ('location' in error) { 
+		line = error.location.first_line;
+	} else if ('lineNumber' in error) {
+		line = error.lineNumber;
+	}
     postMessage({
         'type': 'error',
 		'line': line,
-        'errorText': errorText
+        'errorText': error.message
     });
 }
 self.addEventListener('message', function(e) {
@@ -19,13 +25,7 @@ self.addEventListener('message', function(e) {
         sendResult(CoffeeScript.compile(e.data, {bare: true}));
     } catch (err) {
 		if (err.name == 'SyntaxError') {
-			var line;
-			if ('location' in err) { 
-				line = err.location.first_line;
-			} else if ('lineNumber' in err) {
-				line = err.lineNumber;
-			}
-			sendError(err.message, line);
+			sendError(err);
 		}
     }
 }, false);

@@ -9588,17 +9588,24 @@ function sendResult(resultText) {
         'resultText': resultText
     });
 }
-function sendError(errorText) {
+function sendError(error) {
+	var line;
+	if ('location' in error) { 
+		line = error.location.first_line;
+	} else if ('lineNumber' in error) {
+		line = error.lineNumber;
+	}
     postMessage({
         'type': 'error',
-        'errorText': errorText
+		'line': line,
+        'errorText': error.message
     });
 }
 self.addEventListener('message', function(e) {
     stylus(e.data)
         .render(function(err, str){
-            if (err && err.length) {
-                sendError(err)
+            if (err && err.name == 'SyntaxError') {
+				sendError(err);
             } else {
                 sendResult(str)
             }
