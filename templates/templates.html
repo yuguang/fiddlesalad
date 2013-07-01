@@ -180,16 +180,16 @@
             </p>
             <!-- ko if: styleLanguage() == LANGUAGE.CSS -->
             <p>
-                <input type="checkbox" data-bind="checked: configuration.cssLintEnabled" /><label>CSS Warnings</label>
+                <label><input type="checkbox" data-bind="checked: configuration.cssLintEnabled" />CSS Warnings</label>
             </p>
             <!-- /ko -->
             <!-- ko if: programLanguage() == LANGUAGE.JAVASCRIPT -->
             <p>
-                <input type="checkbox" data-bind="checked: configuration.jsLintEnabled" /><label>JS Warnings</label>
+                <label><input type="checkbox" data-bind="checked: configuration.jsLintEnabled" />JS Warnings</label>
             </p>
             <!-- /ko -->
             <p>
-                <input type="checkbox" data-bind="checked: configuration.enableTransparency" /><label>Enable Transparency</label>
+                <label><input type="checkbox" data-bind="checked: configuration.enableTransparency" />Enable Transparency</label>
             </p>
             <!-- ko if: programLanguage() == LANGUAGE.COFFEESCRIPT -->
             <textarea id="javascriptConverter" placeholder="Paste JavaScript to be converted to CoffeeScript"></textarea>
