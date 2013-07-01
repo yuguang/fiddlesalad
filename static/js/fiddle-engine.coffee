@@ -444,7 +444,7 @@ serverCompiler =
         else
           @compileSuccess = false
           @markError response.error
-          @displayError response.error
+          @displayNotification response.error
       'json'
     )
     @marker?.clear()
