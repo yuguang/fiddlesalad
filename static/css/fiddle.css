@@ -221,6 +221,9 @@ div#source .ui-tabs {
   color: #a00;
   padding: 2px 5px 3px;
 }
+html.-moz- .lint-error {
+  padding: 3px 5px 2px;
+}
 .lint-error-icon {
   color: white;
   background-color: red;
