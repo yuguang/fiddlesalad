@@ -2,7 +2,7 @@ root = global ? window
 BackgroundWorker =
   previousError: new Object
 
-  errorDisplay: new Object
+  errorWidget: new Object
 
   loadWorker: (file) ->
     @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2012040912].join(''))
@@ -40,14 +40,14 @@ BackgroundWorker =
     widget
 
   clearLineWidget: ->
-    if not _.isEmpty @errorDisplay
-      @pad.removeLineWidget @errorDisplay
-      @errorDisplay = new Object
+    if not _.isEmpty @errorWidget
+      @pad.removeLineWidget @errorWidget
+      @errorWidget = new Object
 
   displayError: (line=@pad.getCursor().line, message) ->
     return  if _.isEqual {line, message}, @previousError
     @clearLineWidget()
-    @errorDisplay = @pad.addLineWidget line, @makeLineWidget(message)
+    @errorWidget = @pad.addLineWidget line, @makeLineWidget(message)
     @previousError = {line, message}
 
   displayNotification: (message) ->
@@ -306,10 +306,6 @@ DocumentEditor = DynamicEditor.$extend(
 
   preview: (html) ->
     codeRunner.execute engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html
-
-  load: ->
-    @$super()
-    @hint = CodeMirror.htmlHint
 )
 TemplateEditor = DocumentEditor.$extend(
   getViewerLocals: ->
@@ -362,6 +358,7 @@ HtmlEditor = DocumentEditor.$extend(
 
   load: ->
     @$super()
+    @hint = CodeMirror.htmlHint
     $('#beautifyHtml').on(
       'click'
       (event) =>
