@@ -44,11 +44,12 @@ BackgroundWorker =
       @pad.removeLineWidget @errorWidget
       @errorWidget = new Object
 
-  displayError: (line=@pad.getCursor().line, message) ->
-    return  if _.isEqual {line, message}, @previousError
-    @clearLineWidget()
-    @errorWidget = @pad.addLineWidget line, @makeLineWidget(message)
-    @previousError = {line, message}
+  displayError: _.throttle((line=@pad.getCursor().line, message) ->
+      return  if _.isEqual {line, message}, @previousError
+      @clearLineWidget()
+      @errorWidget = @pad.addLineWidget line, @makeLineWidget(message)
+      @previousError = {line, message}
+    , 1200)
 
   displayNotification: (message) ->
     noty _.defaults(text: message, notyDefaults)
