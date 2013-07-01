@@ -957,6 +957,7 @@ DiffViewer = Class.$extend(
         rhs: (setValue) =>
           setValue @newerRevision.get_code(type)
     else
+      $('#' + @id).parent().wijdialog('open')
       $('#' + @id).mergely 'lhs', @olderRevision.get_code(type)
       $('#' + @id).mergely 'rhs', @newerRevision.get_code(type)
 
