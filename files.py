@@ -139,7 +139,6 @@ MEDIASYNC_JOINED = {
             'js/codemirror/mode/jade/jade.js',
             'js/codemirror/mode/less/less.js',
             'js/codemirror/mode/sass/sass.js',
-            'js/codemirror/mode/scss/scss.js',
             'js/codemirror/mode/roy/roy.js',
             'js/codemirror/mode/markdown/markdown.js',
             'js/codemirror/mode/stylus/stylus.js',

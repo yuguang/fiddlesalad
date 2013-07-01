@@ -566,7 +566,8 @@ CodeMirror.defineMode("css-base", function(config, parserConfig) {
     name: "css-base"
   });
 
-  CodeMirror.defineMIME("text/x-scss", {
+  //Modified for Fiddle Salad
+  CodeMirror.defineMIME("scss", {
     atMediaTypes: atMediaTypes,
     atMediaFeatures: atMediaFeatures,
     propertyKeywords: propertyKeywords,
