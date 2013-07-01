@@ -87,7 +87,8 @@ span.key-lite {
 .ui-dialog .ui-dialog-content {
   padding: 0;
 }
-.transparent {
+.transparent,
+.transparent div.CodeMirror {
   background: rgba(255, 255, 255, 0.2);
 }
 div#projectConfiguration {
