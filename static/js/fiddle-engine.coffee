@@ -1039,16 +1039,15 @@ CodeRunner = Class.$extend(
   execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
     return  unless @initialized
     @body.innerHTML = html
-    if javascript.length
-      newScripts = _.difference(@scripts, @executedScripts)
-      script = @window.document.createElement('script')
-      script.type = 'text/javascript'
-      if newScripts.length
-        script.text = [ 'head.js("', newScripts.join('", "'), '", function() {', javascript, '});' ].join('')
-        @executedScripts = @executedScripts.concat(newScripts)
-      else
-        script.text = [ '(function() {', javascript, '})();' ].join('')
-      @body.appendChild script
+    newScripts = _.difference(@scripts, @executedScripts)
+    script = @window.document.createElement('script')
+    script.type = 'text/javascript'
+    if newScripts.length
+      script.text = [ 'head.js("', newScripts.join('", "'), '", function() {', javascript, '});' ].join('')
+      @executedScripts = @executedScripts.concat(newScripts)
+    else
+      script.text = [ '(function() {', javascript, '})();' ].join('')
+    @body.appendChild script
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
     return  unless @initialized
