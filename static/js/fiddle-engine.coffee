@@ -1,6 +1,8 @@
 root = global ? window
 BackgroundWorker =
-  previousError: new String
+  previousError: new Object
+
+  errorDisplay: new Object
 
   loadWorker: (file) ->
     @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2012040912].join(''))
@@ -12,10 +14,12 @@ BackgroundWorker =
           when ('result')
             code = event.data.resultText
             @previewCode code
+            @clearLineWidget()
+            @previousError = new Object
           when ('hint')
             @displayHint(event.data.hints)
           when ('error')
-            @displayError event.data.errorText
+            @displayError event.data.line, event.data.errorText
       false
     )
 
@@ -24,10 +28,25 @@ BackgroundWorker =
   displayHint: (hints) ->
     CodeMirror.updateLinting(@pad, hints)
 
-  displayError: (message) ->
-    if message isnt @previousError
-      noty _.defaults(text: message, notyDefaults)
-      @previousError = message
+  makeLineWidget: (message) ->
+    widget = document.createElement("div")
+    icon = widget.appendChild(document.createElement("span"))
+    icon.innerHTML = "!!"
+    icon.className = "lint-error-icon"
+    widget.appendChild document.createTextNode(message)
+    widget.className = "lint-error"
+    widget
+
+  clearLineWidget: ->
+    if not _.isEmpty @errorDisplay
+      @pad.removeLineWidget @errorDisplay
+      @errorDisplay = new Object
+
+  displayError: (line=@pad.getCursor().line, message) ->
+    return  if _.isEqual {line, message}, @previousError
+    @clearLineWidget()
+    @errorDisplay = @pad.addLineWidget line, @makeLineWidget(message)
+    @previousError = {line, message}
 
 DynamicEditor = CodeCompleteEditor.$extend(
   __init__: (id) ->

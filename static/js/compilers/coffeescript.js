@@ -7,9 +7,10 @@ function sendResult(resultText) {
         'resultText': resultText
     });
 }
-function sendError(errorText) {
+function sendError(errorText, line) {
     postMessage({
         'type': 'error',
+		'line': line,
         'errorText': errorText
     });
 }
@@ -17,7 +18,14 @@ self.addEventListener('message', function(e) {
     try {
         sendResult(CoffeeScript.compile(e.data, {bare: true}));
     } catch (err) {
-		if (err.name == 'SyntaxError')
-			sendError(err.message);
+		if (err.name == 'SyntaxError') {
+			var line;
+			if ('location' in err) { 
+				line = err.location.first_line;
+			} else if ('lineNumber' in err) {
+				line = err.lineNumber;
+			}
+			sendError(err.message, line);
+		}
     }
 }, false);
