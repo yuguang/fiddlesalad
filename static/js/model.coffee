@@ -264,8 +264,6 @@ FiddleViewModel = ViewModel.$extend(
     @resources = ko.observableArray([])
     @newResourceText = ko.observable()
     @configuration = new WorkspaceConfiguration()
-    if not @newFiddle()
-      @disableLint()
     @loadTips()
 
   add_resource: (file) ->
