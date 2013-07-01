@@ -20,6 +20,8 @@ BackgroundWorker =
             @displayHint(event.data.hints)
           when ('error')
             @displayError event.data.line, event.data.errorText
+          when ('notification')
+            @displayNotification event.data.messageText
       false
     )
 
@@ -47,6 +49,9 @@ BackgroundWorker =
     @clearLineWidget()
     @errorDisplay = @pad.addLineWidget line, @makeLineWidget(message)
     @previousError = {line, message}
+
+  displayNotification: (message) ->
+    noty _.defaults(text: message, notyDefaults)
 
 DynamicEditor = CodeCompleteEditor.$extend(
   __init__: (id) ->

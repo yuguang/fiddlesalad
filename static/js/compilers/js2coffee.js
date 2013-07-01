@@ -2861,16 +2861,16 @@ function sendResult(resultText) {
         'resultText': resultText
     });
 }
-function sendError(errorText) {
+function sendNotification(errorText) {
     postMessage({
-        'type': 'error',
-        'errorText': errorText
+        'type': 'notification',
+        'messageText': errorText
     });
 }
 self.addEventListener('message', function(e) {
     try {
         sendResult(Js2coffee.build(e.data));
     } catch (err) {
-		sendError(err.message);
+		sendNotification(err.message);
     }
 }, false);
