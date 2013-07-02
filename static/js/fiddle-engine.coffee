@@ -176,7 +176,7 @@ StylusEditor = StyleEditor.$extend(
     @$super id
     @mode = 'stylus'
     @loadWorker('stylus')
-    @documentationUrl = 'http://learnboost.github.com/stylus/'
+    @documentationUrl = base_url + '/files/documentation/stylus/index.html'
     @propertyEndKeyCode = 32
     @tabCharaterLength = 2
 
