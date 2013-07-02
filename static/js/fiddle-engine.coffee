@@ -348,6 +348,7 @@ JadeEditor = TemplateEditor.$extend(
     @mode = 'jade'
     @loadWorker('jade')
     @documentationUrl = base_url + '/files/documentation/jade.html'
+    @tabCharaterLength = 2
 
   load: ->
     @$super()
