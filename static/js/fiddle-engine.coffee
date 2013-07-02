@@ -178,6 +178,13 @@ StylusEditor = StyleEditor.$extend(
     @loadWorker('stylus')
     @documentationUrl = 'http://learnboost.github.com/stylus/'
     @propertyEndKeyCode = 32
+    @tabCharaterLength = 2
+
+  get_options: ->
+    _.extend(
+      @$super()
+      indentWithTabs: false
+    )
 )
 ProgramEditor = DynamicEditor.$extend(
   preview: (javascript) ->
