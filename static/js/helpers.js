@@ -108,4 +108,4 @@ var worker_url = debug ? '/static/js/' : 'http://' + window.location.hostname + 
 
 MINUTE = 60000;
 
-WORD_TOKEN = /^[\w$_.@]+$/;
+WORD_TOKEN = /^[\w$_.@-]+$/;
