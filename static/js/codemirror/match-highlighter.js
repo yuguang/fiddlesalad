@@ -34,7 +34,7 @@
     }
   });
 
-  function highlightMatches(cm) {
+  var highlightMatches = _.debounce(function (cm) {
     cm.operation(function() {
       var state = cm.state.matchHighlighter;
       if (state.overlay) {
@@ -48,7 +48,7 @@
 
       cm.addOverlay(state.overlay = makeOverlay(selection, state.style));
     });
-  }
+  }, 350);
 
   function makeOverlay(query, style) {
     return {token: function(stream) {
