@@ -65,7 +65,7 @@ DynamicEditor = CodeCompleteEditor.$extend(
   __include__: [BackgroundWorker]
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       indentUnit: @tabCharaterLength
       indentWithTabs: true
@@ -166,7 +166,7 @@ LessEditor = StyleEditor.$extend(
     @varStart = '@'
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       profile: 'css'
     )
@@ -215,7 +215,7 @@ JavascriptEditor = ProgramEditor.$extend(
   get_documentation: ->
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       @lintOptions()
     )
@@ -251,7 +251,7 @@ CssEditor = StyleEditor.$extend(
   __include__: [lintEditor]
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       profile: 'css'
       @lintOptions()
@@ -295,7 +295,7 @@ TypescriptEditor = ProgramEditor.$extend(
   __include__: [lintEditor]
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       @lintOptions()
     )
@@ -372,7 +372,7 @@ HtmlEditor = DocumentEditor.$extend(
     )
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       autoCloseTags: true
     )
@@ -514,7 +514,7 @@ ScssEditor = SassCompiler.$extend(
     @documentationUrl = base_url + '/files/documentation/sass.html'
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       profile: 'css'
     )

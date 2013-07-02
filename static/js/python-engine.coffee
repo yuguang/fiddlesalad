@@ -22,7 +22,7 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
     @$super editor, event
 
   get_options: ->
-    _.defaults(
+    _.extend(
       @$super()
       extraKeys:
         'Ctrl-Enter': -> engine.execute()
