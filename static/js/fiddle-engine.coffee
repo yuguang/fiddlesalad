@@ -118,7 +118,6 @@ StyleEditor = DynamicEditor.$extend(
     @showAutocomplete = false
     @varStart = '$'
     @theme = 'stylish'
-    @propertyEndKeyCode = 58
 
   set_framework: (code) ->
     return  if code is @bootstrapCode
@@ -142,8 +141,9 @@ StyleEditor = DynamicEditor.$extend(
       _.defer => @updateVars()
     if event.type isnt 'keypress'
       return
-    # if colon is entered, set showAutocomplete to false
-    if event.keyCode is @propertyEndKeyCode
+    # if colon or space is entered, set showAutocomplete to false
+    propertyEndKeyCodes = [58, 32]
+    if event.keyCode in propertyEndKeyCodes
       @showAutocomplete = false
     # for any other key on an indented line
     else if @showAutocomplete and not (event.keyCode < 41 and event.keyCode > 31)
@@ -177,7 +177,6 @@ StylusEditor = StyleEditor.$extend(
     @mode = 'stylus'
     @loadWorker('stylus')
     @documentationUrl = base_url + '/files/documentation/stylus/index.html'
-    @propertyEndKeyCode = 32
     @tabCharaterLength = 2
 
   get_options: ->
