@@ -263,7 +263,7 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeescript')
-    @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013062818'
+    @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013070221'
     @tabCharaterLength = 2
 
   load: ->
@@ -489,7 +489,7 @@ HamlEditor = DocumentEditor.$extend(
     @$super id
     @loadThrottledExecution()
     @mode = 'haml'
-    @documentationUrl = base_url + '/files/documentation/haml.html'
+    @documentationUrl = base_url + '/files/documentation/haml.html?v=2013070221'
 
   __include__: [serverCompiler]
 
