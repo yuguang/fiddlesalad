@@ -132,7 +132,7 @@ StyleEditor = DynamicEditor.$extend(
 
   keyHandler: (editor, event) ->
     ###
-    This routine keeps track of when the cursor position. Autocomplete is only launched on an indented line that does
+    This routine keeps track of the cursor position. Autocomplete is only launched on an indented line that does
     not have the ":" symbol.
     ###
     # if a new line is started, set showAutocomplete to true
@@ -489,6 +489,9 @@ HamlEditor = DocumentEditor.$extend(
     @$super id
     @loadThrottledExecution()
     @mode = 'haml'
+    keywords = _.map KEYWORDS.HTML_TAGS, (keyword) -> '%' + keyword
+    @addAutocomplete keywords
+    @wordPattern = /^[\w%]+$/
     @documentationUrl = base_url + '/files/documentation/haml.html?v=2013070221'
 
   __include__: [serverCompiler]

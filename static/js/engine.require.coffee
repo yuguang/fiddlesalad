@@ -31,6 +31,7 @@ CodeCompleteEditor = Editor.$extend(
     @editCount = 0
     @varClassName = 'cm-variable'
     @closeBrackets = true
+    @wordPattern = WORD_TOKEN
 
   get_code_complexity: ->
     @editCount
@@ -80,7 +81,7 @@ CodeCompleteEditor = Editor.$extend(
     token = editor.getTokenAt(currentPosition)
     start = token.start
     end = token.end
-    if not WORD_TOKEN.test(token.string)
+    if not @wordPattern.test(token.string)
       token = start: currentPosition.ch, end: currentPosition.ch, string: '', state: token.state
     if not token.string.length
       suggestions = @wordAutoComplete.getCompletions(lastChar)
