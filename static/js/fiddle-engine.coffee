@@ -5,7 +5,7 @@ BackgroundWorker =
   errorWidget: new Object
 
   loadWorker: (file) ->
-    @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2012040912].join(''))
+    @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2013070320].join(''))
     @compiler.addEventListener(
       'message'
       (event) =>
@@ -862,7 +862,7 @@ FiddleEditor = Class.$extend(
     previewFrame = Frame 'source', 'Source'
     tabs = TabInterface 'source-tab', 'source'
     preview = IframeComponent @id.css
-    preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013051208'
+    preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013070320'
     index = tabs.add 'css', preview.to_html_string()
     @styleEditor.set_focus_listener PreviewListener('source', index)
 
