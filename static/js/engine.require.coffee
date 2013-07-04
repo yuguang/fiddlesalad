@@ -87,6 +87,8 @@ CodeCompleteEditor = Editor.$extend(
       suggestions = @wordAutoComplete.getCompletions(lastChar)
     else
       suggestions = @wordAutoComplete.getCompletions(token.string)
+    if suggestions.length is 1 and suggestions[0] is token.string
+      suggestions = []
     list: suggestions
     from:
       line: currentPosition.line
