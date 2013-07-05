@@ -41,6 +41,8 @@ TitleMessage = ->
   @set_message = (message, image='blank') ->
     @text message
     @icon [base_url, '/images/', image, '.png'].join('')
+  @clear = ->
+    @set_message ''
   @
 RevisionsMenu = ->
   @revisions = ko.observableArray([])
@@ -96,21 +98,6 @@ ViewModel = Class.$extend(
         return  if not (_.isString(@revisionsMenu.selectedRevision()) and _.isString(@revisionsMenu.selectedDiffRevision()) and (@timestampChanged(@revisionsMenu.selectedRevision) or @timestampChanged(@revisionsMenu.selectedDiffRevision)))
         engine.compare_revisions @revisionsMenu.selectedRevision(), @revisionsMenu.selectedDiffRevision()
 
-  checkSpelling: (words) ->
-    misspelledWords = []
-    _.each(words, (word) ->
-      $.ajax
-        url: ajax_url + '/ajax/get.php?url=' + encodeURIComponent('http://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=' + word)
-        dataType: 'json'
-        async: false
-        success: (response) ->
-          suggestions = response[1]
-          word = word.toLowerCase()
-          if not _.contains _.map(suggestions, (suggestion) -> suggestion.toLowerCase()), word
-            misspelledWords.push(word)
-    )
-    misspelledWords
-
   saveCurrentRevision: ->
     _.throttle @localHistory.create_revision(), 2*MINUTE 
 
@@ -139,12 +126,27 @@ ViewModel = Class.$extend(
     if profanity
       @formMessage 'no profanity allowed'
       return
-    misspellings = @checkSpelling titleWords
-    if misspellings.length
+    @checkSpelling titleWords
+
+  checkSpelling: (words) ->
+    @numSpellcheckWords = words.length
+    @misspelledWords = []
+    #switch to plain get script method and add dictionary check
+    _.each words, (word) -> $LAB.script('http://en.wikipedia.org/w/api.php?action=opensearch&search='+word+'&format=json&callback=viewModel.spellcheckCallback')
+
+  spellcheckCallback: (response) ->
+    word = response[0]
+    suggestions = response[1]
+    word = word.toLowerCase()
+    if not _.contains _.map(suggestions, (suggestion) -> suggestion.toLowerCase()), word
+      @misspelledWords.push(word)
+    if @misspelledWords.length
       @formMessage 'please check for misspellings'
-      @titleMessage.set_message misspellings.join(', '), 'error'
+      @titleMessage.set_message @misspelledWords.join(', '), 'error'
       return
-    @submitForm code
+    @numSpellcheckWords--
+    if @numSpellcheckWords is 0
+      @submitForm
 
   prepare_form: ->
     $('form').validate submitHandler: =>
@@ -152,7 +154,8 @@ ViewModel = Class.$extend(
     @checkTitleOnKeyup()
 
   #  private
-  submitForm: (code) ->
+  submitForm: ->
+    code = engine.get_code()
     primaryLanguage = engine.get_primary_language()
     model = $('form').serializeArray()
     model.push.apply model, [
@@ -169,6 +172,7 @@ ViewModel = Class.$extend(
         if response.success
           $('p.error').remove()
           @formMessage 'success'
+          @titleMessage.clear()
           @updateShareUrl()
           slug = slugify(@title())
           if @newFiddle()
