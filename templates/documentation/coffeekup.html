@@ -1,5 +1,19 @@
 {% extends "base_documentation.html" %}
-
+{% block header %}
+    <h1 id="title">CoffeeKup HTML Templating</h1>
+    <nav>
+        <ul>
+            <li><a href="#lets-get-started---hello-world">Intro</a></li>
+            <li><a href="#adding-attribute">Attributes</a></li>
+            <li><a href="#lonely-text">Text Segments</a></li>
+            <li><a href="#variables-conditionals-and-loops">Programming</a></li>
+            <li><a href="#cool-formatting">Formatting</a></li>
+            <li><a href="#keeping-things-in-context">Template Local Context</a></li>
+            <li><a href="#tag-function-conjunction">Tag Functions</a></li>
+            <li><a href="#cool-running">Running in Node and the Browser</a></li>
+        </ul>
+    </nav>
+{% endblock %}
 {% block main %}
 <h1 id="a-beginners-introduction-to-coffeekup">A Beginner's Introduction to CoffeeKup</h1>
 <p>By Mark Hahn</p>
@@ -8,16 +22,16 @@
 <p>Unlike most tutorials I will not need to help you install CoffeeKup to follow along with the examples. I will give the results of the template with each example. You might also want to bring up http://coffeekup.org in another window and paste these examples into the left pane. This will allow you to play around with the template and see the results immediately. (This also makes a great tool to use while you are writing your own CoffeeKup code).</p>
 <h2 id="lets-get-started---hello-world">Let's Get Started - Hello World</h2>
 <p>First our mandatory friend, Hello World. In each example the CoffeeKup template code appears first followed by the rendered HTML.</p>
-<pre><code>head -&gt;                     
+<pre class="brush: coffeescript; toolbar: false;">head -&gt;
     title 'Hello World'
 body -&gt;
-
+</pre><pre class="brush: html; toolbar: false;">
 &lt;head&gt;
     &lt;title&gt;Hello World&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
 &lt;/body&gt;
-</code></pre>
+</pre>
 <p>First of all, note that the template code is real CoffeeScript code. CoffeeKup <em>is</em> CoffeeScript. Except for some important CoffeeScript code added invisibly to the top and bottom of the template, the CoffeeScript you write in the template is executed directly to render the output. This is very different from most template engines and is the reason CoffeeKup offers all the great features mentioned at the beginning.</p>
 <p>So how did <code>head -&gt;</code> become <code>&lt;head&gt;</code>? And where does the output come from? There is nothing like a <code>write</code> function in the template to send out the results. And how did <code>&lt;/head&gt;</code> appear out of thin air? The secret ingredient in the coffee recipe is the extra code that was mentioned above.</p>
 <p>The top part of the added code defines a lot of things, the most important of which are the functions who share their names with all the possible HTML tags. These functions, when executed, generate the associated HTML code and append it to a buffer, also defined in the invisible code, that accumulates all of the output HTML. When all of your template code has been executed, the buffer containing the complete HTML is then returned as output by an invisible <code>return buffer</code> statement added to the bottom of the template.</p>
@@ -26,62 +40,62 @@ body -&gt;
 <p>So the &quot;tag&quot; functions create all the resulting HTML by adding their arguments to the output buffer while executing the function arguments to create the nesting. Quite elegant, yes?</p>
 <h2 id="adding-attributes">Adding Attributes</h2>
 <p>We know how to insert anything we want for the inner HTML of a tag. We need only include an arbitrary string as an argument to the tag function. But how do you put attributes inside the tag itself? Luckily that is very easy. Check this out ...</p>
-<pre><code>div id:&quot;ugly-box&quot;, style:&quot;width:90px, height:90px,
+<pre class="brush: coffeescript; toolbar: false;">div id:&quot;ugly-box&quot;, style:&quot;width:90px, height:90px,
          background-color: purple, border: 5px green&quot;
-
+</pre><pre class="brush: html; toolbar: false;">
 &lt;div id=&quot;ugly-box&quot; 
      style=&quot;width:100px, height:100px, background-color:
          purple, border: 5px green&quot;&gt;
 &lt;/div&gt;
-</code></pre>
+</pre>
 <p>Any <code>object</code> (aka <code>hash</code>) used as an argument to a tag function is interpreted as a set of attributes. The hash keys are the attribute names and the hash values are the attribute values. In CoffeeScript hashes are created easily and they are perfect for CoffeeKup's attributes.</p>
 <p>Let's look at this more complicated example which ties everything we know together ...</p>
-<pre><code>div id:&quot;another-ugly-box&quot;, style:&quot;background-color:
+<pre class="brush: coffeescript; toolbar: false;">div id:&quot;another-ugly-box&quot;, style:&quot;background-color:
      purple, border: 5px yellow&quot;, -&gt;
     span color:&quot;green&quot;, &quot;And I'm ugly text&quot;
-
+</pre><pre class="brush: html; toolbar: false;">
 &lt;div id=&quot;another-ugly-box&quot; style=&quot;background-color:
      purple, border: 5px yellow&quot;&gt;
   &lt;span color=&quot;green&quot;&gt;And I'm ugly text&lt;/span&gt;
 &lt;/div&gt;
-</code></pre>
+</pre>
 <p>Now it is starting to look like real HTML you'd find on an ugly web page.</p>
 <h2 id="lonely-text">Lonely Text</h2>
 <p>At this point in my use of CoffeeKup I was starting to think I knew how to generate any HTML, but then I ran into a stumbling block. I needed to put some text between tags and not inside a tag. This is a hole in the CoffeeKup logic described so far, but the hole has been filled with a fake tag named <code>text</code> ...</p>
-<pre><code>span color:&quot;red&quot;, &quot;I'm bright red!&quot;
+<pre class="brush: coffeescript; toolbar: false;">span color:&quot;red&quot;, &quot;I'm bright red!&quot;
 text &quot;I'm boring black&quot;
 span color:&quot;blue&quot;, &quot;I'm feeling blue&quot;
-
+</pre><pre class="brush: html; toolbar: false;">
 &lt;span color=&quot;red&quot;&gt;I'm bright red!&lt;/span&gt;
 I'm boring black
 &lt;span color=&quot;blue&quot;&gt;I'm feeling blue&lt;/span&gt;
-</code></pre>
+</pre>
 <p>The <code>text</code> tag (function) just adds whatever text is in its string argument to the output buffer. If we removed <code>text</code> from the beginning of the middle line, that line with only the string would be legal CoffeeScript, and the template would execute without error, but the text would be lost because there would be no function to add it to the output buffer.</p>
 <p>Before we leave the discussion of general text I'd like to point something out. Whether it is a string argument to a real tag like <code>div</code>, or a string argument to the fake <code>text</code> tag, a string can contain any text, even HTML. We will learn how to use this to our advantage in the section <em>Homemade Html</em>.</p>
 <h2 id="variables-conditionals-and-loops">Variables, Conditionals, and Loops</h2>
 <p>If this was all there was to CoffeeKup then it would already be quite useful as a way to write all your HTML in a concise way. No more adding all those nasty closing tags. But wait, there's more ...</p>
 <p>As you might have guessed, because CoffeeKup is executing arbitrary CoffeeScript code, there are a lot of fancy things we can do other than just generate static HTML. Let's look at another example ...</p>
-<pre><code>if true
+<pre class="brush: coffeescript; toolbar: false;">if true
     for i in [2..4]
         p -&gt; 
             text &quot;I want #{i} hamburgers&quot;
-
+</pre><pre class="brush: html; toolbar: false;">
 &lt;p&gt;I want 2 hamburgers&lt;/p&gt;
 &lt;p&gt;I want 3 hamburgers&lt;/p&gt;
 &lt;p&gt;I want 4 hamburgers&lt;/p&gt;
-</code></pre>
+</pre>
 <p>First note that the entire snippet is conditional on the <code>if</code> statement evaluating to <code>true</code>. If you changed <code>true</code> to <code>false</code> then this example would not output anything. This is easy to understand since code must execute to add things to the output buffer. This example is good at showing how CoffeeKup is just CoffeeScript code executing with no magic happening behind the scenes, except for the magical output buffer.</p>
 <p>The <code>for</code> loop simply executes its block of code, which happens to output a paragraph of text. It executes it three times so that block of code added its HTML to the buffer three times.</p>
 <p>Note also the use of the variable <code>i</code> in the text string. It is evaluated and added to the string, which is called interpolation. The syntax <code>#{i}</code> that mixes it in is straight CoffeeScript. Once again CoffeeKup got a cool feature for free from CoffeeScript. It looks almost like a more traditional template syntax such as <em>mustache</em>, which would have {{i}}. Remember that this CoffeeScript interpolation only works inside double quotes <code>&quot;</code>, not single.</p>
 <p>Variables can be defined and used freely in your CoffeeKup template. In a later section, <em>Keeping Things In Context</em>, we will see that variables can be used that are defined outside of the template.</p>
 <h2 id="cool-formatting">Cool Formatting</h2>
 <p>If you are fluent in CoffeeScript, then this will be obvious, but there are cool ways to clean up the last example. There are two or three CoffeeScript features that can be used to turn the four-line example above into this one-liner ...</p>
-<pre><code>p &quot;I want #{i} hamburgers&quot; for i in [2..4] unless false
-
+<pre class="brush: coffeescript; toolbar: false;">p &quot;I want #{i} hamburgers&quot; for i in [2..4] unless false
+</pre><pre class="brush: html; toolbar: false;">
 &lt;p&gt;I want 2 hamburgers&lt;/p&gt;
 &lt;p&gt;I want 3 hamburgers&lt;/p&gt;
 &lt;p&gt;I want 4 hamburgers&lt;/p&gt;
-</code></pre>
+</pre>
 <p>If you don't see how this works, then go do the next lesson in your CoffeeScript class. We'll be waiting here until you get back.</p>
 <h2 id="tag-function-conjunction">Tag Function Conjunction</h2>
 <p>Let's step back and look at how tag functions work with different types of arguments.</p>
@@ -92,62 +106,62 @@ I'm boring black
 <li><p><strong>string and friends</strong>: These are all converted to strings and directly added to the output buffer. You should know that, by default, HTML entity characters are not escaped. See the <em>Homemade Html</em> section.</p></li>
 </ul>
 <p>You might be wondering what the remaining type of javascript variable, the <code>array</code>, does. It is treated exactly like an <code>object</code>, which happens to create useless attributes ...</p>
-<pre><code>div ['a','b']
-
+<pre class="brush: coffeescript; toolbar: false;">div ['a','b']
+</pre><pre class="brush: html; toolbar: false;">
 &lt;div 0=&quot;a&quot; 1=&quot;b&quot;&gt;&lt;/div&gt;
-</code></pre>
+</pre>
 <p>Maybe some smart person will figure out a cool use for arrays in CoffeeKup.</p>
 <h2 id="cool-running">Cool Running</h2>
 <p>So great, we have this CoffeeScript that executes and produces our html. But how do we actually get this to happen in our app? It's not going to happen by itself.</p>
 <p>First we need to get the CoffeeKup module loaded. CoffeeKup (actually CoffeeScript) compiles to vanilla JavaScript so it can run anywhere JavaScript is available. I've only run it in Node and the Browser so let's consider those environments. Note that the same CoffeeKup JavaScript file runs without change in either environment thanks to some fancy footwork.</p>
 <p>I'll assume you know how to install CoffeeKup. You should know how to install modules in node using <code>npm</code> and/or in the browser using the <code>&lt;script&gt;</code> tag. Then include it in your app ...</p>
-<pre><code># in node
+<pre class="brush: coffeescript; toolbar: false;"># in node
 coffeekup = require 'coffeekup'
 
 # in the browser
 coffeekup = window.CoffeeKup
-</code></pre>
+</pre>
 <p>The <code>coffeekup</code> namespace object you just created has the functions you need to run and a lot of other usefull stuff as properties. Of course you can use any name for the namespace object, but we'll stick with <code>coffeekup</code> here.</p>
 <p>Next, we need to include our CoffeeKup template. This is just a function assigned to a var. Let's use a new simpler hello world example ...</p>
-<pre><code>helloTemplate = -&gt; 
+<pre class="brush: coffeescript; toolbar: false;">helloTemplate = -&gt;
     div style:'font-size:96px', 'Hello World'
-</code></pre>
+</pre>
 <p>Even people my age are going to be able to read that.</p>
 <p>Now we need to execute our template function using a special function, <code>coffeekup.render</code>. This renders the desired html.</p>
-<pre><code>helloHtml = coffeekup.render helloTemplate
-</code></pre>
+<pre class="brush: coffeescript; toolbar: false;">helloHtml = coffeekup.render helloTemplate
+</pre>
 <p>That was easy. I'm sure you can figure out how to use the html in <code>helloHtml</code>. In node you do something like <code>result.write helloHtml</code> and in the browser you can stick it in the dom (where the sun never shines), <code>$('body').append helloHtml</code>. This assumes jQuery is present. If you don't have jQuery then don't look to me for help. I learned jQuery at the same time I learned JavaScript so I'm useless without it.</p>
 <p>So putting it all together (in the browser) ...</p>
-<pre><code>coffeekup = window.CoffeeKup
+<pre class="brush: coffeescript; toolbar: false;">coffeekup = window.CoffeeKup
 helloTemplate = -&gt; 
     div style:'font-size:96px', 'Hello World'
 helloHtml = coffeekup.render helloTemplate
 $('body').append helloHtml
-</code></pre>
+</pre>
 <p>Or if you are maniac who likes unreadable source files ...</p>
-<pre><code>coffeekup = window.CoffeeKup
+<pre class="brush: coffeescript; toolbar: false;">coffeekup = window.CoffeeKup
 $('body').append coffeekup.render -&gt;
      div style:'font-size:96px', 'Hello World'
-</code></pre>
+</pre>
 <p>This tiny code will display those giant words. You might wonder though, how can we use the <code>div</code> function when it was never defined? Surely it isn't defined as a global by CoffeeKup? That would be uncool, and to be proper coding style it would need to be <code>coffeekup.div</code>, which kind of defeats the purpose of CoffeeKup. It also can't be a local which would have required an <code>eval</code> somewhere.</p>
 <p>The answer is that <code>div</code> is inside a function that is only defined and not executed before it is passed as an argument to <code>coffeekup.render</code>. From there, <code>render</code> &quot;compiles&quot; the function. It does this by using the wonderful <code>toString()</code> function to get the original source code. Then it adds the magic code to the beginning and end of the source, as described in the first section above. And finally it turns it back into a function using <code>new Function srcCode</code>. Now we have a function that includes the definition for <code>div</code> so the problem is solved. Note that this &quot;compiling&quot; turns a function into another function, which is why I put the quotes around the word &quot;compile&quot;. I'll leave them out to save typing from here on.</p>
 <p><code>coffeekup.render helloTemplate</code> calls <code>coffeekup.compile helloTemplate</code> to produce this tricked-out function. Then simply executing the new compiled function renders the html.</p>
 <p>You can do <code>compiledFunc = coffeekup.compile helloTemplate</code> yourself and keep the compiled template function around for speedy rendering. Later, just execute <code>compiledFunc()</code> to get the coveted html. You can also just let <code>coffeekup.render</code> do this for you. By default, <code>render</code> keeps a copy of each compiled template in a cache and uses the compiled version when available. I've always used this option.</p>
 <h2 id="keeping-things-in-context">Keeping Things In Context</h2>
 <p>When I first used CoffeeKup I tried code like this ...</p>
-<pre><code>fontSize = 96
+<pre class="brush: coffeescript; toolbar: false;">fontSize = 96
 helloTemplate = -&gt; 
     div style:&quot;font-size:#{fontSize}px&quot;, 'Hello World'
-</code></pre>
+</pre>
 <p>Feels quite natural, right? Well all I got for my trouble was an exception saying <code>fontSize</code> was undefined.</p>
 <p>This is another dirty little secret of CoffeeKup. If you are an advanced JavaScript programmer then you might have noticed that the compile operation covered in the last section destroys all closures for the helloTemplate function. Changing it to source and back to a function tends to do that. So later when the compiled template function ran, the var <code>fontSize</code> was not in scope. What to do, what to do.</p>
 <p>The complete signature for <code>coffeekup.render</code> is <code>coffeekup.render template, options</code>. The options argument can contain a lot of properties, but the one we need here is a hash <code>options.locals</code>. Every key, value pair in the <code>options.locals</code> object is turned into a local var in the compile process. The source code <code>key = value</code> is added with the magic code before your template code. This creates locals to the compiled template function, hence the name. Now I can do ...</p>
-<pre><code>fontSize = 96
+<pre class="brush: coffeescript; toolbar: false;">fontSize = 96
 helloTemplate = -&gt; 
     div style:&quot;font-size:#{fontSize}px&quot;, 'Hello World'
 
 coffeekup.render helloTemplate, locals: {fontSize}
-</code></pre>
+</pre>
 <p>This passes fontSize into the compile operation making it avalable as a local and now my code works. I tend to use the CoffeeScript shortcut <code>{fontSize, a, b, c}</code> a lot. This creates <code>{fontSize:fontSize, a:a, b:b, c:c}</code>. So now <code>fontSize</code>, <code>a</code>, <code>b</code>, and <code>c</code> are &quot;passed in&quot; to the template to be available as a local.</p>
 <p>Time for another wrench in the works. What happens if you change the value of fontSize between the time you compile the template and the time you render it? The local value in the template doesn't change. The original value was &quot;baked&quot; in to the source code of the compiled template. So you have to think of the <code>options.locals</code> values as constants. This is especially a problem if you compile once and render multiple times, which the <code>render</code> function will do by default if you call <code>render</code> more than once with the same source template function.</p>
 <p>Another option, <code>dynamic_locals</code>, comes to the rescue. Setting <code>options.dynamic_locals</code> to true causes all the locals passed in through <code>options.locals</code> to be able to change between uses of the compiled template. I have personally not used this feature for two reasons. One is that I've never used a compiled template more than once (duh). But a more serious reason is that <code>dynamic_locals</code> works its magic by enclosing all the template code in a JavaScript <code>with</code> statement. I'm sure you've heard the experts whine about how evil the <code>with</code> statement is. Well, even if you disagree with them (as I do) then you should still consider that the upcoming <code>strict</code> context will not allow any <code>with</code> statement at all. It might be nice to use strict in the future.</p>
@@ -164,9 +178,9 @@ coffeekup.render helloTemplate, locals: {fontSize}
 </ul>
 <h2 id="homemade-html">Homemade Html</h2>
 <p>I mentioned earlier in the section <em>Lonely Text</em> that text added with CoffeeCup can be plain html that is passed through without being treated as CoffeeKup code. It is as easy as saying ...</p>
-<pre><code>div &quot;&lt;div&gt;I'm a homemade div in a div&lt;/div&gt;&quot;
+<pre class="brush: coffeescript; toolbar: false;">div &quot;&lt;div&gt;I'm a homemade div in a div&lt;/div&gt;&quot;
 text &quot;&lt;div&gt;I'm an orphan div with no parent div&lt;/div&gt;&quot;
-</code></pre>
+</pre>
 <p>In order to do this, you must make sure the <code>autoescape</code> option is <code>off</code> (<code>false</code>). Otherwise you will be surprised, as I was, to see the html code in your web page.</p>
 <h2 id="what-the-heck-are-helpers-express-zappa-and-meryl">What the heck are Helpers, Express, Zappa, and Meryl?</h2>
 <p>No, seriously, I don't know what these are. (I do know who Zappa was. He was one of my favorites in the good old days). Someone needs to explain them to me as I am too lazy to Google them. Better yet, please issue a Pull Request to add explanations of them to this document.</p>
