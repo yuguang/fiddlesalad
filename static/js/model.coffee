@@ -129,24 +129,38 @@ ViewModel = Class.$extend(
     @checkSpelling titleWords
 
   checkSpelling: (words) ->
-    @numSpellcheckWords = words.length
-    @misspelledWords = []
-    #switch to plain get script method and add dictionary check
-    _.each words, (word) -> $LAB.script('http://en.wikipedia.org/w/api.php?action=opensearch&search='+word+'&format=json&callback=viewModel.spellcheckCallback')
+    @numSpellcheckCallbacks = words.length + 1 #wikipedia callback for each word and 1 dictionary callback
+    @misspelledWordsWikipedia = []
+    @misspelledWordsDictionary = []
+    $.getJSON(
+      '/check_dictionary/'
+      words: words.join(' ')
+      (response) =>
+        if not response.success
+          @misspelledWordsDictionary = response.misspellings
+        @formAutoSubmit()
+    )
+    $LAB.setGlobalDefaults(AllowDuplicates: true)
+    _.each words, (word) -> $LAB.script('http://en.wikipedia.org/w/api.php?action=opensearch&search='+word+'&format=json&callback=viewModel.spellcheckCallback&v=')
 
   spellcheckCallback: (response) ->
     word = response[0]
     suggestions = response[1]
     word = word.toLowerCase()
     if not _.contains _.map(suggestions, (suggestion) -> suggestion.toLowerCase()), word
-      @misspelledWords.push(word)
-    if @misspelledWords.length
-      @formMessage 'please check for misspellings'
-      @titleMessage.set_message @misspelledWords.join(', '), 'error'
-      return
-    @numSpellcheckWords--
-    if @numSpellcheckWords is 0
-      @submitForm
+      @misspelledWordsWikipedia.push(word)
+    @formAutoSubmit()
+
+  formAutoSubmit: ->
+    @numSpellcheckCallbacks--
+    misspelledWords = _.intersection @misspelledWordsWikipedia, @misspelledWordsDictionary
+    if @numSpellcheckCallbacks is 0
+      if misspelledWords.length
+        @formMessage 'please check for misspellings'
+        @titleMessage.set_message misspelledWords.join(', '), 'error'
+        return
+      else
+        @submitForm()
 
   prepare_form: ->
     $('form').validate submitHandler: =>
