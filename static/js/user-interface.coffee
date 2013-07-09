@@ -4,16 +4,22 @@ VisualComponent = Class.$extend(
     @id = id
 )
 TabInterface = VisualComponent.$extend(
-  __init__: (id, parentId) ->
+  __init__: (id, parent) ->
     @id = id
-    @parentId = parentId
+    @parent = parent
+    @parentId = parent.id
     @type = 'tabs'
     @tabs = new Array
     @tab_count = 0
     @height = ko.observable('')
+    @width = 'auto'
 
   add: (title='', content='') ->
-    @tabs.push { title, content, id: @getId(), height: @height }
+    settings = { title, content, id: @getId(), height: @height, width: @width, position: 'relative' }
+    if title in ['coffeecup', 'python']
+      settings.position = 'fixed'
+      settings.width = @parent.dimension.width - @parent.padding + 'px'
+    @tabs.push settings
     @tab_count++
 
   getId: ->

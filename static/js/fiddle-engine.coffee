@@ -829,7 +829,8 @@ FiddleEditor = Class.$extend(
       layout = ColumnLayout 3
 
       frame = Frame 'documentation', 'Documentation'
-      tabs = TabInterface 'documentation-tabs', 'documentation'
+      layout.add_column frame
+      tabs = TabInterface 'documentation-tabs', frame
       dochubPage = IframeComponent name + 'ReferenceTab'
       dochubPage.set_source 'http://dochub.io/'
       dochubTab = {title: 'dochub', content: dochubPage.to_html_string()}
@@ -852,8 +853,6 @@ FiddleEditor = Class.$extend(
         tabs.add 'emmet', page.to_html_string()
       frame.add tabs
 
-      layout.add_column frame
-
     editor_frames = new Array
     if LANGUAGE_CATEGORY?[engine.get_url_path_language()] is LANGUAGE_TYPE.PROGRAM
       panelOrdering = [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)]]
@@ -874,7 +873,7 @@ FiddleEditor = Class.$extend(
 
     # source preview tabs
     previewFrame = Frame 'source', 'Source'
-    tabs = TabInterface 'source-tab', 'source'
+    tabs = TabInterface 'source-tab', previewFrame
     preview = IframeComponent @id.css
     preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013070320'
     index = tabs.add 'css', preview.to_html_string()
