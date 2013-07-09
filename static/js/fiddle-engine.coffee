@@ -147,6 +147,9 @@ StyleEditor = DynamicEditor.$extend(
       @showAutocomplete = false
     # for any other key on an indented line
     else if @showAutocomplete and not (event.keyCode < 41 and event.keyCode > 31)
+      currentPosition = editor.getCursor()
+      token = editor.getTokenAt(currentPosition)
+      return  if token.className and token.start is 0
       @popupAutocomplete(@keyCharacter(event))
     else
       cur = editor.getCursor()
