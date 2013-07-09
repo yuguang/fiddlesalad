@@ -126,7 +126,10 @@ ViewModel = Class.$extend(
     if profanity
       @formMessage 'no profanity allowed'
       return
-    @checkSpelling titleWords
+    if @newFiddle()
+      @checkSpelling titleWords
+    else
+      @submitForm()
 
   checkSpelling: (words) ->
     @numSpellcheckCallbacks = words.length + 1 #wikipedia callback for each word and 1 dictionary callback
