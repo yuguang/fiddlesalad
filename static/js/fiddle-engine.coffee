@@ -5,7 +5,7 @@ BackgroundWorker =
   errorWidget: new Object
 
   loadWorker: (file) ->
-    @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2013070320].join(''))
+    @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2013070720].join(''))
     @compiler.addEventListener(
       'message'
       (event) =>
@@ -326,7 +326,7 @@ CoffeecupEditor = TemplateEditor.$extend(
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeecup')
-    @documentationUrl = '/coffeecup/documentation/'
+    @documentationUrl = '/coffeecup/documentation/?v=2013070721'
 
   get_documentation: ->
     @$super('coffeecup')
