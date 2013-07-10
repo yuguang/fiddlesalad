@@ -417,7 +417,7 @@ serverCompiler =
         @executeThrottledShort()
 
   markError: (error) ->
-    @displayError error
+    @displayError decodeEntities(error)
 
   execute: ->
     ###
