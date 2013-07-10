@@ -19,7 +19,7 @@ BackgroundWorker =
           when ('hint')
             @displayHint(event.data.hints)
           when ('error')
-            @displayError event.data.line, event.data.errorText
+            @displayError event.data.errorText, event.data.line
           when ('notification')
             @displayNotification event.data.messageText
       false
@@ -44,7 +44,7 @@ BackgroundWorker =
       @pad.removeLineWidget @errorWidget
       @errorWidget = new Object
 
-  displayError: _.throttle((line=@pad.getCursor().line, message) ->
+  displayError: _.throttle((message, line=@pad.getCursor().line) ->
       return  if _.isEqual {line, message}, @previousError
       @clearLineWidget()
       @errorWidget = @pad.addLineWidget line, @makeLineWidget(message)
@@ -340,7 +340,7 @@ CoffeecupEditor = TemplateEditor.$extend(
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeecup')
-    @documentationUrl = '/coffeecup/documentation/?v=2013070721'
+    @documentationUrl = '/coffeecup/documentation/'
 
   get_documentation: ->
     @$super('coffeecup')
@@ -401,8 +401,6 @@ HtmlEditor = DocumentEditor.$extend(
   get_documentation: ->
 )
 serverCompiler =
-  marker: null
-
   compileSuccess: true
 
   loadThrottledExecution: ->
@@ -419,26 +417,7 @@ serverCompiler =
         @executeThrottledShort()
 
   markError: (error) ->
-    linePattern = /line\s(\d+)/
-    columnPattern = /column\s(\d+)/
-    lineNumber = parseInt(linePattern.exec(error)[1]) - 1
-    columnNumber = parseInt(columnPattern.exec(error)[1])
-    lineString = @pad.getLine(lineNumber)
-    scannerPosition = undefined
-    scannerPosition = columnNumber
-    while lineString.charAt(scannerPosition) is ' '
-      scannerPosition++
-    while scannerPosition < lineString.length and lineString.charAt(scannerPosition) isnt ' '
-      scannerPosition++
-    @marker = @pad.markText(
-        line: lineNumber
-        ch: columnNumber
-      ,
-        line: lineNumber
-        ch: scannerPosition
-      ,
-        className: 'syntax-error'
-    )
+    @displayError error
 
   execute: ->
     ###
@@ -447,10 +426,11 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['/',  @mode, '/compile/'].join('')
+      ['http://fiddlesalad.com/',  @mode, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
+          @clearLineWidget()
           @compileSuccess = true
           if @compiler?
             @compiler.postMessage response.code
@@ -458,11 +438,9 @@ serverCompiler =
             @previewCode response.code
         else
           @compileSuccess = false
-          @markError response.error
-          @displayNotification response.error
+          @markError response.error, response?.line
       'json'
     )
-    @marker?.clear()
 
   changeHandler: (editor, change) ->
     ###
@@ -485,11 +463,6 @@ SassCompiler = StyleEditor.$extend(
 
   __include__: [serverCompiler]
 
-  markError: ->
-
-  displayError: (message, settings) ->
-    @$super message, {text: message, timeout: 25000}
-
   previewCode: (code) ->
     @$super viewModel.reindentCss(code)
 
@@ -510,7 +483,10 @@ HamlEditor = DocumentEditor.$extend(
 
   __include__: [serverCompiler]
 
-  markError: ->
+  markError: (error, line) ->
+    linePattern = /line\s(\d+)/
+    lineNumber = parseInt(linePattern.exec(line)[1]) - 1
+    @displayError decodeEntities(error), lineNumber
 
   load: ->
     @$super()
@@ -541,6 +517,7 @@ PythonEditor = ProgramEditor.$extend(
     @mode = 'python'
     @loadWorker('javascript')
     @loadThrottledExecution()
+    @marker = null
     @documentationUrl = '/python/documentation/'
 
   __include__: [serverCompiler]
@@ -556,6 +533,32 @@ PythonEditor = ProgramEditor.$extend(
 
   displayError: (message) ->
     @$super(message.replace('Parse error ', ''))
+
+  markError: (error) ->
+    @displayNotification error
+    linePattern = /line\s(\d+)/
+    columnPattern = /column\s(\d+)/
+    lineNumber = parseInt(linePattern.exec(error)[1]) - 1
+    columnNumber = parseInt(columnPattern.exec(error)[1])
+    lineString = @pad.getLine(lineNumber)
+    scannerPosition = undefined
+    scannerPosition = columnNumber
+    while lineString.charAt(scannerPosition) is ' '
+      scannerPosition++
+    while scannerPosition < lineString.length and lineString.charAt(scannerPosition) isnt ' '
+      scannerPosition++
+    @marker = @pad.markText(
+        line: lineNumber
+        ch: columnNumber
+      ,
+        line: lineNumber
+        ch: scannerPosition
+      ,
+        className: 'syntax-error'
+    )
+
+  clearLineWidget: ->
+    @marker?.clear()
 )
 HtmlChecker = Class.$extend(
   __init__: ->
