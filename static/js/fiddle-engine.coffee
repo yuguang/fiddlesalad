@@ -426,7 +426,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['http://fiddlesalad.com/',  @mode, '/compile/'].join('')
+      ['/',  @mode, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -539,7 +539,7 @@ PythonEditor = ProgramEditor.$extend(
     linePattern = /line\s(\d+)/
     columnPattern = /column\s(\d+)/
     lineNumber = parseInt(linePattern.exec(error)[1]) - 1
-    columnNumber = parseInt(columnPattern.exec(error)[1])
+    columnNumber = parseInt(columnPattern.exec(error)[1]) - 1
     lineString = @pad.getLine(lineNumber)
     scannerPosition = undefined
     scannerPosition = columnNumber
@@ -547,6 +547,7 @@ PythonEditor = ProgramEditor.$extend(
       scannerPosition++
     while scannerPosition < lineString.length and lineString.charAt(scannerPosition) isnt ' '
       scannerPosition++
+    @marker?.clear()
     @marker = @pad.markText(
         line: lineNumber
         ch: columnNumber
