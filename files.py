@@ -164,6 +164,8 @@ MEDIASYNC_JOINED = {
             'js/jade.runtime.min.js',
             'js/jquery.noty.js',
             'js/beautify.js',
+            'js/build/lib/BJSpell.js',
+            'js/build/lib/BJSpell-en_US.js',
             ],
         'js/menu.fiddle.js': [
             'js/bootstrap.js',

@@ -132,19 +132,15 @@ ViewModel = Class.$extend(
       @submitForm()
 
   checkSpelling: (words) ->
-    @numSpellcheckCallbacks = words.length + 1 #wikipedia callback for each word and 1 dictionary callback
+    @numSpellcheckCallbacks = words.length #wikipedia callback for each word
     @misspelledWordsWikipedia = []
     @misspelledWordsDictionary = []
-    $.getJSON(
-      '/check_dictionary/'
-      words: words.join(' ')
-      (response) =>
-        if not response.success
-          @misspelledWordsDictionary = response.misspellings
-        @formAutoSubmit()
-    )
+    dictionary = BJSpell('en_US')
+    for word in words
+      if not dictionary.check word
+        @misspelledWordsDictionary.push word
     $LAB.setGlobalDefaults(AllowDuplicates: true)
-    _.each words, (word) -> $LAB.script('http://en.wikipedia.org/w/api.php?action=opensearch&search='+word+'&format=json&callback=viewModel.spellcheckCallback&v=')
+    _.each words, (word) -> $LAB.script('http://en.wikipedia.org/w/api.php?action=opensearch&search='+word+'&format=json&callback=viewModel.spellcheckCallback')
 
   spellcheckCallback: (response) ->
     word = response[0]
