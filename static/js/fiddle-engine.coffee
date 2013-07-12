@@ -1036,28 +1036,6 @@ CodeRunner = Class.$extend(
     @initialized = false
     @scripts = []
     @delayedStyles = []
-    @template =
-      css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
-      js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
-      html: _.template """
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <title>Fiddle Salad Debug View</title>
-                <script src="http://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
-                <style>
-                  <%= css %>
-                </style>
-              </head>
-              <body>
-                <%= body %>
-                <%= headtags %>
-                <script type="text/javascript">
-                  <%= javascript %>
-                </script>
-              </body>
-            </html>
-            """
 
   execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
     return  unless @initialized
@@ -1132,19 +1110,41 @@ CodeRunner = Class.$extend(
     Debug opens a new window with the code loaded in the page. External CSS and JS files are loaded through head tags.
     It assumes all external resources are stored in the view model.
     ###
+    template =
+      css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
+      js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
+      html: _.template """
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <title>Fiddle Salad Debug View</title>
+                <script src="http://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
+                <style>
+                  <%= css %>
+                </style>
+              </head>
+              <body>
+                <%= body %>
+                <%= headtags %>
+                <script type="text/javascript">
+                  <%= javascript %>
+                </script>
+              </body>
+            </html>
+            """
     # initialize array of head tags
     headTags = new Array
     # for each external resource in view model
     _.each viewModel.resources(), (resource) =>
       # get the file type of the resource, call mapped template with resource, and append generated HTML to head tags
-      headTags.push @template[@filetype resource.source()](source: resource.source())
+      headTags.push template[@filetype resource.source()](source: resource.source())
     headtags = headTags.join('')
     # get JavaScript and CSS code from the engine
     javascript = engine.get_code LANGUAGE_TYPE.COMPILED_PROGRAM
     body = engine.get_code LANGUAGE_TYPE.COMPILED_DOCUMENT
     css = engine.get_code LANGUAGE_TYPE.COMPILED_STYLE
     # call the template for the window with the head tags and code
-    html = @template.html {javascript, css, body, headtags}
+    html = template.html {javascript, css, body, headtags}
     # open window with generated HTML
     window.open 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
     # display message about new window and links to browser console documentation
