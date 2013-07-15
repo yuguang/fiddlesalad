@@ -269,7 +269,7 @@ Template = (configuration) ->
 WorkspaceConfiguration = ->
   @enableTransparency = ko.observable(false)
   @cssLintEnabled = ko.observable(true)
-  @jsLintEnabled = ko.observable(true)
+  @jsLintEnabled = ko.observable(not debug)
   @completeHtmlTags = ko.observable(true)
   @
 FiddleViewModel = ViewModel.$extend(

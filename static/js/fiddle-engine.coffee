@@ -1041,10 +1041,7 @@ CodeRunner = Class.$extend(
     return  unless @initialized
     @body.innerHTML = html
     if javascript.length
-      script = @window.document.createElement('script')
-      script.type = 'text/javascript'
-      script.text = [ 'head.js("', @scripts.join('", "'), '", function() {', javascript, '});' ].join('')
-      @body.appendChild script
+      @window.execute @scripts, javascript
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
     return  unless @initialized
@@ -1059,6 +1056,9 @@ CodeRunner = Class.$extend(
       @style = @window.document.querySelector('#user_css')
       @execute()
       @format()
+
+  js_error: (error) ->
+    console.log error
 
   filetype: (path) ->
     filePattern = /(css|js)$/

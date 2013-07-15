@@ -2,31 +2,10 @@
 <html>
 <head>
 	<title>HTML/CSS Live Reload</title>
-	<meta name="description" content="Python Fiddle runs Python compiled to  JavaScript without reloading the iframe and updates the page automatically once the HTML/CSS changes."/>
+	<meta name="description" content="Fiddle Salad runs languages compiled to JavaScript without reloading the iframe and updates the page automatically once the HTML/CSS changes."/>
     <style id="user_css"></style>
-	<script type="text/javascript" src="http://s3.amazonaws.com/pythonfiddle/js/viewer.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-    locals = {};
-
-    window.console.log = function(){
-        var div = document.createElement('div');
-        div.style.color = 'gray';
-        div.style.fontFamily = 'Helvetica, Univers, Futura, "Franklin Gothic", Gotham, sans-serif';
-        div.innerHTML = '<strong>console</strong>: ' + Array.prototype.slice.call(arguments).join(', ');
-
-        document.body.appendChild(div);
-    };
-
-    (function(){
-        var init = setInterval(function(){
-            if (window.parent.codeRunner != null) {
-                clearInterval(init);
-                window.parent.codeRunner.initialize();
-            }
-        }, 250);
-    })();
-</script>
+    <script type="text/javascript" src="http://s3.amazonaws.com/pythonfiddle/js/viewer.js"></script>
 </body>
 </html>

@@ -144,10 +144,6 @@ MEDIASYNC_JOINED = {
             'js/codemirror/mode/stylus/stylus.js',
             'js/codemirror/runmode.js',
             ],
-        'js/viewer.js': [
-            'files/head.min.js',
-            'js/prettyprint.js',
-            ],
         'js/fiddle.plugins.js': [
             'js/jquery.csrf.js',
             'js/jquery.history.js',
