@@ -200,6 +200,11 @@ StylusEditor = StyleEditor.$extend(
     )
 )
 ProgramEditor = DynamicEditor.$extend(
+  loadErrorHandler: ->
+    window.onmessage = (event) =>
+      line = @sourceLine event.data
+      @pad.addLineClass line, 'background', 'highlight-error'
+
   preview: (javascript) ->
     codeRunner.execute javascript
 )
@@ -220,6 +225,9 @@ JavascriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'javascript'
     @loadWorker('jshint')
+    @loadErrorHandler()
+
+  sourceLine: (line) -> line
 
   __include__: [lintEditor]
 
@@ -1056,9 +1064,6 @@ CodeRunner = Class.$extend(
       @style = @window.document.querySelector('#user_css')
       @execute()
       @format()
-
-  js_error: (error) ->
-    console.log error
 
   filetype: (path) ->
     filePattern = /(css|js)$/

@@ -53,11 +53,21 @@ function execute (scripts, main) {
         catch (e) {
             var lineNumber = e.lineNumber - 50 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [,])[1];
 
-            window.parent.codeRunner.js_error({
-                name: e.name,
-                message: e.message,
-                lineNumber: lineNumber
-            });
+            displayJavascriptError(e.name, e.message);
+
+            window.parent.postMessage(lineNumber - 1, '*');
         }
     });
+}
+
+function displayJavascriptError (name, message) {
+    if (!window.jserror) {
+        var div = document.createElement('div');
+        div.setAttribute('id', 'jserror');
+        document.body.appendChild(div);
+    }
+
+    window.jserror.className = 'active';
+    window.jserror.innerHTML = (name? '<strong>' + name + '</strong>: ' : '') +
+                               (message || 'JavaScript Error');
 }

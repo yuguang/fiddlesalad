@@ -3,6 +3,72 @@
 <head>
 	<title>HTML/CSS Live Reload</title>
 	<meta name="description" content="Fiddle Salad runs languages compiled to JavaScript without reloading the iframe and updates the page automatically once the HTML/CSS changes."/>
+    <style>
+
+        #jserror .line-number {
+            display: inline-block;
+            min-width: 1em;
+            padding: 0 .5em;
+            background: inherit;
+            font: bold 65%/1.5 sans-serif;
+            text-align: center;
+            vertical-align: .3em;
+            border-radius: 999px;
+            text-shadow: none;
+            box-shadow: 0 1px white;
+        }
+
+        @keyframes jserror {
+            50% {
+                padding-top: 1em;
+            }
+        }
+
+        #jserror {
+            display: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+
+            bottom: 0;
+            padding: .2em .5em;
+            border-top: 1px solid #ebb;
+            background: #edd;
+            color: #800;
+            text-shadow: 0 1px 1px white;
+            line-height: 1.5;
+            font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+        }
+
+        #jserror.active {
+            display: block;
+            animation: jserror .2s;
+        }
+
+        #jserror .line-number {
+            margin-right: .5em;
+            background: #e99;
+            color: #fee;
+            font-size: 80%;
+            vertical-align: .15em;
+        }
+
+        #jserror:before {
+            content: '✖';
+            float: right;
+            width: 1em;
+            padding: .2em;
+            border: 4px solid hsla(0, 0%, 100%, .6);
+            border-radius: 50%;
+            margin-top: -1em;
+            text-align: center;
+            background: #e00;
+            color: white;
+            text-shadow: 0 -1px 2px rgba(0, 0, 0, .5);
+            font: bold 200%/1 Arial, sans-serif;
+        }
+
+    </style>
     <style id="user_css"></style>
 </head>
 <body>
