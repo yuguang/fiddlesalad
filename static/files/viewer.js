@@ -46,16 +46,18 @@ window.console.log = function(){
 })();
 
 function execute (scripts, main) {
+    var lineNumber;
     head.js(scripts, function() {
         try {
             eval(main)
         }
         catch (e) {
-            var lineNumber = e.lineNumber - 50 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [,])[1];
+            lineNumber = e.lineNumber - 50 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [,])[1];
 
             displayJavascriptError(e.name, e.message);
-
-            window.parent.postMessage(lineNumber - 1, '*');
+        }
+        finally {
+            window.parent.postMessage(lineNumber? lineNumber - 1: -1, '*');
         }
     });
 }

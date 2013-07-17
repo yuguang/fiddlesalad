@@ -200,10 +200,17 @@ StylusEditor = StyleEditor.$extend(
     )
 )
 ProgramEditor = DynamicEditor.$extend(
+  errorLine: -1
+
   loadErrorHandler: ->
     window.onmessage = (event) =>
       line = @sourceLine event.data
-      @pad.addLineClass line, 'background', 'highlight-error'
+      console.log line
+      if line > -1
+        @pad.addLineClass line, 'background', 'highlight-error'
+        @errorLine = line
+      else
+        @pad.removeLineClass @errorLine, 'background', 'highlight-error'
 
   preview: (javascript) ->
     codeRunner.execute javascript
