@@ -1053,7 +1053,7 @@ CodeRunner = Class.$extend(
 
   execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
     return  unless @initialized
-    @body.innerHTML = html
+#    @body.innerHTML = html
     if javascript.length
       @window.execute @scripts, javascript
 
