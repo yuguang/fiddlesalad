@@ -205,7 +205,6 @@ ProgramEditor = DynamicEditor.$extend(
   loadErrorHandler: ->
     window.onmessage = (event) =>
       line = @sourceLine event.data
-      console.log line
       if line > -1
         @pad.addLineClass line, 'background', 'highlight-error'
         @errorLine = line
