@@ -215,16 +215,16 @@ div#source .ui-tabs {
 .CodeMirror-focused .cm-matchhighlight {
   background-color: #e6e6fa;
 }
-.lint-error {
+.CodeMirror .lint-error {
   font-family: arial;
   background: #ffa;
   color: #a00;
   padding: 2px 5px 3px;
 }
-html.-moz- .lint-error {
+.CodeMirror html.-moz- .lint-error {
   padding: 3px 5px 2px;
 }
-.lint-error-icon {
+.CodeMirror .lint-error-icon {
   color: white;
   background-color: red;
   font-weight: bold;

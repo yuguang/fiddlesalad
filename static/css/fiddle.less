@@ -175,15 +175,17 @@ textarea#javascriptConverter {
     }
 }
 
-div#source pre {
-    font-size: 9pt;
-    line-height: 1.1em;
-    margin: 0;
-    padding: 1em;
-}
+div#source {
+    pre {
+        font-size: 9pt;
+        line-height: 1.1em;
+        margin: 0;
+        padding: 1em;
+    }
 
-div#source .ui-tabs {
-    border: none;
+    .ui-tabs {
+        border: none;
+    }
 }
 
 .radial-gradient () {
@@ -244,24 +246,26 @@ div#source .ui-tabs {
     background-color: #e6e6fa;
 }
 
-.lint-error {
-    font-family: arial;
-    background: #ffa;
-    color: #a00;
-    padding: 2px 5px 3px;
-}
+.CodeMirror {
+    .lint-error {
+        font-family: arial;
+        background: #ffa;
+        color: #a00;
+        padding: 2px 5px 3px;
+    }
 
-html.-moz- .lint-error{
-    padding: 3px 5px 2px;
-}
+    html.-moz- .lint-error{
+        padding: 3px 5px 2px;
+    }
 
-.lint-error-icon {
-    color: white;
-    background-color: red;
-    font-weight: bold;
-    border-radius: 50%;
-    padding: 0 3px;
-    margin-right: 7px;
+    .lint-error-icon {
+        color: white;
+        background-color: red;
+        font-weight: bold;
+        border-radius: 50%;
+        padding: 0 3px;
+        margin-right: 7px;
+    }
 }
 
 .highlight-error {
