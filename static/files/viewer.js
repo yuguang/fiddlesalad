@@ -52,7 +52,7 @@ function execute (scripts, main) {
             eval(main)
         }
         catch (e) {
-            lineNumber = e.lineNumber - 50 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [,])[1];
+            lineNumber = e.lineNumber - 51 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [,])[1];
 
             displayJavascriptError(e.name, e.message);
         }
