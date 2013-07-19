@@ -55,7 +55,9 @@ function execute (scripts, main) {
 
             if (!lineNumber) {
                 var jserror = document.getElementById('jserror');
-                jserror.className = '';
+                if (jserror) {
+                    jserror.className = '';
+                }
             }
         }
     });
