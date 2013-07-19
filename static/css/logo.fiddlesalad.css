@@ -1,2 +1,42 @@
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
-#logo{font-family:'Codystar';font-weight:bolder}#logo span:nth-child(1){color:#70b8ff}#logo span:nth-child(2){color:#fbfd54;text-shadow:1px 1px 1px #fbfd54;font-weight:700}#logo span:nth-child(3){color:#f6ad46}#logo span:nth-child(4){color:#ff40f6}#logo span:nth-child(5){color:#e92d21}#logo span:nth-child(6){color:#feec06;text-shadow:1px 1px 1px #ffd800}#logo span:nth-child(7){color:#6b1582}#logo span:nth-child(8){color:#e30282}#logo span:nth-child(9){color:#000}#logo span:nth-child(10){color:#ffe705;text-shadow:1px 1px 1px yellow;font-weight:700}#logo span:nth-child(11){color:#00a9e5}
+#logo {
+  font-family: 'Codystar';
+  font-weight: bolder;
+}
+#logo span:nth-child(1) {
+  color: #70b8ff;
+}
+#logo span:nth-child(2) {
+  color: #fbfd54;
+  text-shadow: 1px 1px 1px #fbfd54;
+  font-weight: bold;
+}
+#logo span:nth-child(3) {
+  color: #f6ad46;
+}
+#logo span:nth-child(4) {
+  color: #ff40f6;
+}
+#logo span:nth-child(5) {
+  color: #e92d21;
+}
+#logo span:nth-child(6) {
+  color: #feec06;
+  text-shadow: 1px 1px 1px #ffd800;
+}
+#logo span:nth-child(7) {
+  color: #6b1582;
+}
+#logo span:nth-child(8) {
+  color: #e30282;
+}
+#logo span:nth-child(9) {
+  color: black;
+}
+#logo span:nth-child(10) {
+  color: #ffe705;
+  text-shadow: 1px 1px 1px yellow;
+  font-weight: bold;
+}
+#logo span:nth-child(11) {
+  color: #00a9e5;
+}
