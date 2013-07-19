@@ -34,15 +34,15 @@
       if (tprop.string != ".") return;
       tprop = getToken(editor, Pos(cur.line, tprop.start));
       if (tprop.string == ')') {
-        var level = 1;
+        var level = 1, stop = 50, count = 0;
         do {
           tprop = getToken(editor, Pos(cur.line, tprop.start));
           switch (tprop.string) {
           case ')': level++; break;
           case '(': level--; break;
-          default: break;
+          default: count++; break;
           }
-        } while (level > 0);
+        } while (level > 0 && count < stop);
         tprop = getToken(editor, Pos(cur.line, tprop.start));
         if (tprop.type.indexOf("variable") === 0)
           tprop.type = "function";
@@ -100,6 +100,7 @@
       if (str.indexOf(start) == 0 && str !== start) found.push(str); //Modified for FiddleSalad so that auto-complete closes when words match
     }
     function gatherCompletions(obj) {
+      if (obj.self == iframeWindow && !/^[a-zA-Z]+$/.test(start)) return; //Modified for FiddleSalad for performance
       if (typeof obj == "string") forEach(stringProps, maybeAdd);
       else if (obj instanceof Array) forEach(arrayProps, maybeAdd);
       else if (obj instanceof Function) forEach(funcProps, maybeAdd);
