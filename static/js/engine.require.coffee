@@ -50,7 +50,7 @@ CodeCompleteEditor = Editor.$extend(
   get_options: ->
     mode: @mode
     theme: if @theme? then @theme else 'default'
-    lineWrapping: true
+    lineWrapping: false
     lineNumbers: @showLineNumbers
     onKeyEvent: _.bind(@keyHandler, this)
     autoCloseBrackets: @closeBrackets
