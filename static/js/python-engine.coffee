@@ -24,6 +24,7 @@ PythonOnlyEditor = CodeCompleteEditor.$extend(
   get_options: ->
     _.extend(
       @$super()
+      lineWrapping: false
       extraKeys:
         'Ctrl-Enter': -> engine.execute()
         'Ctrl-R': -> engine.reset()
