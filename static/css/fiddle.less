@@ -43,9 +43,9 @@ em {
         outline: 0;
         background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
         background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
-        box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-        -moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
-        -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+        -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
 
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
@@ -70,25 +70,25 @@ em {
 }
 
 span.key-lite {
-    text-shadow:1px 1px 0 rgba(255,255,255,0.04);
-    font-size:.9em;
-    font-weight:400;
-    background:rgba(0,0,0,0.3);
-    -moz-border-radius:6px;
-    -webkit-border-radius:6px;
-    -o-border-radius:6px;
-    -ms-border-radius:6px;
-    -khtml-border-radius:6px;
-    border-radius:6px;
-    color:rgba(255,255,255,0.5);
-    position:relative;
-    top:-1px;
-    margin-left:10px;
-    -moz-box-shadow:1px 1px 0 rgba(0,0,0,0.2);
-    -webkit-box-shadow:1px 1px 0 rgba(0,0,0,0.2);
-    -o-box-shadow:1px 1px 0 rgba(0,0,0,0.2);
-    box-shadow:1px 1px 0 rgba(0,0,0,0.2);
-    padding:0 8px;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.04);
+    font-size: .9em;
+    font-weight: 400;
+    background: rgba(0, 0, 0, 0.3);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -o-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.5);
+    position: relative;
+    top: -1px;
+    margin-left: 10px;
+    -moz-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    -o-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    padding: 0 8px;
 }
 
 .ui-dialog .ui-dialog-content {
@@ -104,7 +104,7 @@ div#projectConfiguration {
     textarea {
         height: 12em;
     }
-    ul{
+    ul {
         margin-left: 0.5em;
     }
     .helptext {
@@ -119,8 +119,8 @@ div#projectConfiguration {
 }
 
 #webDevelopmentTools p:not(.vertical) {
-	text-shadow: 1px 1px 1px #CCCCCC;
-	filter: dropshadow(color=#CCCCCC, offx=1, offy=1);
+    text-shadow: 1px 1px 1px #CCCCCC;
+    filter: dropshadow(color=#CCCCCC, offx=1, offy=1);
 }
 
 #webDevelopmentTools p:not(.vertical) > span.ui-icon + span {
@@ -189,10 +189,10 @@ div#source {
 }
 
 .radial-gradient () {
-	background-image: -webkit-radial-gradient(50% 85%, 60% 33%, rgba(255,255,255,.5), lavender);
-	background-image: -moz-radial-gradient(center 79%, ellipse closest-corner, rgba(255,255,255,.3), rgba(100, 100, 255, .3) 95%);
-	background-image: -o-radial-gradient(50% 85%, 60% 33%, rgba(255,255,255,.5), lavender);
-	background-image: radial-gradient(50% 85%, 60% 33%, rgba(255,255,255,.5), lavender);
+    background-image: -webkit-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, .5), lavender);
+    background-image: -moz-radial-gradient(center 79%, ellipse closest-corner, rgba(255, 255, 255, .3), rgba(100, 100, 255, .3) 95%);
+    background-image: -o-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, .5), lavender);
+    background-image: radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, .5), lavender);
 }
 
 #logo {
@@ -231,9 +231,9 @@ div#source {
 }
 
 #progress {
-    left:50%;
-    top:50%;
-    margin:0 0 0 -75px;
+    left: 50%;
+    top: 50%;
+    margin: 0 0 0 -75px;
     width: 150px;
 }
 
@@ -246,6 +246,12 @@ div#source {
     background-color: #e6e6fa;
 }
 
+.CodeMirror-focused {
+    .CodeMirror-activeline-background {
+        background-color: rgba(136, 228, 243, 0.1);
+    }
+}
+
 .CodeMirror {
     .lint-error {
         font-family: arial;
@@ -254,7 +260,7 @@ div#source {
         padding: 2px 5px 3px;
     }
 
-    html.-moz- .lint-error{
+    html.-moz- .lint-error {
         padding: 3px 5px 2px;
     }
 
@@ -272,21 +278,17 @@ div#source {
     background: lightpink;
 }
 
-
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
-::-webkit-scrollbar
-{
-	width: 8px;
+::-webkit-scrollbar {
+    width: 8px;
     height: 8px;
 }
 
-::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.5);
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, .5);
 }

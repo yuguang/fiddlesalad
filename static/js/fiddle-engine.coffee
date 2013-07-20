@@ -67,6 +67,8 @@ DynamicEditor = CodeCompleteEditor.$extend(
   get_options: ->
     _.extend(
       @$super()
+      lineWrapping: true
+      styleActiveLine: true
       indentUnit: @tabCharaterLength
       indentWithTabs: true
       tabSize: @tabCharaterLength
@@ -201,6 +203,12 @@ StylusEditor = StyleEditor.$extend(
 )
 ProgramEditor = DynamicEditor.$extend(
   errorLine: -1
+
+  get_options: ->
+    _.extend(
+      @$super()
+      highlightSelectionMatches: minChars: 4, showToken: /\w/
+    )
 
   loadErrorHandler: ->
     window.onmessage = (event) =>

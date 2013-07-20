@@ -215,6 +215,9 @@ div#source .ui-tabs {
 .CodeMirror-focused .cm-matchhighlight {
   background-color: #e6e6fa;
 }
+.CodeMirror-focused .CodeMirror-activeline-background {
+  background-color: rgba(136, 228, 243, 0.1);
+}
 .CodeMirror .lint-error {
   font-family: arial;
   background: #ffa;

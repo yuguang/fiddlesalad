@@ -48,12 +48,8 @@ CodeCompleteEditor = Editor.$extend(
     @pad.on 'cursorActivity', _.bind(@selectionHandler, this)
     
   get_options: ->
-    wrap = true
-    if bowser.chrome and parseInt(bowser.version) is 28
-      wrap = false
     mode: @mode
     theme: if @theme? then @theme else 'default'
-    lineWrapping: wrap
     lineNumbers: @showLineNumbers
     onKeyEvent: _.bind(@keyHandler, this)
     autoCloseBrackets: @closeBrackets
