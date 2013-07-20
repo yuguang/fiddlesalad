@@ -60,7 +60,7 @@
         var cur = cm.getCursor(), line = cm.getLine(cur.line), start = cur.ch, end = start;
         while (start && re.test(line.charAt(start - 1))) --start;
         while (end < line.length && re.test(line.charAt(end))) ++end;
-        if (start < end)
+        if (start < end && (end - start) >= state.minChars)
           cm.addOverlay(state.overlay = makeOverlay(line.slice(start, end), re, state.style));
         return;
       }
