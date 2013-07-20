@@ -1069,10 +1069,13 @@ CodeRunner = Class.$extend(
     @initialized = false
     @scripts = []
     @delayedStyles = []
+    @previousHtml = ''
 
   execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
     return  unless @initialized
-#    @body.innerHTML = html
+    if html != @previousHtml
+      @body.innerHTML = html
+      @previousHtml = html
     if javascript.length
       @window.execute @scripts, javascript
 
