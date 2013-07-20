@@ -259,11 +259,21 @@ JavascriptEditor = ProgramEditor.$extend(
     @$super()
     @hint = CodeMirror.javascriptHint
 
+  getCursorWord: ->
+    re = /[\w$]/
+    cur = @pad.getCursor()
+    line = @pad.getLine(cur.line)
+    start = cur.ch
+    end = start
+    --start  while start and re.test(line.charAt(start - 1))
+    ++end  while end < line.length and re.test(line.charAt(end))
+    line.slice(start, end)
+
   selectionHandler: _.throttle(
     ->
       if @pad.somethingSelected()
         selectedText = @pad.getSelection()
-        return  unless /^[\w$_.]+$/.test(selectedText)
+        return  unless selectedText.length > 2 && @getCursorWord() is selectedText
         # get the character position of the last selected letter
         position = @pad.getCursor()
         # insert pretty print block after selection in the line
@@ -272,6 +282,7 @@ JavascriptEditor = ProgramEditor.$extend(
         lines = @get_code().split('\n')
         lines[position.line] = "#{ selectedTextLine }\ndocument.body.appendChild(prettyPrint(#{ selectedText }));"
         @previewCode lines.join('\n')
+        lines[position.line] = selectedTextLine
     500
   )
 )
