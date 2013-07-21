@@ -1,9 +1,5 @@
 root = global ? window
 Editor = Class.$extend(
-  __init__: (id) ->
-    @id = id
-    @mode = new Object
-
   load: ->
     console.log @get_options()  if debug
     @pad = CodeMirror.fromTextArea(document.getElementById(@id), _.defaults(@get_options(), defaultEditor))
@@ -30,6 +26,7 @@ CodeCompleteEditor = Editor.$extend(
     @debounceWaitSeconds = 250
     @editCount = 0
     @varClassName = 'cm-variable'
+    @codeMirrorContainer = '#' + @id + 'container'
     @closeBrackets = true
     @wordPattern = WORD_TOKEN
 

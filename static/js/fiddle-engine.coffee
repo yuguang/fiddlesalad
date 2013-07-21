@@ -64,7 +64,6 @@ DynamicEditor = CodeCompleteEditor.$extend(
     @$super id
     @observers = new Array
     @compiledCode = new String
-    @codeMirrorContainer = '#' + @id + 'container'
     @tabCharaterLength = 4
 
   __include__: [BackgroundWorker]
