@@ -1,23 +1,6 @@
 (function () {
   var Pos = CodeMirror.Pos;
 
-  function forEach(arr, f) {
-    for (var i = 0, e = arr.length; i < e; ++i) f(arr[i]);
-  }
-
-  function arrayContains(arr, item) {
-    if (!Array.prototype.indexOf) {
-      var i = arr.length;
-      while (i--) {
-        if (arr[i] === item) {
-          return true;
-        }
-      }
-      return false;
-    }
-    return arr.indexOf(item) != -1;
-  }
-
   function scriptHint(editor, keywords, getToken, options) {
     // Find the token at the cursor
     var cur = editor.getCursor(), token = getToken(editor, cur), tprop = token;
@@ -34,7 +17,7 @@
       if (tprop.string != ".") return;
       tprop = getToken(editor, Pos(cur.line, tprop.start));
       if (tprop.string == ')') {
-        var level = 1, stop = 50, count = 0;
+        var level = 1, stop = 20, count = 0;
         do {
           tprop = getToken(editor, Pos(cur.line, tprop.start));
           switch (tprop.string) {
@@ -101,9 +84,9 @@
     }
     function gatherCompletions(obj) {
       if (obj.self == iframeWindow && !/^[a-zA-Z]+$/.test(start)) return; //Modified for FiddleSalad for performance
-      if (typeof obj == "string") forEach(stringProps, maybeAdd);
-      else if (obj instanceof Array) forEach(arrayProps, maybeAdd);
-      else if (obj instanceof Function) forEach(funcProps, maybeAdd);
+      if (typeof obj == "string") _.each(stringProps, maybeAdd);
+      else if (obj instanceof Array) _.each(arrayProps, maybeAdd);
+      else if (obj instanceof Function) _.each(funcProps, maybeAdd);
       for (var name in obj) maybeAdd(name);
     }
     var iframeWindow = document.getElementById('viewer').contentWindow;
@@ -137,7 +120,7 @@
       for (var v = token.state.localVars; v; v = v.next) maybeAdd(v.name);
       for (var v = token.state.globalVars; v; v = v.next) maybeAdd(v.name);
       gatherCompletions(iframeWindow);
-      forEach(keywords, maybeAdd);
+      _.each(keywords, maybeAdd);
     }
     return _.unique(found); //Modified for FiddleSalad for performance
   }
