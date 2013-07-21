@@ -20,8 +20,8 @@ BackgroundWorker =
           when ('notification')
             @displayNotification event.data.messageText
           when ('mappedResult')
+            @mappingJSON = event.data.mappingJSON
             @receiveResult event.data.resultText
-            @mapping = JSON.parse event.data.mappingJSON
       false
     )
 
@@ -320,8 +320,7 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @loadErrorHandler()
 
   sourceLine: (line) ->
-
-    source_map = new SourceMapConsumer(@mapping)
+    source_map = new SourceMapConsumer JSON.parse(@mappingJSON)
     lookup =
       line: line + 1
       column: 0
