@@ -107,12 +107,7 @@ CodeMirror.showHint = function (cm, getHints, options) {
             PageDown: function () {
                 changeActive(selectedHint + screenAmount());
             },
-            Home: function () {
-                changeActive(0);
-            },
-            End: function () {
-                changeActive(completions.length - 1);
-            },
+            Home: close,
             Enter: pick,
             Tab: pick,
             Esc: close
