@@ -153,6 +153,7 @@ MEDIASYNC_JOINED = {
         'js/fiddle.init.js': [
             'js/prefixfree.js',
             'js/date.format.js',
+            'js/source-map.js',
             'js/compiled-coffee/model.js',
             'js/fiddle.js',
             'js/layout.js',

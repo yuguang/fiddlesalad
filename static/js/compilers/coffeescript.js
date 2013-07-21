@@ -1,10 +1,11 @@
 importScripts('coffeescript.base.js');
 
-function sendResult(resultText) {
+function sendMappedResult(resultText, mapping) {
     if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
     postMessage({
-        'type': 'result',
-        'resultText': resultText
+        'type': 'mappedResult',
+        'resultText': resultText,
+        'mappingJSON': mapping
     });
 }
 function sendError(error) {
@@ -20,9 +21,11 @@ function sendError(error) {
         'errorText': error.message
     });
 }
+var map;
 self.addEventListener('message', function(e) {
     try {
-        sendResult(CoffeeScript.compile(e.data, {bare: true}));
+        var output = CoffeeScript.compile(e.data, {bare: true, sourceMap: true});
+        sendMappedResult(output.js, output.v3SourceMap);
     } catch (err) {
 		if (err.name == 'SyntaxError') {
 			sendError(err);

@@ -12,18 +12,23 @@ BackgroundWorker =
         messageType = event.data.type
         switch messageType
           when ('result')
-            code = event.data.resultText
-            @previewCode code
-            @clearLineWidget()
-            @previousError = new Object
+            @receiveResult event.data.resultText
           when ('hint')
             @displayHint(event.data.hints)
           when ('error')
             @displayError event.data.errorText, event.data.line
           when ('notification')
             @displayNotification event.data.messageText
+          when ('mappedResult')
+            @receiveResult event.data.resultText
+            @mapping = JSON.parse event.data.mappingJSON
       false
     )
+
+  receiveResult: (code) ->
+    @previewCode code
+    @clearLineWidget()
+    @previousError = new Object
 
   previewCode: (code) ->
 
@@ -212,8 +217,8 @@ ProgramEditor = DynamicEditor.$extend(
 
   loadErrorHandler: ->
     window.onmessage = (event) =>
-      line = @sourceLine event.data
-      if line > -1
+      if event.data > -1
+        line = @sourceLine event.data
         @pad.addLineClass line, 'background', 'highlight-error'
         @errorLine = line
       else
@@ -312,6 +317,15 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @loadWorker('coffeescript')
     @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013070221'
     @tabCharaterLength = 2
+    @loadErrorHandler()
+
+  sourceLine: (line) ->
+
+    source_map = new SourceMapConsumer(@mapping)
+    lookup =
+      line: line + 1
+      column: 0
+    source_map.originalPositionFor(lookup).line
 
   load: ->
     @$super()

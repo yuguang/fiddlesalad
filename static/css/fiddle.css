@@ -248,5 +248,5 @@ div#source .ui-tabs {
   margin-right: 7px;
 }
 .highlight-error {
-  background: lightpink;
+  background: lightpink !important;
 }
