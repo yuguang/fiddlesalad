@@ -399,6 +399,12 @@ MarkdownEditor = TemplateEditor.$extend(
     @documentationUrl = base_url + '/files/documentation/markdown.html'
     @closeBrackets = false
 
+  get_options: ->
+    _.extend(
+      @$super()
+      lineWrapping: false
+    )
+
   keyHandler: ->
 )
 JadeEditor = TemplateEditor.$extend(
