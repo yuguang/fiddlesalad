@@ -326,10 +326,13 @@ FiddleViewModel = ViewModel.$extend(
     @starterFrameworks()[0].selected(templateName)
 
   lint_enabled: (name) ->
-    if name is 'css'
-      @configuration.cssLintEnabled()
-    else
-      @configuration.jsLintEnabled()
+    switch name
+      when 'css'
+        @configuration.cssLintEnabled()
+      when 'javascript'
+        @configuration.jsLintEnabled()
+      else
+        true
 
   #  private
 
