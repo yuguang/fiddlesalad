@@ -42,8 +42,12 @@
         if (left == right && maybeOverwrite(cm) != CodeMirror.Pass) return;
         var cur = cm.getCursor(), ahead = CodeMirror.Pos(cur.line, cur.ch + 1);
         var line = cm.getLine(cur.line), nextChar = line.charAt(cur.ch);
-        if (line.length == cur.ch || closingBrackets.indexOf(nextChar) >= 0 || SPACE_CHAR_REGEX.test(nextChar))
+        if (line.length == cur.ch || closingBrackets.indexOf(nextChar) >= 0 || SPACE_CHAR_REGEX.test(nextChar)) {
+          if (left === "{") {
+            right = "\n" + right;
+          }
           cm.replaceSelection(left + right, {head: ahead, anchor: ahead});
+        }
         else
           return CodeMirror.Pass;
       };
