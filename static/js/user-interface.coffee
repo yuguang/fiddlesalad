@@ -16,7 +16,7 @@ TabInterface = VisualComponent.$extend(
 
   add: (title='', content='') ->
     settings = { title, content, id: @getId(), height: @height, width: @width, position: 'relative' }
-    if title in ['coffeecup', 'python']
+    if title in [LANGUAGE.COFFEEKUP, LANGUAGE.PYTHON]
       settings.position = 'fixed'
       settings.width = @parent.dimension.width - @parent.padding + 'px'
     @tabs.push settings

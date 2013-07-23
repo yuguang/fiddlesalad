@@ -380,15 +380,15 @@ TemplateEditor = DocumentEditor.$extend(
   changeHandler: ->
     @compiler.postMessage code: @get_code(), locals: @getViewerLocals()
 )
-CoffeecupEditor = TemplateEditor.$extend(
+CoffeekupEditor = TemplateEditor.$extend(
   __init__: (id) ->
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeecup')
-    @documentationUrl = '/coffeecup/documentation/'
+    @documentationUrl = '/coffeekup/documentation/'
 
   get_documentation: ->
-    @$super('coffeecup')
+    @$super('coffeekup')
 )
 MarkdownEditor = TemplateEditor.$extend(
   __init__: (id) ->
@@ -1293,5 +1293,5 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeecupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeekupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
 root.engine = EngineFactory(FiddleFactory())

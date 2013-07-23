@@ -450,7 +450,7 @@ examples =
     //     province: 'BC'
     //   };
   """, atob('fCBBbiBleGFtcGxlIG9mIGFuDQphKGhyZWY9JyMnKSBpbmxpbmUNCnwgbGluay4NCg0KZm9ybQ0KICBsYWJlbCBVc2VybmFtZToNCiAgICBpbnB1dCh0eXBlPSd0ZXh0JywgbmFtZT0ndXNlcltuYW1lXScpDQogICAgcA0KICAgICAgfCBKdXN0IGFuIGV4YW1wbGUgb2Ygc29tZSB0ZXh0IHVzYWdlLg0KICAgICAgfCBZb3UgY2FuIGhhdmUgPGVtPmlubGluZTwvZW0+IGh0bWwsDQogICAgICB8IGFzIHdlbGwgYXMNCiAgICAgIHN0cm9uZyB0YWdzDQogICAgICB8IC4NCg0KICAgICAgfCBJbnRlcnBvbGF0aW9uIGlzIGFsc28gc3VwcG9ydGVkLiBUaGUgDQogICAgICB8IHVzZXJuYW1lIGlzIGN1cnJlbnRseSAiI3tuYW1lfSIuDQoNCiAgbGFiZWwgRW1haWw6DQogICAgaW5wdXQodHlwZT0ndGV4dCcsIG5hbWU9J3VzZXJbZW1haWxdJykNCiAgICBwDQogICAgICB8IEVtYWlsIGlzIGN1cnJlbnRseQ0KICAgICAgZW09IGVtYWlsDQogICAgICB8IC4NCg0KICAvLyBhbHRlcm5hdGl2ZWx5LCBpZiB3ZSBwbGFuIG9uIGhhdmluZyBvbmx5DQogIC8vIHRleHQgb3IgaW5saW5lLWh0bWwsIHdlIGNhbiB1c2UgYSB0cmFpbGluZw0KICAvLyAiLiIgdG8gbGV0IGphZGUga25vdyB3ZSB3YW50IHRvIG9taXQgcGlwZXMNCiAgDQogIGxhYmVsIFVzZXJuYW1lOg0KICAgIGlucHV0KHR5cGU9J3RleHQnKQ0KICAgIHAuDQogICAgICBKdXN0IGFuIGV4YW1wbGUsIGxpa2UgYmVmb3JlDQogICAgICBob3dldmVyIG5vdyB3ZSBjYW4gb21pdCB0aG9zZQ0KICAgICAgYW5ub3lpbmcgcGlwZXMhLg0KICAgICAgDQogICAgICBXYWhvby4NCg0KLy8gLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS1qYXZhc2NyaXB0LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KLy8gbG9jYWxzLm5hbWUgPSAndGonOw0KLy8gbG9jYWxzLmVtYWlsID0gJ3RqQHZpc2lvbi1tZWRpYS5jYSc7')])
-  coffeecup: Queue(["""
+  coffeekup: Queue(["""
     div '.navbar.navbar-fixed-top', ->
       div '.navbar-inner', ->
         div '.container', ->
@@ -760,7 +760,7 @@ codeMirrorMode = _.memoize((language) ->
   switch language
     when 'html'
       return 'htmlmixed'
-    when 'coffeecup'
+    when 'coffeekup'
       return 'coffeescript'
     when 'typescript'
       return 'text/typescript'
