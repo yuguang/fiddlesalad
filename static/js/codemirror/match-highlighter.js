@@ -24,14 +24,13 @@
     }
     if (this.style == null) this.style = DEFAULT_TOKEN_STYLE;
     if (this.minChars == null) this.minChars = DEFAULT_MIN_CHARS;
-    this.overlay = this.timeout = null;
+    this.overlay = null;
   }
 
   CodeMirror.defineOption("highlightSelectionMatches", false, function(cm, val, old) {
     if (old && old != CodeMirror.Init) {
       var over = cm.state.matchHighlighter.overlay;
       if (over) cm.removeOverlay(over);
-      clearTimeout(cm.state.matchHighlighter.timeout);
       cm.state.matchHighlighter = null;
       cm.off("cursorActivity", cursorActivity);
     }
@@ -42,11 +41,7 @@
     }
   });
 
-  function cursorActivity(cm) {
-    var state = cm.state.matchHighlighter;
-    clearTimeout(state.timeout);
-    state.timeout = setTimeout(function() {highlightMatches(cm);}, 100);
-  }
+  var cursorActivity = _.debounce(highlightMatches, 300);
 
   function highlightMatches(cm) {
     cm.operation(function() {
@@ -60,8 +55,9 @@
         var cur = cm.getCursor(), line = cm.getLine(cur.line), start = cur.ch, end = start;
         while (start && re.test(line.charAt(start - 1))) --start;
         while (end < line.length && re.test(line.charAt(end))) ++end;
-        if (start < end && (end - start) >= state.minChars)
-          cm.addOverlay(state.overlay = makeOverlay(line.slice(start, end), re, state.style));
+        var keyword = line.slice(start, end);
+        if (start < end && (end - start) >= state.minChars && cm.getValue().each(keyword).length > 1)
+          cm.addOverlay(state.overlay = makeOverlay(keyword, re, state.style));
         return;
       }
       if (cm.getCursor("head").line != cm.getCursor("anchor").line) return;
