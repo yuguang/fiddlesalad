@@ -30,7 +30,7 @@ Supported Languages
 
 * HTML
     * HAML
-    * Zen Coding (input method)
+    * Emmet (input method)
     * Jade
     * CoffeeCup
     * Markdown
@@ -42,6 +42,7 @@ Supported Languages
 
 * JavaScript
     * CoffeeeScript
+    * TypeScript
     * Python
     * Roy
 
@@ -89,14 +90,11 @@ Contribution Guidelines
 
 Features ready to be implemented:
 
-* HTML class and id auto-complete
 * Auto-semicolon insertion for CSS style languages
 * Hide window title bar option
 * Color picker when hovering over CSS color values in editor
 * Homepage with vertical orientation and categorized languages
 * Scroll source to current cursor position in editor
-* Better CoffeeCup documentation page with syntax highlighting
-    * Use CodeMirror's built-in run mode
 * More Languages
     * [Eco](https://github.com/sstephenson/eco) ([Browserify](https://github.com/substack/node-browserify) nodejs module)
     * [Traceur](http://code.google.com/p/traceur-compiler/)
@@ -138,4 +136,4 @@ Contributors
 Thanks to
 
 * [Tom Wilson](https://github.com/twilson63) for the CoffeeCup compiler
-* [Lorin Tackett](https://github.com/ltackett) for home page redesign (in progress)
+* [Lorin Tackett](https://github.com/ltackett) for home page redesign
