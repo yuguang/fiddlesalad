@@ -923,7 +923,7 @@ FiddleEditor = Class.$extend(
     layout.add_column editor_frames
 
     frames = new Array
-    resultFrame = Frame 'result', 'Result'
+    resultFrame = Frame 'result', '<div>Result<span id="resultWarning"></span></div>'
     frames.push resultFrame
 
     # source preview tabs
