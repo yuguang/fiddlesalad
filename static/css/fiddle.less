@@ -280,58 +280,58 @@ div#source {
     background: lightpink !important;
 }
 
-    #resultWarning,
-    #resultWarning::before,
-    #resultWarning::after
-    {
-        position: relative;
-        padding: 0;
-        margin: 0;
-    }
+#resultWarning,
+#resultWarning::before,
+#resultWarning::after {
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
 
-    #resultWarning {
-        float: right;
-        vertical-align: top;
-        font-size: 22px;
-        color: transparent;
-        margin-left: 6px;
-    }
- #resultWarning {
-        display: inline-block;
+#resultWarning {
+    float: right;
+    vertical-align: top;
+    font-size: 22px;
+    color: transparent;
+    margin-left: 6px;
+    display: none;
+    width: 1.12em;
+    height: 1.12em;
 
-        width: 1.12em;
-        height: 1.12em;
+    overflow: hidden;
+    border: none;
+    background-color: transparent;
+    border-radius: 0.625em;
+}
 
-        overflow: hidden;
-        border: none;
-        background-color: transparent;
-        border-radius: 0.625em;
-    }
+#resultWarning.active {
+    display: inline-block;
+}
 
-    #resultWarning::before {
-        content: "";
-        display: block;
-        top: -0.08em;
-        left: 0.0em;
-        position: absolute;
-        border: transparent 0.6em solid;
-        border-bottom-color: #fd3;
-        border-bottom-width: 1em;
-        border-top-width: 0;
-        box-shadow: #999 0 1px 1px;
-    }
+#resultWarning::before {
+    content: "";
+    display: block;
+    top: -0.08em;
+    left: 0.0em;
+    position: absolute;
+    border: transparent 0.6em solid;
+    border-bottom-color: #fd3;
+    border-bottom-width: 1em;
+    border-top-width: 0;
+    box-shadow: #999 0 1px 1px;
+}
 
-    #resultWarning::after {
-        display: block;
-        position: absolute;
-        top: 0.3em;
-        left: 0;
-        width: 100%;
-        padding: 0 1px;
-        text-align: center;
-        font-family: "Garamond";
-        content: "!";
-        font-size: 0.65em;
-        font-weight: bold;
-        color: #333;
-    }
+#resultWarning::after {
+    display: block;
+    position: absolute;
+    top: 0.3em;
+    left: 0;
+    width: 100%;
+    padding: 0 1px;
+    text-align: center;
+    font-family: "Garamond";
+    content: "!";
+    font-size: 0.65em;
+    font-weight: bold;
+    color: #333;
+}

@@ -263,15 +263,16 @@ div#source .ui-tabs {
   font-size: 22px;
   color: transparent;
   margin-left: 6px;
-}
-#resultWarning {
-  display: inline-block;
+  display: none;
   width: 1.12em;
   height: 1.12em;
   overflow: hidden;
   border: none;
   background-color: transparent;
   border-radius: 0.625em;
+}
+#resultWarning.active {
+  display: inline-block;
 }
 #resultWarning::before {
   content: "";
