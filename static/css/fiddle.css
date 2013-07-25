@@ -228,7 +228,7 @@ div#source .ui-tabs {
   background-color: #e6e6fa;
 }
 .CodeMirror-focused .CodeMirror-activeline-background {
-  background-color: rgba(136, 228, 243, 0.1);
+  background-color: rgba(136, 228, 243, 0.15);
 }
 .CodeMirror .lint-error {
   font-family: arial;
