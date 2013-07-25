@@ -49,7 +49,7 @@ BackgroundWorker =
       @pad.removeLineWidget @errorWidget
       @errorWidget = new Object
 
-  displayError: _.throttle((message, line=@pad.getCursor().line) ->
+  displayError: _.debounce((message, line=@pad.getCursor().line) ->
       return  if _.isEqual {line, message}, @previousError
       @clearLineWidget()
       @errorWidget = @pad.addLineWidget line, @makeLineWidget(message)
