@@ -70,7 +70,7 @@ CodeCompleteEditor = Editor.$extend(
     else
       token = editor.getTokenAt editor.getCursor()
       lastChar = @keyCharacter(event)
-      if WORD_TOKEN.test(lastChar) and not token.type?.has('string')
+      if @wordPattern.test(lastChar) and not token.type?.has('string')
         @popupAutocomplete(lastChar)
 
   hint: (editor, lastChar) ->
