@@ -1100,8 +1100,8 @@ define('lib/source-map/source-node', ['require', 'exports', 'module' , 'lib/sour
           }
         });
       }
-      chunk.split('').forEach(function (char) {
-        if (char === '\n') {
+      chunk.split('').forEach(function (character) {
+        if (character === '\n') {
           generated.line++;
           generated.column = 0;
         } else {

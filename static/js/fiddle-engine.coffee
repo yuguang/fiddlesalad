@@ -484,7 +484,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['http://fiddlesalad.com/',  @mode, '/compile/'].join('')
+      ['/',  @mode, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
