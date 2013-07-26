@@ -2,6 +2,8 @@ root = global ? window
 BackgroundWorker =
   previousError: new Object
 
+  compileError: new Object
+
   errorWidget: new Object
 
   loadWorker: (file) ->
@@ -16,7 +18,7 @@ BackgroundWorker =
           when ('hint')
             @displayHint(event.data.hints)
           when ('error')
-            @displayError event.data.errorText, event.data.line
+            @recordError event.data.errorText, event.data.line
           when ('notification')
             @displayNotification event.data.messageText
           when ('mappedResult')
@@ -28,7 +30,7 @@ BackgroundWorker =
   receiveResult: (code) ->
     @previewCode code
     @clearLineWidget()
-    @previousError = new Object
+    @compileError = new Object
 
   previewCode: (code) ->
 
@@ -49,11 +51,14 @@ BackgroundWorker =
       @pad.removeLineWidget @errorWidget
       @errorWidget = new Object
 
-  displayError: _.debounce((message, line=@pad.getCursor().line) ->
-      return  if _.isEqual {line, message}, @previousError
+  recordError: (message, line=@pad.getCursor().line) ->
+    @compileError = {message, line}
+
+  displayError: _.debounce( ->
+      return  if _.isEqual @compileError, @previousError
       @clearLineWidget()
-      @errorWidget = @pad.addLineWidget line, @makeLineWidget(message)
-      @previousError = {line, message}
+      @errorWidget = @pad.addLineWidget @compileError.line, @makeLineWidget(@compileError.message)
+      @previousError = @compileError
     , 1200)
 
   displayNotification: (message) ->
@@ -113,6 +118,7 @@ DynamicEditor = CodeCompleteEditor.$extend(
 
   changeHandler: ->
     @compiler.postMessage @get_code()
+    @displayError()
 
   get_compiled_code: ->
     @compiledCode
@@ -930,7 +936,7 @@ FiddleEditor = Class.$extend(
     previewFrame = Frame 'source', 'Source'
     tabs = TabInterface 'source-tab', previewFrame
     preview = IframeComponent @id.css
-    preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013070320'
+    preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2013072508'
     index = tabs.add 'css', preview.to_html_string()
     @styleEditor.set_focus_listener PreviewListener('source', index)
 
