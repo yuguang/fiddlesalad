@@ -54,7 +54,8 @@ BackgroundWorker =
   recordError: (message, line=@pad.getCursor().line) ->
     @compileError = {message, line}
 
-  displayError: _.debounce( ->
+  displayError: _.debounce((message, line) ->
+      @recordError(message, line)  if message
       return  if _.isEqual @compileError, @previousError
       @clearLineWidget()
       @errorWidget = @pad.addLineWidget @compileError.line, @makeLineWidget(@compileError.message)
@@ -483,7 +484,7 @@ serverCompiler =
     line and column numbers are given and notifies the user about the error.
     ###
     $.post(
-      ['/',  @mode, '/compile/'].join('')
+      ['http://fiddlesalad.com/',  @mode, '/compile/'].join('')
       code: @get_code()
       (response) =>
         if response.success
@@ -542,7 +543,8 @@ HamlEditor = DocumentEditor.$extend(
 
   markError: (error, line) ->
     linePattern = /line\s(\d+)/
-    lineNumber = parseInt(linePattern.exec(line)[1]) - 1
+    if linePattern.test line
+      lineNumber = parseInt(linePattern.exec(line)[1]) - 1
     @displayError decodeEntities(error), lineNumber
 
   load: ->
