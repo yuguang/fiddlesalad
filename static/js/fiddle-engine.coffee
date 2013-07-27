@@ -932,6 +932,8 @@ FiddleEditor = Class.$extend(
 
     frames = new Array
     resultFrame = Frame 'result', '<div>Result<span id="resultWarning"></span></div>'
+    resultFrame.buttons.refresh = true
+    resultFrame.buttons.pin = true
     frames.push resultFrame
 
     # source preview tabs
@@ -1159,9 +1161,7 @@ CodeRunner = Class.$extend(
     )
 
   reset: ->
-    code = engine.get_code()
     @__init__()
-    engine.set_code code
     @window.location.reload()
 
   debug: ->
