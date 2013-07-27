@@ -230,9 +230,9 @@ ProgramEditor = DynamicEditor.$extend(
       message = JSON.parse event.data
       switch message.action
         when 'add'
+          @errorLine = @sourceLine message.line
           lint_enabled = viewModel.lint_enabled(@mode)
           codeRunner.display_error(lint_enabled)
-          @errorLine = @sourceLine message.line
           if not lint_enabled
             $('#resultWarning').show()
         when 'remove'
