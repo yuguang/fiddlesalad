@@ -49,30 +49,47 @@ function execute(scripts, main) {
       catch (e) {
         lineNumber = e.lineNumber - 46 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [, ])[1];
 
-        displayJavascriptError(e.name, e.message);
+        prepareJavascriptError(e.name, e.message);
       }
       finally {
         window.parent.postMessage(lineNumber ? lineNumber - 1 : -1, '*');
 
+        // clear error
         if (!lineNumber) {
-          var jserror = document.getElementById('jserror');
           if (jserror) {
-            jserror.className = '';
+            removeError();
           }
         }
       }
     });
 }
 
-function displayJavascriptError(name, message) {
-  var jserror = document.getElementById('jserror');
+var jserror;
+
+function removeError() {
+  jserror.className = '';
+}
+
+function prepareJavascriptError(name, message) {
   if (!jserror) {
     jserror = document.createElement('div');
     jserror.setAttribute('id', 'jserror');
     document.body.appendChild(jserror);
   }
 
-  jserror.className = 'active';
   jserror.innerHTML = (name ? '<strong>' + name + '</strong>: ' : '') +
     (message || 'JavaScript Error');
+}
+
+function displayJavascriptError(immediate) {
+  var visibleOnHover = !immediate;
+  function showError() {
+    jserror.className = 'active';
+  };
+  if (visibleOnHover) {
+    window.onmouseover = showError;
+    window.onmouseout = removeError;
+  } else {
+    showError();
+  }
 }

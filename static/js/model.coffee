@@ -269,7 +269,13 @@ Template = (configuration) ->
 WorkspaceConfiguration = ->
   @enableTransparency = ko.observable(false)
   @cssLintEnabled = ko.observable(true)
-  @jsLintEnabled = ko.observable(not debug)
+  @jsLintEnabled = ko.observable(true)
+  clearErrorMarkers = ->
+    codeRunner.reset()
+    for style in ['CodeMirror-lint-marker-warning', 'CodeMirror-lint-marker-error', 'highlight-error']
+      $('.' + style).removeClass(style)
+  @cssLintEnabled.subscribe clearErrorMarkers
+  @jsLintEnabled.subscribe clearErrorMarkers
   @completeHtmlTags = ko.observable(true)
   @
 FiddleViewModel = ViewModel.$extend(
@@ -331,8 +337,10 @@ FiddleViewModel = ViewModel.$extend(
         @configuration.cssLintEnabled()
       when 'javascript'
         @configuration.jsLintEnabled()
-      else
+      when 'text/typescript'
         true
+      else
+        false
 
   #  private
 

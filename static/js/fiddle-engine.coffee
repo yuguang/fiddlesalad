@@ -213,6 +213,10 @@ StylusEditor = StyleEditor.$extend(
     )
 )
 ProgramEditor = DynamicEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @loadErrorHandler()
+
   errorLine: -1
 
   get_options: ->
@@ -223,12 +227,20 @@ ProgramEditor = DynamicEditor.$extend(
 
   loadErrorHandler: ->
     window.onmessage = (event) =>
-      if event.data > -1
-        line = @sourceLine event.data
-        @pad.addLineClass line, 'background', 'highlight-error'
-        @errorLine = line
+      lint_enabled = viewModel.lint_enabled(@mode)
+      codeRunner.display_error(lint_enabled)
+      if lint_enabled
+        if event.data > -1
+          line = @sourceLine event.data
+          @pad.addLineClass line, 'background', 'highlight-error'
+          @errorLine = line
+        else
+          @pad.removeLineClass @errorLine, 'background', 'highlight-error'
       else
-        @pad.removeLineClass @errorLine, 'background', 'highlight-error'
+        if event.data > -1
+          $('#resultWarning').show()
+        else
+          $('#resultWarning').hide()
 
   preview: (javascript) ->
     codeRunner.execute javascript
@@ -250,7 +262,6 @@ JavascriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'javascript'
     @loadWorker('jshint')
-    @loadErrorHandler()
 
   sourceLine: (line) -> line
 
@@ -323,7 +334,6 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @loadWorker('coffeescript')
     @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013070221'
     @tabCharaterLength = 2
-    @loadErrorHandler()
 
   sourceLine: (line) ->
     source_map = new SourceMapConsumer JSON.parse(@mappingJSON)
@@ -1112,6 +1122,9 @@ CodeRunner = Class.$extend(
     while style = @delayedStyles.pop()
       @add_css style
     @style.innerHTML = StyleFix.fix(css)
+
+  display_error: (immediate) ->
+    @window.displayJavascriptError(immediate)
 
   initialize: ->
     if not @initialized
