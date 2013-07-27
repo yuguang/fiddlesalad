@@ -71,6 +71,7 @@ em {
 }
 #accordion input[type="checkbox"] {
   vertical-align: middle;
+  margin-right: .5em;
 }
 #accordion a[target="_blank"] {
   word-wrap: break-word;
