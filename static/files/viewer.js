@@ -52,23 +52,28 @@ function execute(scripts, main) {
         prepareJavascriptError(e.name, e.message);
       }
       finally {
-        window.parent.postMessage(lineNumber ? lineNumber - 1 : -1, '*');
-
-        // clear error
+        var message;
         if (!lineNumber) {
+          // clear error
           if (jserror) {
-            removeError();
+            jserror.className = '';
+          }
+          message = {
+            action: 'remove'
+          };
+          window.onmouseover = function () {};
+        } else {
+          message = {
+            action: 'add',
+            line: lineNumber - 1
           }
         }
+        window.parent.postMessage(JSON.stringify(message), '*');
       }
     });
 }
 
 var jserror;
-
-function removeError() {
-  jserror.className = '';
-}
 
 function prepareJavascriptError(name, message) {
   if (!jserror) {
@@ -85,10 +90,13 @@ function displayJavascriptError(immediate) {
   var visibleOnHover = !immediate;
   function showError() {
     jserror.className = 'active';
+    var message = {
+      action: 'show'
+    }
+    window.parent.postMessage(JSON.stringify(message), '*');
   };
   if (visibleOnHover) {
     window.onmouseover = showError;
-    window.onmouseout = removeError;
   } else {
     showError();
   }

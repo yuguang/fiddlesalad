@@ -227,20 +227,20 @@ ProgramEditor = DynamicEditor.$extend(
 
   loadErrorHandler: ->
     window.onmessage = (event) =>
-      lint_enabled = viewModel.lint_enabled(@mode)
-      codeRunner.display_error(lint_enabled)
-      if lint_enabled
-        if event.data > -1
-          line = @sourceLine event.data
-          @pad.addLineClass line, 'background', 'highlight-error'
-          @errorLine = line
-        else
-          @pad.removeLineClass @errorLine, 'background', 'highlight-error'
-      else
-        if event.data > -1
-          $('#resultWarning').show()
-        else
+      message = JSON.parse event.data
+      switch message.action
+        when 'add'
+          lint_enabled = viewModel.lint_enabled(@mode)
+          codeRunner.display_error(lint_enabled)
+          @errorLine = @sourceLine message.line
+          if not lint_enabled
+            $('#resultWarning').show()
+        when 'remove'
+          for lineNumber in [0...@pad.lineCount()]
+            @pad.removeLineClass lineNumber, 'background', 'highlight-error'
           $('#resultWarning').hide()
+        when 'show'
+          @pad.addLineClass @errorLine, 'background', 'highlight-error'
 
   preview: (javascript) ->
     codeRunner.execute javascript
