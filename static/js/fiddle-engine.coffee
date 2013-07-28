@@ -226,6 +226,7 @@ ProgramEditor = DynamicEditor.$extend(
     )
 
   loadErrorHandler: ->
+    return  if not _.isFunction @sourceLine
     window.onmessage = (event) =>
       message = JSON.parse event.data
       switch message.action
