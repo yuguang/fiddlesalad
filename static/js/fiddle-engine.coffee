@@ -970,14 +970,14 @@ FiddleEditor = Class.$extend(
     result_x = resultFrame.get_location().x
     preview_y = previewFrame.get_location().y
     shareFrame = Frame 'sharecontainer', 'Share'
-    shareFrame.set_location(x: result_x, y: preview_y - 100)
+    shareFrame.set_location(x: result_x + 25, y: preview_y - 200)
     shareFrame.set_size(width: 200, height: 80)
     shareBox = TemplateComponent 'share'
     shareBox.set_template 'shareTemplate'
     shareFrame.add shareBox
 
     columnLayoutFrames = layout.get_frames()
-    if not debug
+    if true
       columnLayoutFrames.push shareFrame
     columnLayoutFrames
 
