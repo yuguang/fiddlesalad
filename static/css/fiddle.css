@@ -248,6 +248,10 @@ div#source .ui-tabs {
   padding: 0 3px;
   margin-right: 7px;
 }
+#source-tab-html,
+#source-tab-javascript {
+  overflow-y: auto;
+}
 .highlight-error {
   background: lightpink !important;
 }

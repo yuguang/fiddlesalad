@@ -15,15 +15,15 @@ TabInterface = VisualComponent.$extend(
     @width = 'auto'
 
   add: (title='', content='') ->
-    settings = { title, content, id: @getId(), height: @height, width: @width, position: 'relative' }
+    settings = { title, content, id: @getId(title), height: @height, width: @width, position: 'relative' }
     if title in [LANGUAGE.COFFEEKUP, LANGUAGE.PYTHON]
       settings.position = 'fixed'
       settings.width = @parent.dimension.width - @parent.padding + 'px'
     @tabs.push settings
     @tab_count++
 
-  getId: ->
-    @id + @tab_count
+  getId: (title) ->
+    [@id, '-', title].join('')
 )
 SourceComponent = VisualComponent.$extend(
   to_html_string: ->
