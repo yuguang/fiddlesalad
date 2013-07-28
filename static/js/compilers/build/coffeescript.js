@@ -1,1 +1,0 @@
-importScripts("coffeescript.base.js");function sendResult(a){typeof a==="undefined"||a===null||!a.length||postMessage({type:"result",resultText:a})}function sendError(a){postMessage({type:"error",errorText:a})}self.addEventListener("message",function(a){try{sendResult(CoffeeScript.compile(a.data))}catch(b){b.name=="SyntaxError"&&sendError(b.message)}},!1);
