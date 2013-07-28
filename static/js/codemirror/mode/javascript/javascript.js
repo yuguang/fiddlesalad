@@ -467,5 +467,5 @@ CodeMirror.defineMIME("application/javascript", "javascript");
 CodeMirror.defineMIME("application/ecmascript", "javascript");
 CodeMirror.defineMIME("application/json", {name: "javascript", json: true});
 CodeMirror.defineMIME("application/x-json", {name: "javascript", json: true});
-CodeMirror.defineMIME("text/typescript", { name: "javascript", typescript: true });
+CodeMirror.defineMIME("typescript", { name: "javascript", typescript: true }); // Modified for Fiddle Salad
 CodeMirror.defineMIME("application/typescript", { name: "javascript", typescript: true });

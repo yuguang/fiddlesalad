@@ -361,7 +361,7 @@ RoyEditor = ProgramEditor.$extend(
 TypescriptEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
-    @mode = 'text/typescript'
+    @mode = 'typescript'
     @loadWorker('typescript')
     @documentationUrl = 'http://www.johnpapa.net/typescriptpost3/'
 
