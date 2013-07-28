@@ -77,7 +77,7 @@ DynamicEditor = CodeCompleteEditor.$extend(
   get_options: ->
     _.extend(
       @$super()
-      lineWrapping: true
+      lineWrapping: if bowser.chrome and parseInt(bowser.version) is 28 then false else true
       styleActiveLine: true
       indentUnit: @tabCharaterLength
       indentWithTabs: true
@@ -977,7 +977,7 @@ FiddleEditor = Class.$extend(
     shareFrame.add shareBox
 
     columnLayoutFrames = layout.get_frames()
-    if true
+    if not debug
       columnLayoutFrames.push shareFrame
     columnLayoutFrames
 
