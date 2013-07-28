@@ -331,13 +331,13 @@ FiddleViewModel = ViewModel.$extend(
     engine.set_code atob(frameworkLibrary[@styleLanguage()][templateName].source), LANGUAGE_TYPE.FRAMEWORK
     @starterFrameworks()[0].selected(templateName)
 
-  lint_enabled: (name) ->
-    switch name
-      when 'css'
+  lint_enabled: (language) ->
+    switch language
+      when LANGUAGE.CSS
         @configuration.cssLintEnabled()
-      when 'javascript'
+      when LANGUAGE.JAVASCRIPT
         @configuration.jsLintEnabled()
-      when 'text/typescript'
+      when LANGUAGE.TYPESCRIPT
         true
       else
         false

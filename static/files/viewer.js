@@ -37,7 +37,7 @@ window.console.log = function () {
   }, 250);
 })();
 
-function execute(scripts, main) {
+function execute(scripts, main, immediate) {
   var lineNumber;
   $LAB
     .setOptions({AlwaysPreserveOrder:true})
@@ -54,6 +54,7 @@ function execute(scripts, main) {
       finally {
         var message;
         if (!lineNumber) {
+          var jserror = document.getElementById('jserror');
           // clear error
           if (jserror) {
             jserror.className = '';
@@ -61,21 +62,22 @@ function execute(scripts, main) {
           message = {
             action: 'remove'
           };
+          window.parent.postMessage(JSON.stringify(message), '*');
           window.onmouseover = function () {};
         } else {
           message = {
             action: 'add',
             line: lineNumber - 1
           }
+          window.parent.postMessage(JSON.stringify(message), '*');
+          displayJavascriptError(immediate);
         }
-        window.parent.postMessage(JSON.stringify(message), '*');
       }
     });
 }
 
-var jserror;
-
 function prepareJavascriptError(name, message) {
+  var jserror = document.getElementById('jserror');
   if (!jserror) {
     jserror = document.createElement('div');
     jserror.setAttribute('id', 'jserror');
@@ -89,6 +91,7 @@ function prepareJavascriptError(name, message) {
 function displayJavascriptError(immediate) {
   var visibleOnHover = !immediate;
   function showError() {
+    var jserror = document.getElementById('jserror');
     jserror.className = 'active';
     var message = {
       action: 'show'
@@ -96,6 +99,10 @@ function displayJavascriptError(immediate) {
     window.parent.postMessage(JSON.stringify(message), '*');
   };
   if (visibleOnHover) {
+     var message = {
+      action: 'warn'
+    }
+    window.parent.postMessage(JSON.stringify(message), '*');
     window.onmouseover = showError;
   } else {
     showError();

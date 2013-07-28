@@ -231,16 +231,14 @@ ProgramEditor = DynamicEditor.$extend(
       switch message.action
         when 'add'
           @errorLine = @sourceLine message.line
-          lint_enabled = viewModel.lint_enabled(@mode)
-          codeRunner.display_error(lint_enabled)
-          if not lint_enabled
-            $('#resultWarning').show()
         when 'remove'
           for lineNumber in [0...@pad.lineCount()]
             @pad.removeLineClass lineNumber, 'background', 'highlight-error'
           $('#resultWarning').hide()
         when 'show'
           @pad.addLineClass @errorLine, 'background', 'highlight-error'
+        when 'warn'
+          $('#resultWarning').show()
 
   preview: (javascript) ->
     codeRunner.execute javascript
@@ -1115,16 +1113,13 @@ CodeRunner = Class.$extend(
       @body.innerHTML = html
       @previousHtml = html
     if javascript.length
-      @window.execute @scripts, javascript
+      @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
     return  unless @initialized
     while style = @delayedStyles.pop()
       @add_css style
     @style.innerHTML = StyleFix.fix(css)
-
-  display_error: (immediate) ->
-    @window.displayJavascriptError(immediate)
 
   initialize: ->
     if not @initialized
