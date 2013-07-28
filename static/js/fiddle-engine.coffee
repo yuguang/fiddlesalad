@@ -56,7 +56,7 @@ BackgroundWorker =
 
   displayError: _.debounce((message, line) ->
       @recordError(message, line)  if message
-      return  if _.isEqual @compileError, @previousError
+      return  if _.isEqual(@compileError, @previousError) or not @compileError.message
       @clearLineWidget()
       @errorWidget = @pad.addLineWidget @compileError.line, @makeLineWidget(@compileError.message)
       @previousError = @compileError
