@@ -762,8 +762,6 @@ codeMirrorMode = _.memoize((language) ->
       return 'htmlmixed'
     when 'coffeekup'
       return 'coffeescript'
-    when 'typescript'
-      return 'text/typescript'
     else
       return language
 )
