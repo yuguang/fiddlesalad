@@ -768,18 +768,17 @@ codeMirrorMode = _.memoize((language) ->
 
 timer = null
 
-$('ul.list label').hover _.throttle(->
-      language = $(this).text().toLowerCase().replace(' ', '')
-      editor.setValue examples[language].pop()
-      if timer
-        clearInterval timer
-      timer = setInterval(
-        ->
-          editor.setValue examples[language].pop()
-        5000
-      )
-      editor.setOption 'mode', codeMirrorMode(language)
-    , 1500)
+$('ul.list label').hover ->
+    language = $(this).text().toLowerCase().replace(' ', '')
+    editor.setValue examples[language].pop()
+    if timer
+      clearInterval timer
+    timer = setInterval(
+      ->
+        editor.setValue examples[language].pop()
+      5000
+    )
+    editor.setOption 'mode', codeMirrorMode(language)
   ,
     $.noop
 
