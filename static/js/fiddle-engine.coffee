@@ -1291,7 +1291,6 @@ FiddleFactory = Class.$extend(
         languages.push selectedLanguage
         store.set('languages', languages.join(','))
         window.open("/#{ selectedLanguage }/")
-      showDelay: 0
     )
     $('.menu').show()
     unless bowser.webkit
