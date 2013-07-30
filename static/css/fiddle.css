@@ -248,9 +248,12 @@ div#source .ui-tabs {
   padding: 0 3px;
   margin-right: 7px;
 }
-#source-tab-html,
-#source-tab-javascript {
+.ui-tabs #source-tab-html,
+.ui-tabs #source-tab-javascript {
   overflow-y: auto;
+}
+.ui-tabs .maximized {
+  height: 100% !important;
 }
 .highlight-error {
   background: lightpink !important;
