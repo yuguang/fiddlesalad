@@ -1106,13 +1106,10 @@ CodeRunner = Class.$extend(
     @initialized = false
     @scripts = []
     @delayedStyles = []
-    @previousHtml = ''
 
   execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
     return  unless @initialized
-    if html != @previousHtml
-      @body.innerHTML = html
-      @previousHtml = html
+    @body.innerHTML = html # following the live edit principle, always run js on fresh html
     if javascript.length
       @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
 
