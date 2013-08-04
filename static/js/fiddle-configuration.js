@@ -3,15 +3,6 @@ var _gaq = [
     ['_trackPageview']
 ];
 
-var defaultShare = {
-    'service':'sharethis',
-    'element':document.getElementById('share_this'),
-    'url':document.URL,
-    'title':'fiddle salad',
-    'type':'chicklet',
-    'text':'ShareThis'
-};
-
 var accordionOptions = { fillSpace: false, collapsible: true };
 
 LANGUAGE = {

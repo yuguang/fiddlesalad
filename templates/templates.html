@@ -6,11 +6,14 @@
     {% include "fiddle/templates.html"%}
 
     <script type="text/html" id="shareTemplate">
-        <span class='st_facebook_large' displayText='Facebook'></span>
-        <span class='st_twitter_large' displayText='Tweet'></span>
-        <span class='st_plusone_large' displayText='Google +1'></span>
-        <span class='st_fblike_large' displayText='Facebook Like'></span>
-        <span class='st_twitterfollow_large' displayText='Twitter Follow' st_username='fiddle_salad'></span>
+        <div id="shareMenu">
+            <span class='st_facebook_large' displayText='Facebook'></span>
+            <span class='st_twitter_large' displayText='Tweet'></span>
+            <span class='st_googleplus_large' displayText='Google +'></span>
+            <span class='st_pinterest_large' displayText='Pinterest'></span>
+            <span class='st_sharethis_large' displayText='ShareThis'></span>
+            <span class='st_email_large' displayText='Email'></span>
+        </div>
     </script>
 
     <script type="text/html" id="tipsTemplate">
@@ -242,6 +245,10 @@
                     <span>Tips</span>
                 </a>
             </p>
+        </div>
+        <h3>Share</h3>
+        <div data-bind="template: { name: 'shareTemplate'}">
+
         </div>
     </script>
 

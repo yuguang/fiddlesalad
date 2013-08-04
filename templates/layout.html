@@ -50,8 +50,7 @@
             .script("http://www.google-analytics.com/ga.js")
             .script("http://w.sharethis.com/button/buttons.js").wait(function(){
                 __st_loadLate=true;
-                stLight.options({publisher: "fc68151a-448d-4de4-aff8-689891a963fd"});
-                stWidget.addEntry(defaultShare);
+                stLight.options({publisher: "e166464f-d4f0-487b-b673-7abd0a910c5f", doNotHash: false, doNotCopy: false, hashAddressBar: false});
             });
         }
         H(function(){if("item"in c){if(!c[0]){H(arguments.callee,25);return}c=c[0]}var a=b.createElement("script"),e=false;a.onload=a[E]=function(){if((a[D]&&a[D]!=="complete"&&a[D]!=="loaded")||e){return false}a.onload=a[E]=null;e=true;f()};

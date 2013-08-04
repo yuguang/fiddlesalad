@@ -228,7 +228,7 @@ ProgramEditor = DynamicEditor.$extend(
   loadErrorHandler: ->
     return  if not _.isFunction @sourceLine
     window.onmessage = (event) =>
-      return  if not event.origin in ['http://fiddlesalad.com', 'http://127.0.0.1:8000/']
+      return  if not _.contains ['http://fiddlesalad.com', 'http://127.0.0.1:8000'], event.origin
       message = JSON.parse event.data
       switch message.action
         when 'add'
@@ -968,18 +968,7 @@ FiddleEditor = Class.$extend(
 
     layout.add_column frames
 
-    result_x = resultFrame.get_location().x
-    preview_y = previewFrame.get_location().y
-    shareFrame = Frame 'sharecontainer', 'Share'
-    shareFrame.set_location(x: result_x + 25, y: preview_y - 200)
-    shareFrame.set_size(width: 200, height: 80)
-    shareBox = TemplateComponent 'share'
-    shareBox.set_template 'shareTemplate'
-    shareFrame.add shareBox
-
     columnLayoutFrames = layout.get_frames()
-    if not debug
-      columnLayoutFrames.push shareFrame
     columnLayoutFrames
 
   compare_revisions: (older, newer) ->
