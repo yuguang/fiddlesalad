@@ -26,7 +26,6 @@ LocalHistory = Class.$extend(
     store.get(timestamp)
     
   create_revision: ->
-    code = engine.get_code()
     timestamp = dateFormat()
     store.set timestamp, engine.get_code()
     @revisions.push(timestamp)
@@ -607,7 +606,7 @@ FiddleViewModel = ViewModel.$extend(
     This method observes starterFrameworks so that changing selected loads the template and shows link to documentation
     ###
     framework = new Object
-    tempalte = new String
+    template = new String
     # when a framework is selected
     for starterFramework in @starterFrameworks()
       if _.isString(starterFramework.selected())
