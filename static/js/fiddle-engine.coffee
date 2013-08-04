@@ -1294,7 +1294,8 @@ FiddleFactory = Class.$extend(
     $('.menu').show()
     unless bowser.webkit
       $('.ui-dialog-title').css(position: 'static', height: '1em')
-
+    resultDialog = $('#viewer').closest('.ui-dialog')
+    resultDialog.width resultDialog.width() + 1
   get_view_model: ->
     document.getElementById('progress')?.value = 90
     FiddleViewModel()
