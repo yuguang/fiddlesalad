@@ -99,7 +99,7 @@ ViewModel = Class.$extend(
         engine.compare_revisions @revisionsMenu.selectedRevision(), @revisionsMenu.selectedDiffRevision()
 
   saveCurrentRevision: ->
-    _.throttle @localHistory.create_revision(), 2*MINUTE 
+    _.throttle @localHistory.create_revision(), 15*MINUTE
 
   save: ->
     unless @authenticated()
