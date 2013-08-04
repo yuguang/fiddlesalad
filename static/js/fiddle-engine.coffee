@@ -228,6 +228,7 @@ ProgramEditor = DynamicEditor.$extend(
   loadErrorHandler: ->
     return  if not _.isFunction @sourceLine
     window.onmessage = (event) =>
+      return  if not event.origin in ['http://fiddlesalad.com', 'http://127.0.0.1:8000/']
       message = JSON.parse event.data
       switch message.action
         when 'add'
