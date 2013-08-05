@@ -110,7 +110,11 @@ ViewModel = Class.$extend(
     if @emptyFiddle(code)
       @formMessage 'please fill in code'
       return
-    titleWords = @title().split(' ')
+    title = @title()
+    if title isnt title.compact()
+      @titleMessage.set_message 'check for extraneous spaces', 'warning'
+      return
+    titleWords = title.split(' ')
     if _.all(titleWords, (word) -> word.length < 3)
       @formMessage 'title contains invalid words'
       return
