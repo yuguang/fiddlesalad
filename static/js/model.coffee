@@ -112,7 +112,7 @@ ViewModel = Class.$extend(
       return
     title = @title()
     if title isnt title.compact()
-      @titleMessage.set_message 'check for extraneous spaces', 'warning'
+      @formMessage 'check for extraneous spaces in title'
       return
     titleWords = title.split(' ')
     if _.all(titleWords, (word) -> word.length < 3)
