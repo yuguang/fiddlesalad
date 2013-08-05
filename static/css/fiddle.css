@@ -236,11 +236,11 @@ div#source .ui-tabs {
 .CodeMirror-focused .CodeMirror-activeline-background {
   background-color: rgba(136, 228, 243, 0.15);
 }
-.CodeMirror .CodeMirror-hscrollbar {
+.CodeMirror .-webkit- .CodeMirror-hscrollbar {
   right: 4px !important;
   margin-right: 6px;
 }
-.CodeMirror .CodeMirror-vscrollbar {
+.CodeMirror .-webkit- .CodeMirror-vscrollbar {
   bottom: 8px !important;
 }
 .CodeMirror .lint-error {
