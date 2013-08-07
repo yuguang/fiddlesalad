@@ -189,7 +189,7 @@ LessEditor = StyleEditor.$extend(
     @$super id
     @mode = 'less'
     @loadWorker('less')
-    @documentationUrl = base_url + '/files/documentation/lesscss.html'
+    @documentationUrl = base_url + '/files/documentation/lesscss.html?v=2013080620'
     @varStart = '@'
 
   get_options: ->
@@ -203,7 +203,7 @@ StylusEditor = StyleEditor.$extend(
     @$super id
     @mode = 'stylus'
     @loadWorker('stylus')
-    @documentationUrl = base_url + '/files/documentation/stylus/index.html'
+    @documentationUrl = base_url + '/files/documentation/stylus/index.html?v=2013080620'
     @tabCharaterLength = 2
 
   get_options: ->
@@ -332,7 +332,7 @@ CoffeescriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'coffeescript'
     @loadWorker('coffeescript')
-    @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013070221'
+    @documentationUrl = base_url + '/files/documentation/coffeescript.html?v=2013080620'
     @tabCharaterLength = 2
 
   sourceLine: (line) ->
@@ -412,7 +412,7 @@ MarkdownEditor = TemplateEditor.$extend(
     @$super id
     @mode = 'markdown'
     @loadWorker('markdown')
-    @documentationUrl = base_url + '/files/documentation/markdown.html'
+    @documentationUrl = base_url + '/files/documentation/markdown.html?v=2013080620'
     @closeBrackets = false
 
   get_options: ->
@@ -428,7 +428,7 @@ JadeEditor = TemplateEditor.$extend(
     @$super id
     @mode = 'jade'
     @loadWorker('jade')
-    @documentationUrl = base_url + '/files/documentation/jade.html'
+    @documentationUrl = base_url + '/files/documentation/jade.html?v=2013080620'
     @tabCharaterLength = 2
 
   load: ->
@@ -547,7 +547,7 @@ HamlEditor = DocumentEditor.$extend(
     keywords = _.map KEYWORDS.HTML_TAGS, (keyword) -> '%' + keyword
     @addAutocomplete keywords
     @wordPattern = /^[\w%]+$/
-    @documentationUrl = base_url + '/files/documentation/haml.html?v=2013070221'
+    @documentationUrl = base_url + '/files/documentation/haml.html?v=2013080620'
 
   __include__: [serverCompiler]
 
@@ -566,13 +566,13 @@ SassEditor = SassCompiler.$extend(
   __init__: (id) ->
     @$super id
     @mode = 'sass'
-    @documentationUrl = base_url + '/files/documentation/sass.html'
+    @documentationUrl = base_url + '/files/documentation/sass.html?v=2013080620'
 )
 ScssEditor = SassCompiler.$extend(
   __init__: (id) ->
     @$super id
     @mode = 'scss'
-    @documentationUrl = base_url + '/files/documentation/sass.html'
+    @documentationUrl = base_url + '/files/documentation/sass.html?v=2013080620'
 
   get_options: ->
     _.extend(
