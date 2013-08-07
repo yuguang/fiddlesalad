@@ -241,7 +241,7 @@ div#source .ui-tabs {
   margin-right: 6px;
 }
 .-webkit- .CodeMirror-vscrollbar {
-  bottom: 8px !important;
+  bottom: 4px !important;
 }
 .CodeMirror .lint-error {
   font-family: arial;
