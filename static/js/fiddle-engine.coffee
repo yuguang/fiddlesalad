@@ -1157,9 +1157,9 @@ CodeRunner = Class.$extend(
     )
 
   reset: ->
-    code = engine.get_code(LANGUAGE_TYPE.RESOURCE)
+    code = engine.get_code()
     @__init__()
-    engine.set_code code, LANGUAGE_TYPE.RESOURCE
+    engine.set_code code
     @window.location.reload()
 
   debug: ->

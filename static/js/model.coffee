@@ -610,7 +610,6 @@ FiddleViewModel = ViewModel.$extend(
     This method observes starterFrameworks so that changing selected loads the template and shows link to documentation
     ###
     framework = new Object
-    template = new String
     # when a framework is selected
     for starterFramework in @starterFrameworks()
       if _.isString(starterFramework.selected())
