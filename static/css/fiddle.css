@@ -264,7 +264,7 @@ div#source .ui-tabs {
 .ui-tabs #source-tab-javascript {
   overflow-y: auto;
 }
-.ui-tabs .maximized {
+.ui-draggable-disabled .maximized {
   height: 100% !important;
 }
 .highlight-error {
