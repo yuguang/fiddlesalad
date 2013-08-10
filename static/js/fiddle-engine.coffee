@@ -7,7 +7,7 @@ BackgroundWorker =
   errorWidget: new Object
 
   loadWorker: (file) ->
-    @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 201302114].join(''))
+    @compiler = new Worker([worker_url, 'compilers/', file, '.js', '?v=', 2013080911].join(''))
     @compiler.addEventListener(
       'message'
       (event) =>

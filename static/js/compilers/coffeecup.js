@@ -392,7 +392,7 @@ if (typeof window === "undefined" || window === null) {
 }
 
 function sendResult(resultText) {
-    if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
+    if (typeof resultText === 'undefined' || resultText === null) return;
     postMessage({
         'type': 'result',
         'resultText': resultText

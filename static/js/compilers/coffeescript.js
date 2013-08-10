@@ -1,7 +1,7 @@
 importScripts('coffeescript.base.js?v=201302114');
 
 function sendMappedResult(resultText, mapping) {
-    if (typeof resultText === 'undefined' || resultText === null || !resultText.length) return;
+    if (typeof resultText === 'undefined' || resultText === null) return;
     postMessage({
         'type': 'mappedResult',
         'resultText': resultText,
