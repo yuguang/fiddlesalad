@@ -1,1 +1,1 @@
-if (!debug) document.getElementById('progress').value = 60;
+if (document.getElementById('progress') != null) document.getElementById('progress').value = 60;
