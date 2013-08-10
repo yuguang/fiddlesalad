@@ -1,1 +1,1 @@
-document.getElementById('progress').value = 60;
+if (!debug) document.getElementById('progress').value = 60;

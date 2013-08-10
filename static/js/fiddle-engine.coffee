@@ -1266,7 +1266,10 @@ FiddleFactory = Class.$extend(
     Language _.keys(JSON.parse(storageJSON))
 
   layout: ->
-    document.getElementById('progress').value = 90
+    _.delay( ->
+        $('#snippet, #progress-container, #overlay').remove()
+      , Math.sqrt($('#documentation').find('.maximized').length * 50000)
+    )
     $('#documentation, #source').parent().scrollTop(0)
     $('#logo').click(-> window.open('/'))
     $('.menu').wijmenu(
@@ -1286,11 +1289,13 @@ FiddleFactory = Class.$extend(
       $('.ui-dialog-title').css(position: 'static', height: '1em')
     resultDialog = $('#viewer').closest('.ui-dialog')
     resultDialog.width resultDialog.width() + 1
+
   get_view_model: ->
-    document.getElementById('progress')?.value = 90
+    document.getElementById('progress')?.value = 80
     FiddleViewModel()
 
   load_threads: ->
+    document.getElementById('progress')?.value = 90
     @editor.set_code @code
 
   execute: ->
