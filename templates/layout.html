@@ -7,7 +7,10 @@
 {% block content %}
     <textarea id="snippet">{{ snippet.code }}</textarea>
     {% if not DEBUG %}
-        <progress id="progress" value="5" max="100"></progress>
+        <div id="progress-container">
+            <progress id="progress" value="5" max="100"></progress>
+        </div>
+        <div id="overlay"></div>
         <iframe id="viewer" src="http://fiddlesalad.com/home/files/viewer.html?v=2013080513"></iframe>
     {% else %}
         <iframe id="viewer" src="/static/files/viewer.local.html"></iframe>
@@ -30,6 +33,7 @@
         {% if ownerId %}var ownerId = '{{ ownerId }}'{% endif %};
         {% block json %}{% endblock %}
         {% if not DEBUG %}
+        document.getElementById('progress').value = 10;
         (function(g,b,d){var c=b.head||b.getElementsByTagName("head"),D="readyState",E="onreadystatechange",F="DOMContentLoaded",G="addEventListener",H=setTimeout;
         function f(){
             //debug_base_url="http://fiddlesalad.com/home";

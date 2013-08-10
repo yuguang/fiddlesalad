@@ -1,0 +1,1 @@
+document.getElementById('progress').value = 60;

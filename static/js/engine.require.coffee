@@ -110,9 +110,12 @@ EngineFactory = Class.$extend(
     @engine_factory = factory
 
   layout_workspace: ->
+    document.getElementById('progress').value = 95
     @engine_factory.layout()
+    $('#snippet, #progress-container, #overlay').remove()
 
   load_editor: ->
+    document.getElementById('progress').value = 80
     root.viewModel = @engine_factory.get_view_model()
     ko.applyBindings viewModel
     viewModel.prepare_form()

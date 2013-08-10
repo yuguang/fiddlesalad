@@ -1266,7 +1266,7 @@ FiddleFactory = Class.$extend(
     Language _.keys(JSON.parse(storageJSON))
 
   layout: ->
-    $('#snippet, #progress').remove()
+    document.getElementById('progress').value = 90
     $('#documentation, #source').parent().scrollTop(0)
     $('#logo').click(-> window.open('/'))
     $('.menu').wijmenu(

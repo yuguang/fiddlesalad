@@ -127,6 +127,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror/lint.js',
             'js/codemirror/closetag.js',
             'js/codemirror/closebrackets.js',
+            'js/codemirror-loading.js',
             'js/codemirror/mode/python/python.js',
             'js/codemirror/mode/javascript/javascript.js',
             'js/codemirror/mode/coffeescript/coffeescript.js',
