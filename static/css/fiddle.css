@@ -286,6 +286,9 @@ div#source .ui-tabs {
 .highlight-error {
   background: lightpink !important;
 }
+#result {
+  height: 100%;
+}
 #resultWarning,
 #resultWarning::before,
 #resultWarning::after {
