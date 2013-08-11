@@ -234,8 +234,9 @@ ProgramEditor = DynamicEditor.$extend(
         when 'add'
           @errorLine = @sourceLine message.line
         when 'remove'
-          for lineNumber in [0...@pad.lineCount()]
-            @pad.removeLineClass lineNumber, 'background', 'highlight-error'
+          if $('.highlight-error').length
+            for lineNumber in [0...@pad.lineCount()]
+              @pad.removeLineClass lineNumber, 'background', 'highlight-error'
           $('#resultWarning').hide()
         when 'show'
           @pad.addLineClass @errorLine, 'background', 'highlight-error'
