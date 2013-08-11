@@ -325,6 +325,8 @@ self.addEventListener('message', function(e) {
     try {
         sendResult(HTMLtoXML(e.data));
     } catch (err) {
-        
+        if (e.data.substring(0, 14) === '<!DOCTYPE html') {
+            sendResult(e.data);
+        }
     }
 }, false);
