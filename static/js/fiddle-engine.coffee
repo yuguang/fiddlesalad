@@ -1098,11 +1098,16 @@ CodeRunner = Class.$extend(
     @scripts = []
     @delayedStyles = []
 
-  execute: (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
-    return  unless @initialized
-    @body.innerHTML = html # following the live edit principle, always run js on fresh html
-    if javascript.length
-      @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
+  execute: _.throttle(
+      (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
+        return  unless @initialized
+        console.log 'executed'
+        @body.innerHTML = html # following the live edit principle, always run js on fresh html
+        if javascript.length
+          @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
+      250
+      trailing: false
+    )
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
     return  unless @initialized
