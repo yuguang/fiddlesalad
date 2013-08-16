@@ -1132,7 +1132,8 @@ CodeRunner = Class.$extend(
 
   add_javascript: (source) ->
     @scripts.push source
-    @execute('')
+    if @initialized
+      @window.execute [source], '', false
 
   add_css: (source) ->
     if not @initialized
@@ -1271,8 +1272,8 @@ FiddleFactory = Class.$extend(
     Language _.keys(JSON.parse(storageJSON))
 
   loadStartupTips: ->
-    if not store.get('hideTipsOnStartup')
-      viewModel.load_tips()
+#    if not store.get('hideTipsOnStartup')
+#      viewModel.load_tips()
 
   layout: ->
     _.delay( ->
