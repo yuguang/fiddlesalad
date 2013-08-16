@@ -1101,10 +1101,8 @@ CodeRunner = Class.$extend(
   execute: _.throttle(
       (javascript=engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html=engine.get_code(LANGUAGE_TYPE.COMPILED_DOCUMENT)) ->
         return  unless @initialized
-        console.log 'executed'
         @body.innerHTML = html # following the live edit principle, always run js on fresh html
-        if javascript.length
-          @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
+        @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
       250
       trailing: false
     )
@@ -1134,6 +1132,7 @@ CodeRunner = Class.$extend(
 
   add_javascript: (source) ->
     @scripts.push source
+    @execute('')
 
   add_css: (source) ->
     if not @initialized
