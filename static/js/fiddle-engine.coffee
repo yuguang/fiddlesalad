@@ -1270,6 +1270,10 @@ FiddleFactory = Class.$extend(
   loadLanguages: (storageJSON) ->
     Language _.keys(JSON.parse(storageJSON))
 
+  loadStartupTips: ->
+    if not store.get('hideTipsOnStartup')
+      viewModel.load_tips()
+
   layout: ->
     _.delay( ->
         $('#snippet, #progress-container, #overlay').remove()
@@ -1294,6 +1298,7 @@ FiddleFactory = Class.$extend(
       $('.ui-dialog-title').css(position: 'static', height: '1em')
     resultDialog = $('#viewer').closest('.ui-dialog')
     resultDialog.width resultDialog.width() + 1
+    @loadStartupTips()
 
   get_view_model: ->
     document.getElementById('progress')?.value = 80

@@ -711,7 +711,7 @@ FiddleViewModel = ViewModel.$extend(
       @
     @tips = TipsPanel()
 
-  openTipsFrame: ->
+  load_tips: ->
     tipsFrame = Frame 'tipscontainer', 'Tips'
     tipsBox = TemplateComponent 'tips'
     tipsBox.set_template 'tipsTemplate'

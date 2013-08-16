@@ -339,3 +339,7 @@ div#source .ui-tabs {
   font-weight: bold;
   color: #333;
 }
+#tipsTemplate .navigation {
+  position: absolute;
+  bottom: 0;
+}

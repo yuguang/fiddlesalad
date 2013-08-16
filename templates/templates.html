@@ -19,13 +19,15 @@
     <script type="text/html" id="tipsTemplate">
         <img data-bind="attr: { src: $root.tips.selected().image }" />
         <p data-bind="html: $root.tips.selected().text"></p>
-        <div class="clearfix">
-            <button class="left" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
-                Prev
-            </button>
-            <button class="right" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() < $root.tips.content.length - 1, click: $root.tips.next'>
-                Next
-            </button>
+        <div class="navigation">
+            <div class="clearfix">
+                <button class="left" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
+                    Prev
+                </button>
+                <button class="right" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() < $root.tips.content.length - 1, click: $root.tips.next'>
+                    Next
+                </button>
+            </div>
         </div>
     </script>
 
@@ -240,7 +242,7 @@
             <p><a class="link" href="https://twitter.com/#!/fiddle_salad">Twitter</a></p>
             <p><a class="link" href="https://github.com/yuguang/fiddlesalad/issues">Report Bugs</a></p>
             <p class="vertical">
-                <a href="#" data-bind='click: openTipsFrame'>
+                <a href="#" data-bind='click: load_tips'>
                     <span class="left ui-icon ui-icon-lightbulb"></span>
                     <span>Tips</span>
                 </a>
