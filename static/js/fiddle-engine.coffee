@@ -1104,7 +1104,6 @@ CodeRunner = Class.$extend(
         @body.innerHTML = html # following the live edit principle, always run js on fresh html
         @window.execute @scripts, javascript, viewModel.lint_enabled(viewModel.programLanguage())
       250
-      trailing: false
     )
 
   format: (css=engine.get_code(LANGUAGE_TYPE.COMPILED_STYLE)) ->
