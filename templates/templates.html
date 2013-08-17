@@ -21,12 +21,18 @@
         <p data-bind="html: $root.tips.selected().text"></p>
         <div class="navigation">
             <div class="clearfix">
-                <button class="left" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
-                    Prev
-                </button>
-                <button class="right" data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() < $root.tips.content.length - 1, click: $root.tips.next'>
-                    Next
-                </button>
+                <div class="left">
+                    <label><input data-bind="checked: $root.tips.startup" type="checkbox"/> Show tips on
+                        startup</label>
+                </div>
+                <div class="right">
+                    <button data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
+                        Prev
+                    </button>
+                    <button data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() < $root.tips.content.length - 1, click: $root.tips.next'>
+                        Next
+                    </button>
+                </div>
             </div>
         </div>
     </script>

@@ -339,7 +339,11 @@ div#source .ui-tabs {
   font-weight: bold;
   color: #333;
 }
-#tipsTemplate .navigation {
+#tipscontainer .navigation {
   position: absolute;
-  bottom: 0;
+  bottom: 1em;
+  width: 98%;
+}
+#tipscontainer input[type="checkbox"] {
+  vertical-align: middle;
 }

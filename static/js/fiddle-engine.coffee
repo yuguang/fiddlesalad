@@ -1271,8 +1271,9 @@ FiddleFactory = Class.$extend(
     Language _.keys(JSON.parse(storageJSON))
 
   loadStartupTips: ->
-#    if not store.get('hideTipsOnStartup')
-#      viewModel.load_tips()
+    if viewModel.tips.startup()
+      viewModel.load_tips()
+      $('#showTipsOnStartup').prop('checked', true)
 
   layout: ->
     _.delay( ->
