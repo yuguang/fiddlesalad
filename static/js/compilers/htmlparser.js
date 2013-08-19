@@ -325,7 +325,7 @@ self.addEventListener('message', function(e) {
     try {
         sendResult(HTMLtoXML(e.data));
     } catch (err) {
-        if (e.data.substring(0, 14) === '<!DOCTYPE html') {
+        if (e.data.substring(0, 14).toLowerCase() === '<!doctype html') {
             sendResult(e.data);
         }
     }
