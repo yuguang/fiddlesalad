@@ -679,29 +679,33 @@ FiddleViewModel = ViewModel.$extend(
         store.set('hideTipsOnStartup', not checked)
       )
       @selectedIndex = ko.observable(0)
+      image_url = base_url + '/images/tips/'
       @content = [
-          image: base_url + '/images/tips/css_preview.jpg'
+          image: image_url + 'css_preview.jpg'
           text: 'Hovering over highlighted CSS brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
         ,
-          image: base_url + '/images/tips/js_debug.png'
+          image: image_url + 'import_css.png'
+          text: 'Import CSS frameworks such as Bootstrap by selecting them under the dropdown. '
+        ,
+          image: image_url + 'js_debug.png'
           text: 'Double clicking or highlighting a variable in the JavaScript editor prints the debug output. '
         ,
-          image: base_url + '/images/tips/import_page.png'
+          image: image_url + 'import_page.png'
           text: 'Import CSS, HTML, and JavaScript from an existing site by entering its URL. Inline CSS and JavaScript are imported into editors and external files as resources. '
         ,
-          image: base_url + '/images/tips/js_convert.png'
+          image: image_url + 'js_convert.png'
           text: 'The CoffeeScript to JavaScript conversion box inserts the converted JavaScript at your cursor position in the CoffeeScript editor. '
         ,
-          image: base_url + '/images/tips/local_history.png'
+          image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
         ,
-          image: base_url + '/images/tips/js_log.png'
+          image: image_url + 'js_log.png'
           text: 'Inspect your code by logging messages to the console when you want to see if a function is executing as expected or a variable is being assigned correctly. '
         ,
-          image: base_url + '/images/tips/cs_error.png'
+          image: image_url + 'cs_error.png'
           text: 'For CoffeeScript, a warning icon is shown whenever a JavaScript error occurs. Hovering over the result window highlights the line in CoffeeScript and shows the error. '
         ,
-          image: base_url + '/images/tips/template_locals.png'
+          image: image_url + 'template_locals.png'
           text: 'To render a template with free variables in Haml and Jade, pass in a context object through <em>locals</em> that has properties correspondings to them. '
         ,
       ]
