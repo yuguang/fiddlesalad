@@ -1,14 +1,13 @@
 body
 {
-    font-family:Gotham,Verdana,Sans-Serif;
-    font-weight:bold;
+    font-family: Arial, 'Liberation Sans', 'DejaVu Sans', sans-serif;
 }
 
 ul.thumbs li
 {
     float:left;
     list-style:none outside none;
-    width:75px;
+    width:45px;
     margin:0 15px 15px 0;
     padding:5px;
 }
