@@ -96,9 +96,7 @@ ViewModel = Class.$extend(
       else
         return  if not (_.isString(@revisionsMenu.selectedRevision()) and _.isString(@revisionsMenu.selectedDiffRevision()) and (@timestampChanged(@revisionsMenu.selectedRevision) or @timestampChanged(@revisionsMenu.selectedDiffRevision)))
         engine.compare_revisions @revisionsMenu.selectedRevision(), @revisionsMenu.selectedDiffRevision()
-
-  saveCurrentRevision: ->
-    _.throttle @localHistory.create_revision(), 15*MINUTE
+    @saveCurrentRevision = _.throttle @localHistory.create_revision, 2*MINUTE, leading: false
 
   save: ->
     unless @authenticated()
