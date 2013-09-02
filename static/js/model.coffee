@@ -26,8 +26,10 @@ LocalHistory = Class.$extend(
     store.get(timestamp)
     
   create_revision: ->
+    code = engine.get_code()
+    return  if _.any(@revisions(), (revision) => @get_revision(revision) is code)
     timestamp = dateFormat()
-    store.set timestamp, engine.get_code()
+    store.set timestamp, code
     @revisions.push(timestamp)
     @saveRevisions()
     
