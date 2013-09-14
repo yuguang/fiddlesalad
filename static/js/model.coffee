@@ -699,6 +699,9 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'js_convert.png'
           text: 'The CoffeeScript to JavaScript conversion box inserts the converted JavaScript at your cursor position in the CoffeeScript editor. '
         ,
+          image: image_url + 'jquery.png'
+          text: 'Look up jQuery selectors and methods with an interface that gets out of the way of your development work. '
+        ,
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
         ,
@@ -710,6 +713,12 @@ FiddleViewModel = ViewModel.$extend(
         ,
           image: image_url + 'template_locals.png'
           text: 'To render a template with free variables in Haml and Jade, pass in a context object through <em>locals</em> that has properties correspondings to them. '
+        ,
+          image: image_url + 'emmet.png'
+          text: 'With Emmet you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
+        ,
+          image: image_url + 'dochub.png'
+          text: 'Search documentation CSS documentation instantly. HTML and JavaScript documentation are also available in the menu. '
         ,
       ]
       @selected = ko.computed( =>
