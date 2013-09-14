@@ -687,6 +687,9 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'css_preview.jpg'
           text: 'Hovering over highlighted CSS brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
         ,
+          image: image_url + 'autocomplete.png'
+          text: 'Press enter or tab to select an autocomplete suggestion, up or down to navigate, and esc to quit. '
+        ,
           image: image_url + 'import_css.png'
           text: 'Import CSS frameworks such as Bootstrap by selecting them under the dropdown. '
         ,
@@ -704,6 +707,9 @@ FiddleViewModel = ViewModel.$extend(
         ,
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
+        ,
+          image: image_url + 'highlight.png'
+          text: 'Highlight all instances of a word by placing the cursor on it. '
         ,
           image: image_url + 'js_log.png'
           text: 'Inspect your code by logging messages to the console when you want to see if a function is executing as expected or a variable is being assigned correctly. '
