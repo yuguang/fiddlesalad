@@ -678,7 +678,10 @@ FiddleViewModel = ViewModel.$extend(
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
       )
-      @selectedIndex = ko.observable(0)
+      @selectedIndex = ko.observable(if store.get('tipsIndex') then store.get('tipsIndex') + 1 else 0)
+      @selectedIndex.subscribe((index) ->
+        store.set('tipsIndex', index)
+      )
       image_url = base_url + '/images/tips/'
       @content = [
           image: image_url + 'css_preview.jpg'
