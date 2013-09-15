@@ -687,7 +687,7 @@ FiddleViewModel = ViewModel.$extend(
       image_url = base_url + '/images/tips/'
       @content = [
           image: image_url + 'css_preview.jpg'
-          text: 'Hovering over highlighted CSS brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
+          text: 'Hovering over highlighted CSS in the source window brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
         ,
           image: image_url + 'autocomplete.png'
           text: 'Press enter or tab to select an autocomplete suggestion, up or down to navigate, and esc to quit. '
@@ -705,7 +705,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'The CoffeeScript to JavaScript conversion box inserts the converted JavaScript at your cursor position in the CoffeeScript editor. '
         ,
           image: image_url + 'jquery.png'
-          text: 'Look up jQuery selectors and methods with an interface that gets out of the way of your development work. '
+          text: 'Look up jQuery selectors and methods with an interface that gets out of the way of your development work, loaded if your window is wide enough. '
         ,
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
@@ -729,7 +729,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'With Emmet you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
         ,
           image: image_url + 'dochub.png'
-          text: 'Search documentation CSS documentation instantly. HTML and JavaScript documentation are also available in the menu. '
+          text: 'Search CSS documentation instantly. HTML and JavaScript documentation are also available in the menu. Documentation panel is only shown if window is larger than 1200 pixels as the IDE is loaded. '
         ,
           image: image_url + 'revision_comparison.png'
           text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
