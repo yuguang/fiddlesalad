@@ -26,8 +26,10 @@ LocalHistory = Class.$extend(
     store.get(timestamp)
     
   create_revision: ->
+    code = engine.get_code()
+    return  if _.any(@revisions(), (revision) => @get_revision(revision) is code)
     timestamp = dateFormat()
-    store.set timestamp, engine.get_code()
+    store.set timestamp, code
     @revisions.push(timestamp)
     @saveRevisions()
     
@@ -431,7 +433,9 @@ FiddleViewModel = ViewModel.$extend(
     if (@documentLanguage() in COMPATIBLE_LANGUAGES.HTML and @styleLanguage() in COMPATIBLE_LANGUAGES.CSS and @programLanguage() in COMPATIBLE_LANGUAGES.JAVASCRIPT)
       true
     else
-      false 
+      false
+
+  updateShareUrl: ->
   
   importExternal: ->
     ###
@@ -519,7 +523,7 @@ FiddleViewModel = ViewModel.$extend(
     templateLibrary =
       css:
         title: 'CSS Framework'
-        templates: ['twitterbootstrap', 'jqueryui', 'html5boilerplate', '1140grid', '960gs', 'inuit', 'normalize']
+        templates: ['twitterbootstrap2', 'twitterbootstrap3', 'jqueryui', 'html5boilerplate', '1140grid', '960gs', 'inuit', 'normalize']
         type: 'css'
       html:
         title: 'HTML Boilerplate'
@@ -676,11 +680,17 @@ FiddleViewModel = ViewModel.$extend(
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
       )
-      @selectedIndex = ko.observable(0)
+      @selectedIndex = ko.observable(if store.get('tipsIndex') then store.get('tipsIndex') + 1 else 0)
+      @selectedIndex.subscribe((index) ->
+        store.set('tipsIndex', index)
+      )
       image_url = base_url + '/images/tips/'
       @content = [
           image: image_url + 'css_preview.jpg'
           text: 'Hovering over highlighted CSS brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
+        ,
+          image: image_url + 'autocomplete.png'
+          text: 'Press enter or tab to select an autocomplete suggestion, up or down to navigate, and esc to quit. '
         ,
           image: image_url + 'import_css.png'
           text: 'Import CSS frameworks such as Bootstrap by selecting them under the dropdown. '
@@ -694,8 +704,14 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'js_convert.png'
           text: 'The CoffeeScript to JavaScript conversion box inserts the converted JavaScript at your cursor position in the CoffeeScript editor. '
         ,
+          image: image_url + 'jquery.png'
+          text: 'Look up jQuery selectors and methods with an interface that gets out of the way of your development work. '
+        ,
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
+        ,
+          image: image_url + 'highlight.png'
+          text: 'Highlight all instances of a word by placing the cursor on it. '
         ,
           image: image_url + 'js_log.png'
           text: 'Inspect your code by logging messages to the console when you want to see if a function is executing as expected or a variable is being assigned correctly. '
@@ -705,6 +721,12 @@ FiddleViewModel = ViewModel.$extend(
         ,
           image: image_url + 'template_locals.png'
           text: 'To render a template with free variables in Haml and Jade, pass in a context object through <em>locals</em> that has properties correspondings to them. '
+        ,
+          image: image_url + 'emmet.png'
+          text: 'With Emmet you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
+        ,
+          image: image_url + 'dochub.png'
+          text: 'Search documentation CSS documentation instantly. HTML and JavaScript documentation are also available in the menu. '
         ,
           image: image_url + 'revision_comparison.png'
           text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
