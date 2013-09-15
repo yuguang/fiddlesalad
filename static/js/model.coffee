@@ -189,7 +189,6 @@ ViewModel = Class.$extend(
           $('p.error').remove()
           @formMessage 'success'
           @titleMessage.clear()
-          @updateShareUrl()
           slug = slugify(@title())
           if @newFiddle()
           # create the first revision
@@ -218,13 +217,6 @@ ViewModel = Class.$extend(
             else
               @titleMessage.set_message 'unavailable', 'error'
       , 750)
-
-  updateShareUrl: ->
-    return  if debug
-    stWidget.addEntry _.defaults(
-      url: @snippetUrl()
-      , defaultShare)
-    $('#share_this span').first().remove()  if $('#share_this span').length > 1
 
   showValidationErrors: (errors) ->
     for field of errors
