@@ -706,6 +706,9 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'template_locals.png'
           text: 'To render a template with free variables in Haml and Jade, pass in a context object through <em>locals</em> that has properties correspondings to them. '
         ,
+          image: image_url + 'revision_comparison.png'
+          text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
+        ,
       ]
       @selected = ko.computed( =>
         @content[@selectedIndex()]
