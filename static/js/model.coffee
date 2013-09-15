@@ -189,6 +189,7 @@ ViewModel = Class.$extend(
           $('p.error').remove()
           @formMessage 'success'
           @titleMessage.clear()
+          @updateShareUrl()
           slug = slugify(@title())
           if @newFiddle()
           # create the first revision
@@ -217,6 +218,13 @@ ViewModel = Class.$extend(
             else
               @titleMessage.set_message 'unavailable', 'error'
       , 750)
+
+  updateShareUrl: ->
+    return  if debug
+    stWidget.addEntry _.defaults(
+      url: @snippetUrl()
+      , defaultShare)
+    $('#share_this span').first().remove()  if $('#share_this span').length > 1
 
   showValidationErrors: (errors) ->
     for field of errors
@@ -425,7 +433,9 @@ FiddleViewModel = ViewModel.$extend(
     if (@documentLanguage() in COMPATIBLE_LANGUAGES.HTML and @styleLanguage() in COMPATIBLE_LANGUAGES.CSS and @programLanguage() in COMPATIBLE_LANGUAGES.JAVASCRIPT)
       true
     else
-      false 
+      false
+
+  updateShareUrl: ->
   
   importExternal: ->
     ###
