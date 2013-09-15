@@ -1,0 +1,349 @@
+::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px !important;
+  background-color: snow;
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5) !important;
+}
+html {
+  overflow-y: hidden;
+}
+em {
+  font-style: italic;
+}
+.background {
+  position: absolute;
+  overflow-y: hidden;
+  max-height: 100%;
+}
+.syntax-error {
+  border-bottom: 1px dotted red;
+}
+#documentation > div,
+#documentation > div > div,
+#source > div,
+#source > div > div {
+  height: 100%;
+}
+#accordion {
+  width: 190px;
+}
+#accordion > div {
+  overflow-x: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#accordion input + span.clickable {
+  margin-top: 5px;
+}
+#accordion input,
+#accordion textarea,
+#accordion select {
+  padding: 5px 8px 5px 8px;
+  border: solid 1px #E5E5E5;
+  outline: 0;
+  background: -webkit-gradient(linear, left top, left 25, from(#ffffff), color-stop(4%, #eeeeee), to(#ffffff));
+  background: -moz-linear-gradient(top, #ffffff, #eeeeee 1px, #ffffff 25px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+#accordion input:hover,
+#accordion textarea:hover,
+#accordion input:focus,
+#accordion textarea:focus {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+}
+#accordion input + label {
+  margin-left: 10px;
+}
+#accordion input[type="checkbox"] {
+  vertical-align: middle;
+  margin-right: .5em;
+}
+#accordion a[target="_blank"] {
+  word-wrap: break-word;
+}
+#accordion #shareMenu {
+  margin: 20px auto;
+  width: 10em;
+  display: block;
+}
+span.key-lite {
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.04);
+  font-size: .9em;
+  font-weight: 400;
+  background: rgba(0, 0, 0, 0.3);
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -khtml-border-radius: 6px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  top: -1px;
+  margin-left: 10px;
+  -moz-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  padding: 0 8px;
+}
+.ui-dialog .ui-dialog-content {
+  padding: 0;
+}
+.transparent,
+.transparent div.CodeMirror {
+  background: rgba(255, 255, 255, 0.2);
+}
+div#projectConfiguration {
+  overflow-x: hidden !important;
+}
+div#projectConfiguration textarea {
+  height: 12em;
+}
+div#projectConfiguration ul {
+  margin-left: 0.5em;
+}
+div#projectConfiguration .helptext {
+  display: none;
+}
+div#projectConfiguration input + label {
+  margin-left: 0;
+}
+div#projectConfiguration form {
+  min-height: 415px;
+}
+#webDevelopmentTools p:not(.vertical) {
+  text-shadow: 1px 1px 1px #CCCCCC;
+  filter: dropshadow(color=#cccccc, offx=1, offy=1);
+}
+#webDevelopmentTools p:not(.vertical) > span.ui-icon + span {
+  margin-left: 5px;
+}
+textarea#javascriptConverter {
+  height: 5em;
+}
+#templateConfiguration ul {
+  margin-left: 1em;
+  margin-top: 1em;
+}
+#templateConfiguration label {
+  display: block;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
+}
+#compareLanguageSelection {
+  display: inline;
+}
+#accordion > div > p.vertical {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  position: absolute;
+  right: -40px;
+  top: 0;
+  margin-top: auto;
+  bottom: 0;
+  margin-bottom: auto;
+  height: 20px;
+  width: 100px;
+}
+#tips {
+  overflow-x: hidden;
+}
+#tips img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#tips p {
+  padding: 15px 10px 5px 10px;
+  font-weight: bold;
+}
+div#source pre {
+  font-size: 9pt;
+  line-height: 1.1em;
+  margin: 0;
+  padding: 1em;
+}
+div#source .ui-tabs {
+  border: none;
+}
+#logo {
+  background-image: -webkit-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
+  background-image: -moz-radial-gradient(center 79%, ellipse closest-corner, rgba(255, 255, 255, 0.3), rgba(100, 100, 255, 0.3) 95%);
+  background-image: -o-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
+  background-image: radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
+  font-size: 1.55em;
+  letter-spacing: .15em;
+  font-weight: 500;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.menu {
+  display: none;
+}
+.ui-dialog-title {
+  height: 1em;
+}
+.ui-dialog-title .ui-widget-header {
+  background: none;
+  border: none;
+  top: -12px;
+}
+.ui-dialog-title .menu * {
+  cursor: pointer;
+}
+#snippet,
+#viewer {
+  display: none;
+}
+#snippet,
+#progress-container {
+  position: fixed;
+}
+#progress-container {
+  left: 50%;
+  top: 50%;
+  margin: 0 0 0 -75px;
+  width: 150px;
+  z-index: 5000;
+}
+#overlay {
+  position: absolute;
+  /* makes the div go into a position that’s absolute to the browser viewing area */
+
+  left: 0%;
+  top: 0%;
+  /* makes the div span all the way across the viewing area */
+
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: 4999;
+  /* makes the div the second most top layer, so it’ll lay on top of everything else EXCEPT for divs with a higher z-index (meaning the #overlay ruleset) */
+
+}
+#documentation,
+#source {
+  overflow-y: hidden;
+  height: 100%;
+}
+.CodeMirror-focused .cm-matchhighlight {
+  background-color: #e6e6fa;
+}
+.CodeMirror-focused .CodeMirror-activeline-background {
+  background-color: rgba(136, 228, 243, 0.15);
+}
+.-webkit- .CodeMirror-hscrollbar {
+  right: 4px !important;
+  margin-right: 6px;
+}
+.-webkit- .CodeMirror-vscrollbar {
+  bottom: 4px !important;
+}
+.CodeMirror .lint-error {
+  font-family: arial;
+  background: #ffa;
+  color: #a00;
+  padding: 2px 5px 3px;
+}
+.CodeMirror html.-moz- .lint-error {
+  padding: 3px 5px 2px;
+}
+.CodeMirror .lint-error-icon {
+  color: white;
+  background-color: red;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 0 3px;
+  margin-right: 7px;
+}
+.ui-tabs #source-tab-html,
+.ui-tabs #source-tab-javascript {
+  overflow-y: auto;
+}
+.ui-draggable-disabled .maximized {
+  height: 100% !important;
+}
+.highlight-error {
+  background: lightpink !important;
+}
+#result {
+  height: 100%;
+}
+#resultWarning,
+#resultWarning::before,
+#resultWarning::after {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+#resultWarning {
+  float: right;
+  vertical-align: top;
+  font-size: 22px;
+  color: transparent;
+  margin-left: 6px;
+  display: none;
+  width: 1.12em;
+  height: 1.12em;
+  overflow: hidden;
+  border: none;
+  background-color: transparent;
+  border-radius: 0.625em;
+}
+#resultWarning.active {
+  display: inline-block;
+}
+#resultWarning::before {
+  content: "";
+  display: block;
+  top: -0.08em;
+  left: 0.0em;
+  position: absolute;
+  border: transparent 0.6em solid;
+  border-bottom-color: #fd3;
+  border-bottom-width: 1em;
+  border-top-width: 0;
+  box-shadow: #999 0 1px 1px;
+}
+#resultWarning::after {
+  display: block;
+  position: absolute;
+  top: 0.3em;
+  left: 0;
+  width: 100%;
+  padding: 0 1px;
+  text-align: center;
+  font-family: "Garamond";
+  content: "!";
+  font-size: 0.65em;
+  font-weight: bold;
+  color: #333;
+}
+#tipscontainer .navigation {
+  position: absolute;
+  bottom: 1em;
+  width: 98%;
+}
+#tipscontainer input[type="checkbox"] {
+  vertical-align: middle;
+}
