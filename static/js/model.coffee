@@ -710,6 +710,9 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
         ,
+          image: image_url + 'js_lint.png'
+          text: 'Static code analysis for CSS and JavaScript is performed by the IDE on the fly. The editor highlights warnings and errors in the code immediately as you type. '
+        ,
           image: image_url + 'highlight.png'
           text: 'Highlight all instances of a word by placing the cursor on it. '
         ,
