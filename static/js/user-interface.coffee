@@ -92,7 +92,6 @@ Frame = VisualComponent.$extend(
     @location =
       x: 0
       y: 0
-    @modal = false
     @components = new Array
     @buttons =
       minimize: false
