@@ -94,6 +94,7 @@ Frame = VisualComponent.$extend(
       y: 0
     @components = new Array
     @buttons =
+      toggle: true
       minimize: false
       close: true
       pin: false

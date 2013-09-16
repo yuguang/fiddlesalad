@@ -754,6 +754,8 @@ FiddleViewModel = ViewModel.$extend(
     tipsFrame.set_location(x: ($(window).width() - width) / 2, y: ($(window).height() - height) / 2)
     tipsFrame.set_size {width, height}
     tipsFrame.add tipsBox
+    tipsFrame.buttons.toggle = false
+    tipsFrame.buttons.maximize = false
     @containers.push tipsFrame
 )
 root.ViewModel = ViewModel
