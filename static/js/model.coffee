@@ -279,6 +279,15 @@ WorkspaceConfiguration = ->
       $('.' + style).removeClass(style)
   @cssLintEnabled.subscribe clearErrorMarkers
   @jsLintEnabled.subscribe clearErrorMarkers
+  @refreshPreview = ko.observable(false)
+  @refreshPreview.subscribe (enabled) ->
+    if enabled
+      root.codeRunner = StaticCodeRunner()
+    else
+      window = root.codeRunner.window
+      root.codeRunner = null
+      window.location.reload()
+      root.codeRunner = DynamicCodeRunner()
   @completeHtmlTags = ko.observable(true)
   @
 FiddleViewModel = ViewModel.$extend(

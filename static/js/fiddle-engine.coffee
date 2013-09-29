@@ -821,7 +821,7 @@ FiddleEditor = Class.$extend(
     $('#projectConfiguration, #featuredFiddles').css('max-height', $(window).height() - 175 - 28)
     viewModel.containers @layoutFrames()
     $('#viewer').appendTo('#result').show()
-    root.codeRunner = CodeRunner()
+    root.codeRunner = DynamicCodeRunner()
     viewModel.add_resource(if debug then base_url + '/js/jquery-2.0.0.js' else 'http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
 
     @styleEditor.load()
@@ -1091,6 +1091,86 @@ ColumnLayout = Class.$extend(
     @frames
 )
 CodeRunner = Class.$extend(
+  ###
+  Returns the preview HTML source. External CSS and JS files are loaded through head tags.
+  It assumes all external resources are stored in the view model.
+  ###
+  previewHtml: ->
+    template =
+      css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
+      js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
+      html: _.template """
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <title>Fiddle Salad Debug View</title>
+                <script src="http://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
+                <style>
+                  <%= css %>
+                </style>
+              </head>
+              <body>
+                <%= body %>
+                <%= headtags %>
+                <script type="text/javascript">
+                  <%= javascript %>
+                </script>
+              </body>
+            </html>
+            """
+    # initialize array of head tags
+    headTags = new Array
+    # for each external resource in view model
+    _.each viewModel.resources(), (resource) =>
+      # get the file type of the resource, call mapped template with resource, and append generated HTML to head tags
+      headTags.push template[@filetype resource.source()](source: resource.source())
+    headtags = headTags.join('')
+    # get JavaScript and CSS code from the engine
+    javascript = engine.get_code LANGUAGE_TYPE.COMPILED_PROGRAM
+    body = engine.get_code LANGUAGE_TYPE.COMPILED_DOCUMENT
+    css = engine.get_code LANGUAGE_TYPE.COMPILED_STYLE
+    # call the template for the window with the head tags and code
+    template.html {javascript, css, body, headtags}
+
+  debug: ->
+    ###
+    Debug opens a new window with the code loaded in the page.
+    ###
+    # open window with generated HTML
+    window.open 'data:text/html;charset=utf-8,' + encodeURIComponent(@previewHtml())
+    # display message about new window and links to browser console documentation
+    if bowser.firefox
+      documentationUrl = 'http://getfirebug.com/'
+      consoleName = 'Firebug'
+    else if bowser.opera
+      documentationUrl = 'http://www.opera.com/dragonfly/'
+      consoleName = 'Opera Dragonfly'
+    else
+      documentationUrl = 'http://code.google.com/chrome/devtools/docs/console.html'
+      consoleName = 'Chrome Console'
+    @window.document.body.innerHTML = """
+      <h3>Console Debug</h3>
+      <p>
+        A new page has been created for you to debug JavaScript. Launch <a target="_blank" href="#{ documentationUrl }">#{ consoleName }</a>
+        to start your debugging session.
+      </p>
+      """
+)
+StaticCodeRunner = CodeRunner.$extend(
+  __init__: ->
+    @add_file = @execute
+    @remove_css = @execute
+    @reset = @execute
+    @debug = @execute
+
+  window: ->
+    frame = document.getElementById('viewer')
+    (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
+
+  execute: ->
+    @window().location = @previewHtml()
+)
+DynamicCodeRunner = CodeRunner.$extend(
   __init__: ->
     frame = document.getElementById('viewer')
     @window = (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
@@ -1166,66 +1246,6 @@ CodeRunner = Class.$extend(
     @__init__()
     engine.set_code code
     @window.location.reload()
-
-  debug: ->
-    ###
-    Debug opens a new window with the code loaded in the page. External CSS and JS files are loaded through head tags.
-    It assumes all external resources are stored in the view model.
-    ###
-    template =
-      css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
-      js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
-      html: _.template """
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <title>Fiddle Salad Debug View</title>
-                <script src="http://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
-                <style>
-                  <%= css %>
-                </style>
-              </head>
-              <body>
-                <%= body %>
-                <%= headtags %>
-                <script type="text/javascript">
-                  <%= javascript %>
-                </script>
-              </body>
-            </html>
-            """
-    # initialize array of head tags
-    headTags = new Array
-    # for each external resource in view model
-    _.each viewModel.resources(), (resource) =>
-      # get the file type of the resource, call mapped template with resource, and append generated HTML to head tags
-      headTags.push template[@filetype resource.source()](source: resource.source())
-    headtags = headTags.join('')
-    # get JavaScript and CSS code from the engine
-    javascript = engine.get_code LANGUAGE_TYPE.COMPILED_PROGRAM
-    body = engine.get_code LANGUAGE_TYPE.COMPILED_DOCUMENT
-    css = engine.get_code LANGUAGE_TYPE.COMPILED_STYLE
-    # call the template for the window with the head tags and code
-    html = template.html {javascript, css, body, headtags}
-    # open window with generated HTML
-    window.open 'data:text/html;charset=utf-8,' + encodeURIComponent(html)
-    # display message about new window and links to browser console documentation
-    if bowser.firefox
-      documentationUrl = 'http://getfirebug.com/'
-      consoleName = 'Firebug'
-    else if bowser.opera
-      documentationUrl = 'http://www.opera.com/dragonfly/'
-      consoleName = 'Opera Dragonfly'
-    else
-      documentationUrl = 'http://code.google.com/chrome/devtools/docs/console.html'
-      consoleName = 'Chrome Console'
-    @window.document.body.innerHTML = """
-      <h3>Console Debug</h3>
-      <p>
-        A new page has been created for you to debug JavaScript. Launch <a target="_blank" href="#{ documentationUrl }">#{ consoleName }</a>
-        to start your debugging session.
-      </p>
-      """
 )
 FiddleFactory = Class.$extend(
   __init__: ->
