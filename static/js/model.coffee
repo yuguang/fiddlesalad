@@ -694,7 +694,7 @@ FiddleViewModel = ViewModel.$extend(
       if store.get('tipsIndex')
         selectedIndex = store.get('tipsIndex') + 1
       else
-        selectedIndex = 0
+        selectedIndex = 1
       store.set('tipsIndex', selectedIndex)
       @selectedIndex = ko.observable(selectedIndex)
       @selectedIndex.subscribe((index) ->
@@ -702,11 +702,11 @@ FiddleViewModel = ViewModel.$extend(
       )
       image_url = base_url + '/images/tips/'
       @content = [
-          image: image_url + 'css_preview.jpg'
-          text: 'Hovering over highlighted CSS in the source window brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
-        ,
           image: image_url + 'autocomplete.png'
           text: 'Press enter or tab to select an autocomplete suggestion, up or down to navigate, and esc to quit. '
+        ,
+          image: image_url + 'css_preview.jpg'
+          text: 'Hovering over highlighted CSS in the source window brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
         ,
           image: image_url + 'import_css.png'
           text: 'Import CSS frameworks such as Bootstrap by selecting them under the dropdown. '
@@ -714,14 +714,14 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'js_debug.png'
           text: 'Double clicking or highlighting a variable in the JavaScript editor prints the debug output. '
         ,
-          image: image_url + 'import_page.png'
-          text: 'Import CSS, HTML, and JavaScript from an existing site by entering its URL. Inline CSS and JavaScript are imported into editors and external files as resources. '
+          image: image_url + 'jquery.png'
+          text: 'Look up jQuery selectors and methods with an interface that gets out of the way of your development work, loaded if your window is wide enough. '
         ,
           image: image_url + 'js_convert.png'
           text: 'The CoffeeScript to JavaScript conversion box inserts the converted JavaScript at your cursor position in the CoffeeScript editor. '
         ,
-          image: image_url + 'jquery.png'
-          text: 'Look up jQuery selectors and methods with an interface that gets out of the way of your development work, loaded if your window is wide enough. '
+          image: image_url + 'import_page.png'
+          text: 'Import CSS, HTML, and JavaScript from an existing site by entering its URL. Inline CSS and JavaScript are imported into editors and external files as resources. '
         ,
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
