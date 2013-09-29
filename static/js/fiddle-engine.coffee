@@ -1091,6 +1091,15 @@ ColumnLayout = Class.$extend(
     @frames
 )
 CodeRunner = Class.$extend(
+  filetype: (path) ->
+    filePattern = /(css|js)$/
+    if path.match(filePattern)
+      path.match(filePattern)[0]
+    else if path.has 'css'
+      'css'
+    else
+      'js'
+
   ###
   Returns the preview HTML source. External CSS and JS files are loaded through head tags.
   It assumes all external resources are stored in the view model.
@@ -1137,7 +1146,7 @@ CodeRunner = Class.$extend(
     Debug opens a new window with the code loaded in the page.
     ###
     # open window with generated HTML
-    window.open 'data:text/html;charset=utf-8,' + encodeURIComponent(@previewHtml())
+    window.open @dataUri(@previewHtml())
     # display message about new window and links to browser console documentation
     if bowser.firefox
       documentationUrl = 'http://getfirebug.com/'
@@ -1155,6 +1164,9 @@ CodeRunner = Class.$extend(
         to start your debugging session.
       </p>
       """
+
+  dataUri: (html) ->
+    'data:text/html;charset=utf-8,' + encodeURIComponent(html)
 )
 StaticCodeRunner = CodeRunner.$extend(
   __init__: ->
@@ -1168,7 +1180,7 @@ StaticCodeRunner = CodeRunner.$extend(
     (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
 
   execute: ->
-    @window().location = @previewHtml()
+    @window().location = @dataUri @previewHtml()
 )
 DynamicCodeRunner = CodeRunner.$extend(
   __init__: ->
@@ -1199,15 +1211,6 @@ DynamicCodeRunner = CodeRunner.$extend(
       @style = @window.document.querySelector('#user_css')
       @execute()
       @format()
-
-  filetype: (path) ->
-    filePattern = /(css|js)$/
-    if path.match(filePattern)
-      path.match(filePattern)[0]
-    else if path.has 'css'
-      'css'
-    else
-      'js'
 
   add_javascript: (source) ->
     @scripts.push source
@@ -1337,3 +1340,5 @@ FiddleFactory = Class.$extend(
 )
 root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeekupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
 root.engine = EngineFactory(FiddleFactory())
+root.DynamicCodeRunner = DynamicCodeRunner
+root.StaticCodeRunner = StaticCodeRunner
