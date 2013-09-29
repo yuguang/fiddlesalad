@@ -691,7 +691,12 @@ FiddleViewModel = ViewModel.$extend(
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
       )
-      @selectedIndex = ko.observable(if store.get('tipsIndex') then store.get('tipsIndex') + 1 else 0)
+      if store.get('tipsIndex')
+        selectedIndex = store.get('tipsIndex') + 1
+      else
+        selectedIndex = 0
+      store.set('tipsIndex', selectedIndex)
+      @selectedIndex = ko.observable(selectedIndex)
       @selectedIndex.subscribe((index) ->
         store.set('tipsIndex', index)
       )
