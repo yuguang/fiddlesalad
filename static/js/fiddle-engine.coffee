@@ -1147,23 +1147,6 @@ CodeRunner = Class.$extend(
     ###
     # open window with generated HTML
     window.open @dataUri(@previewHtml())
-    # display message about new window and links to browser console documentation
-    if bowser.firefox
-      documentationUrl = 'http://getfirebug.com/'
-      consoleName = 'Firebug'
-    else if bowser.opera
-      documentationUrl = 'http://www.opera.com/dragonfly/'
-      consoleName = 'Opera Dragonfly'
-    else
-      documentationUrl = 'http://code.google.com/chrome/devtools/docs/console.html'
-      consoleName = 'Chrome Console'
-    @window.document.body.innerHTML = """
-      <h3>Console Debug</h3>
-      <p>
-        A new page has been created for you to debug JavaScript. Launch <a target="_blank" href="#{ documentationUrl }">#{ consoleName }</a>
-        to start your debugging session.
-      </p>
-      """
 
   dataUri: (html) ->
     'data:text/html;charset=utf-8,' + encodeURIComponent(html)
