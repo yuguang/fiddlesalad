@@ -1173,14 +1173,16 @@ StaticCodeRunner = CodeRunner.$extend(
     @add_file = @execute
     @remove_css = @execute
     @reset = @execute
-    @debug = @execute
 
   window: ->
     frame = document.getElementById('viewer')
     (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
 
-  execute: ->
-    @window().location = @dataUri @previewHtml()
+  execute: _.debounce(
+      ->
+        @window().location = @dataUri @previewHtml()
+      750
+    )
 )
 DynamicCodeRunner = CodeRunner.$extend(
   __init__: ->
