@@ -313,6 +313,8 @@ FiddleViewModel = ViewModel.$extend(
         title = pathSegments[pathSegments.length - 2]
       @source = ko.observable(source)
       @title = ko.observable(title)
+      if title.has /angular|mustache/
+        ownerViewModel.configuration.refreshPreview(true)
       @remove = ->
         filetype = codeRunner.filetype(@source())
         if filetype is 'css'
