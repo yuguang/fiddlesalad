@@ -691,15 +691,6 @@ FiddleViewModel = ViewModel.$extend(
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
       )
-      if store.get('tipsIndex')
-        selectedIndex = store.get('tipsIndex') + 1
-      else
-        selectedIndex = 1
-      store.set('tipsIndex', selectedIndex)
-      @selectedIndex = ko.observable(selectedIndex)
-      @selectedIndex.subscribe((index) ->
-        store.set('tipsIndex', index)
-      )
       image_url = base_url + '/images/tips/'
       @content = [
           image: image_url + 'autocomplete.png'
@@ -751,6 +742,18 @@ FiddleViewModel = ViewModel.$extend(
           text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
         ,
       ]
+      loadCircularTipsIndex = ->
+        tipsIndex = store.get('tipsIndex')
+        if _.isNumber(tipsIndex) and tipsIndex + 1 < @content.length
+          tipsIndex + 1
+        else
+          1
+      selectedIndex = loadCircularTipsIndex()
+      store.set('tipsIndex', selectedIndex)
+      @selectedIndex = ko.observable(selectedIndex)
+      @selectedIndex.subscribe((index) ->
+        store.set('tipsIndex', index)
+      )
       @selected = ko.computed( =>
         @content[@selectedIndex()]
       )
