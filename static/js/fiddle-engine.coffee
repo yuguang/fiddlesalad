@@ -696,6 +696,17 @@ BeautifiedJavascriptViewer = JavascriptViewer.$extend(
   set_code: (javascript) ->
     @$super js_beautify(javascript)
 )
+TemplateUpdater = Class.$extend(
+  __init__: (editor) ->
+    @documentEditor = editor
+
+  observe: (editor) ->
+    editor.attach @
+
+  update: ->
+    # race condition: the template locals must be accessed after execution of JavaScript
+    @documentEditor.changeHandler()
+)
 codeConverter =
   loadConverter: (id) ->
     @textarea = $('#' + id)
@@ -800,6 +811,9 @@ FiddleEditor = Class.$extend(
     if @showHtmlSource()
       @htmlViewer = HtmlViewer @id.html
       @htmlViewer.observe @documentEditor
+    if @documentEditor instanceof TemplateEditor
+      @templateUpdater = TemplateUpdater @documentEditor
+      @templateUpdater.observe @programEditor
 
     @codeStorage = CodeStorage(@settings)
     @diffViewer = DiffViewer 'compare', @settings
