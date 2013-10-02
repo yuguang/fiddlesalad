@@ -388,15 +388,8 @@ DocumentEditor = DynamicEditor.$extend(
     codeRunner.execute engine.get_code(LANGUAGE_TYPE.COMPILED_PROGRAM), html
 )
 TemplateEditor = DocumentEditor.$extend(
-  getViewerLocals: ->
-    iframeWindow = document.getElementById('viewer').contentWindow
-    if 'locals' of iframeWindow
-      iframeWindow.locals
-    else
-      {}
-
   changeHandler: ->
-    @compiler.postMessage code: @get_code(), locals: @getViewerLocals()
+    @compiler.postMessage code: @get_code(), locals: codeRunner.get_locals()
 )
 CoffeekupEditor = TemplateEditor.$extend(
   __init__: (id) ->
@@ -1161,6 +1154,8 @@ StaticCodeRunner = CodeRunner.$extend(
     frame = document.getElementById('viewer')
     (if frame.contentWindow then frame.contentWindow else (if frame.contentDocument.document then frame.contentDocument.document else frame.contentDocument))
 
+  get_locals: -> {}
+
   execute: _.debounce(
       ->
         @window().location = @dataUri @previewHtml()
@@ -1234,6 +1229,12 @@ DynamicCodeRunner = CodeRunner.$extend(
     @__init__()
     engine.set_code code
     @window.location.reload()
+
+  get_locals: ->
+    if 'locals' of @window
+      @window.locals
+    else
+      {}
 )
 FiddleFactory = Class.$extend(
   __init__: ->
