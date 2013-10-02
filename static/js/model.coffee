@@ -730,7 +730,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'For CoffeeScript, a warning icon is shown whenever a JavaScript error occurs. Hovering over the result window highlights the line in CoffeeScript and shows the error. '
         ,
           image: image_url + 'template_locals.png'
-          text: 'To render a template with free variables in Jade, pass in a context object through <em>locals</em> that has properties correspondings to them. '
+          text: 'To render a template with free variables in Jade, Coffeekup, or Markdown; pass in a context object through <em>locals</em> that has properties correspondings to them. '
         ,
           image: image_url + 'emmet.png'
           text: 'With Emmet you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
