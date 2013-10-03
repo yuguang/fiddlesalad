@@ -1175,7 +1175,7 @@ CodeRunner = Class.$extend(
             }
 
         })();
-      <script>
+      </script>
       """
     # call the template for the window with the head tags and code
     template.html {javascript, css, body, headtags, headscript}
