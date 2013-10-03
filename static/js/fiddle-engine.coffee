@@ -1111,7 +1111,7 @@ CodeRunner = Class.$extend(
   Returns the preview HTML source. External CSS and JS files are loaded through head tags.
   It assumes all external resources are stored in the view model.
   ###
-  previewHtml: ->
+  previewHtml: (preventFlash=false) ->
     template =
       css: _.template '<link rel="stylesheet" type="text/css" href="<%= source %>" />'
       js: _.template '<script type="text/javascript" src="<%= source %>"></script>'
@@ -1119,6 +1119,7 @@ CodeRunner = Class.$extend(
             <!DOCTYPE html>
             <html>
               <head>
+                <%= headscript %>
                 <title>Fiddle Salad Debug View</title>
                 <script src="http://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
                 <style>
@@ -1145,8 +1146,39 @@ CodeRunner = Class.$extend(
     javascript = engine.get_code LANGUAGE_TYPE.COMPILED_PROGRAM
     body = engine.get_code LANGUAGE_TYPE.COMPILED_DOCUMENT
     css = engine.get_code LANGUAGE_TYPE.COMPILED_STYLE
+    headscript = ''
+    if preventFlash
+      headscript = """
+      <script type="text/javascript">
+        (function () {
+
+              /*
+                  1. Inject CSS which makes iframe invisible
+              */
+
+            var div = document.createElement('div'),
+                ref = document.getElementsByTagName('base')[0] ||
+                      document.getElementsByTagName('script')[0];
+
+            div.innerHTML = '&shy;<style> iframe { visibility: hidden; } </style>';
+
+            ref.parentNode.insertBefore(div, ref);
+
+
+            /*
+                2. When window loads, remove that CSS,
+                   making iframe visible again
+            */
+
+            window.onload = function() {
+                div.parentNode.removeChild(div);
+            }
+
+        })();
+      <script>
+      """
     # call the template for the window with the head tags and code
-    template.html {javascript, css, body, headtags}
+    template.html {javascript, css, body, headtags, headscript}
 
   debug: ->
     ###
@@ -1172,8 +1204,8 @@ StaticCodeRunner = CodeRunner.$extend(
 
   execute: _.debounce(
       ->
-        @window().location = @dataUri @previewHtml()
-      750
+        @window().location = @dataUri @previewHtml(true)
+      350
     )
 )
 DynamicCodeRunner = CodeRunner.$extend(
