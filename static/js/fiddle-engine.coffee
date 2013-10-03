@@ -705,7 +705,11 @@ TemplateUpdater = Class.$extend(
 
   update: ->
     # race condition: the template locals must be accessed after execution of JavaScript
-    @documentEditor.changeHandler()
+    _.delay( =>
+      @documentEditor.changeHandler()
+      500
+    )
+
 )
 codeConverter =
   loadConverter: (id) ->
