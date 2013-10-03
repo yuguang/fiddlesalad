@@ -705,9 +705,11 @@ TemplateUpdater = Class.$extend(
 
   update: ->
     # race condition: the template locals must be accessed after execution of JavaScript
-    _.delay( =>
-      @documentEditor.changeHandler()
-      500
+    _.delay(
+        =>
+          @documentEditor.changeHandler()
+      ,
+        500
     )
 
 )
