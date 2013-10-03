@@ -1205,7 +1205,7 @@ StaticCodeRunner = CodeRunner.$extend(
   execute: _.debounce(
       ->
         @window().location = @dataUri @previewHtml(true)
-      350
+      100
     )
 )
 DynamicCodeRunner = CodeRunner.$extend(
