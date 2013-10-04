@@ -196,6 +196,7 @@ ViewModel = Class.$extend(
             @newFiddle false
             # change browser location
             if primaryLanguage isnt engine.get_url_path_language()
+              store.set('reloading', true)
               window.location.assign [ window.location.origin, primaryLanguage, slug ].join('/')
             else
               History.pushState null, @title(), slug  if History.enabled
@@ -687,7 +688,7 @@ FiddleViewModel = ViewModel.$extend(
 
   loadTips: ->
     TipsPanel = ->
-      @startup = ko.observable(not store.get('hideTipsOnStartup'))
+      @startup = ko.observable(not store.get('hideTipsOnStartup') and not store.get('reloading'))
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
       )
