@@ -196,6 +196,7 @@ ViewModel = Class.$extend(
             @newFiddle false
             # change browser location
             if primaryLanguage isnt engine.get_url_path_language()
+              store.set('reloading', true)
               window.location.assign [ window.location.origin, primaryLanguage, slug ].join('/')
             else
               History.pushState null, @title(), slug  if History.enabled
@@ -207,11 +208,10 @@ ViewModel = Class.$extend(
     )
 
   checkTitleOnKeyup: ->
-    input = $('input#id_title')
-    input.keyup _.debounce(=>
-        return  if input.val().split(' ').length < 3
+    @title.subscribe _.debounce((title) =>
+        return  if title.split(' ').length < 3
         $.getJSON '/check_title/',
-          title: input.val(),
+          title: title,
           (json) =>
             if json.available
               @titleMessage.set_message 'available', 'check'
@@ -296,6 +296,7 @@ FiddleViewModel = ViewModel.$extend(
     @containers = ko.observableArray([])
     @loadTemplates()
     @loadFrameworks()
+    @loadWidgetLibrary()
     @resources = ko.observableArray([])
     @newResourceText = ko.observable()
     @configuration = new WorkspaceConfiguration()
@@ -590,7 +591,7 @@ FiddleViewModel = ViewModel.$extend(
       templatePath = [ ajax_url, '/files/', templatePath, '.', type ].join('')
       if type is 'css' and templateType isnt 'css/html'
         $('#accordion').accordion('activate', 0)
-        @add_resource templatePath
+        _.defer(=> @add_resource templatePath)
       else
         $.get templatePath, {}, ((code) =>
           @disableLint()
@@ -634,6 +635,20 @@ FiddleViewModel = ViewModel.$extend(
     # return the name and url of the framework
     name: template
     url: framework.url
+
+  loadWidgetLibrary: ->
+    WidgetLibrary = ->
+      @names = _.keys(widgetLibrary)
+      @selected = ko.observable('')
+      @selectedUrl = ko.computed =>
+        library = widgetLibrary[@selected()]
+        if library
+          _.defer(-> _.each(library.sources, (source) -> viewModel.add_resource(source)))
+          library.url
+        else
+          ''
+      @
+    @widgetLibrary = new WidgetLibrary()
 
   initializeTabs: (elements, data) ->
     $(elements).tabs()
@@ -687,18 +702,9 @@ FiddleViewModel = ViewModel.$extend(
 
   loadTips: ->
     TipsPanel = ->
-      @startup = ko.observable(not store.get('hideTipsOnStartup'))
+      @startup = ko.observable(not store.get('hideTipsOnStartup') and not store.get('reloading'))
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
-      )
-      if store.get('tipsIndex')
-        selectedIndex = store.get('tipsIndex') + 1
-      else
-        selectedIndex = 1
-      store.set('tipsIndex', selectedIndex)
-      @selectedIndex = ko.observable(selectedIndex)
-      @selectedIndex.subscribe((index) ->
-        store.set('tipsIndex', index)
       )
       image_url = base_url + '/images/tips/'
       @content = [
@@ -739,7 +745,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'For CoffeeScript, a warning icon is shown whenever a JavaScript error occurs. Hovering over the result window highlights the line in CoffeeScript and shows the error. '
         ,
           image: image_url + 'template_locals.png'
-          text: 'To render a template with free variables in Haml and Jade, pass in a context object through <em>locals</em> that has properties correspondings to them. '
+          text: 'To render a template with free variables in Jade, Coffeekup, or Markdown; pass in a context object through <em>locals</em> that has properties correspondings to them. '
         ,
           image: image_url + 'emmet.png'
           text: 'With Emmet you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
@@ -751,6 +757,18 @@ FiddleViewModel = ViewModel.$extend(
           text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
         ,
       ]
+      loadCircularTipsIndex = ->
+        tipsIndex = store.get('tipsIndex')
+        if _.isNumber(tipsIndex) and tipsIndex + 1 < @content.length
+          tipsIndex + 1
+        else
+          1
+      selectedIndex = loadCircularTipsIndex()
+      store.set('tipsIndex', selectedIndex)
+      @selectedIndex = ko.observable(selectedIndex)
+      @selectedIndex.subscribe((index) ->
+        store.set('tipsIndex', index)
+      )
       @selected = ko.computed( =>
         @content[@selectedIndex()]
       )

@@ -26,3 +26,22 @@ var frameworkLibrary = {
         }
     }
 };
+var widgetLibrary = {
+    'jQuery UI': {
+        'sources': ['http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css', 'http://code.jquery.com/ui/1.10.3/jquery-ui.js'],
+        'url': 'http://api.jqueryui.com/'
+    },
+    'Kendo UI': {
+        'sources': ['http://cdn.kendostatic.com/2013.2.918/styles/kendo.common.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.rtl.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.default.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.dataviz.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.dataviz.default.min.css',
+'http://cdn.kendostatic.com/2013.2.918/js/kendo.all.min.js'],
+        'url': 'http://docs.kendoui.com/'
+    },
+    'Wijmo': {
+        'sources': ['http://code.jquery.com/ui/1.10.3/jquery-ui.js', 'http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css', 'http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20132.9.min.css', 'http://cdn.wijmo.com/jquery.wijmo-open.all.3.20132.9.min.js', 'http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20132.9.min.js'],
+        'url': 'http://wijmo.com/wiki/index.php/Main_Page'
+    }
+};

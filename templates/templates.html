@@ -148,6 +148,15 @@
             <ul>
                 <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
             </ul>
+            <ul>
+                <li data-bind="with: widgetLibrary">
+                    <label>UI Framework</label>
+                    <select data-bind="options: names, value: selected, optionsCaption: 'Choose...'"></select>
+                </li>
+            </ul>
+            <ul>
+                <a target="_blank" data-bind="text: widgetLibrary.selectedUrl, attr: { href: widgetLibrary.selectedUrl }"></a>
+            </ul>
         </div>
         <h3>Tools</h3>
         <div id="webDevelopmentTools">

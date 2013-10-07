@@ -32,7 +32,8 @@ window.console.log = function () {
   var init = setInterval(function () {
     if (window.parent.codeRunner != null) {
       clearInterval(init);
-      window.parent.codeRunner.initialize();
+      if (typeof window.parent.codeRunner.initialize !== 'undefined')
+        window.parent.codeRunner.initialize();
     }
   }, 250);
 })();
