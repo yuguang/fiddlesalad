@@ -32,7 +32,12 @@ var widgetLibrary = {
         'url': 'http://api.jqueryui.com/'
     },
     'Kendo UI': {
-        'sources': ['http://cdn.kendostatic.com/2013.2.716/js/kendo.all.min.js'],
+        'sources': ['http://cdn.kendostatic.com/2013.2.918/styles/kendo.common.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.rtl.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.default.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.dataviz.min.css',
+'http://cdn.kendostatic.com/2013.2.918/styles/kendo.dataviz.default.min.css',
+'http://cdn.kendostatic.com/2013.2.918/js/kendo.all.min.js'],
         'url': 'http://docs.kendoui.com/'
     },
     'Wijmo': {
