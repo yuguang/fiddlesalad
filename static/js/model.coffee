@@ -637,9 +637,18 @@ FiddleViewModel = ViewModel.$extend(
     url: framework.url
 
   loadWidgetLibrary: ->
-    @widgetLibrary =
-      names: _.keys(widgetLibrary)
-      selected: ko.observable('')
+    WidgetLibrary = ->
+      @names = _.keys(widgetLibrary)
+      @selected = ko.observable('')
+      @selectedUrl = ko.computed =>
+        library = widgetLibrary[@selected()]
+        if library
+          _.each(library.sources, (source) -> viewModel.add_resource(source))
+          library.url
+        else
+          ''
+      @
+    @widgetLibrary = new WidgetLibrary()
 
   initializeTabs: (elements, data) ->
     $(elements).tabs()
