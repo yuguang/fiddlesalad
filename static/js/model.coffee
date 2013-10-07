@@ -296,6 +296,7 @@ FiddleViewModel = ViewModel.$extend(
     @containers = ko.observableArray([])
     @loadTemplates()
     @loadFrameworks()
+    @loadWidgetLibrary()
     @resources = ko.observableArray([])
     @newResourceText = ko.observable()
     @configuration = new WorkspaceConfiguration()
@@ -634,6 +635,11 @@ FiddleViewModel = ViewModel.$extend(
     # return the name and url of the framework
     name: template
     url: framework.url
+
+  loadWidgetLibrary: ->
+    @widgetLibrary =
+      names: _.keys(widgetLibrary)
+      selected: ko.observable('')
 
   initializeTabs: (elements, data) ->
     $(elements).tabs()

@@ -111,23 +111,6 @@
     </script>
 
     <script id="fiddleAccordion" type="text/html">
-        <h3>Project</h3>
-        <div id="projectConfiguration">
-            <p class="clearfix">
-                <label>Add Resource: </label><input id="resourceInput" class="thin left" data-bind="autoComplete: {autoFocus: false}, optionsSource: packages, autocompleteValue: newResourceText, optionsText: 'name', optionsValue: 'url', value: newResourceText" placeholder="Search/Paste URL" />
-                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
-            </p>
-            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
-            <div class="details wide west" data-bind='template: "formTemplate"'></div>
-            <!-- ko template: "revisionsTemplate" -->
-            <!-- /ko -->
-            <p class="vertical">
-                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
-                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
-                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
-                </a>
-            </p>
-        </div>
         <h3>Import</h3>
         <div id="templateConfiguration">
             <!-- ko if: compatibleLanguages() -->
@@ -148,6 +131,32 @@
             <ul>
                 <a target="_blank" data-bind="text: selectedFramework().url, attr: { href: selectedFramework().url }"></a>
             </ul>
+            <ul>
+                <li data-bind="with: widgetLibrary">
+                    <label>UI Framework</label>
+                    <select data-bind="options: names, value: selected, optionsCaption: 'Choose...'"></select>
+                </li>
+            </ul>
+            <ul>
+                <a target="_blank" data-bind="text: widgetLibrary.selected(), attr: { href: function () { if (widgetLibrary.selected()) widgetLibrary.selected().url } }"></a>
+            </ul>
+        </div>
+        <h3>Project</h3>
+        <div id="projectConfiguration">
+            <p class="clearfix">
+                <label>Add Resource: </label><input id="resourceInput" class="thin left" data-bind="autoComplete: {autoFocus: false}, optionsSource: packages, autocompleteValue: newResourceText, optionsText: 'name', optionsValue: 'url', value: newResourceText" placeholder="Search/Paste URL" />
+                <span class="clickable right ui-icon ui-icon-plusthick" data-bind="click: add_resource"></span>
+            </p>
+            <ul data-bind="template: { name: 'resourceTemplate', foreach: resources }, visible: resources().length > 0"></ul>
+            <div class="details wide west" data-bind='template: "formTemplate"'></div>
+            <!-- ko template: "revisionsTemplate" -->
+            <!-- /ko -->
+            <p class="vertical">
+                <a href="#" data-bind='click: function() { authenticated() ? window.open("/dashboard/") : popup("/login/") }'>
+                    <span class="left ui-icon" data-bind='css: { "ui-icon-unlocked": authenticated(), "ui-icon-locked": !authenticated() }'></span>
+                    <span data-bind='text: authenticated() ? "Dashboard" : "Login"'></span>
+                </a>
+            </p>
         </div>
         <h3>Tools</h3>
         <div id="webDevelopmentTools">
