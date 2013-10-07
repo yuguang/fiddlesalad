@@ -591,7 +591,7 @@ FiddleViewModel = ViewModel.$extend(
       templatePath = [ ajax_url, '/files/', templatePath, '.', type ].join('')
       if type is 'css' and templateType isnt 'css/html'
         $('#accordion').accordion('activate', 0)
-        @add_resource templatePath
+        _.defer(=> @add_resource templatePath)
       else
         $.get templatePath, {}, ((code) =>
           @disableLint()
@@ -643,7 +643,7 @@ FiddleViewModel = ViewModel.$extend(
       @selectedUrl = ko.computed =>
         library = widgetLibrary[@selected()]
         if library
-          _.each(library.sources, (source) -> viewModel.add_resource(source))
+          _.defer(-> _.each(library.sources, (source) -> viewModel.add_resource(source)))
           library.url
         else
           ''
