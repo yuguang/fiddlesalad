@@ -196,7 +196,6 @@ ViewModel = Class.$extend(
             @newFiddle false
             # change browser location
             if primaryLanguage isnt engine.get_url_path_language()
-              store.set('reloading', true)
               window.location.assign [ window.location.origin, primaryLanguage, slug ].join('/')
             else
               History.pushState null, @title(), slug  if History.enabled
@@ -702,10 +701,17 @@ FiddleViewModel = ViewModel.$extend(
 
   loadTips: ->
     TipsPanel = ->
-      @startup = ko.observable(not store.get('hideTipsOnStartup') and not store.get('reloading'))
+      @currentDate = ->
+        date = new Date()
+        "#{ date.getMonth() }-#{ date.getDate() }"
+      @alreadyShown = =>
+        @currentDate() is store.get('date')
+      @startup = ko.observable(not store.get('hideTipsOnStartup') and not @alreadyShown())
       @startup.subscribe((checked) ->
         store.set('hideTipsOnStartup', not checked)
       )
+      if @startup()
+        store.set('date', @currentDate())
       image_url = base_url + '/images/tips/'
       @content = [
           image: image_url + 'autocomplete.png'
