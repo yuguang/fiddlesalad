@@ -175,7 +175,7 @@ textarea#javascriptConverter {
   display: block;
 }
 #tips p {
-  padding: 15px 10px 5px 10px;
+  padding: 5px 10px 5px 10px;
   font-weight: bold;
 }
 div#source pre {
@@ -349,4 +349,10 @@ div#source .ui-tabs {
 }
 #tipscontainer input[type="checkbox"] {
   vertical-align: middle;
+}
+#tipscontainer hr {
+  margin: 0;
+  height: 12px;
+  border: 0;
+  box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 }

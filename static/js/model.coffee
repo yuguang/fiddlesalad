@@ -790,7 +790,7 @@ FiddleViewModel = ViewModel.$extend(
     tipsBox = TemplateComponent 'tips'
     tipsBox.set_template 'tipsTemplate'
     width = 402
-    height = 460
+    height = 470
     tipsFrame.set_location(x: ($(window).width() - width) / 2, y: ($(window).height() - height) / 2)
     tipsFrame.set_size {width, height}
     tipsFrame.add tipsBox
