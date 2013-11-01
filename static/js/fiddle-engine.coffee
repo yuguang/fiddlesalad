@@ -1201,6 +1201,7 @@ StaticCodeRunner = CodeRunner.$extend(
     @add_file = @execute
     @remove_css = @execute
     @reset = @execute
+    @format = $.noop
 
   window: ->
     frame = document.getElementById('viewer')
