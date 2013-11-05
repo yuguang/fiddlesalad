@@ -717,6 +717,12 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'autocomplete.png'
           text: 'Press enter or tab to select an autocomplete suggestion, up or down to navigate, and esc to quit. '
         ,
+          image: image_url + 'startup.png'
+          text: 'These tips are shown once a day to get out of your way. If you want to refer to them later, you will find them under the Links menu. '
+        ,
+          image: image_url + 'import_framework.png'
+          text: 'UI frameworks are available under the Import menu To make it easy to add the required JavaScript and CSS files. '
+        ,
           image: image_url + 'css_preview.jpg'
           text: 'Hovering over highlighted CSS in the source window brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
         ,
