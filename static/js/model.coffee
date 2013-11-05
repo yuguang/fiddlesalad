@@ -754,7 +754,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'To render a template with free variables in Jade, Coffeekup, or Markdown; pass in a context object through <em>locals</em> that has properties correspondings to them. '
         ,
           image: image_url + 'emmet.png'
-          text: 'With Emmet you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
+          text: 'With <a href="http://emmet.io/" target="_blank">Emmet</a> you can quickly write a bunch of code, wrap code with new tags, quickly traverse and select important code parts and more!'
         ,
           image: image_url + 'dochub.png'
           text: 'Search CSS documentation instantly. HTML and JavaScript documentation are also available in the menu. Documentation panel is only shown if window is larger than 1200 pixels as the IDE is loaded. '
