@@ -769,15 +769,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
         ,
       ]
-      loadCircularTipsIndex = ->
-        tipsIndex = store.get('tipsIndex')
-        if _.isNumber(tipsIndex) and tipsIndex + 1 < @content.length
-          tipsIndex + 1
-        else
-          1
-      selectedIndex = loadCircularTipsIndex()
-      store.set('tipsIndex', selectedIndex)
-      @selectedIndex = ko.observable(selectedIndex)
+      @selectedIndex = ko.observable(store.get('tipsIndex') or 0)
       @selectedIndex.subscribe((index) ->
         store.set('tipsIndex', index)
       )
@@ -788,6 +780,11 @@ FiddleViewModel = ViewModel.$extend(
         @selectedIndex(@selectedIndex() - 1)
       @next = =>
         @selectedIndex(@selectedIndex() + 1)
+      @load_circular_tips_index = ->
+        if @selectedIndex() + 1 < @content.length
+          @selectedIndex @selectedIndex() + 1
+        else
+          @selectedIndex 0
       @
     @tips = TipsPanel()
 
@@ -802,6 +799,7 @@ FiddleViewModel = ViewModel.$extend(
     tipsFrame.add tipsBox
     tipsFrame.buttons.toggle = false
     tipsFrame.buttons.maximize = false
+    @tips.load_circular_tips_index()
     @containers.push tipsFrame
 )
 root.ViewModel = ViewModel
