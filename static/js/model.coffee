@@ -720,8 +720,8 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'startup.png'
           text: 'These tips are shown once a day to get out of your way. If you want to refer to them later, you will find them under the Links menu. '
         ,
-          image: image_url + 'import_framework.png'
-          text: 'UI frameworks available under the Import menu make it easy to add the required JavaScript and CSS files. '
+          image: image_url + 'all_fiddles.png'
+          text: 'Browse fiddles by other authors, categorized by language, or by tag at <a href="http://fiddlesalad.com/fiddles/" target="_blank">http://fiddlesalad.com/fiddles/</a>.'
         ,
           image: image_url + 'css_preview.jpg'
           text: 'Hovering over highlighted CSS in the source window brings up tooltips. You can get previews for fonts, colors, sizes, and images.'
@@ -744,6 +744,9 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'local_history.png'
           text: 'With local history, you never have to worry about losing your changes! All your saved revisions are stored. '
         ,
+          image: image_url + 'import_framework.png'
+          text: 'The required JavaScript and CSS files for UI frameworks are easily imported by selecting them under the Import menu. '
+        ,
           image: image_url + 'js_lint.png'
           text: 'Static code analysis for CSS and JavaScript is performed by the IDE on the fly. The editor highlights warnings and errors in the code immediately as you type. '
         ,
@@ -765,8 +768,11 @@ FiddleViewModel = ViewModel.$extend(
           image: image_url + 'dochub.png'
           text: 'Search CSS documentation instantly. HTML and JavaScript documentation are also available in the menu. Documentation panel is only shown if window is larger than 1200 pixels as the IDE is loaded. '
         ,
-          image: image_url + 'revision_comparison.png'
+          image: image_url + 'revision_comparison.jpg'
           text: 'Checking compare revisons and selecting a saved revision will open an advanced visual Diff window, showing diff statistics and highlighting differences in color.'
+        ,
+          image: image_url + 'github.png'
+          text: 'Watch <a href="https://github.com/yuguang/fiddlesalad" target="_blank">fiddlesalad on Github</a> to get a scoop on the updates. '
         ,
       ]
       @selectedIndex = ko.observable(store.get('tipsIndex') or 0)
