@@ -3,6 +3,7 @@
     function scriptHint(editor, _keywords, getToken, lastChar) {
         // Find the token at the cursor
         var cur = editor.getCursor(), token = getToken(editor, cur), tprop = token;
+        if (/\b(?:string|comment)\b/.test(token.type)) return;
         // If it's not a 'word-style' token, ignore the token.
 
         var completionList = [];
