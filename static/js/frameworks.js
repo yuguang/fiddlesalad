@@ -41,7 +41,7 @@ var widgetLibrary = {
         'url': 'http://docs.kendoui.com/'
     },
     'Wijmo': {
-        'sources': ['http://code.jquery.com/ui/1.10.3/jquery-ui.js', 'http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css', 'http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20132.9.min.css', 'http://cdn.wijmo.com/jquery.wijmo-open.all.3.20132.9.min.js', 'http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20132.9.min.js'],
+        'sources': ['http://code.jquery.com/ui/1.10.1/jquery-ui.js', 'http://cdn.wijmo.com/themes/aristo/jquery-wijmo.css', 'http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20133.20.min.css', 'http://cdn.wijmo.com/jquery.wijmo-open.all.3.20133.20.min.js', 'http://cdn.wijmo.com/jquery.wijmo-pro.all.3.20133.20.min.js'],
         'url': 'http://wijmo.com/wiki/index.php/Main_Page'
     }
 };
