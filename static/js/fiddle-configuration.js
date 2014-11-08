@@ -7,6 +7,7 @@ var accordionOptions = { fillSpace: false, collapsible: true };
 
 LANGUAGE = {
     PYTHON: 'python',
+    OPAL: 'opal',
     JAVASCRIPT: 'javascript',
     COFFEESCRIPT: 'coffeescript',
     TYPESCRIPT: 'typescript',
@@ -38,6 +39,7 @@ LANGUAGE_TYPE = {
 
 LANGUAGE_CATEGORY = {
     python: LANGUAGE_TYPE.PROGRAM,
+    opal: LANGUAGE_TYPE.PROGRAM,
     javascript: LANGUAGE_TYPE.PROGRAM,
     coffeescript: LANGUAGE_TYPE.PROGRAM,
     typescript: LANGUAGE_TYPE.PROGRAM,

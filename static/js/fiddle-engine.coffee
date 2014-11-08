@@ -349,6 +349,18 @@ CoffeescriptEditor = ProgramEditor.$extend(
     converter = JavascriptConverter('javascriptConverter')
     converter.set_editor @
 )
+OpalEditor = ProgramEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = 'ruby'
+    @loadWorker('opal')
+    @documentationUrl = 'http://opalrb.org/docs/interacting_with_javascript/'
+    @tabCharaterLength = 2
+
+  load: ->
+    @$super()
+    viewModel.add_resource base_url + '/js/opal.js'
+)
 RoyEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -1377,7 +1389,7 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeekupEditor, MarkdownEditor, RoyEditor, TypescriptEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeekupEditor, MarkdownEditor, RoyEditor, TypescriptEditor, OpalEditor}
 root.engine = EngineFactory(FiddleFactory())
 root.DynamicCodeRunner = DynamicCodeRunner
 root.StaticCodeRunner = StaticCodeRunner
