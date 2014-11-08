@@ -359,7 +359,7 @@ OpalEditor = ProgramEditor.$extend(
 
   load: ->
     @$super()
-    viewModel.add_resource base_url + '/js/opal.js.gz'
+    viewModel.add_resource base_url + '/js/opal.js'
 )
 RoyEditor = ProgramEditor.$extend(
   __init__: (id) ->
@@ -599,7 +599,7 @@ PythonEditor = ProgramEditor.$extend(
 
   load: ->
     @$super()
-    viewModel.add_resource base_url + '/js/pylib.js.gz'
+    viewModel.add_resource base_url + '/js/pylib.js'
     @hint = CodeMirror.pythonHint
     @addAutocomplete CodeMirror.pythonHint.pylibKeywords
 
