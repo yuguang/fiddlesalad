@@ -117,7 +117,8 @@ To add a language:
 
 1. Modify the LANGUAGE and LANGUAGE_CATEGORY settings in *fiddle-configuration.js*. 
 2. Write a class in *fiddle-engine.coffee* that inherits *(Style/Program/Document)Editor*
-3. Create the compiler (aka worker) in _static/js/compilers/_ with the [sendResult and sendError functions](https://github.com/yuguang/fiddlesalad/blob/master/static/js/compilers/coffeescript.js). 
+3. Add the class to root.editor, which is globally scoped, for dynamic instantiation
+4. Create the compiler (aka worker) in _static/js/compilers/_ with the [sendResult and sendError functions](https://github.com/yuguang/fiddlesalad/blob/master/static/js/compilers/coffeescript.js).
 The compiler reads input from e.data for style and program editors and e.data.code for document editors
 	
 ###User Interface
