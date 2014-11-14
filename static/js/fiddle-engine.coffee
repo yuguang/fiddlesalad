@@ -360,6 +360,9 @@ OpalEditor = ProgramEditor.$extend(
   load: ->
     @$super()
     viewModel.add_resource base_url + '/js/opal.js'
+
+  get_documentation: ->
+    @$super('opal')
 )
 RoyEditor = ProgramEditor.$extend(
   __init__: (id) ->
