@@ -359,7 +359,7 @@ OpalEditor = ProgramEditor.$extend(
 
   load: ->
     @$super()
-    viewModel.add_resource base_url + '/js/opal.js'
+    viewModel.add_resource '//cdn.opalrb.org/opal/current/opal.min.js'
 
   get_documentation: ->
     @$super('opal')
