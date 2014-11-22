@@ -926,10 +926,16 @@ FiddleEditor = Class.$extend(
 
   layoutFrames: ->
     if $(window).width() < 1200
-      layout = ColumnLayout 2
+      columns = 2
     else
-      layout = ColumnLayout 3
+      columns = 3
 
+    if engine.get_url_path_language() is LANGUAGE.MARKDOWN
+      layout = SingleFrameColumnLayout columns
+    else
+      layout = ColumnLayout columns
+
+    if columns is 3
       frame = Frame 'documentation', 'Documentation'
       layout.add_column frame
       tabs = TabInterface 'documentation-tabs', frame
@@ -953,6 +959,8 @@ FiddleEditor = Class.$extend(
 
     editor_frames = new Array
     if LANGUAGE_CATEGORY?[engine.get_url_path_language()] is LANGUAGE_TYPE.PROGRAM
+      panelOrdering = [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)]]
+    else if engine.get_url_path_language() is LANGUAGE.MARKDOWN
       panelOrdering = [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)]]
     else
       panelOrdering = [[@id.document, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.DOCUMENT)], [@id.style, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.STYLE)], [@id.program, @getLanguageHeading @settings.get_language(LANGUAGE_TYPE.PROGRAM)]]
@@ -1113,6 +1121,23 @@ ColumnLayout = Class.$extend(
 
   get_frames: ->
     @frames
+)
+SingleFrameColumnLayout = ColumnLayout.$extend(
+  __init__: (columns) ->
+    @currentColumn = 0
+    @$super columns
+
+  add_column: (frames, reverse=true) ->
+    if !_.isArray frames
+      frames = new Array(frames)
+    for frame in frames.reverse()
+      frame.set_size(
+        width: @column_width - frame.get_padding(),
+        height: @document_height - frame.get_padding()
+      )
+      @frames.push frame
+      frame.set_location x: @currentColumn * @column_width, y: 0
+    @currentColumn++
 )
 CodeRunner = Class.$extend(
   filetype: (path) ->
