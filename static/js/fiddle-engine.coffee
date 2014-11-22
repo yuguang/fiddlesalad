@@ -703,8 +703,8 @@ JavascriptViewer = Viewer.$extend(
         $element.html "<a href='http://api.jquery.com/jQuery.#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
       else if $element.text() in KEYWORDS.JQUERY_PROTOTYPE and $element.prev().prev().text() is '$'
         $element.html "<a href='http://api.jquery.com/#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
-      else if $element.text() of keywordDict(KEYWORDS.DOM)
-        $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }' target='_blank'>#{ $element.text() }</a>"
+      ###else if $element.text() of keywordDict(KEYWORDS.DOM)
+        $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }' target='_blank'>#{ $element.text() }</a>"###
     )
 )
 BeautifiedJavascriptViewer = JavascriptViewer.$extend(
@@ -933,9 +933,6 @@ FiddleEditor = Class.$extend(
       frame = Frame 'documentation', 'Documentation'
       layout.add_column frame
       tabs = TabInterface 'documentation-tabs', frame
-      dochubPage = IframeComponent name + 'ReferenceTab'
-      dochubPage.set_source 'http://dochub.io/'
-      dochubTab = {title: 'dochub', content: dochubPage.to_html_string()}
       switch LANGUAGE_CATEGORY[engine.get_url_path_language()]
         when LANGUAGE_TYPE.PROGRAM
           editorDocumentation = [@programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
@@ -943,7 +940,6 @@ FiddleEditor = Class.$extend(
           editorDocumentation = [@documentEditor.get_documentation(), @styleEditor.get_documentation(), @programEditor.get_documentation()]
         else
           editorDocumentation = [@styleEditor.get_documentation(), @programEditor.get_documentation(), @documentEditor.get_documentation()]
-      editorDocumentation.push(dochubTab)  if not debug
       for documentation in _.filter(editorDocumentation, (tabSetting) -> _.isObject(tabSetting))
         tabs.add documentation.title, documentation.content
       page = IframeComponent 'jqueryReferenceTab'
