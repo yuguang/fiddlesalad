@@ -45,6 +45,7 @@ Supported Languages
     * TypeScript
     * Python
     * Roy
+    * Opal
 
 Getting the Code and Running it
 -------------------------------
@@ -97,11 +98,10 @@ Features ready to be implemented:
 * Scroll source to current cursor position in editor
 * More Languages
     * [Eco](https://github.com/sstephenson/eco) ([Browserify](https://github.com/substack/node-browserify) nodejs module)
-    * [Traceur](http://code.google.com/p/traceur-compiler/)
-	* [Move](https://github.com/rsms/move)
+    * [Traceur](https://github.com/google/traceur-compiler)
 
 ###Foreign language Translations
-Django's i18n middleware will be used, but only the translations are needed for buttons and labels.
+Django's i18n middleware will be used, but only the translations for buttons and labels are needed.
 
 * Spanish
 * Russian
