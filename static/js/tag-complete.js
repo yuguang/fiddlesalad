@@ -5,7 +5,7 @@ Snippets = window.Snippets || {};
 
   var TagCompletion = function(options) {
     this.options = options || {};
-    this.default_url = '/tag-hint/';
+    this.default_url = '/tag_hint/';
   };
 
   TagCompletion.prototype.bind_listener = function(input_sel) {
