@@ -64,6 +64,19 @@ Getting the Code and Running it
 
 Open http://127.0.0.1:8000/ in the browser.
 
+Alternatively, Install Packages to Virtualenv on Linux
+------------------------------------------------------
+A virtualenv setup script is included
+
+    git clone git://github.com/yuguang/fiddlesalad.git
+    git clone git://github.com/yuguang/cloud-ide-templates.git
+    mv cloud-ide-templates templates
+    cd fiddlesalad
+    mv settings.default.py settings.py
+    ./setup-virtualenv.sh
+    dev-python/bin/python manage.py syncdb
+    dev-python/bin/python manage.py runserver
+
 Installation Notes
 ------------------
 ###Compiling CoffeeScript
