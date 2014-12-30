@@ -75,7 +75,7 @@ fi
 # Install all pypi dependencies
 echo "Installing PYPI packages"
 
-if ! dev-python/bin/pip install -r dependencies.pip; then
+if ! dev-python/bin/pip install -r requirements.txt; then
     echo "Pip command failed." 1>&2
     exit 1
 fi
