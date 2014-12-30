@@ -90,15 +90,13 @@ DynamicEditor = CodeCompleteEditor.$extend(
     _.defer => @notify()
 
   load: ->
-    @$super()
-    $(@codeMirrorContainer)
-      .parent()
-      .bind('wijdialogresize', _.debounce(
-          =>
-            @pad.refresh()
-          300
-        )
-      )
+	  @$super()
+	  $(@codeMirrorContainer).parent().bind('wijdialogresize', _.debounce(
+			  =>
+				  @pad.refresh()
+			  300
+		  )
+	  )
 
   attach: (observer) ->
     @observers.push(observer)
