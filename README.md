@@ -92,6 +92,9 @@ run [less compiler](http://lesscss.org/#-server-side-usage) from the command lin
 	cd static/js/
 	coffee -cw -o ./compiled-coffee ./
 
+###Initialize Database to Save Fiddles
+    python manage.py loaddata language_fixture.json
+
 Developer Documentation
 -----------------------
 
