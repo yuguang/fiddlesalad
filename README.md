@@ -69,7 +69,7 @@ Installation Notes
 ###Compiling CoffeeScript
 from the _static/js/_ folder run
 
-    coffee -cw -o ./compiled-coffee .\
+    coffee -cw -o ./compiled-coffee .
 	
 ###Compiling Less
 run [less compiler](http://lesscss.org/#-server-side-usage) from the command line or install [SimpLESS](http://wearekiss.com/simpless)
