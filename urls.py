@@ -5,6 +5,7 @@ from home import views
 urlpatterns = shared_urls +  patterns('cloud_ide.fiddle.views',
     url(r'^save/$', 'save', name='save_snippet'),
     url(r'^check_title/', 'check_title'),
+    url(r'^tag-hint/$', 'tag_hint'),
     url(r'^(?P<language>[\w]+)/$', 'create', name='create_snippet'),
 )
 

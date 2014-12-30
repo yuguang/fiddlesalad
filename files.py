@@ -147,6 +147,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror/runmode.js',
             ],
         'js/fiddle.plugins.js': [
+            'js/tag-complete.js',
             'js/jquery.csrf.js',
             'js/jquery.history.js',
             'js/mergely.js',

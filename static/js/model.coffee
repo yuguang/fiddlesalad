@@ -164,10 +164,15 @@ ViewModel = Class.$extend(
       else
         @submitForm()
 
+  loadTagSuggest: ->
+    tag_completion = new Snippets.TagCompletion()
+    tag_completion.bind_listener('#id_tags')
+
   prepare_form: ->
     $('form').validate submitHandler: =>
       @save()
     @checkTitleOnKeyup()
+    @loadTagSuggest()
 
   #  private
   submitForm: ->
