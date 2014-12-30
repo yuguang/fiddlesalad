@@ -64,9 +64,9 @@ Getting the Code and Running it
 
 Open http://127.0.0.1:8000/ in the browser.
 
-Alternatively, Install Packages to Virtualenv on Linux
-------------------------------------------------------
-A virtualenv setup script is included
+Alternatively, Use Virtualenv
+-----------------------------
+A virtualenv setup script is included for Linux
 
     git clone git://github.com/yuguang/fiddlesalad.git
     git clone git://github.com/yuguang/cloud-ide-templates.git
