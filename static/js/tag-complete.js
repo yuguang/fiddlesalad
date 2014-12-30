@@ -17,6 +17,12 @@ Snippets = window.Snippets || {};
       minLength: self.options.min_length || 1,
       source: function(request, response) {self.fetch_results(request, response);}
     });
+
+    var disable_browser_complete = _.once(function(){
+      self.input_element.attr('autocomplete', 'off');
+    });
+
+    this.input_element.click(disable_browser_complete);
   };
 
   TagCompletion.prototype.fetch_results = function(request, response) {
