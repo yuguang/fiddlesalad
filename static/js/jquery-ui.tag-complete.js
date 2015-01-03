@@ -25,6 +25,7 @@ Snippets = window.Snippets || {};
     this.input_element.click(disable_browser_complete);
   };
 
+
   TagCompletion.prototype.fetch_results = function(request, response) {
     var url = this.options.url || this.default_url,
         term = request.term,
