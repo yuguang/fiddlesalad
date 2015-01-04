@@ -96,3 +96,23 @@ ul.list .ui-corner-right {
   position: relative;
   top: 5px;
 }
+html,
+body {
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+}
+#main {
+  overflow: auto;
+  padding-bottom: 180px;
+  /* this needs to be bigger than footer height*/
+}
+.footer {
+  position: relative;
+  margin-top: -180px;
+  /* negative value of footer height */
+  height: 180px;
+  clear: both;
+  padding-top: 20px;
+}

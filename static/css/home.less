@@ -103,3 +103,26 @@ ul.list {
     position: relative;
     top: 5px;
 }
+
+html, body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+@footer-height: 180px;
+
+#main {
+  overflow:auto;
+  padding-bottom:@footer-height; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+  position: relative;
+  margin-top: -@footer-height; /* negative value of footer height */
+  height: @footer-height;
+  clear:both;
+  padding-top:20px;
+}
