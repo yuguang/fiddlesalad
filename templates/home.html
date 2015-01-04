@@ -17,38 +17,46 @@
         <p class="span3"><a class="btn btn-warning action right" href="#" data-bind="click: loadWorkspace">Go &raquo;</a></p>
     </div>
 
-<div class="row">
-    <div class="span8">
+  <div class="row-fluid">
+    <div class="span7">
       <div class="CodeMirror-placeholder"></div>
       <textarea id="code">
       </textarea>
     </div>
-    <div class="span4">
+    <div id="options-container" class="span5">
       <div id="options">
-
-        <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
-            <li>
-                <input type="radio" name="documentOption" value="html" checked="checked" data-bind="checked: documentLanguage" id="htmlMenuOption" />
-                <label for="htmlMenuOption" data-bind="inputActive: documentLanguage">HTML</label>
-            </li>
-            <li>
-                <input type="radio" name="documentOption" value="haml" data-bind="checked: documentLanguage" id="hamlMenuOption" />
-                <label for="hamlMenuOption" data-bind="inputActive: documentLanguage">HAML</label>
-            </li>
-            <li>
-                <input type="radio" name="documentOption" value="markdown" data-bind="checked: documentLanguage" id="markdownMenuOption" />
-                <label for="markdownMenuOption" data-bind="inputActive: documentLanguage">Markdown</label>
-            </li>
-            <li>
-                <input type="radio" name="documentOption" value="coffeekup" data-bind="checked: documentLanguage" id="coffeekupMenuOption" />
-                <label for="coffeekupMenuOption" data-bind="inputActive: documentLanguage">CoffeeKup</label>
-            </li>
-            <li>
-                <input type="radio" name="documentOption" value="jade" data-bind="checked: documentLanguage" id="jadeMenuOption" />
-                <label for="jadeMenuOption" data-bind="inputActive: documentLanguage">Jade</label>
-            </li>
+        <ul>
+          <li><a href="#document">Document</a></li>
+          <li><a href="#style">Style</a></li>
+          <li><a href="#program">Program</a></li>
         </ul>
-        <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
+        <div id="document">
+          <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
+              <li>
+                  <input type="radio" name="documentOption" value="html" checked="checked" data-bind="checked: documentLanguage" id="htmlMenuOption" />
+                  <label for="htmlMenuOption" data-bind="inputActive: documentLanguage">HTML</label>
+              </li>
+              <li>
+                  <input type="radio" name="documentOption" value="haml" data-bind="checked: documentLanguage" id="hamlMenuOption" />
+                  <label for="hamlMenuOption" data-bind="inputActive: documentLanguage">HAML</label>
+              </li>
+              <li>
+                  <input type="radio" name="documentOption" value="markdown" data-bind="checked: documentLanguage" id="markdownMenuOption" />
+                  <label for="markdownMenuOption" data-bind="inputActive: documentLanguage">Markdown</label>
+              </li>
+              <li>
+                  <input type="radio" name="documentOption" value="coffeekup" data-bind="checked: documentLanguage" id="coffeekupMenuOption" />
+                  <label for="coffeekupMenuOption" data-bind="inputActive: documentLanguage">CoffeeKup</label>
+              </li>
+              <li>
+                  <input type="radio" name="documentOption" value="jade" data-bind="checked: documentLanguage" id="jadeMenuOption" />
+                  <label for="jadeMenuOption" data-bind="inputActive: documentLanguage">Jade</label>
+              </li>
+          </ul>
+        </div>
+
+        <div id="style">
+          <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
             <li>
                 <input type="radio" name="styleOption" value="css" data-bind="checked: styleLanguage" id="cssMenuOption" />
                 <label for="cssMenuOption" data-bind="inputActive: styleLanguage">CSS</label>
@@ -70,7 +78,10 @@
                 <label for="stylusMenuOption" data-bind="inputActive: styleLanguage">Stylus</label>
             </li>
         </ul>
-        <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
+        </div>
+
+        <div id="program">
+          <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
             <li>
                 <input type="radio" name="programOption" value="javascript" checked="checked" data-bind="checked: programLanguage" id="javascriptMenuOption" />
                 <label for="javascriptMenuOption" data-bind="inputActive: programLanguage">JavaScript</label>
@@ -96,7 +107,8 @@
                 <label for="royMenuOption" data-bind="inputActive: programLanguage">Roy</label>
             </li>
         </ul>
-    </div>
+        </div>
+      </div>
     </div>
   </div>
     <div class="row-fluid">

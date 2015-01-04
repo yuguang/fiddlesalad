@@ -8,8 +8,15 @@ body {
 #logo {
   margin-top: 20px;
 }
+#options-container {
+  margin-left: 2px;
+}
+#options-container #options {
+  height: 300px;
+}
 ul.list {
   margin: 3em auto 3em auto;
+  padding-left: 0;
 }
 ul.list li {
   display: inline;

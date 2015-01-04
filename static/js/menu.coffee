@@ -1,4 +1,7 @@
 root = global ? window
+
+$("#options").wijtabs(event: "mouseover")
+
 Queue = (list) ->
   queue = new CircularQueue(list.length)
   for item in list
