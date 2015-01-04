@@ -21,14 +21,6 @@ ul.list .ui-corner-right {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-ul.list label {
-  -webkit-transition: margin 0.1s ease-out;
-  -moz-transition: margin 0.1s ease-out;
-  -o-transition: margin 0.1s ease-out;
-}
-ul.list label:hover {
-  margin-top: -4px;
-}
 .right {
   float: right;
 }
