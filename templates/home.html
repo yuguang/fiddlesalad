@@ -16,11 +16,16 @@
         </div>
         <p class="span3"><a class="btn btn-warning action right" href="#" data-bind="click: loadWorkspace">Go &raquo;</a></p>
     </div>
-    <div class="CodeMirror-placeholder"></div>
-    <textarea id="code">
-    </textarea>
 
-    <div id="options">
+<div class="row">
+    <div class="span8">
+      <div class="CodeMirror-placeholder"></div>
+      <textarea id="code">
+      </textarea>
+    </div>
+    <div class="span4">
+      <div id="options">
+
         <ul class="list row-fluid" data-bind='jqueryui: "buttonset"'>
             <li class="span2">
                 <input type="radio" name="documentOption" value="html" checked="checked" data-bind="checked: documentLanguage" id="htmlMenuOption" />
@@ -92,6 +97,8 @@
             </li>
         </ul>
     </div>
+    </div>
+  </div>
     <div class="row-fluid">
         <div class="span4 placeholder">.</div>
         <div class="span3">
