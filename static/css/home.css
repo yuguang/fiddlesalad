@@ -11,9 +11,6 @@ body {
 ul.list {
   margin: 3em auto 3em auto;
 }
-ul.list:nth-child(odd) {
-  background-color: #F2F2FA;
-}
 ul.list li {
   display: inline;
   list-style-type: none;
@@ -32,9 +29,6 @@ ul.list label {
 ul.list label:hover {
   margin-top: -4px;
 }
-ul.list:hover {
-  background-color: #E0E4FF;
-}
 .right {
   float: right;
 }
@@ -51,13 +45,6 @@ ul.list:hover {
   border-radius: 25px;
   font-size: 125%;
   font-weight: bold;
-}
-#options {
-  margin-top: 20px;
-  margin-bottom: 65px;
-}
-#options .ui-button-text {
-  font-size: 90%;
 }
 .CodeMirror-placeholder {
   background-attachment: scroll;
