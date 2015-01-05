@@ -56,7 +56,7 @@ form input, form textarea {
 }
 
 div.toolbar {
-    width: 610px;
+    width: 630px;
 }
 
 div.toolbar, .title {
@@ -241,7 +241,7 @@ div.ui-layout-center {
 {
 	list-style:none;
 	position:relative;
-	float:left;
+	float:right;
 	margin:0;
 	padding:0
 }
@@ -283,7 +283,8 @@ div.ui-layout-center {
 	top:100%;
 	left:0;
 	background:#fff;
-	padding:0
+	padding:0;
+    width: 100%;
 }
 
 #languages ul ul li
