@@ -231,3 +231,80 @@ div.ui-layout-center {
   margin-top: 22px;
   cursor: pointer;
 }
+
+#languages
+{
+	margin-top:15px
+}
+
+#languages ul
+{
+	list-style:none;
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+}
+
+#languages ul a
+{
+	display:block;
+	color:#333;
+	text-decoration:none;
+	font-weight:700;
+	font-size:12px;
+	line-height:32px;
+	padding:0 15px;
+	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
+#languages ul li
+{
+	position:relative;
+	float:left;
+	margin:0;
+	padding:0
+}
+
+#languages ul li.current-menu-item
+{
+	background:#ddd
+}
+
+#languages ul li:hover
+{
+	background:#f6f6f6
+}
+
+#languages ul ul
+{
+	display:none;
+	position:absolute;
+	top:100%;
+	left:0;
+	background:#fff;
+	padding:0
+}
+
+#languages ul ul li
+{
+	float:none;
+	width:200px
+}
+
+#languages ul ul a
+{
+	line-height:120%;
+	padding:10px 15px
+}
+
+#languages ul ul ul
+{
+	top:0;
+	left:100%
+}
+
+#languages ul li:hover > ul
+{
+	display:block
+}
