@@ -12,4 +12,4 @@ var defaultShare = {
     'text':'ShareThis'
 };
 
-var accordionOptions = { fillSpace: true };
+var accordionOptions = { fillSpace: true, heightStyle: "content" };
