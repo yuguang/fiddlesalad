@@ -2,6 +2,9 @@
   font-family: 'Codystar';
   font-weight: bolder;
 }
+#logo img {
+  width: 190px;
+}
 #logo span:nth-child(1) {
   color: #70b8ff;
 }
