@@ -38,7 +38,6 @@ MEDIASYNC_JOINED = {
             'css/jquery.wijmo-open.css',
             ],
         'css/home.css': [
-            'css/bootstrap.css',
             'css/codemirror.css',
             'css/codemirror/themes/monokai.css',
             'css/home.css',
@@ -166,7 +165,6 @@ MEDIASYNC_JOINED = {
             'js/beautify.js',
             ],
         'js/menu.fiddle.js': [
-            'js/bootstrap.js',
             'js/fiddle-configuration.js',
             'js/keywords.js',
             'js/queue.js',
