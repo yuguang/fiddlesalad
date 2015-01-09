@@ -6,73 +6,96 @@
 
 {% block content %}
 
-  <div class="row">
-    <div class="col-md-12">
-      {% include "logo.html" %}
+
+<!-- top with logo -->
+<div class="row top-row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <img src="{% media_url %}/images/FiddleSalad_Logo_Final.png" alt="FiddleSalad" class="F_logo">
+  </div>
+  <div class="col-mds-1"></div>
+</div>
+<!-- end top with logo -->
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="between-top-and-mid col-md-10">
+    <h1> Code with <span style="color:#2dd2b4">convienence.</h1>
+      <p>An online playground with an instantly ready coding environment.
+      </br>Combine language preprocessors, CSS, HTML and JavaScript to create and share coding examples.</p>
     </div>
+    <div class="col-md-1"></div>
   </div>
-  <div class="row">
-    <div class="line"></div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#document">Document</a></li>
-        <li><a data-toggle="tab" href="#style">Style</a></li>
-        <li><a data-toggle="tab" href="#program">Program</a></li>
-      </ul>
-      <div class="tab-content">
-        <div id="document" class="tab-pane fade in active">
-          <p>Section A content…</p>
-        </div>
-        <div id="style" class="tab-pane fade">
-          <p>Section B content…</p>
-        </div>
-        <div id="program" class="tab-pane fade">
-          <p>Dropdown 1 content…</p>
-        </div>
+  <!-- left div -->
+  <div style="height:500px;" class="col-md-1"></div>
+  <!-- left div end -->
+  <!-- tabs! -->
+  <div id="lines" class="col-md-4 tabbable full-width-tabs">
+    <ul class="nav nav-tabs">
+      <li class="active tab-expand"><a href="#tab-one" data-toggle="tab">1. Document</a></li>
+      <li class="tab-expand"><a href="#tab-two" data-toggle="tab">2. Style</a></li>
+      <li class="tab-expand"><a href="#tab-three" data-toggle="tab">3. Program</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab-one">
+        <h2>Meow loudly at 1am to human slave</h2>
+        <p>Cat ipsum dolor sit amet, has closed eyes but still sees you present belly. Leave dead animals as gifts hide at bottom of staircase to trip human so sit by the fire.</p>
+      </div>
+      <div class="tab-pane" id="tab-two">
+        <h2>Meow loudly at 2am to human slave</h2>
+        <p>Cat ipsum dolor sit amet, has closed eyes but still sees you present belly. Leave dead animals as gifts hide at bottom of staircase to trip human so sit by the fire.</p>
+      </div>
+      <div class="tab-pane" id="tab-three">
+        <h2>Meow loudly at 3am to human slave</h2>
+        <p>Cat ipsum dolor sit amet, has closed eyes but still sees you present belly. Leave dead animals as gifts hide at bottom of staircase to trip human so sit by the fire.</p>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="CodeMirror-placeholder"></div>
-      <textarea id="code">
-      </textarea>
+    <!-- GET STARTED>>> button -->
+    <div class="button-go cray">
+      <span class="cray"> GET STARTED >> </span>
+    </div>
+    <!-- GET STARTED>>> button end -->
+  </div>
+
+  <!-- tabs end -->
+
+  <div id="lines" class="col-md-6">
+    <div class="code-box">
+      code box goes here
     </div>
   </div>
+  <!-- right div -->
+  <div style="height:500px;" class="col-md-1"></div>
+  <!-- right div end -->
+  <!-- bottom div -->
+  <div style="height:100px;" class="col-md-12"></div>
+  <!-- bottom div end -->
 
 {% endblock %}
 
 {% block resources %}
-    <link href='http://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+
     {% css "css/home.css" %}
-    {% css "css/wijmo-artisto.css" %}
+    {% css "css/bootstrap.min.css" %}
+    {% css "css/bootstrap-theme.min.css" %}
     <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
-    {% if not DEBUG %}
-        <script src="http://s3.amazonaws.com/pythonfiddle/js/LAB.min.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            {% include "javascript_setup.html" %}
-            $LAB
-                    .script("http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js")
-                    .script("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait()
-                    .script("http://s3.amazonaws.com/pythonfiddle/js/knockout.js.gz?v=2013062511")
-                    .script("http://s3.amazonaws.com/pythonfiddle/js/codemirror.fiddle.js.gz"+_v)
-                    .script("http://s3.amazonaws.com/pythonfiddle/js/jquery-ui.fiddle.js.gz"+_v).wait()
-                    .script("http://s3.amazonaws.com/pythonfiddle/js/menu.fiddle.js.gz"+_v)
-                    .script("http://www.google-analytics.com/ga.js")
-                    .script("http://platform.twitter.com/widgets.js");
-        </script>
-    {% else %}
-        {% js "js/underscore.js" %}
-        {% js "js/codemirror.fiddle.js" %}
-        {% js "js/menu.fiddle.js" %}
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    {% endif %}
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
+    <!-- js resources -->
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $(".tab_content").hide();
+      $(".tab_content:first").show();
+
+      $("ul.tabs li").click(function() {
+        $("ul.tabs li").removeClass("active");
+        $(this).addClass("active");
+        $(".tab_content").hide();
+        var activeTab = $(this).attr("rel");
+        $("#"+activeTab).fadeIn();
+      });
+    });
+
+    </script>
 {% endblock %}

@@ -1,9 +1,167 @@
-.floatClear {
-  float: left;
-  clear: both;
+.cray {
+  font-family: "Oxygen", sans-serif, serif;
+  color:white;
+  padding: 10px;
+  font-size: 19px;
+  text-align: center;
+  font-weight:100;
+
 }
-div.line {
+
+body {
+  background-color: #faf9f9;
+}
+
+.button-go {
+  background-color:#2dd2b4;
+  margin: 8px 0 0 0;
+}
+
+.footer_main {
+  height:20px;
+}
+
+.code-box {
+  height:420px;
+  background-color:white;
+  border: 1px solid #ccc;
+}
+
+div.tab-content h2 {
+  color:#606060;
+  font-family: "Oxygen", sans-serif, serif;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.between-top-and-mid {
+  height:140px;
+}
+
+div.between-top-and-mid h1 {
+  color:#515151;
+  font-family: "Oxygen", sans-serif, serif;
+  font-size: 24px;
+  letter-spacing: .5px;
+  padding-top:10px;
+}
+
+div.between-top-and-mid p {
+  color:#606060;
+  font-family: "Oxygen", sans-serif, serif;
+  font-size: 13px;
+  padding-bottom:10px;
+}
+
+div.tab-content p {
+  color:#606060;
+  font-family: "Oxygen", sans-serif, serif;
+  font-size: 12px;
+}
+
+.col-md-4 {
+  padding: 0px;
+}
+.col-md-6 {
+  padding-right:6px;
+  padding-left:6px;
+}
+
+/*TOP ROW WHERE LOGO IS*/
+.top-row {
+  border-bottom: 2px solid #dbdbdb;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+}
+
+.F_logo {
+  width: 190px;
+  padding: 10px 10px 10px 0px;
+}
+
+/*#lines {
+border: 1px solid red;
+}*/
+
+.nav-tabs > li > a, .nav-tabs>li.active>a {
+  -webkit-transition: all ease-in-out .3s;
+  -moz-transition: all ease-in-out .3s;
+  -ms-transition: all ease-in-out .3s;
+  -o-transition: all ease-in-out .3s;
+  transition: all ease-in-out .3s;
+}
+
+.nav > li > a {
+  padding: 15px 15px 15px 15px;
+}
+
+.nav-tabs {
+  border:none;
+  font-family: "Oxygen", sans-serif, serif;
+  font-weight: 100;
+  font-size: 15px;
+}
+
+.nav-tabs>li>a {
+  border-radius: 0px;
+}
+/* tab color */
+.nav-tabs>li>a {
+  background-color: #e6e6e6;
+  color:#2b2b2b;
+  border:none;
+}
+
+/* active tab color */
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+  color: #2b2b2b;
+  background-color: #ffffff;
+  border:none;
+}
+
+/* hover tab color */
+.nav-tabs>li>a:hover {
+  background-color: #9f9f9f;
+  border:none;
+}
+
+ul.nav-tabs li a{
+  margin-right: 0;
+}
+
+.full-width-tabs > ul.nav.nav-tabs {
+  display: table;
   width: 100%;
-  background-color: gray;
-  height: 2px;
+  table-layout: fixed;
+}
+.full-width-tabs > ul.nav.nav-tabs > li {
+  float: none;
+  display: table-cell;
+}
+.full-width-tabs > ul.nav.nav-tabs > li > a {
+  text-align: center;
+}
+.tab-expand{
+  width:100%;
+}
+
+.tab-content {
+  height: 300px;
+  padding: 10px 20px 10px 20px;
+  border-left: 1px solid #ccc ;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+.tabbable {
+  /*height: 350px;*/
+  overflow: hidden;
+}
+
+ul.nav.nav-tabs {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
 }
