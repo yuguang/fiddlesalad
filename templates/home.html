@@ -62,7 +62,10 @@
 
   <div id="lines" class="col-md-6">
     <div class="code-box">
-      code box goes here
+      <div class="CodeMirror-placeholder"></div>
+      <textarea id="code">
+          some code
+      </textarea>
     </div>
   </div>
   <!-- right div -->
@@ -100,4 +103,7 @@
     });
 
     </script>
+    {% js "js/underscore.js" %}
+    {% js "js/codemirror.fiddle.js" %}
+    {% js "js/menu.fiddle.js" %}
 {% endblock %}
