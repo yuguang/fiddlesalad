@@ -176,13 +176,3 @@ MEDIASYNC_JOINED = {
             'js/compiled-coffee/menu.js',
             ]
     }
-
-if build_config:
-    MEDIASYNC_JOINED['js/jquery-ui.fiddle.js'] = [
-        'js/build/lib/jquery-ui-1.8.19.custom.min.js',
-        'js/build/lib/jquery.wijmo.wijutil.min.js',
-        'js/build/lib/jquery.wijmo.wijdialog.min.js',
-        'js/build/lib/jquery.wijmo.wijsplitter.min.js',
-        'js/build/lib/jquery.wijmo.wijmenu.min.js',
-        'js/build/lib/jquery.wijmo.wijaccordion.min.js',
-        ]
