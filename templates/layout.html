@@ -43,7 +43,8 @@
             .script("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait(function(){
             	document.getElementById('progress').value = 50
             })
-            .script(base_url+"/js/jquery-ui.fiddle.js.gz"+_v)
+            .script("https://code.jquery.com/ui/1.8.19/jquery-ui.min.js")
+            .script("http://cdn.wijmo.com/jquery.wijmo-open.all.2.0.5.min.js")
             .script(base_url+"/js/knockout.js.gz?v=2013062511")
             .script(base_url+"/js/codemirror.fiddle.js.gz"+_v)
             .script(base_url+"/js/fiddle.plugins.js.gz"+_v).wait(function(){
