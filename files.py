@@ -39,7 +39,8 @@ MEDIASYNC_JOINED = {
             ],
         'css/home.css': [
             'css/codemirror.css',
-            'css/codemirror/themes/monokai.css',
+            'css/codemirror/themes/default.css',
+            'css/codemirror/themes/neo.css',
             'css/home.css',
             'css/logo.fiddlesalad.css',
             ],

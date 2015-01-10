@@ -962,7 +962,7 @@ $('.tab-content button').click ->
 
 editor = CodeMirror.fromTextArea(document.getElementById('code'),
   readOnly: 'nocursor'
-  theme: 'monokai'
+  theme: 'neo'
 )
 
 $('.CodeMirror-placeholder').remove()

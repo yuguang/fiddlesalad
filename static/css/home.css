@@ -192,4 +192,5 @@ ul.nav.nav-tabs {
 }
 .CodeMirror {
   height: 100%;
+  font-family: "Consolas", "Lucida Console", Monaco, monospace;
 }
