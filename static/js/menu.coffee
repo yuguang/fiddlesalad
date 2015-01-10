@@ -946,19 +946,23 @@ selectedLanguage = store.get('lastSelectedLanguage')
 if selectedLanguage is LANGUAGE.ZENCODING
   selectedLanguage = LANGUAGE.HTML
 
+setDisplayLanguage = (language) ->
+  editor.setValue examples[language].pop()
+  if timer
+    clearInterval timer
+  timer = setInterval(
+    ->
+      editor.setValue examples[language].pop()
+    5000
+  )
+  editor.setOption 'mode', codeMirrorMode(language)
+
 $('.tab-content button').click ->
     language = $(this).text().toLowerCase().replace(' ', '')
-    console.log language
-    editor.setValue examples[language].pop()
-    if timer
-      clearInterval timer
-    timer = setInterval(
-      ->
-        editor.setValue examples[language].pop()
-      5000
-    )
-    editor.setOption 'mode', codeMirrorMode(language)
+    setDisplayLanguage(language)
     selectedLanguage = language
+    $(this).addClass('active')
+    $(this).siblings().removeClass('active')
 
 editor = CodeMirror.fromTextArea(document.getElementById('code'),
   readOnly: 'nocursor'
@@ -974,16 +978,6 @@ ViewModel = ->
   @styleLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.STYLE))
   @programLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.PROGRAM))
 
-  @selectBasic = =>
-    @documentLanguage 'html'
-    @styleLanguage 'css'
-    @programLanguage 'javascript'
-
-  @selectOptimal = =>
-    @documentLanguage 'jade'
-    @styleLanguage 'less'
-    @programLanguage 'coffeescript'
-
   @loadWorkspace = =>
     languages = [ @documentLanguage(), @styleLanguage(), @programLanguage() ].join(',')
     store.set 'languages', languages
@@ -994,5 +988,6 @@ ViewModel = ->
 
 viewModel = new ViewModel()
 ko.applyBindings viewModel
+setDisplayLanguage(viewModel.documentLanguage())
 
 root.viewModel = viewModel
