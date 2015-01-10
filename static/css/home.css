@@ -53,7 +53,7 @@ div.between-top-and-mid p {
   padding-bottom:10px;
 }
 
-div.tab-content p {
+div.tab-content p, div.tab-content li {
   color:#606060;
   font-family: "Oxygen", sans-serif, serif;
   font-size: 12px;
