@@ -5,7 +5,6 @@
   font-size: 19px;
   text-align: center;
   font-weight:100;
-
 }
 
 body {
@@ -193,4 +192,15 @@ ul.nav.nav-tabs {
 .CodeMirror {
   height: 100%;
   font-family: "Consolas", "Lucida Console", Monaco, monospace;
+}
+
+.lorna-3-point-5col {
+  width: 29.1%;
+  float: left;
+}
+
+.lorna-8-point-5col {
+  width: 55.3%;
+  float: left;
+  margin-left: 8px;
 }
