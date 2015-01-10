@@ -940,6 +940,73 @@ codeMirrorMode = _.memoize((language) ->
       return language
 )
 
+descriptions =
+  TypeScript: 'TypeScript is a language for application-scale JavaScript development. It\'s a typed superset of JavaScript that compiles to plain JavaScript.'
+  CoffeeScript: """<p>
+      <b>CoffeeScript is a little language that compiles into JavaScript.</b>
+      Underneath that awkward Java-esque patina, JavaScript has always had
+      a gorgeous heart. CoffeeScript is an attempt to expose
+      the good parts of JavaScript in a simple way.
+    </p>
+
+    <p>
+      The golden rule of CoffeeScript is: <i>"It's just JavaScript"</i>. The code
+      compiles one-to-one into the equivalent JS, and there is
+      no interpretation at runtime. You can use any existing JavaScript library
+      seamlessly from CoffeeScript (and vice-versa). The compiled output is
+      readable and pretty-printed, will work in every JavaScript runtime, and tends
+      to run as fast or faster than the equivalent handwritten JavaScript.
+    </p>"""
+  Opal: """<p>
+    <b>Opal is a Ruby to Javascript compiler</b>
+    It is source-to-source, making it fast as a runtime. Opal includes a compiler, a corelib and runtime implementation.
+    </p>
+    """
+  Roy: """<p>Roy is an experimental programming language that targets JavaScript. It
+        tries to meld JavaScript semantics with some features common in static
+        functional languages:</p>
+      <ul>
+        <li><a href="http://en.wikipedia.org/wiki/Type_inference#Hindley.E2.80.93Milner_type_inference_algorithm">Damas-Hindley-Milner type inference</a></li>
+        <li><a href="http://jashkenas.github.com/coffee-script/">Whitespace</a> <a href="http://www.haskell.org/haskellwiki/Haskell">significant</a> <a href="http://www.python.org/">syntax</a></li>
+        <li><a href="http://en.wikipedia.org/wiki/Tagged_union">Simple tagged unions</a></li>
+        <li><a href="http://en.wikipedia.org/wiki/Pattern_matching">Pattern matching</a></li>
+        <li><a href="http://en.wikipedia.org/wiki/Structural_type_system">Structural typing</a></li>
+        <li><a href="http://en.wikipedia.org/wiki/Monad_%28functional_programming%29#do-notation">Monad syntax</a></li>
+      </ul>
+    """
+  LESS: 'Less is a CSS pre-processor, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.'
+  Stylus: """<p>Stylus is a revolutionary new language, providing an efficient, dynamic, and expressive way to generate CSS. Supporting both an indented syntax and regular CSS style.</p>
+
+    <p>Stylus has <em>many</em> features:</p>
+
+    <ul class="task-list">
+    <li><a href="/LearnBoost/stylus/blob/master/docs/conditionals.md">conditionals</a></li>
+    <li><a href="/LearnBoost/stylus/blob/master/docs/iteration.md">iteration</a></li>
+    <li>nested <a href="/LearnBoost/stylus/blob/master/docs/selectors.md">selectors</a>
+    </li>
+    <li>parent reference</li>
+    <li>in-language <a href="/LearnBoost/stylus/blob/master/docs/functions.md">functions</a>
+    </li>
+    <li><a href="/LearnBoost/stylus/blob/master/docs/vargs.md">variable arguments</a></li>
+    <li>built-in <a href="/LearnBoost/stylus/blob/master/docs/bifs.md">functions</a> (over 60)</li>
+    <li>optional <a href="/LearnBoost/stylus/blob/master/docs/functions.url.md">image inlining</a>
+    </li>
+    <li>optional compression</li>
+    <li>JavaScript <a href="/LearnBoost/stylus/blob/master/docs/js.md">API</a>
+    </li>
+    </ul>
+    """
+  Markdown: 'Markdown is a markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.'
+  Jade: '<p>Jade is a terse language for writing HTML templates.</p><ul><li>Produces HTML</li><li>Supports dynamic code</li><li>Supports reusability (DRY)</li></ul><p>'
+  HAML: 'Haml (HTML Abstraction Markup Language) is a lightweight markup language that is used to describe the XHTML of any web document without the use of traditional inline coding. It is designed to address many of the flaws in traditional templating engines, as well as making markup as elegant as it can be.'
+  CoffeeKup: 'CoffeeKup uses a simple scheme to provide a concise, expressive, easy-to-read, and time-saving HTML templating solution. It is based on the CoffeeScript language, with which you will need to be familiar. '
+  SASS: 'Sass is a CSS pre-processor with syntax advancements. Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets. However, they do not extend the CSS standard itself.'
+  SCSS: 'SCSS is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported.'
+  Python: """<p>Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. The language provides constructs intended to enable clear programs on both a small and large scale. The Python has the following philosopy:</p>
+  <ul>
+  <li>Beautiful is better than ugly.</li><li>Explicit is better than implicit.</li><li>Simple is better than complex.</li><li>Complex is better than complicated.</li><li>Flat is better than nested.</li><li>Sparse is better than dense.</li><li>Readability counts.</li>
+  </ul>"""
+
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])
 
@@ -968,6 +1035,20 @@ ViewModel = ->
   @selectedDocumentLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.DOCUMENT))
   @selectedStyleLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.STYLE))
   @selectedProgramLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.PROGRAM))
+
+  getDescription = (language) ->
+    if language of descriptions
+      description = descriptions[language]
+      if description.charAt(0) isnt '<'
+        "<p>#{ description }</p>"
+      else
+        description
+    else
+      ''
+
+  @documentLanguageDescription = ko.computed(=> getDescription @selectedDocumentLanguage())
+  @styleLanguageDescription = ko.computed(=> getDescription @selectedStyleLanguage())
+  @programLanguageDescription = ko.computed(=> getDescription @selectedProgramLanguage())
 
   @setLanguage = (language) =>
     if language in @documentLanguage()

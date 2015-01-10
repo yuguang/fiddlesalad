@@ -42,20 +42,20 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tab-one">
-                <p></p>
+                <div data-bind="html: documentLanguageDescription"></div>
                 {% comment %}The "active" class marks the selected language{% endcomment %}
                 <div data-bind="foreach: documentLanguage">
                     <button type="button" class="btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
                 </div>
             </div>
             <div class="tab-pane" id="tab-two">
-                <p></p>
+                <div data-bind="html: styleLanguageDescription"></div>
                 <div data-bind="foreach: styleLanguage">
                     <button type="button" class="btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data }"></button>
                 </div>
             </div>
             <div class="tab-pane" id="tab-three">
-                <p></p>
+                <div data-bind="html: programLanguageDescription"></div>
                 <div data-bind="foreach: programLanguage">
                     <button type="button" class="btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data }"></button>
                 </div>
