@@ -1,115 +1,105 @@
-body > div > label, form span {
-    display: block;
+#shareMenu,
+.ui-accordion-header a,
+.ui-button-text,
+label {
+  font-family: Helvetica, "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", "宋体", SimSun, STXihei, "华文细黑";
 }
-
-form input, form textarea {
-    font-family: Arial, Sans-Serif;
-    font-size: 13px;
-    margin-bottom: 5px;
-    display: block;
-    border: solid 1px #85b1de;
-    width: 150px;
-    background-color: #EDF2F7;
-    padding: 4px;
+body > div > label,
+form span {
+  display: block;
 }
-
+form input,
+form textarea {
+  font-family: Arial, Sans-Serif;
+  font-size: 13px;
+  margin-bottom: 5px;
+  display: block;
+  border: solid 1px #85b1de;
+  width: 150px;
+  background-color: #EDF2F7;
+  padding: 4px;
+}
 #logo {
-    height: 108px;
-    position: relative;
-    z-index: -3;
+  height: 108px;
+  position: relative;
+  z-index: -3;
 }
-
-#logo h1, #logo h3 {
-    font-family: 'Baumans', cursive;
-    position: absolute;
-    padding: 0;
-    margin: 0;
-}
-
-#logo h1 {
-    top: 37px;
-    right: 132px;
-    font-weight: 400;
-    font-size: 36px;
-    letter-spacing: 0.069em;
-    word-spacing: 0em;
-    line-height: 1.4;
-}
-
+#logo h1,
 #logo h3 {
-    top: 83px;
-    right: 4px;
+  font-family: 'Baumans', cursive;
+  position: absolute;
+  padding: 0;
+  margin: 0;
 }
-
+#logo h1 {
+  top: 37px;
+  right: 132px;
+  font-weight: 400;
+  font-size: 36px;
+  letter-spacing: 0.069em;
+  word-spacing: 0em;
+  line-height: 1.4;
+}
+#logo h3 {
+  top: 83px;
+  right: 4px;
+}
 #logo img {
-    position: absolute;
-    top: 0;
-    right: 3px;
+  position: absolute;
+  top: 0;
+  right: 3px;
 }
-
 #importDialog input {
-    width: 200px;
+  width: 200px;
 }
-
 .toolbar * {
-    display: inline;
+  display: inline;
 }
-
 div.toolbar {
-    width: 630px;
+  width: 630px;
 }
-
-div.toolbar, .title {
-    float: left;
-    padding: 15px 20px 5px 0;
-}
-
-.toolbar div {
-    padding: 0 10px;
-}
-
+div.toolbar,
 .title {
-    z-index: -3;
+  float: left;
+  padding: 15px 20px 5px 0;
 }
-
+.toolbar div {
+  padding: 0 10px;
+}
+.title {
+  z-index: -3;
+}
 #shareMenu {
-    width: 150px;
-    height: 100px;
-    padding: .4em;
-    position: absolute;
-    left: 9px;
-    top: 25px;
+  width: 150px;
+  height: 100px;
+  padding: .4em;
+  position: absolute;
+  left: 9px;
+  top: 25px;
 }
-
 #shareMenu input {
-    width: 98%;
+  width: 98%;
 }
-
 #shareMenu div {
-    padding: 0;
+  padding: 0;
 }
-
 #share_this {
-    margin-bottom: 5px;
-    display: block;
+  margin-bottom: 5px;
+  display: block;
 }
-
 #copyButton {
-    padding: 2px;
+  padding: 2px;
 }
-
 #console {
-    width: 100%;
-    height: 6em;
-    display: block;
-    border: none;
+  width: 100%;
+  height: 6em;
+  display: block;
+  border: none;
 }
-
 #console span {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
-
 /*
 
 #revisionsMenu input + label {
@@ -120,59 +110,52 @@ div.toolbar, .title {
     vertical-align: middle;
 }
 */
-
 div#revisionsMenu > div {
-    display: none;
+  display: none;
 }
-
 div.ui-layout-center {
-    padding: 0 !important;
+  padding: 0 !important;
 }
-
 .removePadding {
-    padding: 0 !important;
+  padding: 0 !important;
 }
-
 .fullWidth {
-    width: 100% !important;
+  width: 100% !important;
 }
-
 /*fill the tab bar*/
-
-.east-north, .center-north , .east-south{
-    padding: 0;
+.east-north,
+.center-north,
+.east-south {
+  padding: 0;
 }
-
-.east-north .ui-tabs-nav, .center-north .ui-tabs-nav, .east-south .ui-tabs-nav{
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    padding-bottom: 0 !important;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
+.east-north .ui-tabs-nav,
+.center-north .ui-tabs-nav,
+.east-south .ui-tabs-nav {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  padding-bottom: 0 !important;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
 }
-
-.center-north ul, .east-north ul {
-    position: fixed;
-    width: 100%;
-    z-index: 4;
+.center-north ul,
+.east-north ul {
+  position: fixed;
+  width: 100%;
+  z-index: 4;
 }
-
-.maximized, .maximized iframe {
-    width: 100%;
-    height: 100%;
+.maximized,
+.maximized iframe {
+  width: 100%;
+  height: 100%;
 }
-
 .ui-layout-resizer {
-    background: #EEE !important;
+  background: #EEE !important;
 }
-
 .ui-layout-toggler {
-    background: #999 !important;
+  background: #999 !important;
 }
-
 /* Browsers Fallback */
-
 #browserDialog {
   color: #666;
   top: 31px;
@@ -181,21 +164,20 @@ div.ui-layout-center {
   background: white;
   height: 100%;
 }
-
 #fallback-header {
   text-align: center;
   font-size: 24pt;
   width: 500px !important;
   margin: 22pt auto;
 }
-
 #fallback-content {
   text-align: center;
   width: 500px !important;
   margin: 22pt auto;
 }
-
-#fallback-content a, #fallback-content a:link, #fallback-content a:visited {
+#fallback-content a,
+#fallback-content a:link,
+#fallback-content a:visited {
   width: 100px;
   height: 20px;
   padding-top: 100px;
@@ -206,106 +188,79 @@ div.ui-layout-center {
   text-decoration: none;
   white-space: nowrap;
 }
-
 #browser-firefox {
   background: url('http://pythonfiddle.s3.amazonaws.com/images/browsers.png') 0px 0px no-repeat;
 }
-
 #browser-chrome {
   background: url('http://pythonfiddle.s3.amazonaws.com/images/browsers.png') -100px 0px no-repeat;
 }
-
 #browser-safari {
   background: url('http://pythonfiddle.s3.amazonaws.com/images/browsers.png') -200px 0px no-repeat;
 }
-
 #browser-ie {
   background: url('http://pythonfiddle.s3.amazonaws.com/images/browsers.png') -300px 0px no-repeat;
 }
-
 #browser-opera {
   background: url('http://pythonfiddle.s3.amazonaws.com/images/browsers.png') -400px 0px no-repeat;
 }
-
-#fallback-ignore, #fallback-ignore:active {
+#fallback-ignore,
+#fallback-ignore:active {
   margin-top: 22px;
   cursor: pointer;
 }
-
-#languages
-{
-	margin-top:15px
+#languages {
+  margin-top: 15px;
 }
-
-#languages ul
-{
-	list-style:none;
-	position:relative;
-	float:right;
-	margin:0;
-	padding:0
+#languages ul {
+  list-style: none;
+  position: relative;
+  float: right;
+  margin: 0;
+  padding: 0;
 }
-
-#languages ul a
-{
-	display:block;
-	color:#333;
-	text-decoration:none;
-	font-weight:700;
-	font-size:12px;
-	line-height:32px;
-	padding:0 15px;
-	font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+#languages ul a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 32px;
+  padding: 0 15px;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", "宋体", SimSun, STXihei, "华文细黑";
 }
-
-#languages ul li
-{
-	position:relative;
-	float:left;
-	margin:0;
-	padding:0
+#languages ul li {
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
 }
-
-#languages ul li.current-menu-item
-{
-	background:#ddd
+#languages ul li.current-menu-item {
+  background: #dddddd;
 }
-
-#languages ul li:hover
-{
-	background:#f6f6f6
+#languages ul li:hover {
+  background: #f6f6f6;
 }
-
-#languages ul ul
-{
-	display:none;
-	position:absolute;
-	top:100%;
-	left:0;
-	background:#fff;
-	padding:0;
-    width: 100%;
+#languages ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  padding: 0;
+  width: 100%;
 }
-
-#languages ul ul li
-{
-	float:none;
-	width:200px
+#languages ul ul li {
+  float: none;
+  width: 200px;
 }
-
-#languages ul ul a
-{
-	line-height:120%;
-	padding:10px 15px
+#languages ul ul a {
+  line-height: 120%;
+  padding: 10px 15px;
 }
-
-#languages ul ul ul
-{
-	top:0;
-	left:100%
+#languages ul ul ul {
+  top: 0;
+  left: 100%;
 }
-
-#languages ul li:hover > ul
-{
-	display:block
+#languages ul li:hover > ul {
+  display: block;
 }
