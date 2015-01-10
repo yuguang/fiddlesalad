@@ -192,12 +192,8 @@ div#source .ui-tabs {
   background-image: -moz-radial-gradient(center 79%, ellipse closest-corner, rgba(255, 255, 255, 0.3), rgba(100, 100, 255, 0.3) 95%);
   background-image: -o-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
   background-image: radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
-  font-size: 1.55em;
-  letter-spacing: .15em;
-  font-weight: 500;
-  text-align: center;
+  width: 190px;
   display: block;
-  margin: 0 auto;
   cursor: pointer;
 }
 .menu {
