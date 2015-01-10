@@ -1,7 +1,8 @@
 #shareMenu,
 .ui-accordion-header a,
 .ui-button-text,
-label {
+label,
+.helptext {
   font-family: Helvetica, "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", "宋体", SimSun, STXihei, "华文细黑";
 }
 body > div > label,
@@ -213,14 +214,13 @@ div.ui-layout-center {
 }
 #languages ul {
   list-style: none;
-  position: relative;
-  float: right;
+  position: absolute;
   margin: 0;
   padding: 0;
 }
 #languages ul a {
   display: block;
-  color: #333;
+  color: #333333;
   text-decoration: none;
   font-weight: 700;
   font-size: 12px;
@@ -240,12 +240,15 @@ div.ui-layout-center {
 #languages ul li:hover {
   background: #f6f6f6;
 }
+#languages ul li:hover > ul {
+  display: block;
+}
 #languages ul ul {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  background: #fff;
+  background: #ffffff;
   padding: 0;
   width: 100%;
 }
@@ -260,7 +263,4 @@ div.ui-layout-center {
 #languages ul ul ul {
   top: 0;
   left: 100%;
-}
-#languages ul li:hover > ul {
-  display: block;
 }
