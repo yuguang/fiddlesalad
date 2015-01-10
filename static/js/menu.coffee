@@ -940,54 +940,67 @@ codeMirrorMode = _.memoize((language) ->
       return language
 )
 
-timer = null
-
-selectedLanguage = store.get('lastSelectedLanguage')
-if selectedLanguage is LANGUAGE.ZENCODING
-  selectedLanguage = LANGUAGE.HTML
-
-setDisplayLanguage = (language) ->
-  editor.setValue examples[language].pop()
-  if timer
-    clearInterval timer
-  timer = setInterval(
-    ->
-      editor.setValue examples[language].pop()
-    5000
-  )
-  editor.setOption 'mode', codeMirrorMode(language)
-
-$('.tab-content button').click ->
-    language = $(this).text().toLowerCase().replace(' ', '')
-    setDisplayLanguage(language)
-    selectedLanguage = language
-    $(this).addClass('active')
-    $(this).siblings().removeClass('active')
-
-editor = CodeMirror.fromTextArea(document.getElementById('code'),
-  readOnly: 'nocursor'
-  theme: 'neo'
-)
-
-$('.CodeMirror-placeholder').remove()
-
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])
 
-  @documentLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.DOCUMENT))
-  @styleLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.STYLE))
-  @programLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.PROGRAM))
+  editor = CodeMirror.fromTextArea(document.getElementById('code'),
+    readOnly: 'nocursor'
+    theme: 'neo'
+  )
+  $('.CodeMirror-placeholder').remove()
+
+  @timer = null
+
+  @selectedLanguage = store.get('lastSelectedLanguage')
+  if @selectedLanguage is LANGUAGE.ZENCODING
+    @selectedLanguage = LANGUAGE.HTML
+
+  @documentLanguage = ko.observableArray ['HTML', 'HAML', 'Markdown', 'CoffeeKup', 'Jade']
+  @styleLanguage = ko.observableArray ['CSS', 'LESS', 'SCSS', 'SASS', 'Stylus']
+  @programLanguage = ko.observableArray ['JavaScript', 'CoffeeScript', 'TypeScript', 'Opal', 'Python', 'Roy']
+
+  camelCase = (name) =>
+    for languages in [@documentLanguage(), @styleLanguage(), @programLanguage()]
+      for language in languages
+        if name is language.toLowerCase()
+          return language
+
+  @selectedDocumentLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.DOCUMENT))
+  @selectedStyleLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.STYLE))
+  @selectedProgramLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.PROGRAM))
+
+  @setLanguage = (language) =>
+    if language in @documentLanguage()
+      @selectedDocumentLanguage(language)
+    else if language in @styleLanguage()
+      @selectedStyleLanguage(language)
+    else
+      @selectedProgramLanguage(language)
+    properName = language.toLowerCase()
+    @setDisplayLanguage(properName)
+    @selectedLanguage = properName
+    
+  @setDisplayLanguage = (language) =>
+    editor.setValue examples[language].pop()
+    if @timer
+      clearInterval @timer
+    @timer = setInterval(
+      ->
+        editor.setValue examples[language].pop()
+      5000
+    )
+    editor.setOption 'mode', codeMirrorMode(language)
 
   @loadWorkspace = =>
-    languages = [ @documentLanguage(), @styleLanguage(), @programLanguage() ].join(',')
+    languages = [ @selectedDocumentLanguage(), @selectedStyleLanguage(), @selectedProgramLanguage() ].join(',').toLowerCase()
     store.set 'languages', languages
     # keep the URL the same when the user clicks "Go" without clicking on a language
-    store.set 'lastSelectedLanguage', (if selectedLanguage then selectedLanguage else @styleLanguage())
+    store.set 'lastSelectedLanguage', (if @selectedLanguage then @selectedLanguage else @selectedStyleLanguage())
     window.location.assign window.location.href.replace('#', '') + store.get('lastSelectedLanguage') + '/'
   @
 
 viewModel = new ViewModel()
 ko.applyBindings viewModel
-setDisplayLanguage(viewModel.documentLanguage())
+viewModel.setDisplayLanguage(viewModel.selectedDocumentLanguage().toLowerCase())
 
 root.viewModel = viewModel
