@@ -1,19 +1,133 @@
-.cray {
+/*fiddlesalad red: #f85857
+            green: #2dd2b4
+             gray: #606060*/
+
+/*make buttons stick at the bottom*/
+.stickbottom2 {
+  position:relative;
+}
+
+.stickbottom {
+  position:absolute;
+  bottom:18px;
+}
+/*make buttons stick at the bottom end*/
+
+.social-media-buttons {
+  padding-top: 8px;
+  float:right;
+  width: 18.89%;
+}
+
+.intab-buttons {
+  color:#606060;
+  background:white;
+  border-radius: 0px;
+  width: 110px;
+  margin: 3px;
+  font-weight:200;
+  font-size:12px;
+  letter-spacing:.5px;
+  text-shadow: none;
+  border: 1px solid gray#c1c1c1;
+  text-transform: uppercase;
+}
+
+.intab-buttons:hover {
+  background:#f4a6a6;
+  color:#fff;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s ;
+  transition: all ease 0.5s ;
+}
+
+input,
+input:focus,
+input:active,
+input:hover
+{
+  border-color: #ccc;
+  box-shadow:  #ccc;
+  border: 1px solid #ccc;
+  outline:none;
+}
+
+.btn-default:active, .btn-default.active {
+  background:#f85857;
+  border-color:#f85857;
+  color:white;
+}
+
+.bootstrap-select .btn:focus {
+  outline: none !important;
+}
+
+.getstarted-button {
   font-family: "Oxygen", sans-serif, serif;
   color:white;
   padding: 10px;
   font-size: 19px;
   text-align: center;
   font-weight:100;
+  background-color:#2dd2b4;
+  margin: 8px 0 0 0;
+  transition: opacity 0.5s;
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -o-transition: all ease 0.5s;
+  -ms-transition: all ease 0.5s ;
+  transition: all ease 0.5s ;
+}
+
+.getstarted-button:hover {
+  background:#6de0cb;
+  color:#fff;
+  -webkit-transition: all ease 0.7s;
+  -moz-transition: all ease 0.7s;
+  -o-transition: all ease 0.7s;
+  -ms-transition: all ease 0.7s ;
+  transition: all ease 0.5s ;
+}
+
+.hvr-icon-forward {
+  width:100%;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  padding-right: 2.2em;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.hvr-icon-forward:before {
+  content: ">>";
+  position: absolute;
+  right: 6.5em;
+  padding: 0 1px;
+  font-family: FontAwesome;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-icon-forward:hover:before, .hvr-icon-forward:focus:before, .hvr-icon-forward:active:before {
+  -webkit-transform: translateX(4px);
+  transform: translateX(4px);
 }
 
 body {
   background-color: #faf9f9;
-}
-
-.button-go {
-  background-color:#2dd2b4;
-  margin: 8px 0 0 0;
 }
 
 .footer_main {
@@ -21,7 +135,7 @@ body {
 }
 
 .code-box {
-  height:420px;
+  height:507px;
   background-color:white;
   border: 1px solid #ccc;
 }
@@ -56,6 +170,7 @@ div.tab-content p, div.tab-content li {
   color:#606060;
   font-family: "Oxygen", sans-serif, serif;
   font-size: 12px;
+  letter-spacing: .3px;
 }
 
 .col-md-4 {
@@ -69,8 +184,8 @@ div.tab-content p, div.tab-content li {
 /*TOP ROW WHERE LOGO IS*/
 .top-row {
   border-bottom: 2px solid #dbdbdb;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   background-color: white;
 }
 
@@ -146,8 +261,8 @@ ul.nav-tabs li a{
 }
 
 .tab-content {
-  height: 313px;
-  padding: 10px 20px 10px 20px;
+  height: 400px;
+  padding: 20px 20px 10px 20px;
   border-left: 1px solid #ccc ;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
@@ -190,17 +305,19 @@ ul.nav.nav-tabs {
   color: white;
 }
 .CodeMirror {
+  padding: 20px 20px 20px 30px;
   height: 100%;
   font-family: "Consolas", "Lucida Console", Monaco, monospace;
 }
 
-.lorna-3-point-5col {
+.l3-point-5col {
   width: 29.1%;
   float: left;
+  padding-left: 15px;
 }
 
-.lorna-8-point-5col {
-  width: 55.3%;
+.l8-point-5col {
+  width: 53.3%;
   float: left;
   margin-left: 8px;
 }

@@ -13,7 +13,7 @@
 
 {% block content %}
     <!-- top with logo -->
-    <div class="row top-row">
+    <div class="row top-row" style="margin:0;">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             {% include "logo.html" %}
@@ -21,7 +21,7 @@
         <div class="col-mds-1"></div>
     </div>
     <!-- end top with logo -->
-    <div class="row">
+    <div class="row" style="margin:0;padding:0;">
         <div class="col-md-1"></div>
         <div class="between-top-and-mid col-md-10">
             <h1> Code with <span style="color:#2dd2b4">convienence.</span></h1>
@@ -35,43 +35,43 @@
     <div style="height:500px;" class="col-md-1"></div>
     <!-- left div end -->
     <!-- tabs! -->
-    <div id="lines" class="lorna-3-point-5col tabbable full-width-tabs">
+    <div id="lines" class="l3-point-5col tabbable full-width-tabs">
         <ul class="nav nav-tabs">
             <li class="active tab-expand"><a href="#tab-one" data-toggle="tab">1. Document</a></li>
             <li class="tab-expand"><a href="#tab-two" data-toggle="tab">2. Style</a></li>
             <li class="tab-expand"><a href="#tab-three" data-toggle="tab">3. Program</a></li>
         </ul>
-        <div class="tab-content">
+        <div class="stickbottom2 tab-content">
             <div class="tab-pane active" id="tab-one">
                 <div data-bind="html: documentLanguageDescription"></div>
                 {% comment %}The "active" class marks the selected language{% endcomment %}
-                <div data-bind="foreach: documentLanguage">
-                    <button type="button" class="btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
+                <div class="stickbottom" data-bind="foreach: documentLanguage">
+                    <button type="button" class="intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
                 </div>
             </div>
             <div class="tab-pane" id="tab-two">
                 <div data-bind="html: styleLanguageDescription"></div>
-                <div data-bind="foreach: styleLanguage">
-                    <button type="button" class="btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data }"></button>
+                <div class="stickbottom" data-bind="foreach: styleLanguage">
+                    <button type="button" class="intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data }"></button>
                 </div>
             </div>
             <div class="tab-pane" id="tab-three">
                 <div data-bind="html: programLanguageDescription"></div>
-                <div data-bind="foreach: programLanguage">
-                    <button type="button" class="btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data }"></button>
+                <div class="stickbottom" data-bind="foreach: programLanguage">
+                    <button type="button" class="intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data }"></button>
                 </div>
             </div>
         </div>
         <!-- GET STARTED>>> button -->
-        <div class="button-go cray">
-            <span class="cray" data-bind="click: loadWorkspace"> GET STARTED >> </span>
+        <div class="getstarted-button hvr-icon-forward">
+            <span data-bind="click: loadWorkspace"> GET STARTED </span>
         </div>
         <!-- GET STARTED>>> button end -->
     </div>
 
     <!-- tabs end -->
 
-    <div id="lines" class="lorna-8-point-5col">
+    <div id="lines" class="l8-point-5col">
         <div class="code-box">
             <div class="CodeMirror-placeholder"></div>
             <textarea id="code">
@@ -80,10 +80,17 @@
         </div>
     </div>
     <!-- right div -->
-    <div style="height:500px;" class="col-md-1"></div>
+    <!-- <div style="height:500px;" class="col-md-1"></div> -->
     <!-- right div end -->
     <!-- bottom div -->
-    <div style="height:100px;" class="col-md-12"></div>
+    <div class="social-media-buttons">
+
+      <a href="https://www.facebook.com/pages/Fiddle-Salad/433836646631748"><img style="margin-right:5px;"src="static/images/facebook-icon.png"></a>
+      <a href="https://www.youtube.com/user/LiveWebDevelopment"><img style="margin-right:5px;"src="static/images/youtube-icon.png"></a>
+      <a href="https://twitter.com/fiddle_salad"><img style="margin-right:5px;"src="static/images/twitter-icon.png"></a>
+      <a href="https://github.com/yuguang/fiddlesalad"><img style="height:25px;" src="static/images/github-icon.png"></a>
+
+    </div>
     <!-- bottom div end -->
 
 {% endblock %}
@@ -108,6 +115,9 @@
         $("#"+activeTab).fadeIn();
       });
     });
+
+    $("input, select, textarea, form, button").css("outline", "none");
+    $("input, select, textarea, form, button").css("box-shadow", "none");
 
     </script>
     {% js "js/underscore.js" %}
