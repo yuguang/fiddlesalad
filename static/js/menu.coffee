@@ -1082,6 +1082,6 @@ ViewModel = ->
 
 viewModel = new ViewModel()
 ko.applyBindings viewModel
-viewModel.setDisplayLanguage(viewModel.selectedDocumentLanguage().toLowerCase())
+viewModel.setDisplayLanguage(if debug then 'blank' else viewModel.selectedDocumentLanguage().toLowerCase())
 
 root.viewModel = viewModel
