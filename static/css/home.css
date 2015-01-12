@@ -294,7 +294,7 @@ ul.nav-tabs li a{
 
 .full-width-tabs > ul.nav.nav-tabs {
   display: table;
-  width: 100%;
+  width: 100.1%;
   table-layout: fixed;
 }
 .full-width-tabs > ul.nav.nav-tabs > li {
