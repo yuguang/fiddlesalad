@@ -33,6 +33,10 @@
   width: 18.89%;
 }
 
+.social-media-buttons img{
+  margin-right: 5px;
+}
+
 .intab-buttons {
   color:#606060;
   background:white;
