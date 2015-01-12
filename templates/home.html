@@ -15,10 +15,14 @@
     <!-- top with logo -->
     <div class="row top-row" id="logo-row">
         <div class="col-sm-1"></div>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             {% include "logo.html" %}
         </div>
-        <div class="col-sms-1"></div>
+        <div class="col-sms-3 pull-right">
+
+				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=yuguang&repo=fiddlesalad&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="112px" height="20px"></iframe>
+				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=yuguang&repo=fiddlesalad&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+        </div>
     </div>
     <!-- end top with logo -->
     <div class="row" id="motto-row">
@@ -117,6 +121,9 @@
         $("#"+activeTab).fadeIn();
       });
     });
+
+    $("input, select, textarea, form, button").css("outline", "none");
+    $("input, select, textarea, form, button").css("box-shadow", "none");
 
     </script>
     {% js "js/underscore.js" %}
