@@ -13,7 +13,7 @@
 
 {% block content %}
     <!-- top with logo -->
-    <div class="row top-row" style="margin:0;">
+    <div class="row top-row" id="logo-row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
             {% include "logo.html" %}
@@ -21,7 +21,7 @@
         <div class="col-mds-1"></div>
     </div>
     <!-- end top with logo -->
-    <div class="row" style="margin:0;padding:0;">
+    <div class="row" id="motto-row">
         <div class="col-md-1"></div>
         <div class="between-top-and-mid col-md-10">
             <h1> Code with <span style="color:#2dd2b4">convienence.</span></h1>
@@ -45,8 +45,10 @@
             <div class="tab-pane active" id="tab-one">
                 <div data-bind="html: documentLanguageDescription"></div>
                 {% comment %}The "active" class marks the selected language{% endcomment %}
-                <div class="stickbottom" data-bind="foreach: documentLanguage">
-                    <button type="button" class="intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
+                <div class="stickbottom container-fluid">
+                  <div class="row" data-bind="foreach: documentLanguage">
+                    <button type="button" class="col-md-1 intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
+                    </div>
                 </div>
             </div>
             <div class="tab-pane" id="tab-two">

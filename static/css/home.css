@@ -3,6 +3,14 @@
              gray: #606060*/
 
 
+#logo-row {
+  margin:0;
+}
+
+#motto-row {
+  margin:0;padding:0;
+}
+
 .col-md-10 {
   padding-left:0;
  }
@@ -30,7 +38,7 @@
   background:white;
   border-radius: 0px;
   width: 130px;
-  margin: 3px;
+  margin: 3px 16px 3px 16px;
   font-weight:200;
   font-size:12px;
   letter-spacing:1px;
