@@ -14,32 +14,34 @@
 {% block content %}
     <!-- top with logo -->
     <div class="row top-row" id="logo-row">
-        <div class="col-sm-9">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-8">
             {% include "logo.html" %}
         </div>
-        <div class="col-sms-3">
+        <div class="col-sms-3 pull-right">
 
+				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=yuguang&repo=fiddlesalad&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="112px" height="20px"></iframe>
+				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=yuguang&repo=fiddlesalad&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
         </div>
     </div>
     <!-- end top with logo -->
     <div class="row" id="motto-row">
-        <div class="between-top-and-mid col-sm-9">
+        <div class="col-sm-1"></div>
+        <div class="between-top-and-mid col-sm-8">
             <h1> Code with <span style="color:#2dd2b4">convienence.</span></h1>
 
             <p>An online playground with an instantly ready coding environment.<br/>
                Combine language preprocessors, CSS, HTML and JavaScript to create and share coding examples.</p>
         </div>
 
-        <div class="col-sms-3 pull-right github">
-
-				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=yuguang&repo=fiddlesalad&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="112px" height="20px"></iframe>
-				<iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=yuguang&repo=fiddlesalad&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
-        </div>
+        <div class="col-sms-3"></div>
     </div>
     <!-- left div -->
+    <div class="col-sm-1"></div>
     <!-- left div end -->
     <!-- tabs! -->
-    <div id="lines" class="col-sm-5 tabbable full-width-tabs">
+  <div class="row">
+    <div id="lines" class="col-sm-4 tabbable full-width-tabs">
         <ul class="nav nav-tabs">
             <li class="active tab-expand"><a href="#tab-one" data-toggle="tab">1. Document</a></li>
             <li class="tab-expand"><a href="#tab-two" data-toggle="tab">2. Style</a></li>
@@ -84,7 +86,7 @@
 
     <!-- tabs end -->
 
-    <div class="col-sm-7">
+    <div class="col-sm-6">
         <div class="code-box">
             <div class="CodeMirror-placeholder"></div>
             <textarea id="code">
@@ -93,13 +95,24 @@
         </div>
     </div>
 
+    <div class="col-sm-1"></div>
+  </div>
     <div class="clearfix"></div>
+    <!-- right div -->
+    <!-- <div style="height:500px;" class="col-sm-1"></div> -->
+    <!-- right div end -->
     <!-- bottom div -->
+  <div class="row">
+  <div class="col-sm-11 pad-left-only">
     <div class="social-media-buttons">
       <a href="https://www.facebook.com/pages/Fiddle-Salad/433836646631748"><img src="static/images/facebook-icon.png"></a>
       <a href="https://www.youtube.com/user/LiveWebDevelopment"><img src="static/images/youtube-icon.png"></a>
       <a href="https://twitter.com/fiddle_salad"><img src="static/images/twitter-icon.png"></a>
+      </div>
+    <div class="col-sm-1"></div>
     </div>
+
+  </div>
     <!-- bottom div end -->
 
 {% endblock %}

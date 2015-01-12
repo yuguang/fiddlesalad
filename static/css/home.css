@@ -31,11 +31,15 @@
 .social-media-buttons {
   padding-top: 8px;
   float:right;
-  width: 126px;
+  width: 114px;
 }
 
 .social-media-buttons img{
-  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.pad-left-only {
+  padding-right: 0;
 }
 
 .github {
