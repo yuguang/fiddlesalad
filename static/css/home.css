@@ -24,6 +24,7 @@
 .stickbottom {
   position:absolute;
   bottom:18px;
+  width: 90%;
 }
 /*make buttons stick at the bottom end*/
 
@@ -45,14 +46,24 @@
   color:#606060;
   background:white;
   border-radius: 0px;
-  width: 130px;
-  margin: 3px 16px 3px 16px;
+  width: 98px;
+  margin: 3px;
+  padding: 6px;
   font-weight:200;
   font-size:12px;
   letter-spacing:1px;
   text-shadow: none;
   border: 1px solid gray#c1c1c1;
   text-transform: uppercase;
+  display: inline-block;
+}
+
+#tab-two .intab-buttons{
+  width: 90px;
+}
+
+#tab-three .intab-buttons{
+  width: 130px;
 }
 
 .intab-buttons:hover {
@@ -64,6 +75,11 @@
   -o-transition: all ease 0.7s;
   -ms-transition: all ease 0.7s ;
   transition: all ease 0.5s ;
+}
+
+.center {
+  display:block;
+  text-align:center;
 }
 
 input,

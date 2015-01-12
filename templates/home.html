@@ -49,27 +49,34 @@
             <li class="tab-expand"><a href="#tab-three" data-toggle="tab">3. Program</a></li>
         </ul>
         <div class="stickbottom2 tab-content">
-            <div class="tab-pane active" id="tab-one">
-                <div data-bind="html: documentLanguageDescription"></div>
-                {% comment %}The "active" class marks the selected language{% endcomment %}
-                <div class="stickbottom container-fluid">
-                  <div class="row" data-bind="foreach: documentLanguage">
-                    <button type="button" class="col-sm-1 intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
-                    </div>
-                </div>
+          <div class="tab-pane active" id="tab-one">
+            <div data-bind="html: documentLanguageDescription"></div>
+            {% comment %}The "active" class marks the selected language{% endcomment %}
+            <div class="stickbottom">
+                  <span class="center" data-bind="foreach: documentLanguage">
+                    <button type="button" class="intab-buttons btn btn-default"
+                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
+                    </span>
             </div>
-            <div class="tab-pane" id="tab-two">
-                <div data-bind="html: styleLanguageDescription"></div>
-                <div class="stickbottom" data-bind="foreach: styleLanguage">
-                    <button type="button" class="intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data }"></button>
-                </div>
+          </div>
+          <div class="tab-pane" id="tab-two">
+            <div data-bind="html: styleLanguageDescription"></div>
+            <div class="stickbottom">
+                  <span class="center" data-bind="foreach: styleLanguage">
+                    <button type="button" class="intab-buttons btn btn-default"
+                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data }"></button>
+                       </span>
             </div>
-            <div class="tab-pane" id="tab-three">
-                <div data-bind="html: programLanguageDescription"></div>
-                <div class="stickbottom" data-bind="foreach: programLanguage">
-                    <button type="button" class="intab-buttons btn btn-default" data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data }"></button>
-                </div>
+          </div>
+          <div class="tab-pane" id="tab-three">
+            <div data-bind="html: programLanguageDescription"></div>
+            <div class="stickbottom">
+                  <span class="center" data-bind="foreach: programLanguage">
+                    <button type="button" class="intab-buttons btn btn-default"
+                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data }"></button>
+                    </span>
             </div>
+          </div>
         </div>
         <!-- GET STARTED>>> button -->
         <div class="getstarted-button hvr-icon-forward">
