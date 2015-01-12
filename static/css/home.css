@@ -83,6 +83,10 @@ input:hover
   outline: none !important;
 }
 
+#lines {
+  margin-bottom: 10px;
+}
+
 .getstarted-button {
   font-family: "Oxygen", sans-serif, serif;
   color:white;
@@ -340,4 +344,8 @@ ul.nav.nav-tabs {
   width: 53.3%;
   float: left;
   margin-left: 8px;
+}
+
+textarea {
+  display: none;
 }
