@@ -2,7 +2,13 @@
             green: #2dd2b4
              gray: #606060*/
 
+
+.col-md-10 {
+  padding-left:0;
+ }
+
 /*make buttons stick at the bottom*/
+
 .stickbottom2 {
   position:relative;
 }
@@ -23,11 +29,11 @@
   color:#606060;
   background:white;
   border-radius: 0px;
-  width: 110px;
+  width: 130px;
   margin: 3px;
   font-weight:200;
   font-size:12px;
-  letter-spacing:.5px;
+  letter-spacing:1px;
   text-shadow: none;
   border: 1px solid gray#c1c1c1;
   text-transform: uppercase;
@@ -139,6 +145,7 @@ body {
   height:507px;
   background-color:white;
   border: 1px solid #ccc;
+  padding: 20px 0 0 20px;
 }
 
 div.tab-content h2 {
@@ -314,6 +321,7 @@ ul.nav.nav-tabs {
   width: 29.1%;
   float: left;
   padding-left: 15px;
+  position: relative;
 }
 
 .l8-point-5col {
