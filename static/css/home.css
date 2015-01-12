@@ -35,6 +35,7 @@
 
 .intab-buttons:hover {
   background:#f4a6a6;
+  border-color: #ffffff;
   color:#fff;
   -webkit-transition: all ease 0.7s;
   -moz-transition: all ease 0.7s;
