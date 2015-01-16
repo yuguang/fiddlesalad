@@ -284,8 +284,8 @@ border: 1px solid red;
 
 /* hover tab color */
 .nav-tabs>li>a:hover {
-  background-color: #9f9f9f;
-  text-shadow: 1px 1px 3px #F5F5F5;
+  background-color: lightsteelblue;
+  text-shadow: 1px 1px 3px snow;
   border:none;
 }
 
