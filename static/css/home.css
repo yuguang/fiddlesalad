@@ -355,7 +355,7 @@ ul.nav.nav-tabs {
 }
 .CodeMirror {
   height: 100%;
-  font-family: "Consolas", "Lucida Console", Monaco, monospace;
+  font-family: "Consolas", "Lucida Console", Monaco, "DejaVu Sans Mono", "Bitstream Vera Sans Mono", monospace;
 }
 
 .l3-point-5col {
