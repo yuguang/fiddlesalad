@@ -941,8 +941,8 @@ codeMirrorMode = _.memoize((language) ->
 )
 
 descriptions =
-  TypeScript: 'TypeScript is a language for application-scale JavaScript development. It\'s a typed superset of JavaScript that compiles to plain JavaScript.'
-  CoffeeScript: """<p>
+  typescript: 'TypeScript is a language for application-scale JavaScript development. It\'s a typed superset of JavaScript that compiles to plain JavaScript.'
+  coffeescript: """<p>
       <b>CoffeeScript is a little language that compiles into JavaScript.</b>
       Underneath that awkward Java-esque patina, JavaScript has always had
       a gorgeous heart. CoffeeScript is an attempt to expose
@@ -957,12 +957,12 @@ descriptions =
       readable and pretty-printed, will work in every JavaScript runtime, and tends
       to run as fast or faster than the equivalent handwritten JavaScript.
     </p>"""
-  Opal: """<p>
+  opal: """<p>
     <b>Opal is a Ruby to Javascript compiler</b>
     It is source-to-source, making it fast as a runtime. Opal includes a compiler, a corelib and runtime implementation.
     </p>
     """
-  Roy: """<p>Roy is an experimental programming language that targets JavaScript. It
+  roy: """<p>Roy is an experimental programming language that targets JavaScript. It
         tries to meld JavaScript semantics with some features common in static
         functional languages:</p>
       <ul>
@@ -974,8 +974,8 @@ descriptions =
         <li><a href="http://en.wikipedia.org/wiki/Monad_%28functional_programming%29#do-notation">Monad syntax</a></li>
       </ul>
     """
-  LESS: 'Less is a CSS pre-processor, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.'
-  Stylus: """<p>Stylus is a revolutionary new language, providing an efficient, dynamic, and expressive way to generate CSS. Supporting both an indented syntax and regular CSS style.</p>
+  less: 'Less is a CSS pre-processor, meaning that it extends the CSS language, adding features that allow variables, mixins, functions and many other techniques that allow you to make CSS that is more maintainable, themable and extendable.'
+  stylus: """<p>Stylus is a revolutionary new language, providing an efficient, dynamic, and expressive way to generate CSS. Supporting both an indented syntax and regular CSS style.</p>
 
     <p>Stylus has <em>many</em> features:</p>
 
@@ -996,19 +996,19 @@ descriptions =
     </li>
     </ul>
     """
-  Markdown: 'Markdown is a markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.'
-  Jade: '<p>Jade is a terse language for writing HTML templates.</p><ul><li>Produces HTML</li><li>Supports dynamic code</li><li>Supports reusability (DRY)</li></ul><p>'
+  markdown: 'Markdown is a markup language with plain text formatting syntax designed so that it can be converted to HTML and many other formats. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.'
+  jade: '<p>Jade is a terse language for writing HTML templates.</p><ul><li>Produces HTML</li><li>Supports dynamic code</li><li>Supports reusability (DRY)</li></ul><p>'
   HAML: 'Haml (HTML Abstraction Markup Language) is a lightweight markup language that is used to describe the XHTML of any web document without the use of traditional inline coding. It is designed to address many of the flaws in traditional templating engines, as well as making markup as elegant as it can be.'
-  CoffeeKup: 'CoffeeKup uses a simple scheme to provide a concise, expressive, easy-to-read, and time-saving HTML templating solution. It is based on the CoffeeScript language, with which you will need to be familiar. '
-  SASS: 'Sass is a CSS pre-processor with syntax advancements. Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets. However, they do not extend the CSS standard itself.'
-  SCSS: 'SCSS is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported.'
-  Python: """<p>Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. The language provides constructs intended to enable clear programs on both a small and large scale. The Python has the following philosopy:</p>
+  coffeekup: 'CoffeeKup uses a simple scheme to provide a concise, expressive, easy-to-read, and time-saving HTML templating solution. It is based on the CoffeeScript language, with which you will need to be familiar. '
+  sass: 'Sass is a CSS pre-processor with syntax advancements. Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets. However, they do not extend the CSS standard itself.'
+  scss: 'SCSS is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported.'
+  python: """<p>Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. The language provides constructs intended to enable clear programs on both a small and large scale. The Python has the following philosopy:</p>
   <ul>
   <li>Beautiful is better than ugly.</li><li>Explicit is better than implicit.</li><li>Simple is better than complex.</li><li>Complex is better than complicated.</li><li>Flat is better than nested.</li><li>Sparse is better than dense.</li><li>Readability counts.</li>
   </ul>"""
-  HTML: 'Hypertext Markup Language, a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages.'
-  CSS: 'Cascading Style Sheets is a style sheet language used for describing the look and formatting of a document written in a markup language.'
-  JavaScript: 'JavaScript is an object-oriented computer programming language commonly used to create interactive effects within web browsers. '
+  html: 'Hypertext Markup Language, a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages.'
+  css: 'Cascading Style Sheets is a style sheet language used for describing the look and formatting of a document written in a markup language.'
+  javascript: 'JavaScript is an object-oriented computer programming language commonly used to create interactive effects within web browsers. '
 
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])
@@ -1035,9 +1035,9 @@ ViewModel = ->
         if name is language.toLowerCase()
           return language
 
-  @selectedDocumentLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.DOCUMENT))
-  @selectedStyleLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.STYLE))
-  @selectedProgramLanguage = ko.observable(camelCase settings.get_language(LANGUAGE_TYPE.PROGRAM))
+  @selectedDocumentLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.DOCUMENT))
+  @selectedStyleLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.STYLE))
+  @selectedProgramLanguage = ko.observable(settings.get_language(LANGUAGE_TYPE.PROGRAM))
 
   getDescription = (language) ->
     if language of descriptions
@@ -1055,11 +1055,11 @@ ViewModel = ->
 
   @setLanguage = (language) =>
     if language in @documentLanguage()
-      @selectedDocumentLanguage(language)
+      @selectedDocumentLanguage(language.toLowerCase())
     else if language in @styleLanguage()
-      @selectedStyleLanguage(language)
+      @selectedStyleLanguage(language.toLowerCase())
     else
-      @selectedProgramLanguage(language)
+      @selectedProgramLanguage(language.toLowerCase())
     properName = language.toLowerCase()
     @setDisplayLanguage(properName)
     @selectedLanguage = properName
@@ -1076,7 +1076,7 @@ ViewModel = ->
     editor.setOption 'mode', codeMirrorMode(language)
 
   @loadWorkspace = =>
-    languages = [ @selectedDocumentLanguage(), @selectedStyleLanguage(), @selectedProgramLanguage() ].join(',').toLowerCase()
+    languages = [ @selectedDocumentLanguage(), @selectedStyleLanguage(), @selectedProgramLanguage() ].join(',')
     store.set 'languages', languages
     # keep the URL the same when the user clicks "Go" without clicking on a language
     store.set 'lastSelectedLanguage', (if @selectedLanguage then @selectedLanguage else @selectedStyleLanguage())
@@ -1085,6 +1085,18 @@ ViewModel = ->
 
 viewModel = new ViewModel()
 ko.applyBindings viewModel
-viewModel.setDisplayLanguage(if debug then 'blank' else viewModel.selectedDocumentLanguage().toLowerCase())
+viewModel.setDisplayLanguage(if debug then 'blank' else viewModel.selectedDocumentLanguage())
+
+$('a[href="#tab-one"]').click( ->
+  viewModel.setDisplayLanguage(viewModel.selectedDocumentLanguage())
+)
+
+$('a[href="#tab-two"]').click( ->
+  viewModel.setDisplayLanguage(viewModel.selectedStyleLanguage())
+)
+
+$('a[href="#tab-three"]').click( ->
+  viewModel.setDisplayLanguage(viewModel.selectedProgramLanguage())
+)
 
 root.viewModel = viewModel

@@ -54,7 +54,7 @@
             <div class="stickbottom">
                   <span class="center" data-bind="foreach: documentLanguage">
                     <button type="button" class="intab-buttons btn btn-default"
-                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data }"></button>
+                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedDocumentLanguage() === $data.toLowerCase() }"></button>
                     </span>
             </div>
           </div>
@@ -63,7 +63,7 @@
             <div class="stickbottom">
                   <span class="center" data-bind="foreach: styleLanguage">
                     <button type="button" class="intab-buttons btn btn-default"
-                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data }"></button>
+                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedStyleLanguage() === $data.toLowerCase() }"></button>
                        </span>
             </div>
           </div>
@@ -72,7 +72,7 @@
             <div class="stickbottom">
                   <span class="center" data-bind="foreach: programLanguage">
                     <button type="button" class="intab-buttons btn btn-default"
-                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data }"></button>
+                            data-bind="text: $data, click: $root.setLanguage, css: { active: $root.selectedProgramLanguage() === $data.toLowerCase() }"></button>
                     </span>
             </div>
           </div>
