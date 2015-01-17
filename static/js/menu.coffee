@@ -1006,6 +1006,9 @@ descriptions =
   <ul>
   <li>Beautiful is better than ugly.</li><li>Explicit is better than implicit.</li><li>Simple is better than complex.</li><li>Complex is better than complicated.</li><li>Flat is better than nested.</li><li>Sparse is better than dense.</li><li>Readability counts.</li>
   </ul>"""
+  HTML: 'Hypertext Markup Language, a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages.'
+  CSS: 'Cascading Style Sheets is a style sheet language used for describing the look and formatting of a document written in a markup language.'
+  JavaScript: 'JavaScript is an object-oriented computer programming language commonly used to create interactive effects within web browsers. '
 
 ViewModel = ->
   settings = Language(if store.get('languages')? then store.get('languages').split(',') else [LANGUAGE.HTML, LANGUAGE.LESS, LANGUAGE.JAVASCRIPT])
