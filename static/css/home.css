@@ -126,6 +126,7 @@ input:hover
   -o-transition: all ease 0.5s;
   -ms-transition: all ease 0.5s ;
   transition: all ease 0.5s ;
+  cursor: pointer;
 }
 
 .getstarted-button:hover {
