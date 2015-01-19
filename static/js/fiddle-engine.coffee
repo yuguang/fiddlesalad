@@ -1071,6 +1071,7 @@ DiffViewer = Class.$extend(
     title = HtmlComponent 'compareLanguageSelection'
     revisionFrame = Frame(@id, 'Compare Revisions' + title.to_html_string())
     revisionFrame.buttons.maximize = false
+    revisionFrame.buttons.close = true
     layout.add_column revisionFrame
     viewModel.containers.push _.first(layout.get_frames())
     $('#compareLanguageSelection input').change =>
