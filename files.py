@@ -38,6 +38,9 @@ MEDIASYNC_JOINED = {
             'css/jquery.wijmo-open.css',
             ],
         'css/home.css': [
+            'css/bootstrap.min.css',
+            'css/bootstrap-theme.min.css',
+            'css/home.css',
             'css/codemirror.css',
             'css/codemirror/themes/default.css',
             'css/codemirror/themes/neo.css',

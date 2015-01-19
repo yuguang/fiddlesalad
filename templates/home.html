@@ -6,8 +6,6 @@
 
 {% block styles %}
     <link href='http://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-    {% css "css/bootstrap.min.css" %}
-    {% css "css/bootstrap-theme.min.css" %}
     {% css "css/home.css" %}
 {% endblock %}
 
@@ -105,9 +103,9 @@
   <div class="row">
   <div class="col-sm-11 pad-left-only">
     <div class="social-media-buttons">
-      <a target="_blank" href="https://www.facebook.com/pages/Fiddle-Salad/433836646631748"><img src="static/images/facebook-icon.png"></a>
-      <a target="_blank" href="https://www.youtube.com/user/LiveWebDevelopment"><img src="static/images/youtube-icon.png"></a>
-      <a target="_blank" href="https://twitter.com/fiddle_salad"><img src="static/images/twitter-icon.png"></a>
+      <a target="_blank" href="https://www.facebook.com/pages/Fiddle-Salad/433836646631748"><img src="{% media_url %}/images/facebook-icon.png"></a>
+      <a target="_blank" href="https://www.youtube.com/user/LiveWebDevelopment"><img src="{% media_url %}/images/youtube-icon.png"></a>
+      <a target="_blank" href="https://twitter.com/fiddle_salad"><img src="{% media_url %}/images/twitter-icon.png"></a>
       </div>
     <div class="col-sm-1"></div>
     </div>
@@ -122,6 +120,7 @@
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <script type="text/javascript">
     {% include "javascript_setup.html" %}
 
@@ -142,7 +141,6 @@
     $("input, select, textarea, form, button").css("outline", "none").css("box-shadow", "none");
 
     </script>
-    {% js "js/underscore.js" %}
     {% js "js/codemirror.fiddle.js" %}
     {% js "js/menu.fiddle.js" %}
     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
