@@ -965,8 +965,6 @@ FiddleEditor = Class.$extend(
     for frame_setting, editorIndex in panelOrdering
       frame = Frame frame_setting[0] + 'container', frame_setting[1]
       editor = EditorComponent frame_setting[0]
-      if editorIndex is 0
-        editor.focus_on_initialization()
       frame.add editor
       editor_frames.push frame
     layout.add_column editor_frames
