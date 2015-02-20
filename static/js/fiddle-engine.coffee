@@ -965,8 +965,6 @@ FiddleEditor = Class.$extend(
     for frame_setting, editorIndex in panelOrdering
       frame = Frame frame_setting[0] + 'container', frame_setting[1]
       editor = EditorComponent frame_setting[0]
-      if editorIndex is 0
-        editor.focus_on_initialization()
       frame.add editor
       editor_frames.push frame
     layout.add_column editor_frames
@@ -1071,6 +1069,7 @@ DiffViewer = Class.$extend(
     title = HtmlComponent 'compareLanguageSelection'
     revisionFrame = Frame(@id, 'Compare Revisions' + title.to_html_string())
     revisionFrame.buttons.maximize = false
+    revisionFrame.buttons.close = true
     layout.add_column revisionFrame
     viewModel.containers.push _.first(layout.get_frames())
     $('#compareLanguageSelection input').change =>

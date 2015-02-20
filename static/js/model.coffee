@@ -810,6 +810,7 @@ FiddleViewModel = ViewModel.$extend(
     tipsFrame.add tipsBox
     tipsFrame.buttons.toggle = false
     tipsFrame.buttons.maximize = false
+    tipsFrame.buttons.close = true
     @tips.load_circular_tips_index()
     @containers.push tipsFrame
 )
