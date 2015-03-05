@@ -153,4 +153,4 @@ Contributors
 Thanks to
 
 * [Tom Wilson](https://github.com/twilson63) for the CoffeeCup compiler
-* [Lorin Tackett](https://github.com/ltackett) for home page redesign
+* [Lorna Qin](http://lornaqin.com/) for redesign

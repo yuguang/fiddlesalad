@@ -1398,6 +1398,7 @@ FiddleFactory = Class.$extend(
 
   get_view_model: ->
     document.getElementById('progress')?.value = 80
+    $('body').addClass('wallpaper')
     FiddleViewModel()
 
   load_threads: ->

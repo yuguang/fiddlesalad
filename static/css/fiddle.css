@@ -13,6 +13,9 @@
 html {
   overflow-y: hidden;
 }
+.wallpaper {
+  background-color: mintcream;
+}
 em {
   font-style: italic;
 }
@@ -188,10 +191,10 @@ div#source .ui-tabs {
   border: none;
 }
 #logo {
-  background-image: -webkit-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
+  background-image: -webkit-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), lavender);
   background-image: -moz-radial-gradient(center 79%, ellipse closest-corner, rgba(255, 255, 255, 0.3), rgba(100, 100, 255, 0.3) 95%);
-  background-image: -o-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
-  background-image: radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), #e6e6fa);
+  background-image: -o-radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), lavender);
+  background-image: radial-gradient(50% 85%, 60% 33%, rgba(255, 255, 255, 0.5), lavender);
   width: 190px;
   display: block;
   cursor: pointer;
