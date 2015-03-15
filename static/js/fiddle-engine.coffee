@@ -365,7 +365,7 @@ OpalEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'ruby'
     @loadWorker('opal')
-    @documentationUrl = 'http://opalrb.org/docs/interacting_with_javascript/'
+    @documentationUrl = 'http://opalrb.org/docs/'
     @tabCharaterLength = 2
 
   load: ->
