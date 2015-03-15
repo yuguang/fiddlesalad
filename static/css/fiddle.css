@@ -353,3 +353,13 @@ div#source .ui-tabs {
   border: 0;
   box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
 }
+.ui-accordion-header:nth-of-type(1) a {
+  background-color: #2dd2b4 !important;
+}
+.ui-accordion-header:nth-of-type(2) a {
+  background-color: #f85857 !important;
+}
+.ui-accordion-header:nth-of-type(2) a,
+.ui-accordion-header:nth-of-type(1) a {
+  color: white;
+}
