@@ -39,7 +39,7 @@ window.console.log = function () {
 })();
 
 function execute(scripts, main, immediate) {
-  var lineNumber;
+  var lineNumber, errorMessage;
   $LAB
     .setOptions({AlwaysPreserveOrder:true})
     .script(scripts)
@@ -49,6 +49,7 @@ function execute(scripts, main, immediate) {
       }
       catch (e) {
         lineNumber = e.lineNumber - 46 + 1 || (e.stack.match(/<anonymous>:(\d+):\d+/) || [, ])[1];
+        errorMessage = e.toString();
 
         prepareJavascriptError(e.name, e.message);
       }
@@ -68,7 +69,8 @@ function execute(scripts, main, immediate) {
         } else {
           message = {
             action: 'add',
-            line: lineNumber - 1
+            line: lineNumber - 1,
+            error: errorMessage
           }
           window.parent.postMessage(JSON.stringify(message), '*');
           displayJavascriptError(immediate);

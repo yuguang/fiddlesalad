@@ -231,6 +231,19 @@ ProgramEditor = DynamicEditor.$extend(
       switch message.action
         when 'add'
           @errorLine = @sourceLine message.line
+          console.log(
+            error_message: message.error
+            context:
+              code: @.get_code()
+              line: message.line
+          )
+          ###$.getJSON('',
+            error_message: message.error
+            context:
+              code: @.get_code()
+              line: message.line
+          ).done (data) ->
+            ###
         when 'remove'
           if $('.highlight-error').length
             for lineNumber in [0...@pad.lineCount()]
