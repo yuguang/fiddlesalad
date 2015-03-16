@@ -1381,6 +1381,8 @@ FiddleFactory = Class.$extend(
     Language _.keys(JSON.parse(storageJSON))
 
   loadStartupTips: ->
+    if debug
+      viewModel.load_suggestions()
     if viewModel.tips.startup()
       viewModel.load_tips()
       $('#showTipsOnStartup').prop('checked', true)
