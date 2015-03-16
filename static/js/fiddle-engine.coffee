@@ -801,10 +801,9 @@ StackoverflowViewer = Class.$extend(
   display: (suggestion) ->
     @url = suggestion.url
     @title = suggestion.title
-    @compiler.postMessage code: _.unescape(suggestion.content)
+    @compiler.postMessage code: $('<div/>').html(suggestion.content).text()
 
   previewCode: (code) ->
-    console.log code
     viewModel.add_suggestion title: @title, url: @url, content: code
 )
 HtmlConverter = Class.$extend(
