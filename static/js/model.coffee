@@ -706,22 +706,13 @@ FiddleViewModel = ViewModel.$extend(
     @containers.push hotkeysFrame
 
   add_suggestion: (suggestion) ->
+    # suggestion.content is escaped markdown
     if @suggestions.length > 3
       @suggestions.pop()
     @suggestions.push suggestion
 
   loadSuggestions: ->
-    @suggestions = ko.observableArray([
-      url: 'http://stackoverflow.com/questions/1945302/uncaught-referenceerror-invalid-left-hand-side-in-assignment'
-      title: 'Uncaught ReferenceError: Invalid left-hand side in assignment'
-      content: """You can't assign a new value to the result of a function
-
-$('input#q').val() = urlencode($('input#q').val());
-Use this instead:
-
-$('input#q').val(urlencode($('input#q').val()))
-It wouldn't work with the keypress either - maybe the page is simply submitted after the same js error occurs."""
-    ])
+    @suggestions = ko.observableArray([])
     @showElement = (elem) ->
       if elem.nodeType == 1
         $(elem).hide().slideDown()
@@ -733,7 +724,6 @@ It wouldn't work with the keypress either - maybe the page is simply submitted a
           $(elem).remove()
           return
       return
-
 
   loadTips: ->
     TipsPanel = ->

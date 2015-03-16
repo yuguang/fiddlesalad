@@ -41,7 +41,7 @@
     <script type="text/html" id="suggestionsTemplate">
         <div data-bind="foreach: { data: $root.suggestions, beforeRemove: $root.hideElement, afterAdd: $root.showElement }">
             <h3><a data-bind="attr: { href: $data.url }, text: $data.title" class="link"></a></h3>
-            <div class="answer" data-bind="text: $data.content"></div>
+            <div class="answer" data-bind="html: $data.content"></div>
         </div>
     </script>
 

@@ -792,6 +792,21 @@ JavascriptConverter = Class.$extend(
     500
   )
 )
+StackoverflowViewer = Class.$extend(
+  __init__: (id) ->
+    @loadWorker('markdown')
+
+  __include__: [BackgroundWorker]
+
+  display: (suggestion) ->
+    @url = suggestion.url
+    @title = suggestion.title
+    @compiler.postMessage code: _.unescape(suggestion.content)
+
+  previewCode: (code) ->
+    console.log code
+    viewModel.add_suggestion title: @title, url: @url, content: code
+)
 HtmlConverter = Class.$extend(
   __init__: (id) ->
     @loadConverter(id)
@@ -1383,6 +1398,12 @@ FiddleFactory = Class.$extend(
   loadStartupTips: ->
     if debug
       viewModel.load_suggestions()
+      v = StackoverflowViewer()
+      v.display(
+        url: 'http://stackoverflow.com/questions/1945302/uncaught-referenceerror-invalid-left-hand-side-in-assignment'
+        title: 'Uncaught ReferenceError: Invalid left-hand side in assignment'
+        content: """Suppose I&#39;m familiar with developing client-side applications in [jQuery][2], but now I&#39;d like to start using [AngularJS][1]. Can you describe the paradigm shift that is necessary? Here are a few questions that might help you frame an answer:\r\n\r\n - How do I architect and design client-side web applications differently? What is the biggest difference?\r\n - What should I stop doing/using; What should I start doing/using instead?\r\n - Are there any server-side considerations/restrictions?\r\n\r\nI&#39;m not looking for a detailed comparison between jQuery and AngularJS.\r\n\r\n  [1]: http://angularjs.org/\r\n  [2]: http://jquery.com/"""
+      )
     if viewModel.tips.startup()
       viewModel.load_tips()
       $('#showTipsOnStartup').prop('checked', true)
