@@ -38,6 +38,13 @@
         </div>
     </script>
 
+    <script type="text/html" id="suggestionList">
+        <div data-bind="foreach: suggestion">
+            <h3><a data-bind="attr: { href: url }, text: title" class="link"></a></h3>
+            <div class="answer" data-bind="text: content"></div>
+        </div>
+    </script>
+
     <script type="text/html" id="macHotkeysTemplate">
         <div class="hotkeys">
             <span class="kbd">&#8984;</span>+<span class="kbd">A</span><span>selectAll</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">D</span><span>deleteLine</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Z</span><span>undo</span><br /><span class="kbd">Shift</span>+<span class="kbd">&#8984;</span>+<span class="kbd">Z</span><span>redo</span><br /><span class="kbd">&#8984;</span>+<span class="kbd">Y</span><span>redo</span><br />

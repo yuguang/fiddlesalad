@@ -950,6 +950,10 @@ FiddleEditor = Class.$extend(
       frame = Frame 'documentation', 'Documentation'
       layout.add_column frame
       tabs = TabInterface 'documentation-tabs', frame
+
+      suggestions = HtmlComponent 'jsSuggest'
+      index = tabs.add 'stackoverflow', suggestions.to_html_string()
+
       switch LANGUAGE_CATEGORY[engine.get_url_path_language()]
         when LANGUAGE_TYPE.PROGRAM
           editorDocumentation = [@programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
@@ -967,10 +971,6 @@ FiddleEditor = Class.$extend(
         page = IframeComponent 'emmetReferenceTab'
         page.set_source 'http://docs.emmet.io/cheat-sheet/'
         tabs.add 'emmet', page.to_html_string()
-
-      suggestions = HtmlComponent 'jsSuggest'
-      index = tabs.add 'stackoverflow', suggestions.to_html_string()
-
       frame.add tabs
 
     editor_frames = new Array

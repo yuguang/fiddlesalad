@@ -305,6 +305,7 @@ FiddleViewModel = ViewModel.$extend(
     @newResourceText = ko.observable()
     @configuration = new WorkspaceConfiguration()
     @loadTips()
+    @loadSuggestions()
 
   add_resource: (file) ->
     resource = (source, ownerViewModel) ->
@@ -703,6 +704,19 @@ FiddleViewModel = ViewModel.$extend(
     hotkeysFrame.set_size(width: width, height: 220)
     hotkeysFrame.add hotkeysBox
     @containers.push hotkeysFrame
+
+  loadSuggestions: ->
+    @suggestion = [
+      url: 'http://stackoverflow.com/questions/1945302/uncaught-referenceerror-invalid-left-hand-side-in-assignment'
+      title: 'Uncaught ReferenceError: Invalid left-hand side in assignment'
+      content: """You can't assign a new value to the result of a function
+
+$('input#q').val() = urlencode($('input#q').val());
+Use this instead:
+
+$('input#q').val(urlencode($('input#q').val()))
+It wouldn't work with the keypress either - maybe the page is simply submitted after the same js error occurs."""
+    ]
 
   loadTips: ->
     TipsPanel = ->
