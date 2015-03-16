@@ -38,10 +38,10 @@
         </div>
     </script>
 
-    <script type="text/html" id="suggestionList">
-        <div data-bind="foreach: suggestion">
-            <h3><a data-bind="attr: { href: url }, text: title" class="link"></a></h3>
-            <div class="answer" data-bind="text: content"></div>
+    <script type="text/html" id="suggestionsTemplate">
+        <div data-bind="foreach: { data: $root.suggestions, beforeRemove: $root.hideElement, afterAdd: $root.showElement }">
+            <h3><a data-bind="attr: { href: $data.url }, text: $data.title" class="link"></a></h3>
+            <div class="answer" data-bind="text: $data.content"></div>
         </div>
     </script>
 

@@ -371,13 +371,13 @@ FiddleViewModel = ViewModel.$extend(
   disableLint: ->
     @configuration.cssLintEnabled(false)
     @configuration.jsLintEnabled(false)
-  
+
   validateHtml: ->
     htmlBody = engine.get_code LANGUAGE_TYPE.DOCUMENT
     body = document.body
     form = document.createElement('form')
     input = document.createElement('input')
-    
+
     form.action = 'http://validator.w3.org/check'
     form.enctype = 'multipart/form-data'
     form.method = 'post'
@@ -401,13 +401,13 @@ FiddleViewModel = ViewModel.$extend(
     body.appendChild form
     form.submit()
     body.removeChild form
-  
+
   validateCss: ->
     css = engine.get_code LANGUAGE_TYPE.STYLE
     body = document.body
     form = document.createElement('form')
     input = document.createElement('input')
-    
+
     form.action = 'http://jigsaw.w3.org/css-validator/validator'
     form.enctype = 'multipart/form-data'
     form.method = 'post'
@@ -426,13 +426,13 @@ FiddleViewModel = ViewModel.$extend(
     body.appendChild form
     form.submit()
     body.removeChild form
-    
+
   beautifyJavascript: ->
     engine.set_code js_beautify(engine.get_code(LANGUAGE_TYPE.PROGRAM)), LANGUAGE_TYPE.PROGRAM
-    
+
   beautifyCss: ->
     engine.set_code @reindentCss(engine.get_code(LANGUAGE_TYPE.STYLE)), LANGUAGE_TYPE.STYLE
-    
+
   reindentCss: (css) ->
     s = css
     s = s.replace(/\t+/g, "")
@@ -453,14 +453,14 @@ FiddleViewModel = ViewModel.$extend(
       false
 
   updateShareUrl: ->
-  
+
   importExternal: ->
     ###
     This routine imports inline CSS/JS and HTML into editors and external files as resources. If the scripting language
     is not compatible with JS, it is imported embedded in the HTML. Otherwise, jQuery strips out all link and script
     tags in the body. If one of the languages used is not compatible, a notification is shown. This routine assumes
-    the languages are set in the view model, the server request returns a JSON result with the resources, inline 
-    CSS/JS blocks, and the HTML body. This routine sets the associated editors with the imported code. 
+    the languages are set in the view model, the server request returns a JSON result with the resources, inline
+    CSS/JS blocks, and the HTML body. This routine sets the associated editors with the imported code.
     ###
     return  if not @importUrl().length or @importUrl.hasError()
     absolutePath = (resource, relative=false) =>
@@ -705,8 +705,13 @@ FiddleViewModel = ViewModel.$extend(
     hotkeysFrame.add hotkeysBox
     @containers.push hotkeysFrame
 
+  add_suggestion: (suggestion) ->
+    if @suggestions.length > 3
+      @suggestions.pop()
+    @suggestions.push suggestion
+
   loadSuggestions: ->
-    @suggestion = [
+    @suggestions = ko.observableArray([
       url: 'http://stackoverflow.com/questions/1945302/uncaught-referenceerror-invalid-left-hand-side-in-assignment'
       title: 'Uncaught ReferenceError: Invalid left-hand side in assignment'
       content: """You can't assign a new value to the result of a function
@@ -716,7 +721,19 @@ Use this instead:
 
 $('input#q').val(urlencode($('input#q').val()))
 It wouldn't work with the keypress either - maybe the page is simply submitted after the same js error occurs."""
-    ]
+    ])
+    @showElement = (elem) ->
+      if elem.nodeType == 1
+        $(elem).hide().slideDown()
+      return
+
+    @hideElement = (elem) ->
+      if elem.nodeType == 1
+        $(elem).slideUp ->
+          $(elem).remove()
+          return
+      return
+
 
   loadTips: ->
     TipsPanel = ->
@@ -827,6 +844,20 @@ It wouldn't work with the keypress either - maybe the page is simply submitted a
     tipsFrame.buttons.close = true
     @tips.load_circular_tips_index()
     @containers.push tipsFrame
+
+  load_suggestions: ->
+    helpFrame = Frame 'helpcontainer', 'Stackoverflow'
+    helpBox = TemplateComponent 'suggestions'
+    helpBox.set_template 'suggestionsTemplate'
+    width = _.first(@containers()).dimension.width
+    height = getDocumentHeight() * 5 / 6
+    helpFrame.set_location(x: ($(window).width() - width) / 2, y: ($(window).height() - height) / 2)
+    helpFrame.set_size {width, height}
+    helpFrame.add helpBox
+    helpFrame.buttons.toggle = false
+    helpFrame.buttons.maximize = false
+    helpFrame.buttons.close = true
+    @containers.push helpFrame
 )
 root.ViewModel = ViewModel
 root.PythonViewModel = PythonViewModel

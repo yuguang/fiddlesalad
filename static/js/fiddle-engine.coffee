@@ -951,9 +951,6 @@ FiddleEditor = Class.$extend(
       layout.add_column frame
       tabs = TabInterface 'documentation-tabs', frame
 
-      suggestions = HtmlComponent 'jsSuggest'
-      index = tabs.add 'stackoverflow', suggestions.to_html_string()
-
       switch LANGUAGE_CATEGORY[engine.get_url_path_language()]
         when LANGUAGE_TYPE.PROGRAM
           editorDocumentation = [@programEditor.get_documentation(), @styleEditor.get_documentation(), @documentEditor.get_documentation()]
