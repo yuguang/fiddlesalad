@@ -39,6 +39,9 @@
     </script>
 
     <script type="text/html" id="suggestionsTemplate">
+        <div data-bind="visible: $root.suggestions().length == 0">
+            Once a JavaScript runtime error is encountered in Fiddle Salad, suggested solutions from Stackoverflow will show up here.
+        </div>
         <div data-bind="foreach: { data: $root.suggestions, beforeRemove: $root.hideElement, afterAdd: $root.showElement }">
             <h3><a data-bind="attr: { href: $data.url }, text: $data.title" class="link"></a></h3>
             <div class="answer" data-bind="html: $data.content"></div>
@@ -194,6 +197,10 @@
             <p class="clickable" data-bind="click: beautifyJavascript">
                 <span class="left ui-icon ui-icon-star"></span>
                 <span>Beautify Javascript</span>
+            </p>
+            <p class="clickable" data-bind="click: load_suggestions">
+                <span class="left ui-icon ui-icon-lightbulb"></span>
+                <span>Stackoverflow JS Error Suggestions</span>
             </p>
             <!-- /ko -->
             <!-- ko if: documentLanguage() == LANGUAGE.HTML -->
