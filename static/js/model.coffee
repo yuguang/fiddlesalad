@@ -707,7 +707,7 @@ FiddleViewModel = ViewModel.$extend(
 
   add_suggestion: (suggestion) ->
     # suggestion.content is escaped markdown
-    if @suggestions.length > 3
+    if @suggestions.length > 6
       @suggestions.pop()
     @suggestions.push suggestion
 
