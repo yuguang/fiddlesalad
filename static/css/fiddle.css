@@ -231,17 +231,15 @@ div#source .ui-tabs {
 #overlay {
   position: absolute;
   /* makes the div go into a position that’s absolute to the browser viewing area */
-
   left: 0%;
+  /* makes the div span all the way across the viewing area */
   top: 0%;
   /* makes the div span all the way across the viewing area */
-
   background-color: white;
   width: 100%;
   height: 100%;
   z-index: 4999;
   /* makes the div the second most top layer, so it’ll lay on top of everything else EXCEPT for divs with a higher z-index (meaning the #overlay ruleset) */
-
 }
 #documentation,
 #source {
@@ -365,7 +363,6 @@ div#source .ui-tabs {
 }
 #suggestions a.link:link {
   /* Essentially means a[href], or that the link actually goes somewhere */
-
   color: #4472B9;
   text-decoration: none;
 }
@@ -383,8 +380,7 @@ div#source .ui-tabs {
   color: #0c65a5;
 }
 #suggestions .answer {
-  margin-top: 1em;
-  margin-left: .5em;
+  margin: 1em .5em 2em .5em;
 }
 /*
 .ui-accordion-header:nth-of-type(1) a {
