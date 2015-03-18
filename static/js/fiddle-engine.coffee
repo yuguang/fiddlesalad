@@ -214,7 +214,6 @@ ProgramEditor = DynamicEditor.$extend(
   __init__: (id) ->
     @$super id
     @loadErrorHandler()
-    @helpViewer = StackoverflowViewer()
 
   errorLine: -1
 
@@ -232,6 +231,7 @@ ProgramEditor = DynamicEditor.$extend(
       switch message.action
         when 'add'
           @errorLine = @sourceLine message.line
+          return  if not $('#helpcontainer').length
           $.getJSON('http://spongiatia.herokuapp.com/api/search/',
             error_message: message.error
             context:
@@ -239,7 +239,8 @@ ProgramEditor = DynamicEditor.$extend(
               line: message.line
           ).done (data) =>
             for suggestion in data.suggestions.slice(0, 3)
-              @helpViewer.display(
+              helpViewer = StackoverflowViewer()
+              helpViewer.display(
                 url: suggestion.question.url
                 title: suggestion.question.title
                 content: [suggestion.question.body_markdown,
@@ -802,6 +803,7 @@ StackoverflowViewer = Class.$extend(
   __include__: [BackgroundWorker]
 
   display: (suggestion) ->
+    console.log suggestion
     @url = suggestion.url
     @title = $('<div/>').html(suggestion.title).text()
     @compiler.postMessage code: $('<div/>').html(suggestion.content).text()
