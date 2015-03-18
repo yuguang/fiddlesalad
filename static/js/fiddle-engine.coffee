@@ -238,7 +238,7 @@ ProgramEditor = DynamicEditor.$extend(
               code: @get_code()
               line: message.line
           ).done (data) =>
-            for suggestion in data.suggestions.slice(0, 3)
+            for suggestion in data.suggestions.slice(0, 3).reverse()
               helpViewer = StackoverflowViewer()
               helpViewer.display(
                 url: suggestion.question.url

@@ -709,7 +709,7 @@ FiddleViewModel = ViewModel.$extend(
     # suggestion.content is escaped markdown
     if @suggestions.length > 6
       @suggestions.pop()
-    @suggestions.push suggestion
+    @suggestions.unshift suggestion
 
   loadSuggestions: ->
     @suggestions = ko.observableArray([])
