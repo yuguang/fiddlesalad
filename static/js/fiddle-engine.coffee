@@ -232,11 +232,16 @@ ProgramEditor = DynamicEditor.$extend(
         when 'add'
           @errorLine = @sourceLine message.line
           return  if not $('#helpcontainer').length
-          $.getJSON('http://spongiatia.herokuapp.com/api/search/',
-            error_message: message.error
-            context:
-              code: @get_code()
-              line: message.line
+          $.ajax('http://spongiatia.herokuapp.com/api/search/',
+            data:
+              JSON.stringify(
+                error_message: message.error
+                context:
+                  code: @get_code()
+                  line: message.line
+              )
+            contentType : 'application/json'
+            type : 'POST'
           ).done (data) =>
             for suggestion in data.suggestions.slice(0, 3).reverse()
               helpViewer = StackoverflowViewer()
