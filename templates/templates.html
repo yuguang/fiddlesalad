@@ -23,8 +23,7 @@
         <div class="navigation">
             <div class="clearfix">
                 <div class="left">
-                    <label><input data-bind="checked: $root.tips.startup" type="checkbox"/> Show tips on
-                        startup</label>
+                    <label><input data-bind="checked: $root.tips.startup" type="checkbox"/> Show daily tips</label>
                 </div>
                 <div class="right">
                     <button data-bind='jqueryui: { widget: "button" }, visible: $root.tips.selectedIndex() > 0, click: $root.tips.prev'>
@@ -43,7 +42,7 @@
             Once a JavaScript runtime error is encountered in Fiddle Salad, suggested solutions from Stackoverflow will show up here.
             <div class="bottom clearfix">
                 <div class="left">
-                    <label><input data-bind="checked: $root.suggestionsOnStartup" type="checkbox"/> Show suggestions on
+                    <label><input data-bind="checked: $root.suggestionsOnStartup" type="checkbox"/> Show Stackoverflow panel on
                         startup</label>
                 </div>
                 <div class="right">
@@ -51,7 +50,7 @@
             </div>
         </div>
         <div data-bind="foreach: { data: $root.suggestions, beforeRemove: $root.hideElement, afterAdd: $root.showElement }">
-            <h3><a data-bind="attr: { href: $data.url }, text: $data.title" class="link"></a></h3>
+            <h3><a data-bind="attr: { href: $data.url }, html: $data.title" class="link"></a></h3>
             <div class="answer" data-bind="html: $data.content"></div>
         </div>
     </script>

@@ -808,9 +808,8 @@ StackoverflowViewer = Class.$extend(
   __include__: [BackgroundWorker]
 
   display: (suggestion) ->
-    console.log suggestion
     @url = suggestion.url
-    @title = $('<div/>').html(suggestion.title).text()
+    @title = suggestion.title
     @compiler.postMessage code: $('<div/>').html(suggestion.content).text()
 
   previewCode: (code) ->
