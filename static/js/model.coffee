@@ -713,6 +713,10 @@ FiddleViewModel = ViewModel.$extend(
 
   loadSuggestions: ->
     @suggestions = ko.observableArray([])
+    @suggestionsOnStartup = ko.observable(store.get('suggestionsOnStartup'))
+    @suggestionsOnStartup.subscribe((checked) ->
+      store.set('suggestionsOnStartup', checked)
+    )
     @showElement = (elem) ->
       if elem.nodeType == 1
         $(elem).hide().slideDown()

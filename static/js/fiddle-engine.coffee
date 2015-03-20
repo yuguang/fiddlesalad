@@ -1407,7 +1407,10 @@ FiddleFactory = Class.$extend(
   loadStartupTips: ->
     if viewModel.tips.startup()
       viewModel.load_tips()
-      $('#showTipsOnStartup').prop('checked', true)
+
+  loadStartupTips: ->
+      if viewModel.suggestionsOnStartup()
+        viewModel.load_suggestions()
 
   layout: ->
     _.delay( ->
@@ -1434,6 +1437,7 @@ FiddleFactory = Class.$extend(
     resultDialog = $('#viewer').closest('.ui-dialog')
     resultDialog.width resultDialog.width() + 1
     @loadStartupTips()
+    @loadStartupSuggestions()
 
   get_view_model: ->
     document.getElementById('progress')?.value = 80

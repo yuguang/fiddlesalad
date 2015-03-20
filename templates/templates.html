@@ -41,6 +41,14 @@
     <script type="text/html" id="suggestionsTemplate">
         <div data-bind="visible: $root.suggestions().length == 0">
             Once a JavaScript runtime error is encountered in Fiddle Salad, suggested solutions from Stackoverflow will show up here.
+            <div class="bottom clearfix">
+                <div class="left">
+                    <label><input data-bind="checked: $root.suggestionsOnStartup" type="checkbox"/> Show suggestions on
+                        startup</label>
+                </div>
+                <div class="right">
+                </div>
+            </div>
         </div>
         <div data-bind="foreach: { data: $root.suggestions, beforeRemove: $root.hideElement, afterAdd: $root.showElement }">
             <h3><a data-bind="attr: { href: $data.url }, text: $data.title" class="link"></a></h3>
