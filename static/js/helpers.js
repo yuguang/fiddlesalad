@@ -129,3 +129,5 @@ var worker_url = debug ? '/static/js/' : 'http://' + window.location.hostname + 
 MINUTE = 60000;
 
 WORD_TOKEN = /^[\w$_.@-]+$/;
+
+THREE_COLUMN_WINDOW_SIZE = 1200;

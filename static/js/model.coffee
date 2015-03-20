@@ -844,8 +844,12 @@ FiddleViewModel = ViewModel.$extend(
     helpBox = TemplateComponent 'suggestions'
     helpBox.set_template 'suggestionsTemplate'
     width = _.first(@containers()).dimension.width
-    height = getDocumentHeight() * 5 / 6
-    helpFrame.set_location(x: ($(window).width() - width) / 2, y: ($(window).height() - height) / 2)
+    if $(window).width() < THREE_COLUMN_WINDOW_SIZE
+      height = getDocumentHeight() * 5 / 6
+      helpFrame.set_location(x: ($(window).width() - width) / 2, y: ($(window).height() - height) / 2)
+    else
+      height = getDocumentHeight() - 2 * helpFrame.get_padding()
+      helpFrame.set_location(x: 0, y: 0)
     helpFrame.set_size {width, height}
     helpFrame.add helpBox
     helpFrame.buttons.toggle = false

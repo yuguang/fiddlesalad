@@ -960,7 +960,7 @@ FiddleEditor = Class.$extend(
     codeComplexity[Math.max(_.keys(codeComplexity)...)]
 
   layoutFrames: ->
-    if $(window).width() < 1200
+    if $(window).width() < THREE_COLUMN_WINDOW_SIZE
       columns = 2
     else
       columns = 3
