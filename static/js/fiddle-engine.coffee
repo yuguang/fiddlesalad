@@ -232,7 +232,7 @@ ProgramEditor = DynamicEditor.$extend(
         when 'add'
           @errorLine = @sourceLine message.line
           return  if not $('#helpcontainer').length
-          $.ajax('http://spongiatia.herokuapp.com/api/search/',
+          $.ajax('http://tsenmu.com:3000/api/search/',
             data:
               JSON.stringify(
                 error_message: message.error
