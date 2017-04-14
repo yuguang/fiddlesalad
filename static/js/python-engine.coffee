@@ -112,12 +112,8 @@ PythonFactory = Class.$extend(
       console.log event.message, event
 
   get_executable: ->
-    pythonExecutable = undefined
-    unless debug
-      python_version = '?v=' + 15
-      pythonExecutable = worker_url + 'skulpt.js' + python_version
-    else
-      pythonExecutable = worker_url + 'build/skulpt.js'
+    python_version = '?v=' + 15
+    pythonExecutable = worker_url + 'skulpt.js' + python_version
     pythonExecutable
 
   layout: ->
