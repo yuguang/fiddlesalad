@@ -114,10 +114,10 @@ PythonFactory = Class.$extend(
   get_executable: ->
     pythonExecutable = undefined
     unless debug
-      python_version = '?v=' + 14
-      pythonExecutable = worker_url + 'python.compressed.js' + python_version
+      python_version = '?v=' + 15
+      pythonExecutable = worker_url + 'skulpt.js' + python_version
     else
-      pythonExecutable = worker_url + 'build/python.mod.debug.js'
+      pythonExecutable = worker_url + 'build/skulpt.js'
     pythonExecutable
 
   layout: ->
