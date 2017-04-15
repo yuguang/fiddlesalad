@@ -40,13 +40,12 @@ MEDIASYNC_JOINED = {
         'css/home.css': [
             'css/bootstrap.min.css',
             'css/bootstrap-theme.min.css',
-            'css/home.css',
+            'css/home-theme.css',
             'css/codemirror.css',
             'css/codemirror/themes/default.css',
             'css/codemirror/themes/neo.css',
-            'css/home.css',
             'css/logo.fiddlesalad.css',
-            ],
+        ],
         'css/snippets.css': [
             'css/user.css'
         ],
