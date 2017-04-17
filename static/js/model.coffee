@@ -16,7 +16,7 @@ LocalHistory = Class.$extend(
     @title = '' 
   
   initialize_revisions: _.once((@title) ->
-    if store.get(title)? # Snippet object exists
+    if store.get(@title)? # Snippet object exists
       @revisions store.get(@title)
     else # create Snippet object
       @create_revision()
