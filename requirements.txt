@@ -4,3 +4,4 @@ django-social-auth >= 0.6.4
 django-taggit >= 0.9.3
 django-chunks >= 0.1
 beautifulsoup4 >= 4.0.1
+libsass
