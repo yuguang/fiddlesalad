@@ -802,6 +802,8 @@ CodeMirror.defineMode("es6", function(config, parserConfig) {
   };
 });
 
+CodeMirror.registerHelper("wordChars", "es6", /[\w$]/);
+
 CodeMirror.defineMIME("text/es6", "es6");
 
 });
