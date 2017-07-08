@@ -1,7 +1,7 @@
 Fiddle Salad Live Web Development
 ======================
 The web developer's wonderland that makes everyday tasks enjoyable, a live editor for front-end languages
-### # [fiddlesalad.com](http://fiddlesalad.com)
+#### [fiddlesalad.com](http://fiddlesalad.com)
  
 Current Features
 ----------------
@@ -138,11 +138,11 @@ To add a language:
 The compiler reads input from e.data for style and program editors and e.data.code for document editors
 	
 ### User Interface
-### #Home
+#### Home
 The Homepage uses [Twitter Bootstrap's fluid grid system](http://twitter.github.com/bootstrap/scaffolding.html#fluidGridSystem) 
 to align buttons. The main files to modify are *templates/home.html* and *static/css/home.less*. 
 
-### #Fiddle
+#### Fiddle
 All UI elements are generated using [Knockout](http://knockoutjs.com/documentation/introduction.html)
 and [jQuery UI](http://jqueryui.com/demos/). Knockout templates are in *templates/templates.html*, with the View Model
 in *static/js/model.coffee*. Main stylesheet is *static/css/fiddle.less*. 
