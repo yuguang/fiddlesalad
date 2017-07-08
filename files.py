@@ -132,6 +132,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror-loading.js',
             'js/codemirror/mode/python/python.js',
             'js/codemirror/mode/javascript/javascript.js',
+            'js/codemirror/mode/es6/javascript.js',
             'js/codemirror/mode/xml/xml.js',
             'js/codemirror/mode/coffeescript/coffeescript.js',
             'js/codemirror/mode/css/css.js',
