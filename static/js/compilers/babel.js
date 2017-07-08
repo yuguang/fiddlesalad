@@ -48,7 +48,7 @@ function sendError(error) {
 if (typeof window === "undefined" && typeof global === "undefined") {
   this.onmessage = function (event) {
     try {
-      var output = Babel.transform(event.data, {presets: ['es2015', 'es2016']}).code;
+      var output = Babel.transform(event.data, {presets: ['react', 'es2015', 'es2016']}).code;
       sendResult(output)
     } catch (err) {
       sendError(err);
