@@ -1,7 +1,7 @@
 Fiddle Salad Live Web Development
 ======================
 The web developer's wonderland that makes everyday tasks enjoyable, a live editor for front-end languages
-#### [fiddlesalad.com](http://fiddlesalad.com)
+### # [fiddlesalad.com](http://fiddlesalad.com)
  
 Current Features
 ----------------
@@ -79,20 +79,20 @@ A virtualenv setup script is included for Linux
 
 Installation Notes
 ------------------
-###Compiling CoffeeScript
+### Compiling CoffeeScript
 from the _static/js/_ folder run
 
     coffee -cw -o ./compiled-coffee .
 	
-###Compiling Less
+### Compiling Less
 run [less compiler](http://lesscss.org/#-server-side-usage) from the command line or install [SimpLESS](http://wearekiss.com/simpless)
 
-###CoffeeScript Setup on Ubuntu
+### CoffeeScript Setup on Ubuntu
 	sudo apt-get install coffeescript
 	cd static/js/
 	coffee -cw -o ./compiled-coffee ./
 
-###Initialize Database to Save Fiddles
+### Initialize Database to Save Fiddles
     python manage.py loaddata language_fixture.json
 
 Developer Documentation
@@ -116,7 +116,7 @@ Features ready to be implemented:
     * [Eco](https://github.com/sstephenson/eco) ([Browserify](https://github.com/substack/node-browserify) nodejs module)
     * [Traceur](https://github.com/google/traceur-compiler)
 
-###Foreign language Translations
+### Foreign language Translations
 Django's i18n middleware will be used, but only the translations for buttons and labels are needed.
 
 * Spanish
@@ -125,10 +125,10 @@ Django's i18n middleware will be used, but only the translations for buttons and
 * Japanese
 * French
     
-###Syntax Highlighting
+### Syntax Highlighting
 Get started by reading the [CodeMirror manual](http://codemirror.net/doc/manual.html#modeapi). The modes are under _static/js/codemirror/mode/_.
 
-###Language Editor
+### Language Editor
 To add a language:
 
 1. Modify the LANGUAGE and LANGUAGE_CATEGORY settings in *fiddle-configuration.js*. 
@@ -137,12 +137,12 @@ To add a language:
 4. Create the compiler (aka worker) in _static/js/compilers/_ with the [sendResult and sendError functions](https://github.com/yuguang/fiddlesalad/blob/master/static/js/compilers/coffeescript.js).
 The compiler reads input from e.data for style and program editors and e.data.code for document editors
 	
-###User Interface
-####Home
+### User Interface
+### #Home
 The Homepage uses [Twitter Bootstrap's fluid grid system](http://twitter.github.com/bootstrap/scaffolding.html#fluidGridSystem) 
 to align buttons. The main files to modify are *templates/home.html* and *static/css/home.less*. 
 
-####Fiddle
+### #Fiddle
 All UI elements are generated using [Knockout](http://knockoutjs.com/documentation/introduction.html)
 and [jQuery UI](http://jqueryui.com/demos/). Knockout templates are in *templates/templates.html*, with the View Model
 in *static/js/model.coffee*. Main stylesheet is *static/css/fiddle.less*. 
