@@ -132,6 +132,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror-loading.js',
             'js/codemirror/mode/python/python.js',
             'js/codemirror/mode/javascript/javascript.js',
+            'js/codemirror/mode/xml/xml.js',
             'js/codemirror/mode/coffeescript/coffeescript.js',
             'js/codemirror/mode/css/css.js',
             'js/build/lib/emmet.min.js',
@@ -147,6 +148,7 @@ MEDIASYNC_JOINED = {
             'js/codemirror/mode/markdown/markdown.js',
             'js/codemirror/mode/stylus/stylus.js',
             'js/codemirror/runmode.js',
+            'js/codemirror/mode/jsx/jsx.js',
             ],
         'js/fiddle.plugins.js': [
             'js/jquery-ui.tag-complete.js',

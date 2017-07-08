@@ -369,6 +369,14 @@ CoffeescriptEditor = ProgramEditor.$extend(
     converter = JavascriptConverter('javascriptConverter')
     converter.set_editor @
 )
+BabelEditor = ProgramEditor.$extend(
+  __init__: (id) ->
+    @$super id
+    @mode = 'jsx'
+    @loadWorker('babel')
+    @documentationUrl = 'http://es6-features.org/'
+    @tabCharaterLength = 2
+)
 OpalEditor = ProgramEditor.$extend(
   __init__: (id) ->
     @$super id
@@ -1452,7 +1460,7 @@ FiddleFactory = Class.$extend(
   reset: ->
     codeRunner.reset()
 )
-root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeekupEditor, MarkdownEditor, RoyEditor, TypescriptEditor, OpalEditor}
+root.editor = {HtmlEditor, LessEditor, PythonEditor, JavascriptEditor, CssEditor, CoffeescriptEditor, SassEditor, ScssEditor, HamlEditor, StylusEditor, JadeEditor, HtmlViewer, CoffeekupEditor, MarkdownEditor, RoyEditor, TypescriptEditor, OpalEditor, BabelEditor}
 root.engine = EngineFactory(FiddleFactory())
 root.DynamicCodeRunner = DynamicCodeRunner
 root.StaticCodeRunner = StaticCodeRunner
