@@ -40,7 +40,7 @@ BackgroundWorker =
   makeLineWidget: (message) ->
     widget = document.createElement("div")
     icon = widget.appendChild(document.createElement("span"))
-    icon.innerHTML = "!!"
+    icon.innerHTML = "&#9995;"
     icon.className = "lint-error-icon"
     widget.appendChild document.createTextNode(message)
     widget.className = "lint-error"
