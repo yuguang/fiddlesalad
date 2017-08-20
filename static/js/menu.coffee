@@ -919,6 +919,74 @@ examples =
     > ## This is an H2 in a blockquote
   """
   ])
+  jsx: Queue(["""
+    var link = function(height = 50, color = 'red', url = 'http://azat.co') {
+      ...
+    }
+  """, """
+    var name = `Your name is ${first} ${last}.`
+    var url = `http://localhost:3000/api/messages/${id}`
+    var roadPoem = `Then took the other, as just as fair,
+        And having perhaps the better claim
+        Because it was grassy and wanted wear,
+        Though as for that the passing there
+        Had worn them really about the same,`
+
+    var fourAgreements = `You have the right to be you.
+        You can only be you when you do your best.`
+  """, """
+    var { house, mouse} = $('body').data() // we'll get house and mouse variables
+
+    var {jsonMiddleware} = require('body-parser')
+
+    var {username, password} = req.body
+  """, """
+    var [col1, col2]  = $('.column'),
+    [line1, line2, line3, , line5] = file.split('\n')
+  """, """
+    var serviceBase = {port: 3000, url: 'azat.co'},
+        getAccounts = function(){return [1,2,3]}
+    var accountService = {
+        __proto__: serviceBase,
+        getAccounts,
+        toString() {
+         return JSON.stringify((super.valueOf()))
+        },
+        getUrl() {return "http://" + this.url + ':' + this.port},
+        [ 'valueOf_' + getAccounts().join('_') ]: getAccounts()
+    };
+  """, """
+    $('.btn').click((event) =>{
+      this.sendData()
+    })
+  """, """
+    var wait1000 =  new Promise(function(resolve, reject) {
+      setTimeout(resolve, 1000)
+    }).then(function() {
+      console.log('Yay!')
+    })
+  """, """
+  class baseModel {
+    constructor(options = {}, data = []) { // class constructor
+          this.name = 'Base'
+      this.url = 'http://azat.co/api'
+          this.data = data
+      this.options = options
+      }
+
+      getName() { // class method
+          console.log(`Class name: ${this.name}`)
+      }
+  }
+  class AccountModel extends baseModel {
+    constructor(options, data) {
+
+    super({private: true}, ['32113123123', '524214691']) //call the parent method with super
+        this.name = 'Account Model'
+    this.url +='/accounts/'
+  }
+  """
+  ])
   blank: Queue(["""
 
       """, """
@@ -1000,6 +1068,7 @@ descriptions =
   jade: '<p>Jade is a terse language for writing HTML templates.</p><ul><li>Produces HTML</li><li>Supports dynamic code</li><li>Supports reusability (DRY)</li></ul><p>'
   haml: 'Haml (HTML Abstraction Markup Language) is a lightweight markup language that is used to describe the XHTML of any web document without the use of traditional inline coding. It is designed to address many of the flaws in traditional templating engines, as well as making markup as elegant as it can be.'
   coffeekup: 'CoffeeKup uses a simple scheme to provide a concise, expressive, easy-to-read, and time-saving HTML templating solution. It is based on the CoffeeScript language, with which you will need to be familiar. '
+  jsx: 'ES6 is an update to JavaScript that adds significant new syntax for writing complex applications, including classes and modules, but defines them semantically in the same terms as ECMAScript 5 strict mode. Other new features include iterators and for/of loops, Python-style generators and generator expressions, arrow functions, binary data, typed arrays, collections (maps, sets and weak maps), promises, number and math enhancements, reflection, and proxies. '
   sass: 'Sass is a CSS pre-processor with syntax advancements. Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets. However, they do not extend the CSS standard itself.'
   scss: 'SCSS is a superset of CSS3’s syntax. This means that every valid CSS3 stylesheet is valid SCSS as well. The second, older syntax is known as the indented syntax (or just “Sass”). Inspired by Haml’s terseness, it’s intended for people who prefer conciseness over similarity to CSS. Instead of brackets and semicolons, it uses the indentation of lines to specify blocks. Although no longer the primary syntax, the indented syntax will continue to be supported.'
   python: """<p>Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C++ or Java. Python has the following philosopy:</p>
@@ -1027,7 +1096,7 @@ ViewModel = ->
 
   @documentLanguage = ko.observableArray ['HTML', 'HAML', 'Markdown', 'CoffeeKup', 'Jade']
   @styleLanguage = ko.observableArray ['CSS', 'LESS', 'SCSS', 'SASS', 'Stylus']
-  @programLanguage = ko.observableArray ['JavaScript', 'CoffeeScript', 'TypeScript', 'Opal', 'Python', 'Roy']
+  @programLanguage = ko.observableArray ['JavaScript', 'JSX', 'CoffeeScript', 'TypeScript', 'Opal', 'Python', 'Roy']
 
   camelCase = (name) =>
     for languages in [@documentLanguage(), @styleLanguage(), @programLanguage()]
