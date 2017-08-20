@@ -1498,8 +1498,8 @@
         ,
         {
             "name": "jquery",
-            "filename": "jquery.min.js",
-            "version": "1.8.3",
+            "filename": "https://code.jquery.com/jquery-1.12.4.min.js",
+            "version": "1.12.4",
             "description": "jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript.",
             "homepage": "http://jquery.com/",
             "keywords": [
@@ -4131,6 +4131,24 @@
         }
         ,
         {
+            "name": "react",
+            "filename": "react-with-addons.js",
+            "version": "15.6.1",
+            "description": "react",
+            "homepage": "https://github.com/facebook/react",
+            "keywords": []
+        }
+        ,
+        {
+            "name": "react-dom",
+            "filename": "http://cdnjs.cloudflare.com/ajax/libs/react/15.6.1/react-dom.js",
+            "version": "15.6.1",
+            "description": "react",
+            "homepage": "https://github.com/facebook/react",
+            "keywords": []
+        }
+        ,
+        {
             "name": "handlebars.js",
             "filename": "handlebars.min.js",
             "version": "1.0.rc.1",
@@ -5983,9 +6001,15 @@
             ]
         }];
     viewModel.packages(_.map(packages, function(package) {
+        var url;
+        if (package.filename.search('http://') === -1) {
+            url = ["http://cdnjs.cloudflare.com/ajax/libs", package.name, package.version, package.filename].join('/');
+        } else {
+            url = package.filename;
+        }
         return {
             name: package.name,
-            url: ["http://cdnjs.cloudflare.com/ajax/libs", package.name, package.version, package.filename].join('/')
+            url: url
         }
     }));
 })();

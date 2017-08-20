@@ -892,7 +892,7 @@ FiddleEditor = Class.$extend(
     viewModel.containers @layoutFrames()
     $('#viewer').appendTo('#result').show()
     root.codeRunner = DynamicCodeRunner()
-    viewModel.add_resource(if debug then base_url + '/js/jquery-2.0.0.js' else 'http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js')
+    viewModel.add_resource(if debug then base_url + '/js/jquery-2.0.0.js' else 'https://code.jquery.com/jquery-3.2.1.min.js')
 
     @styleEditor.load()
     @documentEditor.load()
