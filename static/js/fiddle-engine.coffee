@@ -374,7 +374,7 @@ JsxEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'jsx'
     @loadWorker('babel')
-    @documentationUrl = 'http://es6-features.org/'
+    @documentationUrl = 'http://stack.formidable.com/es6-interactive-guide/'
     @tabCharaterLength = 2
 )
 OpalEditor = ProgramEditor.$extend(
