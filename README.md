@@ -73,7 +73,16 @@ A virtualenv setup script is included for Linux
     mv cloud-ide-templates templates
     cd fiddlesalad
     mv settings.default.py settings.py
-    ./setup-virtualenv.sh
+    # initialize virtualenv (details skipped)
+    git clone git://github.com/yuguang/django-cloud-ide.git
+    cd django-cloud-ide
+    python setup.py install
+    cd ..
+    git clone https://github.com/clintecker/django-chunks.git
+    cd django-chunks
+    python setup.py install
+    cd ..
+    git clone https://github.com/clintecker/django-chunks.git
     dev-python/bin/python manage.py syncdb
     dev-python/bin/python manage.py runserver
 
