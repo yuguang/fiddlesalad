@@ -1,7 +1,7 @@
 Fiddle Salad Live Web Development
 ======================
 The web developer's wonderland that makes everyday tasks enjoyable, a live editor for front-end languages
-#### [fiddlesalad.com](http://fiddlesalad.com)
+#### [fiddlesalad.com](https://fiddlesalad.com)
  
 Current Features
 ----------------

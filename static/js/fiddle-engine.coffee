@@ -226,13 +226,13 @@ ProgramEditor = DynamicEditor.$extend(
   loadErrorHandler: ->
     return  if not _.isFunction @sourceLine
     window.onmessage = (event) =>
-      return  if not _.contains ['http://fiddlesalad.com', 'http://127.0.0.1:8000'], event.origin
+      return  if not _.contains ['https://fiddlesalad.com', 'http://127.0.0.1:8000'], event.origin
       message = JSON.parse event.data
       switch message.action
         when 'add'
           @errorLine = @sourceLine message.line
           return  if not $('#helpcontainer').length
-          $.ajax('http://tsenmu.com:3000/api/search/',
+          $.ajax('https://tsenmu.com:3000/api/search/',
             data:
               JSON.stringify(
                 error_message: message.error
@@ -374,7 +374,7 @@ JsxEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'jsx'
     @loadWorker('babel')
-    @documentationUrl = 'http://stack.formidable.com/es6-interactive-guide/'
+    @documentationUrl = 'https://stack.formidable.com/es6-interactive-guide/'
     @tabCharaterLength = 2
 )
 OpalEditor = ProgramEditor.$extend(
@@ -382,7 +382,7 @@ OpalEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'ruby'
     @loadWorker('opal')
-    @documentationUrl = 'http://opalrb.org/docs/'
+    @documentationUrl = 'https://opalrb.org/docs/'
     @tabCharaterLength = 2
 
   load: ->
@@ -397,7 +397,7 @@ RoyEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'roy'
     @loadWorker('roy')
-    @documentationUrl = 'http://guide.roylang.org/en/latest/index.html'
+    @documentationUrl = 'https://guide.roylang.org/en/latest/index.html'
     @tabCharaterLength = 2
 
   load: ->
@@ -409,7 +409,7 @@ TypescriptEditor = ProgramEditor.$extend(
     @$super id
     @mode = 'typescript'
     @loadWorker('typescript')
-    @documentationUrl = 'http://www.johnpapa.net/typescriptpost3/'
+    @documentationUrl = 'https://www.johnpapa.net/typescriptpost3/'
 
   __include__: [lintEditor]
 
@@ -550,7 +550,7 @@ serverCompiler =
   changeHandler: (editor, change) ->
     ###
     This routine calls execute to compile code either when a major code block is completed or after a period of time.
-    http://codemirror.net/doc/manual.html#option_onChange
+    https://codemirror.net/doc/manual.html#option_onChange
     ###
     return  if _.isEmpty(editor) or _.isEmpty(change)
     # if a code block is completed
@@ -728,11 +728,11 @@ JavascriptViewer = Viewer.$extend(
     $('#' + @id + ' .cm-property').each(->
       $element = $(this)
       if $element.text() in KEYWORDS.JQUERY_OBJECT and $element.prev().text() is '$'
-        $element.html "<a href='http://api.jquery.com/jQuery.#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
+        $element.html "<a href='https://api.jquery.com/jQuery.#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
       else if $element.text() in KEYWORDS.JQUERY_PROTOTYPE and $element.prev().prev().text() is '$'
-        $element.html "<a href='http://api.jquery.com/#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
+        $element.html "<a href='https://api.jquery.com/#{ $element.text() }/' target='_blank'>#{ $element.text() }</a>"
       ###else if $element.text() of keywordDict(KEYWORDS.DOM)
-        $element.html "<a href='http://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }' target='_blank'>#{ $element.text() }</a>"###
+        $element.html "<a href='https://dochub.io/#dom/#{ keywordDict(KEYWORDS.DOM)[$element.text()] }' target='_blank'>#{ $element.text() }</a>"###
     )
 )
 BeautifiedJavascriptViewer = JavascriptViewer.$extend(
@@ -771,7 +771,7 @@ codeConverter =
       if @textarea.val() isnt @previousValue
         @previousValue = @textarea.val()
         $.post(
-          ['http://fiddlesalad.com/',  @editor.mode, '/convert/'].join('')
+          ['https://fiddlesalad.com/',  @editor.mode, '/convert/'].join('')
           code: @textarea.val()
           (response) =>
             @previewCode(response[@editor.mode])
@@ -997,7 +997,7 @@ FiddleEditor = Class.$extend(
 
       if @settings.get_language(LANGUAGE_TYPE.STYLE) in COMPATIBLE_LANGUAGES.CSS or @settings.get_language(LANGUAGE_TYPE.DOCUMENT) in COMPATIBLE_LANGUAGES.HTML
         page = IframeComponent 'emmetReferenceTab'
-        page.set_source 'http://docs.emmet.io/cheat-sheet/'
+        page.set_source 'https://docs.emmet.io/cheat-sheet/'
         tabs.add 'emmet', page.to_html_string()
       frame.add tabs
 
@@ -1025,7 +1025,7 @@ FiddleEditor = Class.$extend(
     previewFrame = Frame 'source', 'Source'
     tabs = TabInterface 'source-tab', previewFrame
     preview = IframeComponent @id.css
-    preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'http://fiddlesalad.com/home/files/csspreviewer.html?v=2015032011'
+    preview.set_source if debug then base_url + '/files/csspreviewer.debug.html' else 'https://fiddlesalad.com/home/files/csspreviewer.html?v=2015032011'
     index = tabs.add 'css', preview.to_html_string()
     @styleEditor.set_focus_listener PreviewListener('source', index)
 
@@ -1206,7 +1206,7 @@ CodeRunner = Class.$extend(
               <head>
                 <%= headscript %>
                 <title>Fiddle Salad Debug View</title>
-                <script src="http://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
+                <script src="https://leaverou.github.com/prefixfree/prefixfree.min.js"></script>
                 <style>
                   <%= css %>
                 </style>

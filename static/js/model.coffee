@@ -751,7 +751,7 @@ FiddleViewModel = ViewModel.$extend(
           text: 'These tips are shown once a day to get out of your way. If you want to refer to them later, you will find them under the Links menu. '
         ,
           image: image_url + 'all_fiddles.png'
-          text: 'Browse fiddles by other authors, categorized by language, or by tag at <a href="http://fiddlesalad.com/fiddles/" target="_blank">http://fiddlesalad.com/fiddles/</a>.'
+          text: 'Browse fiddles by other authors, categorized by language, or by tag at <a href="https://fiddlesalad.com/fiddles/" target="_blank">https://fiddlesalad.com/fiddles/</a>.'
         ,
           image: image_url + 'css_preview.jpg'
           text: 'Hovering over highlighted CSS in the source window brings up tooltips. You can get previews for fonts, colors, sizes, and images.'

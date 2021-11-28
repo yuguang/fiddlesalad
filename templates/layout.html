@@ -11,7 +11,7 @@
             <progress id="progress" value="5" max="100"></progress>
         </div>
         <div id="overlay"></div>
-        <iframe id="viewer" src="http://fiddlesalad.com/home/files/viewer.html?v=2013080513"></iframe>
+        <iframe id="viewer" src="https://fiddlesalad.com/home/files/viewer.html?v=2013080513"></iframe>
     {% else %}
         <iframe id="viewer" src="/static/files/viewer.local.html"></iframe>
     {% endif %}
@@ -21,9 +21,9 @@
 
 {% block styles %}
     {% if not DEBUG %}
-    <link href="http://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Codystar" rel="stylesheet" type="text/css">
     {% endif %}
-    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro:500' rel='stylesheet' type='text/css'>
     {% css "css/styles.fiddle.css" %}
 {% endblock %}
 
@@ -37,15 +37,15 @@
         document.getElementById('progress').value = 10;
         (function(g,b,d){var c=b.head||b.getElementsByTagName("head"),D="readyState",E="onreadystatechange",F="DOMContentLoaded",G="addEventListener",H=setTimeout;
         function f(){
-            //debug_base_url="http://fiddlesalad.com/home";
+            //debug_base_url="https://fiddlesalad.com/home";
         	document.getElementById('progress').value = 20;
             $LAB
             .script(base_url+"/js/fiddle.bootstrap.js.gz"+_v)
-            .script("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait(function(){
+            .script("https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js").wait(function(){
             	document.getElementById('progress').value = 50
             })
             .script("https://code.jquery.com/ui/1.8.19/jquery-ui.min.js")
-            .script("http://cdn.wijmo.com/jquery.wijmo-open.all.2.0.5.min.js")
+            .script("https://cdn.wijmo.com/jquery.wijmo-open.all.2.0.5.min.js")
             .script(base_url+"/js/knockout.js.gz?v=2013062511")
             .script(base_url+"/js/codemirror.fiddle.js.gz"+_v)
             .script(base_url+"/js/fiddle.plugins.js.gz"+_v).wait(function(){
@@ -53,7 +53,7 @@
             })
             .script(base_url+"/js/fiddle.init.js.gz"+_v).wait()
             .script(base_url+"/js/spellchecker.js.gz"+_v)
-            .script("http://www.google-analytics.com/ga.js")
+            .script("https://www.google-analytics.com/ga.js")
             .script("http://w.sharethis.com/button/buttons.js").wait(function(){
                 __st_loadLate=true;
                 stLight.options({publisher: "e166464f-d4f0-487b-b673-7abd0a910c5f", doNotHash: false, doNotCopy: false, hashAddressBar: false});

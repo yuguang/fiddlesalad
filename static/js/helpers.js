@@ -124,7 +124,7 @@ var defaultEditor = {
     matchBrackets: true
 };
 
-var worker_url = debug ? '/static/js/' : 'http://' + window.location.hostname + '/js/';
+var worker_url = debug ? '/static/js/' : 'https://' + window.location.hostname + '/js/';
 
 MINUTE = 60000;
 
